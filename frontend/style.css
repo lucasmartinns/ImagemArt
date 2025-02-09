@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'AbhayaLibre-Bold';
+    src: url(./assets/font/AbhayaLibre-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'AbhayaLibre-Regular';
+    src: url(./assets/font/AbhayaLibre-Regular.ttf);
+}
+
+:root{
+    --verde: #63783D
+    --preto: #0A0809
+}
