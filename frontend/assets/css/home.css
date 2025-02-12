@@ -1,5 +1,6 @@
+
 body{
-    background-color: #0A0809;
+    background-color: var(--preto);
 }
 
 .navbar {
@@ -8,6 +9,7 @@ body{
     align-items: center;
     padding: 20px 50px;
     position: fixed;
+    width: 100%;
 }
 .logo img {
     height: 40px;
@@ -15,16 +17,18 @@ body{
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 50px;
     padding: 0;
+    justify-self: center;
 }
 .nav-links a {
     position: relative;
+    padding: 10px 20px;
 }
 .nav-links  a {
     text-decoration: none;
     color: white;
-    font-weight: bold;
+    font-weight: regular;
     font-size: 18px;
     position: relative;
     padding-bottom: 5px;
@@ -41,5 +45,5 @@ body{
     transform: translateX(-50%);
 }
 .nav-links a:hover::after {
-    width: 100%;
+    width: 60%;
 }

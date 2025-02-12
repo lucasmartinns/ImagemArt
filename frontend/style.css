@@ -12,3 +12,9 @@
     --verde: #63783D
     --preto: #0A0809
 }
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
