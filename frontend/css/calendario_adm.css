@@ -259,3 +259,155 @@ body {
   border-left: 1px solid var(--primary-clr);
   border-radius: 0;
 }
+
+.container .right {
+  position: relative;
+  width: 40%;
+  min-height: 100%;
+  padding: 20px 0;
+}
+
+.right .dataHoje {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  padding-left: 70px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+.dataHoje .diaEvento {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.dataHoje .diaEvento {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #e7e7e8;
+}
+
+.dataHoje .dataEvento {
+  font-style: Italic;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #878895;
+}
+
+.eventos {
+  width: 100%;
+  height: 100%;
+  max-height: 600px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+}
+.eventos .evento {
+  position: relative;
+  width: 95%;
+  min-height: 70px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0 20px;
+  padding-left: 50px;
+  color: #e7e7e8;
+  cursor: pointer;
+  background: linear-gradient(90deg, #4e4e4e, transparent);
+}
+
+.eventos .evento:nth-child(even) {
+  background: transparent;
+}
+
+.eventos .evento:hover {
+  background: linear-gradient(90deg, var(--secundary-clr), transparent);
+}
+
+.eventos .evento .titulo {
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.evento .titulo .fa-circle {
+  size: 10px;
+}
+
+.eventos .evento .titulo .tituloEvento {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-left: 15px;
+}
+
+.eventos .evento .titulo i {
+  color: var(--primary-clr);
+  font-size: 0.4rem;
+}
+
+.eventos .evento:hover .title i,
+.eventos .evento:hover .horaEvento {
+  color: #e7e7e8;
+}
+
+.eventos .evento .horaEvento {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--secundary-clr);
+  margin-left: 15px;
+  pointer-events: none;
+}
+
+.evento::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  font-size: 3rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  color: var(--secundary-clr);
+  transform: translateY(-50%);
+}
+
+.evento:hover::after {
+  display: flex;
+}
+
+.adicionarEventoCompleto {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  width: 90%;
+  max-height: 0;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: #e7e7e8;
+  transform: translateX(-50%);
+  transition: max-height 0.5s;
+}
+.adicionarEventoCompleto.active {
+  max-height: 300px;
+}
+
+.adicionarEventoCabeca {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  color: #282828;
+  border-bottom: 1px solid var(--primary-clr);
+}
