@@ -13,18 +13,18 @@ router.post("/login", async (req, res) => {
     [email],
     async (err, results) => {
       if (err) {
-        res.status(400).json({ mensagem: "Erro ao consultar ao servidor" });
+       return res.status(400).json({ mensagem: "Erro ao consultar ao servidor" });
       }
 
       if (results.length === 0) {
-        res.status(400).json({ error: "Usuário não encontrado!" });
+        return res.status(400).json({ error: "Usuário não encontrado!" });
       }
 
       const usuario = results[0];
       const SenhaCorreta = await bcrypt.compare(senha, usuario.senha);
 
       if (!SenhaCorreta) {
-        res.status(400).json({ error: "Senha incorreta!" });
+        return res.status(400).json({ error: "Senha incorreta!" });
       }
     }
   );
@@ -36,7 +36,7 @@ router.get("/", (req, res) => {
     "SELECT idusuario,nome,email,telefone,tipo_usuario FROM usuario",
     (err, results) => {
       if (err) {
-        res.status(400).json({ error: "Erro ao encontrar o usário" });
+       return res.status(400).json({ error: "Erro ao encontrar o usário" });
       }
       res.json(results);
     }
@@ -49,22 +49,22 @@ router.post("/cadastrar", async (req, res) => {
     req.body;
 
   if (!nome || !email || !senha || !telefone) {
-    return res.status(400).json({ mensagem: "Preencha todos os campos!" });
+    return res.status(400).json({ error: "Preencha todos os campos!" });
   }
 
    
 
   try {
 
-    // Verifica se já existe um usuário com o mesmo nome ou e-mail
+    // Verifica se já existe um usuário com o mesmo e-mail
     const sqlSelect = `SELECT * FROM usuario WHERE email = ?`;
-    connection.query(sqlSelect, [email], (err, results) => {
+    connection.query(sqlSelect, [email], async (err, results) => {
       if (err) {
         return res.status(500).json({ error: "Erro ao verificar usuário!" });
       }
 
       if (results.length > 0) {
-        return res.status(400).json({ error: "Usuário já cadastrado!" });
+        return res.status(400).json({ mensagem: "Usuário já cadastrado!" });
       }
     });
           
@@ -87,10 +87,8 @@ router.post("/cadastrar", async (req, res) => {
           console.error("Erro ao inserir usuário:", err);
           return res.status(500).json({ error: "Erro ao criar usuário!" });
         }
-        res
-          .status(201)
-          .json({
-            message: "Usuário criado com sucesso!",
+          return res.status(201).json({
+             message: "Usuário criado com sucesso!",
             id: results.insertId,
           });
       }
@@ -124,12 +122,12 @@ router.put("/alterar/:id", async (req, res) => {
 
     connection.query(sql, valores, (err, results) => {
       if (err) {
-        res.status(400).json({ error: "Erro ao alterar o usuário" });
+       return res.status(400).json({ error: "Erro ao alterar o usuário" });
       }
-      res.status(200).json({ mensagem: "Usuário alterado com sucesso!" });
+     return res.status(200).json({ mensagem: "Usuário alterado com sucesso!" });
     });
   } catch (error) {
-    res.status(400).json({ error: "Erro ao criptografar a senha" });
+   return res.status(400).json({ error: "Erro ao criptografar a senha" });
   }
 });
 
