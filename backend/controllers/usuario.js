@@ -9,17 +9,21 @@ const usuario = {
         const sql = `INSERT INTO usuario (nome,email,senha,telefone) VALUES (?,?,?,?)`;
         const valores = [nome,email,SenhaCriptografada,telefone]
 
-        console.log(nome,email,SenhaCriptografada,telefone);
+        // console.log(nome,email,SenhaCriptografada,telefone);
 
-        connection.query(sql,valores, (err,result) => {
-            if (err) {s
-                console.error('Erro ao inserir usuário:', err);
-                return;
-            } 
-            console.log('Usuário cadastrado!')
+        return new Promise((resolve,reject) => {
+            connection.query(sql,valores, (err,result) => {
+                if (err) {
+                    console.error('Erro ao inserir usuário:', err);
+                    reject(err);
+                } 
+                console.log('Usuário cadastrado!')
+                resolve(result);
+            });
         });
     } catch (error) {
-        console.error('Erro a criptografar a senha:',error);
+        console.error('Erro ao criptografar senha:', error);
+        throw error;
     }
 }
 }
