@@ -409,5 +409,101 @@ body {
   justify-content: space-between;
   padding: 0 20px;
   color: #282828;
+  border-bottom: 3px solid var(--secundary-clr);
+}
+
+.adicionarEventoCompleto .close {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.adicionarEventoCompleto .close:hover {
+  color: var(--primary-clr);
+}
+
+.adicionarEventoCompleto .title {
+  font-weight: 500;
+}
+
+.adicionarEventoCorpo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 20px;
+}
+
+.adicionarEventoCorpo .inputEvento {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.adicionarEventoCorpo input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #a5a5a5;
+  padding: 0 10px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #282828;
+  background-color: transparent;
+}
+
+.adicionarEventoCorpo input::placeholder {
+  color: #a5a5a5;
+}
+.adicionarEventoCorpo input:focus {
   border-bottom: 1px solid var(--primary-clr);
+}
+.adicionarEventoCorpo input:focus::placeholder {
+  color: var(--primary-clr);
+}
+.adicionarEventoFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.adicionarEventoFooter .adicionarEventoBotao {
+  height: 40px;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  color: #0a0809;
+  background-color: var(--primary-clr);
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 10px;
+  margin: 10px;
+  margin-top: -25px;
+  border: 1px solid var(--primary-clr);
+}
+.adicionarEventoFooter .adicionarEventoBotao:hover {
+  background-color: var(--secundary-clr);
+  border: 1px solid var(--secundary-clr);
+  color: #e7e7e8;
+}
+
+.botaoEvento {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #e7e7e8;
+  opacity: 0.5;
+  border-radius: 50%;
+  background-color: transparent !important;
+  cursor: pointer;
 }

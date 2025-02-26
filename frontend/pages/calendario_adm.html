@@ -94,39 +94,43 @@
           </div>
         </div>
         <div class="adicionarEvento">
-          <div class="adicionarEventoCompleto active">
+          <div class="adicionarEventoCompleto close">
             <div class="adicionarEventoCabeca">
               <div class="title">Adicionar Evento</div>
               <i class="fas fa-times close"></i>
             </div>
             <div class="adicionarEventoCorpo">
-              <div class="adicionarNomeEvento">
+              <div class="inputEvento">
                 <input
                   type="text"
                   placeholder="Nome do evento"
                   class="nomeEvento"
                 />
               </div>
-
-              <div class="adicionarHoraInicial">
+              <div class="inputEvento">
                 <input
                   type="text"
                   placeholder="Hora de início"
                   class="horaInicial"
                 />
               </div>
-              <div class="adicionarHoraFinal">
+              <div class="inputEvento">
                 <input
                   type="text"
                   placeholder="Hora de término"
                   class="horaFinal"
                 />
               </div>
-              <button class="adicionarBotao">Adicionar</button>
-              <button class="cancelarBotao">Cancelar</button>
+            </div>
+            <div class="adicionarEventoFooter">
+              <button class="adicionarEventoBotao">Adicionar</button>
+              <button class="adicionarEventoBotao">Cancelar</button>
             </div>
           </div>
         </div>
+        <button class="botaoEvento">
+          <i class="fas fa-plus"></i>
+        </button>
       </div>
     </div>
     <script src="../../backend/controllers/calendario.js"></script>
