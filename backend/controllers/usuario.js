@@ -57,7 +57,14 @@ const usuario = {
 
         return res
           .status(200)
-          .json({ mensagem: "Login realizado com sucesso!" });
+          .json({ mensagem: "Login realizado com sucesso!",
+            usuario:{
+                    id: usuario.idusuario,
+                    nome: usuario.nome,
+                    email: usuario.email,
+                    tipo_usuario: usuario.tipo_usuario_idtipo_usuario // Retorna se é Admin (1) ou Usuário comum (2)
+            }
+           });
       }
     );
   },
@@ -103,6 +110,11 @@ const usuario = {
   
     if (!nome || !email || !senha || !telefone || tipo_usuario_idtipo_usuario === undefined) {
       return res.status(400).json({ error: "Preencha todos os campos!" });
+    }
+
+    // Se o tipo de usuário não for informado, assume que é um usuário comum (2)
+    if(tipo_usuario_idtipo_usuario == undefined){
+        tipo_usuario_idtipo_usuario = 2;
     }
   
     // Verifica se o tipo de usuário é válido (1 = adm, 2 = usuário comum)
