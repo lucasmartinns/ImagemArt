@@ -1,138 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link
-      href="//fonts.googleapis.com/css?family=Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800"
-      rel="stylesheet"
-      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="../css/calendario_adm.css" />
-    <title>Calendário Pessoal</title>
+    <link rel="stylesheet" href="../components/navbar.css" />
+    <title>Calendário</title>
   </head>
+
   <body>
     <div class="container">
       <div class="left">
-        <div class="calendario">
-          <div class="mes">
-            <i class="fa fa-angle-left prev"></i>
-            <div class="data"></div>
-            <i class="fa fa-angle-right next"></i>
+        <div class="calendar">
+          <div class="month">
+            <i class="fas fa-angle-left prev"></i>
+            <div class="date">dezembro 2025</div>
+            <i class="fas fa-angle-right next"></i>
           </div>
-          <div class="semana">
-            <div>dom</div>
-            <div>seg</div>
-            <div>ter</div>
-            <div>qua</div>
-            <div>qui</div>
-            <div>sex</div>
-            <div>sáb</div>
+          <div class="weekdays">
+            <div>Dom</div>
+            <div>Seg</div>
+            <div>Ter</div>
+            <div>Qua</div>
+            <div>Qui</div>
+            <div>Sex</div>
+            <div>Sab</div>
           </div>
-          <div class="dias">
-            <!-- <div class="dia prev-date">30</div>
-            <div class="dia prev-date">31</div>
-            <div class="dia">1</div>
-            <div class="dia">2</div>
-            <div class="dia evento">3</div>
-            <div class="dia">4</div>
-            <div class="dia">5</div>
-            <div class="dia">6</div>
-            <div class="dia">7</div>
-            <div class="dia">8</div>
-            <div class="dia">9</div>
-            <div class="dia evento">10</div>
-            <div class="dia">11</div>
-            <div class="dia">12</div>
-            <div class="dia">13</div>
-            <div class="dia">14</div>
-            <div class="dia ativo evento">15</div>
-            <div class="dia hoje">16</div>
-            <div class="dia">17</div>
-            <div class="dia">18</div>
-            <div class="dia">19</div>
-            <div class="dia">20</div>
-            <div class="dia">21</div>
-            <div class="dia">22</div>
-            <div class="dia">23</div>
-            <div class="dia">24</div>
-            <div class="dia">25</div>
-            <div class="dia">26</div>
-            <div class="dia">27</div>
-            <div class="dia">28</div>
-            <div class="dia">29</div>
-            <div class="dia">30</div>
-            <div class="dia next-date">1</div>
-            <div class="dia next-date">2</div>
-            <div class="dia next-date">3</div> -->
-          </div>
-          <div class="goto-hoje">
+          <div class="days"></div>
+          <div class="goto-today">
             <div class="goto">
-              <input type="text" placeholder="mês/ano" class="inputData" />
-              <button class="ir-btn">Ir</button>
+              <input type="text" placeholder="mês / ano" class="date-input" />
+              <button class="goto-btn">Ir</button>
             </div>
-            <button class="hojeBotao">Hoje</button>
+            <button class="today-btn">Hoje</button>
           </div>
         </div>
       </div>
       <div class="right">
-        <div class="dataHoje">
-          <div class="diaEvento">Quarta</div>
-          <div class="dataEvento">20 fevereiro 2025</div>
+        <div class="today-date">
+          <div class="event-day">qua</div>
+          <div class="event-date">12 de dezembro de 2025</div>
         </div>
-        <div class="eventos">
-          <div class="evento">
-            <div class="titulo">
-              <i class="fas fa-circle"></i>
-              <h3 class="tituloEvento">Evento 1</h3>
-            </div>
-            <div class="horaEvento">10:00am - 12:00pm</div>
+        <div class="events"></div>
+        <div class="add-event-wrapper">
+          <div class="add-event-header">
+            <div class="title">Adicionar Evento</div>
+            <i class="fas fa-times close"></i>
           </div>
-        </div>
-        <div class="adicionarEvento">
-          <div class="adicionarEventoCompleto close">
-            <div class="adicionarEventoCabeca">
-              <div class="title">Adicionar Evento</div>
-              <i class="fas fa-times close"></i>
+          <div class="add-event-body">
+            <div class="add-event-input">
+              <input
+                type="text"
+                placeholder="Nome do Evento"
+                class="event-name"
+              />
             </div>
-            <div class="adicionarEventoCorpo">
-              <div class="inputEvento">
-                <input
-                  type="text"
-                  placeholder="Nome do evento"
-                  class="nomeEvento"
-                />
-              </div>
-              <div class="inputEvento">
-                <input
-                  type="text"
-                  placeholder="Hora de início"
-                  class="horaInicial"
-                />
-              </div>
-              <div class="inputEvento">
-                <input
-                  type="text"
-                  placeholder="Hora de término"
-                  class="horaFinal"
-                />
-              </div>
+            <div class="add-event-input">
+              <input
+                type="text"
+                placeholder="Hora Inicial"
+                class="event-time-from"
+              />
             </div>
-            <div class="adicionarEventoFooter">
-              <button class="adicionarEventoBotao">Adicionar</button>
-              <button class="adicionarEventoBotao">Cancelar</button>
+            <div class="add-event-input">
+              <input
+                type="text"
+                placeholder="Hora Final"
+                class="event-time-to"
+              />
             </div>
           </div>
+          <div class="add-event-footer">
+            <button class="add-event-btn">Adicionar Evento</button>
+          </div>
         </div>
-        <button class="botaoEvento">
-          <i class="fas fa-plus"></i>
-        </button>
       </div>
+      <button class="add-event">
+        <i class="fas fa-plus"></i>
+      </button>
     </div>
+
     <script src="../../backend/controllers/calendario.js"></script>
   </body>
 </html>

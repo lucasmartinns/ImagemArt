@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Serviços</title>
+    <link rel="stylesheet" href="../css/servicos_adm.css" />
+  </head>
+  <!-- navbar -->
+  <body>
+    <div class="container">
+      <h1>Serviços</h1>
+      <div class="line"></div>
+      <div class="itens">
+        <div id="itemsContainer"></div>
+        <img
+          class="addImg"
+          id="createItemImg"
+          src="../assets/img/servicos/adicionar.jpg"
+          alt="Adicionar Serviço"
+        />
+        <div id="itemModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Adicionar Serviço</h2>
+            <form id="serviceForm">
+              <label for="serviceName">Nome do Serviço:</label>
+              <input
+                type="text"
+                id="serviceName"
+                name="serviceName"
+              /><br /><br />
+              <label for="serviceImage">Foto do Serviço:</label>
+              <input
+                type="file"
+                id="serviceImage"
+                name="serviceImage"
+              /><br /><br />
+              <img
+                id="serviceImagePreview"
+                src=""
+                alt="Imagem do Serviço"
+                style="display: none; width: 100px; height: 100px"
+              /><br /><br />
+              <div class="table-container">
+                <table id="detailsTable">
+                  <thead>
+                    <tr>
+                      <th>Detalhe</th>
+                      <th>Preço</th>
+                      <th>Quantidade</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="editable-row">
+                      <td contenteditable="true">
+                        Clique para adicionar detalhes
+                      </td>
+                      <td contenteditable="true" class="price">
+                        Clique para adicionar preço
+                      </td>
+                      <td contenteditable="true" class="quantity">
+                        Clique para adicionar quantidade
+                      </td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button type="button" id="saveBtn">Salvar</button>
+                <button type="button" id="deleteBtn">Excluir</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../backend/controllers/servico.js"></script>
+  </body>
+</html>
