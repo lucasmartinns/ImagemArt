@@ -257,14 +257,23 @@ addEventBtn.addEventListener("click", () => {
 // Adiciona event listener para o botão de fechar o formulário de adicionar evento
 addEventCloseBtn.addEventListener("click", () => {
   addEventWrapper.classList.remove("active");
+  clearEventForm();
 });
 
 // Adiciona event listener para fechar o formulário de adicionar evento ao clicar fora dele
 document.addEventListener("click", (e) => {
   if (e.target !== addEventBtn && !addEventWrapper.contains(e.target)) {
     addEventWrapper.classList.remove("active");
+    clearEventForm();
   }
 });
+
+// Função para limpar o formulário de adicionar evento
+function clearEventForm() {
+  addEventTitle.value = "";
+  addEventFrom.value = "";
+  addEventTo.value = "";
+}
 
 // Limita o título do evento a 60 caracteres
 addEventTitle.addEventListener("input", (e) => {
@@ -280,7 +289,23 @@ addEventFrom.addEventListener("input", (e) => {
   if (addEventFrom.value.length > 5) {
     addEventFrom.value = addEventFrom.value.slice(0, 5);
   }
+  validateEventTime();
 });
+
+function validateEventTime() {
+  const timeFromArr = addEventFrom.value.split(":");
+  const timeToArr = addEventTo.value.split(":");
+  if (timeFromArr.length === 2 && timeToArr.length === 2) {
+    const timeFrom = new Date();
+    const timeTo = new Date();
+    timeFrom.setHours(timeFromArr[0], timeFromArr[1]);
+    timeTo.setHours(timeToArr[0], timeToArr[1]);
+    if (timeTo < timeFrom) {
+      alert("O horário final não pode ser anterior ao horário inicial.");
+      addEventTo.value = "";
+    }
+  }
+}
 
 // Formata a hora de término do evento
 addEventTo.addEventListener("input", (e) => {
