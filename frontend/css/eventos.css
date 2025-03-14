@@ -1,0 +1,212 @@
+* {
+    box-sizing: border-box;
+
+}
+
+@font-face {
+    font-family: 'AbhayaLibre-Bold';
+    src: url('../assets/font/AbhayaLibre-Bold.ttf');
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    min-height: 100vh;
+    display: block;
+    overflow-x: hidden;
+}
+
+
+.teste {
+    display: flex;
+    justify-content: start;
+    justify-items: center;
+    font-family: "Abhaya Libre";
+    font-size: 115px;
+    color: #E7E7E8;
+
+}
+
+.S {
+    margin-top: 8rem;
+    position: absolute;
+    z-index: 2;
+    margin-top: 1.6%;
+    margin-left: 7.5%;
+    user-select: none;
+    font-weight: 700;
+    color: #E7E7E8;
+    letter-spacing: 6px;
+
+
+    & span {
+        color: #E7E7E8;
+        font-family: "Abhaya Libre";
+        font-size: 65px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 7.8px;
+
+    }
+}
+
+
+.imagem-casamento {
+    margin-top: 8rem;
+    margin-left: 9%;
+
+    & img {
+        position: absolute;
+    }
+
+    z-index: 1;
+}
+
+
+.R {
+    margin-top: 8rem;
+    position: absolute;
+    z-index: 2;
+    margin-top: 19.75%;
+    margin-left: 14%;
+    user-select: none;
+    font-weight: 700;
+    letter-spacing: 6px;
+
+    & span {
+        color: #E7E7E8;
+        font-family: "Abhaya Libre";
+        font-size: 65px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 7.8px;
+
+    }
+
+}
+
+.tudo {
+    margin: 15px;
+}
+
+.texto-eventos {
+    color: #d4d4d4;
+    font-family: "Montserrat";
+    font-size: 16px;
+    width: 25%;
+    margin-top: 19%;
+    margin-left: 9%;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 4px;
+    user-select: none;
+}
+
+.imagens-eventos {
+    display: flex;
+    justify-content: center;
+    margin-left: 50px;
+    margin-top: -650px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25%;
+    user-select: none;
+}
+
+.imagens-eventos2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40%;
+    margin-top: -9%;
+    margin-left: 36%;
+    user-select: none;
+}
+
+.linha {
+    display: flex;
+    justify-content: flex-start;
+    background-color: #282828;
+    margin-left: 25%;
+    float: left;
+    width: 50%;
+    height: 1px;
+    position: absolute;
+    margin-top: 10rem;
+    user-select: none;
+}
+
+button {
+    display: flex;
+    width: 284.12px;
+    height: 57.238px;
+    flex-shrink: 0;
+    user-select: none;
+    color: #E7E7E8;
+    font-size: 16px;
+    color: black;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+
+.botaoAcess {
+    font-family: "Montserrat";
+    letter-spacing: 1px;
+    font-weight: 500;
+    background-color: #63783D;
+    color: #E7E7E8;
+    border: 1px solid #1D1D1D;
+    border-radius: 15px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    margin-right: 5rem;
+}
+
+
+.botaoAcess:hover {
+    cursor: pointer;
+    background-color: #46552b;
+    transform: translate(0, -5px);
+}
+
+.alinhar {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 13rem;
+    margin-bottom: -10%;
+}
+
+.conteudo {
+    margin-top: 5rem;
+}
+
+img {
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+img:hover {
+    transform: scale(1.2);
+}
+
+.botaoAcess {
+    display: flex;
+    margin-top: -40%;
+
+}
+
+.conteudo1 {
+    margin-top: 15rem;
+}

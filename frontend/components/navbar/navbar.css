@@ -1,19 +1,31 @@
-
-body{
+body {
     background-color: #0A0809;
+}
+
+.navbar {
+    margin: 1% 0%;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px 50px;
-    position: fixed;
+    position: sticky;
+    top: 0;
     width: 100%;
+    z-index: 5;
+    /* ME ARRANJA UM EMPREGO POR FAVOR CARALHO */
+    /* EU ODEIO MINHA VIDA */
+    /* vo ter que sequestrar alguem n vai ter jeito */
+    /* e eu nao quero fazer isso */
 }
+
 .logo img {
     height: 40px;
+    user-select: none;
 }
+
 .nav-links {
     list-style: none;
     display: flex;
@@ -21,19 +33,24 @@ body{
     padding: 0;
     justify-self: center;
 }
+
 .nav-links a {
     position: relative;
     padding: 10px 20px;
 }
-.nav-links  a {
+
+.nav-links a {
+    font-family: "Abhaya Libre";
     text-decoration: none;
-    color: white;
-    font-weight: regular;
-    font-size: 18px;
+    color: #d4d4d4;
+    font-weight: 100;
+    font-size: 23px;
     position: relative;
     padding-bottom: 5px;
+    letter-spacing: 0.5px;
 }
-.nav-links  a::after {
+
+.nav-links a::after {
     content: '';
     position: absolute;
     left: 50%;
@@ -44,6 +61,18 @@ body{
     transition: all 0.3s ease;
     transform: translateX(-50%);
 }
+
 .nav-links a:hover::after {
     width: 60%;
+}
+
+.text-nav {
+    position: absolute;
+    left: 46.5%;
+    top: 10%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 18px;
 }

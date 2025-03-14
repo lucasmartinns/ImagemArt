@@ -1,0 +1,276 @@
+* {
+    box-sizing: border-box;
+
+}
+
+@font-face {
+    font-family: 'AbhayaLibre-Bold';
+    src: url('../assets/font/AbhayaLibre-Bold.ttf');
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    min-height: 100vh;
+    display: block;
+    overflow-x: hidden;
+}
+
+.foto_titulo {
+    display: flex;
+    align-items: center;
+    margin: -6% 1%;
+    justify-content: space-evenly;
+    width: 100vw;
+
+}
+
+.titulo {
+    display: flex;
+    margin-right: 10rem;
+    font-family: "Montserrat";
+    text-decoration: none;
+    color: #E7E7E8;
+    font-size: 100px;
+    position: relative;
+    padding-bottom: 2%;
+    margin-left: 3%;
+    user-select: none;
+    letter-spacing: 5%;
+}
+
+.titulo {
+    animation: slideInLeft 1.5s ease-in 1 normal both;
+}
+
+.titulo2 {
+    animation: slideInLeft 1.8s ease-in 1 normal both;
+}
+
+.titulo2 {
+    color: #63783d;
+    font-family: "Montserrat";
+    top: 55%;
+    position: absolute;
+    left: 4%;
+    font-size: 60px;
+    user-select: none;
+}
+
+
+
+.linha {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: -2rem;
+    float: left;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 60px;
+    user-select: none;
+}
+
+.fotoinicial {
+    justify-content: flex-start;
+    align-items: center;
+    width: -230%;
+    margin-right: 6%;
+}
+
+.fotoinicial img {
+    max-width: 190%;
+    height: auto;
+    margin-left: -350px;
+}
+
+.textTitle {
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.sobre {
+    display: flex;
+    user-select: none;
+}
+
+.sobrenos {
+    text-align: end;
+    color: #E7E7E8;
+    font-size: 65px;
+    margin-top: 20rem;
+    margin-left: 80rem;
+    font-family: "Montserrat";
+    position: absolute;
+    z-index: -1;
+    letter-spacing: 8%;
+}
+
+.linhas {
+    width: 630px;
+    height: 2px;
+    background-color: #63783d;
+    margin-top: 405px;
+    margin-left: 235px;
+}
+
+.linhas2 {
+    position: relative;
+    width: 598px;
+    height: 2px;
+    background-color: #63783d;
+    margin-top: 13.5rem;
+    margin-left: 490px;
+    transform: rotate(90deg)
+}
+
+.text-sobre1 {
+    color: #E7E7E8;
+    font-family: "Montserrat";
+    font-size: 30px;
+    font-weight: 270;
+    margin-left: 200px;
+    margin-top: -200px;
+    width: 35rem;
+    text-align: right;
+}
+
+.botao {
+    background-color: #282828;
+    /*  margin-top: 0;
+    margin-left: 90px; */
+    border-radius: 8px;
+    margin: 16px;
+    text-decoration: none;
+
+
+
+}
+
+.titulo-eventos {
+    & p {
+        text-decoration: none;
+    }
+}
+
+.botao img {
+    width: 400px;
+}
+
+
+.imagemeventos {
+    margin-left: 1px;
+}
+
+.titulo-eventos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.titulo-eventos p {
+    color: #E7E7E8;
+    font-family: "Montserrat";
+    font-size: 32px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-decoration: none;
+
+}
+
+.tituloeventos {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: #E7E7E8;
+    text-decoration: none;
+    font-family: "Montserrat";
+    letter-spacing: 2px;
+    font-weight: 800;
+    font-size: 85px;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+    transform: rotate(90deg);
+
+}
+
+.titulo-eventos a {
+    display: flex;
+    color: #E7E7E8;
+    background-color: #63783d;
+    text-decoration: none;
+    font-family: "AbhayaLibre-Bold";
+    padding: 8px 60px;
+    border-radius: 3px;
+    letter-spacing: 5px;
+    /*   margin-top: 18px;*/
+    margin-bottom: 1.5rem;
+}
+
+
+.botoes-eventos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+
+
+.linha3 {
+    background-color: #63783d;
+    margin-top: 9px;
+    margin-left: 12px;
+}
+
+
+
+.teste {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-wrap: wrap;
+    margin-left: 9rem;
+}
+
+.botao {
+    transition-duration: 0.5s;
+}
+
+.botao:hover {
+    transform: translate(0, -5px);
+    background-color: #1e1f1a;
+    cursor: pointer;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-300px);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+
+}
+
+
+.redes-sociais {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1%
+}
+
+.redes-sociais img {
+    display: block;
+    width: 29px;
+    height: 100%;
+}
