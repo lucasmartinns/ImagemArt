@@ -261,7 +261,6 @@ h1 {
   height: auto;
   max-width: 8rem;
   max-height: 8rem;
-  border-radius: 50%;
 }
 
 .service-item .service-image {
@@ -270,7 +269,6 @@ h1 {
   height: auto;
   max-width: 8rem;
   max-height: 8rem;
-  border-radius: 50%;
 }
 
 .service-item h3 {
