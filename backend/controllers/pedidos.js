@@ -20,7 +20,7 @@ const pedido = {
 
     // 🔹 Gerar orçamento do usuário
     gerarOrcamento: (req, res) => {
-        const usuarioId = req.params.usuarioId;
+        const idpedido = req.params.idpedido;
 
         const sql = `
             SELECT 
@@ -28,10 +28,10 @@ const pedido = {
                 (p.quantidade * s.valor) AS total 
             FROM pedido p
             INNER JOIN servico s ON p.servico_idservico = s.idservico
-            WHERE p.usuario_idusuario = ?;
+            WHERE p.idpedido = ?;
         `;
 
-        connection.query(sql, [usuarioId], (err, results) => {
+        connection.query(sql, [idpedido], (err, results) => {
             if (err) {
                 return res.status(500).json({ error: "Erro ao gerar orçamento", detalhes: err });
             }
@@ -44,7 +44,7 @@ const pedido = {
             const totalGeral = results.reduce((acc, pedido) => acc + parseFloat(pedido.total), 0);
 
             return res.json({
-                usuarioId,
+                idpedido,
                 pedidos: results,
                 totalGeral
             });
