@@ -77,10 +77,26 @@ function addEmptyRow() {
         );
       }
     };
+
+    // Adiciona evento para verificar se a última linha foi preenchida
+    cell.addEventListener("input", checkLastRow);
   });
 
   row.querySelector(".price").onblur = formatPrice;
   row.querySelector(".quantity").onblur = validateQuantity;
+}
+
+// Verifica se a última linha foi preenchida e adiciona uma nova linha vazia
+function checkLastRow() {
+  const rows = detailsTable.rows;
+  const lastRow = rows[rows.length - 1];
+  const isLastRowFilled = Array.from(lastRow.cells).some(
+    (cell) => cell.innerText.trim() !== ""
+  );
+
+  if (isLastRowFilled) {
+    addEmptyRow();
+  }
 }
 
 // Formatar preço para moeda brasileira
