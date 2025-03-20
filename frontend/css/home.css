@@ -15,8 +15,8 @@ a {
 body {
     padding: 0;
     margin: 0;
-    width: 100vw;
-    min-height: 100vh;
+    width: 100%;
+    min-height: 100%;
     display: block;
     overflow-x: hidden;
 }
@@ -26,13 +26,12 @@ body {
     align-items: center;
     margin: -6% 1%;
     justify-content: space-evenly;
-    width: 100vw;
-
+    width: 100%;
 }
 
 .titulo {
     display: flex;
-    margin-right: 10rem;
+    margin-right: 10%;
     font-family: "Montserrat";
     text-decoration: none;
     color: #E7E7E8;
@@ -40,8 +39,10 @@ body {
     position: relative;
     padding-bottom: 2%;
     margin-left: 3%;
+    gap: 5%;
     user-select: none;
     letter-spacing: 5%;
+    font-weight: bold;
 }
 
 .titulo {
@@ -60,19 +61,19 @@ body {
     left: 4%;
     font-size: 60px;
     user-select: none;
+    font-weight: bold;
 }
-
 
 
 .linha {
     display: flex;
     justify-content: flex-start;
-    margin-left: -2rem;
+    margin-left: -3%;
     float: left;
     width: 100%;
     position: absolute;
     z-index: -1;
-    top: 60px;
+    top: 5.5%;
     user-select: none;
 }
 
@@ -86,45 +87,46 @@ body {
 .fotoinicial img {
     max-width: 190%;
     height: auto;
-    margin-left: -350px;
+    margin-left: -45%;
 }
 
-.textTitle {
-    font-weight: bold;
-    margin-right: 15px;
-}
+
 
 .sobre {
     display: flex;
     user-select: none;
 }
 
+
 .sobrenos {
     text-align: end;
     color: #E7E7E8;
     font-size: 65px;
-    margin-top: 20rem;
-    margin-left: 80rem;
+    margin-top: 15%;
+    margin-left: 18%;
     font-family: "Montserrat";
     position: absolute;
     z-index: -1;
     letter-spacing: 8%;
+    font-weight: bold;
 }
 
 .linhas {
     width: 630px;
     height: 2px;
     background-color: #63783d;
-    margin-top: 405px;
-    margin-left: 235px;
+    margin-top: 38%;
+    margin-left: 23%;
+    z-index: -1;
+    box-shadow: #63783d;
 }
 
 .linhas2 {
     position: relative;
-    width: 598px;
+    width: 59%;
     height: 2px;
     background-color: #63783d;
-    margin-top: 13.5rem;
+    margin-top: 13rem;
     margin-left: 490px;
     transform: rotate(90deg)
 }
@@ -132,12 +134,14 @@ body {
 .text-sobre1 {
     color: #E7E7E8;
     font-family: "Montserrat";
+    margin-top: -19%;
+    margin-left: 16.5%;
     font-size: 30px;
-    font-weight: 270;
-    margin-left: 200px;
-    margin-top: -200px;
-    width: 35rem;
+    font-weight: 200;
+    letter-spacing: 2px;
+    width: 60%;
     text-align: right;
+
 }
 
 .botao {
@@ -207,7 +211,7 @@ body {
     background-color: #63783d;
     text-decoration: none;
     font-family: "AbhayaLibre-Bold";
-    padding: 8px 60px;
+    padding: 8% 60%;
     border-radius: 3px;
     letter-spacing: 5px;
     /*   margin-top: 18px;*/
@@ -261,16 +265,155 @@ body {
 
 }
 
+@media (max-width: 1200px) {
+    .foto_titulo {
+        display: flex;
+        align-items: center;
+        margin: -8% 3.5%;
+        justify-content: space-evenly;
+        width: 100%;
+    }
 
-.redes-sociais {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1%
+    .titulo {
+        display: flex;
+        margin-right: 10%;
+        font-family: "Montserrat";
+        text-decoration: none;
+        color: #E7E7E8;
+        font-size: 60px;
+        position: relative;
+        padding-bottom: 2%;
+        margin-left: 3%;
+        gap: 5%;
+        user-select: none;
+        letter-spacing: 5%;
+        font-weight: bold;
+    }
+    .titulo2 {
+        color: #63783d;
+        font-family: "Montserrat";
+        top: 48%;
+        position: absolute;
+        left: 6.5%;
+        font-size: 30px;
+        user-select: none;
+        font-weight: bold;
+    }
+    
+    .linha {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: -115%;
+        float: left;
+        width: 5%;
+        z-index: -1;
+        top: -5%;
+        user-select: none;
+    }
+   .titulo-eventos {
+    & p {
+        text-decoration: none;
+    }
+}
+.botao img {
+    width: 400px;
 }
 
-.redes-sociais img {
-    display: block;
-    width: 29px;
-    height: 100%;
+
+.imagemeventos {
+    margin-left: 1px;
+}
+
+.titulo-eventos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.titulo-eventos p {
+    color: #E7E7E8;
+    font-family: "Montserrat";
+    font-size: 32px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-decoration: none;
+
+}
+.polaroid{
+
+    & img{
+        width: 50vw;
+        height: 89vh;
+    }
+}
+
+.tituloeventos {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: #E7E7E8;
+    text-decoration: none;
+    font-family: "Montserrat";
+    letter-spacing: 2px;
+    font-weight: 800;
+    font-size: 85px;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+    transform: rotate(90deg);
+
+}
+
+.titulo-eventos a {
+    display: flex;
+    color: #E7E7E8;
+    background-color: #63783d;
+    text-decoration: none;
+    font-family: "AbhayaLibre-Bold";
+    padding: 8% 60%;
+    border-radius: 3px;
+    letter-spacing: 5px;
+    /*   margin-top: 18px;*/
+    margin-bottom: 1.5rem;
+}
+
+
+.botoes-eventos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+
+
+.linha3 {
+    background-color: #63783d;
+    margin-top: 9px;
+    margin-left: 12px;
+}
+
+
+
+.teste {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-wrap: wrap;
+    margin-left: 9rem;
+}
+
+.botao {
+    transition-duration: 0.5s;
+}
+
+.botao:hover {
+    transform: translate(0, -5px);
+    background-color: #1e1f1a;
+    cursor: pointer;
+}
+
+
+
 }

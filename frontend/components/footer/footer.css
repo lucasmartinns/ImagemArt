@@ -36,12 +36,15 @@ footer {
     margin-left: 90px;
     position: relative;
     margin-top: -19px;
-    font-family: "AbhayaLibre-Medium";
+    font-family: "Montserrat";
     padding-top: 20px;
 }
 
 .redes {
+    display: flex;
     margin-left: 90px;
+
+
 }
 
 logo-footer {
