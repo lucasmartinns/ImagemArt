@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const servico = require("../controllers/servico");
 const pedido = require("../controllers/pedidos");
 const calendario = require("../controllers/calendario");
+const path = require("path");
 
 //🔹Rotas de Usuário
 router.post("/login", usuario.Login);
@@ -36,6 +37,11 @@ router.put("/atualizarEvento/:id", calendario.atualizarEvento);
 router.delete("/deletarEvento/:id", calendario.deletarEvento);
 
 
+
+//Rotas para paginas
+router.get("/home", (req, res) => {
+  res.sendFile(path.join(__dirname, "../views/index.html"));
+});
 
 
 module.exports = router;
