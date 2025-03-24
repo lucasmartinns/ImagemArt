@@ -26,15 +26,20 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  align-items: center;
 }
 
-h1 {
+h1 span {
   font-size: 2.5rem;
   font-family: "Abhaya Libre";
   font-weight: bold;
-  letter-spacing: 12px;
   color: var(--white);
   text-align: center;
+  letter-spacing: 8px;
+}
+
+h1 span:last-child {
+  letter-spacing: 0;
 }
 
 .line {
@@ -242,7 +247,6 @@ h1 {
   transform: scale(0.95);
 }
 
-/* Estilos para os itens de serviço */
 .service-item {
   position: relative;
   display: flex;
@@ -278,7 +282,6 @@ h1 {
   font-weight: bold;
   letter-spacing: 0.1rem;
   text-align: center;
-  margin-top: 10px;
 }
 
 .service-item:active .image-container img,
@@ -375,4 +378,28 @@ h1 {
 #saveBtn,
 #deleteBtn {
   margin-left: 10px;
+}
+
+.deleteRowBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #e7e7e8;
+  background-color: transparent;
+  border: none;
+  transition: transform 0.2s ease, filter 0.1s ease, background-color 0.1s ease;
+}
+
+.deleteRowBtn:active {
+  color: var(--secundary-clr);
+  filter: brightness(0.8);
+  transform: scale(0.95);
 }

@@ -124,7 +124,7 @@ function validateQuantity(event) {
 // Salvar um item
 saveBtn.onclick = function () {
   const serviceName = document.getElementById("serviceName").value;
-  const serviceImage = imageInput.files[0]; // Use imageInput instead of fileInput
+  const serviceImage = imageInput.files[0];
 
   if (serviceName) {
     const reader = new FileReader();
@@ -133,7 +133,7 @@ saveBtn.onclick = function () {
         // Atualizar item existente
         if (serviceImage) {
           currentItem.querySelector(".service-image").src = e.target.result;
-          currentItem.dataset.image = e.target.result; // Save the image data
+          currentItem.dataset.image = e.target.result;
         }
         currentItem.querySelector("h3").innerText = serviceName;
         currentItem.dataset.details = JSON.stringify(getDetailsFromTable());
@@ -149,16 +149,16 @@ saveBtn.onclick = function () {
           <h3>${serviceName}</h3>
         `;
         item.dataset.details = JSON.stringify(getDetailsFromTable());
-        item.dataset.image = e.target.result; // Save the image data
+        item.dataset.image = e.target.result;
         item.onclick = function () {
           currentItem = item;
           itemModal.style.display = "flex";
           document.getElementById("serviceName").value = serviceName;
           loadDetailsToTable(JSON.parse(item.dataset.details));
           deleteBtn.style.display = "block";
-          selectedImage.src = item.dataset.image; // Load the saved image data
+          selectedImage.src = item.dataset.image;
           selectedImage.style.display = "block";
-          modalPlusSymbol.style.display = "none"; // Hide the plus symbol in the modal
+          modalPlusSymbol.style.display = "none";
         };
         itemsContainer.insertBefore(item, itemsContainer.lastElementChild);
       }
@@ -211,9 +211,9 @@ function loadDetailsToTable(details) {
       <td contenteditable="true">${detail.detail}</td>
       <td contenteditable="true" class="price">${detail.price}</td>
       <td contenteditable="true" class="quantity">${detail.quantity}</td>
-      <td><button type="button" class="deleteRowBtn">Excluir</button></td>
+      <td><button type="button" class="deleteRowBtn" style="text-align: center;">x</button></td>
     `;
-    // Add event listener to delete row button
+
     row.querySelector(".deleteRowBtn").onclick = function () {
       detailsTable.deleteRow(row.rowIndex - 1);
     };
@@ -224,20 +224,31 @@ function loadDetailsToTable(details) {
 // Inicializar com uma linha em branco
 addEmptyRow();
 
-// Handle image selection and preview
+// Adiciona um evento de clique ao formulário de adição de item
 addItemForm.addEventListener("click", function () {
+  // Simula um clique no input de arquivo para selecionar uma imagem
   imageInput.click();
 });
 
+// Adiciona um evento de mudança ao input de arquivo para carregar a imagem selecionada
 imageInput.addEventListener("change", function (event) {
+  // Obtém o arquivo selecionado
   const file = event.target.files[0];
+
+  // Verifica se um arquivo foi selecionado
   if (file) {
+    // Cria um FileReader para ler o conteúdo do arquivo
     const reader = new FileReader();
+
+    // Define a função de callback para quando a leitura do arquivo estiver completa
     reader.onload = function (e) {
+      // Define a imagem selecionada como a imagem de fundo do item
       selectedImage.src = e.target.result;
       selectedImage.style.display = "block";
-      modalPlusSymbol.style.display = "none"; // Hide the plus symbol in the modal
+      modalPlusSymbol.style.display = "none";
     };
+
+    // Lê o conteúdo do arquivo como uma URL de dados
     reader.readAsDataURL(file);
   }
 });
