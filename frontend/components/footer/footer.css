@@ -1,0 +1,78 @@
+footer {
+    width: 100vw;
+    height: 22vh;
+    margin-top: 12%;
+    background-color: #161515;
+}
+
+.nome-empresa {
+    color: #E7E7E8;
+    font-family: "Montserrat";
+    margin-top: -99px;
+    margin-left: 80vw;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.6px;
+}
+
+.nome-empresa1 {
+    color: #63783d;
+    font-family: "Montserrat";
+    margin-top: -40px;
+    margin-left: 80.5vw;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.6px;
+}
+
+
+.local {
+    display: flex;
+    color: #E7E7E8;
+    margin-left: 90px;
+    position: relative;
+    margin-top: -19px;
+    font-family: "AbhayaLibre-Medium";
+    padding-top: 20px;
+}
+
+.redes {
+    margin-left: 90px;
+}
+
+logo-footer {
+    width: 120px;
+    height: 70.909px;
+}
+
+.footer img {
+    margin-top: 190px;
+}
+
+.empresaLogo {
+    display: flex;
+
+    & img {
+        position: absolute;
+        margin-left: 76%;
+        margin-top: -5%;
+
+    }
+}
+
+.redes-sociais {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1%
+}
+
+.redes-sociais img {
+    display: block;
+    width: 29px;
+    height: 100%;
+}
