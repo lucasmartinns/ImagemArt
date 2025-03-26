@@ -1,78 +1,67 @@
 body {
-    background-color: #0A0809;
+  background-color: #0a0809;
 }
 
 .navbar {
-    margin: 1% 0%;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px 50px;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 5;
-    /* ME ARRANJA UM EMPREGO POR FAVOR CARALHO */
-    /* EU ODEIO MINHA VIDA */
-    /* vo ter que sequestrar alguem n vai ter jeito */
-    /* e eu nao quero fazer isso */
-}
-
-.logo img {
-    height: 40px;
-    user-select: none;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 50px;
-    padding: 0;
-    justify-self: center;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
 }
 
 .nav-links a {
-    position: relative;
-    padding: 10px 20px;
+  padding: 10px 20px;
 }
 
 .nav-links a {
-    font-family: "Abhaya Libre";
-    text-decoration: none;
-    color: #d4d4d4;
-    font-weight: 100;
-    font-size: 23px;
-    position: relative;
-    padding-bottom: 5px;
-    letter-spacing: 0.5px;
+  font-family: "Abhaya Libre";
+  text-decoration: none;
+  color: #d4d4d4;
+  font-weight: 100;
+  font-size: 1.3vw;
+  position: relative;
+  padding-bottom: 5px;
+  letter-spacing: 0.5px;
+  display: inline-block;
 }
 
 .nav-links a::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background: white;
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
 .nav-links a:hover::after {
-    width: 60%;
+  width: 60%;
 }
 
 .text-nav {
-    position: absolute;
-    left: 46.5%;
-    top: 10%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    color: white;
-    font-size: 18px;
+  display: flex;
+}
+
+.logo img {
+  height: 2.5vw;
+  user-select: none;
+  position: absolute;
+  left: 1%;
+  top: 1%;
+}
+
+@media screen and (max-width: 1000px) {
+  .nav-links a {
+    font-size: 2vw;
+  }
+}
+@media screen and (max-width: 500px) {
+  .nav-links a {
+    font-size: 3vw;
+  }
 }
