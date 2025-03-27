@@ -9,6 +9,8 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "../frontend/assets"))); 
+app.use("/uploads", express.static("uploads")); // Permitir acesso às imagens
 
 //Rotas
 app.use('/', router);

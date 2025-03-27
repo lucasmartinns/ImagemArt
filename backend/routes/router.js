@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const servico = require("../controllers/servico");
 const pedido = require("../controllers/pedidos");
 const calendario = require("../controllers/calendario");
+const upload = require("../middlewares/upload");
 const path = require("path");
 
 //🔹Rotas de Usuário
@@ -16,7 +17,6 @@ router.put("/alterar/:id",usuario.AlterarUsuario);
 router.delete("/deletar/:id",usuario.Deletar);
 router.get('/',usuario.ListarUsuario);
 router.get('/buscar/:id',usuario.BuscarUsuarioPorId);
-
 
 //🔹Rotas de Serviço
 router.post("/criarservico", servico.criarServico);
@@ -36,12 +36,45 @@ router.get("/buscarEvento/:id", calendario.buscarEventoID);
 router.put("/atualizarEvento/:id", calendario.atualizarEvento);
 router.delete("/deletarEvento/:id", calendario.deletarEvento);
 
+// //Rotas para paginas
+// router.get("/home", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../views/index.html"));
+// });
 
+//🔹 Rota para Upload de Imagem
+router.post("/upload", upload.single("imagem"), (req, res) => {
+  if (!req.file) {
+      return res.status(400).json({ message: "Nenhuma imagem enviada" });
+  }
 
-//Rotas para paginas
-router.get("/home", (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/index.html"));
+  // Caminho da imagem salva no servidor
+  const caminho = `/uploads/${req.file.filename}`;
+
+  // Inserindo o caminho no MySQL
+  connection.query(
+      "INSERT INTO imagens (caminho) VALUES (?)",
+      [caminho],
+      (err, result) => {
+          if (err) {
+              console.error(err);
+              return res.status(500).json({ message: "Erro ao salvar no banco" });
+          }
+          res.json({ message: "Upload realizado com sucesso!", caminho });
+      }
+  );
 });
+
+//🔹 Rota para listar imagens
+router.get("/imagens", (req, res) => {
+  connection.query("SELECT * FROM imagens", (err, results) => {
+      if (err) {
+          console.error(err);
+          return res.status(500).json({ message: "Erro ao buscar imagens" });
+      }
+      res.json(results);
+  });
+});
+
 
 
 module.exports = router;
