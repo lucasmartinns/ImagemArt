@@ -79,3 +79,25 @@ logo-footer {
     width: 29px;
     height: 100%;
 }
+@media (max-width: 1200px) {
+    .nome-empresa {
+        margin-left: 80vw;
+    }
+
+    .nome-empresa1 {
+        margin-left: 80.5vw;
+    }
+
+    .local {
+        margin-left: 2%;
+    }
+
+    .redes {
+        margin-left: 10px;
+    }
+
+    .empresaLogo img {
+        margin-left: 73%;
+        margin-top: -7.5%;
+    }
+}
