@@ -588,6 +588,9 @@ body {
   .add-event-wrapper {
     bottom: 100px;
   }
+  .right .today-date {
+    margin-top: 0;
+  }
 }
 
 @media screen and (max-width: 500px) {

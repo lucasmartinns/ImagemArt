@@ -4,7 +4,7 @@ body {
 
 .navbar {
   margin-top: 1%;
-  margin-bottom: 1%;
+  margin-bottom: 3.5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +20,7 @@ body {
   text-decoration: none;
   color: #d4d4d4;
   font-weight: 100;
-  font-size: 1.3vw;
+  font-size: clamp(1rem, 1.35vw, 1.7rem);
   position: relative;
   padding-bottom: 5px;
   letter-spacing: 0.5px;
@@ -48,20 +48,9 @@ body {
 }
 
 .logo img {
-  height: 2.5vw;
+  height: clamp(1.45rem, 3vw, 2.5rem);
   user-select: none;
   position: absolute;
   left: 1%;
   top: 1%;
-}
-
-@media screen and (max-width: 1000px) {
-  .nav-links a {
-    font-size: 2vw;
-  }
-}
-@media screen and (max-width: 500px) {
-  .nav-links a {
-    font-size: 3vw;
-  }
 }
