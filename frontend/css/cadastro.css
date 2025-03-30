@@ -1,0 +1,153 @@
+/* ESSENCIAIS */
+:root {
+  --primary-clr: #a6b826;
+  --secundary-clr: #838d35;
+  --tertiary-clr: #cbd4b6;
+  --white: #e7e7e8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #0a0809;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.form-container {
+  width: clamp(20rem, 40vw, 40vw);
+  color: #e7e7e8;
+  padding: 2rem;
+  border-radius: 15px;
+  border: 2px solid #4b4b4b;
+  background: #282828;
+  background-color: #282828;
+}
+
+h1 {
+  font-family: "Montserrat";
+  font-size: clamp(1.5rem, 2vw, 2vw);
+  text-align: center;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-clr);
+  letter-spacing: 1.5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.informations label {
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  color: #e7e7e8;
+  margin-bottom: 1rem !important;
+}
+
+.informations input {
+  display: flex;
+  padding: 1rem;
+  width: clamp(12rem, 15vw, 15vw);
+  height: clamp(2rem, 3vw, 3rem);
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  background-color: #e7e7e8;
+  color: #0a0809;
+  margin-bottom: 0.8rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.informations input:focus {
+  outline: 2px solid var(--secundary-clr);
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  width: 100%;
+}
+
+.password-container .toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 47%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.checkbox-container input {
+  margin-right: 0.5rem;
+}
+
+.cadastrarButton {
+  width: clamp(10rem, 8vw, 8vw);
+  height: clamp(2.5rem, 3vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--white);
+  border-radius: 10px;
+  border: 2px solid #1d1d1d;
+  box-shadow: inset 0px -13.58px 18.11px rgba(0, 0, 0, 0.05),
+    inset 0px 9.05px 13.58px rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.1s ease, background-color 0.1s ease;
+}
+
+.cadastrarButton:hover {
+  background-color: var(--secundary-clr);
+}
+
+.manterConectado {
+  font-size: clamp(0.8rem, 1vw, 1rem);
+}
+
+#manterConectado:checked {
+  accent-color: var(--secundary-clr);
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--primary-clr);
+  text-decoration: none;
+  font-size: clamp(0.8rem, 1vw, 1rem);
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+.mensagem {
+  text-align: start;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
