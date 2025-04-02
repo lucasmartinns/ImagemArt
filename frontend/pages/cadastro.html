@@ -17,6 +17,7 @@
   <body>
     <div class="form-container">
       <h1>CADASTRO</h1>
+
       <form id="cadastroForm">
         <div class="informations">
           <label for="nome">Nome</label>
@@ -26,6 +27,8 @@
             name="nome"
             placeholder="Digite seu nome"
             required
+            oninvalid="this.setCustomValidity('Preencha seu nome.')"
+            oninput="this.setCustomValidity('')"
           />
 
           <label for="email">E-mail</label>
@@ -45,6 +48,8 @@
             placeholder="Digite seu telefone"
             maxlength="15"
             required
+            oninvalid="this.setCustomValidity('Digite seu telefone.')"
+            oninput="this.setCustomValidity('')"
           />
 
           <label for="senha">Senha</label>
@@ -55,13 +60,19 @@
               name="senha"
               placeholder="Digite sua senha"
               required
+              oninvalid="this.setCustomValidity('Preencha o campo da senha.')"
+              oninput="this.setCustomValidity('')"
             />
             <button
               type="button"
               class="toggle-password"
-              onclick="togglePassword('senha')"
+              onclick="togglePassword('senha', this)"
             >
-              👁️‍🗨️
+              <img
+                src="../assets/img/password/eye-key-look-password-security-see-svgrepo-com.svg"
+                alt="Mostrar senha"
+                class="password-icon"
+              />
             </button>
           </div>
 
@@ -73,13 +84,19 @@
               name="confirmarSenha"
               placeholder="Confirme sua senha"
               required
+              oninvalid="this.setCustomValidity('As senhas não coincidem. Por favor, verifique.')"
+              oninput="this.setCustomValidity('')"
             />
             <button
               type="button"
               class="toggle-password"
-              onclick="togglePassword('confirmarSenha')"
+              onclick="togglePassword('confirmarSenha', this)"
             >
-              👁️‍🗨️
+              <img
+                src="../assets/img/password/eye-key-look-password-security-see-svgrepo-com.svg"
+                alt="Mostrar senha"
+                class="password-icon"
+              />
             </button>
           </div>
         </div>
@@ -94,6 +111,14 @@
         <button class="cadastrarButton" type="submit">Cadastrar</button>
         <a href="login.html" class="login-link">Já tem uma conta? Faça login</a>
       </form>
+
+      <!-- Alert -->
+      <div id="customAlert" class="custom-alert">
+        <div class="custom-alert-content">
+          <p id="customAlertMessage"></p>
+          <button id="customAlertButton">OK</button>
+        </div>
+      </div>
     </div>
     <script src="../../backend/controllers/cadastro.js"></script>
   </body>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/login.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="form-container">
+      <h1>LOGIN</h1>
+
+      <form id="loginForm">
+        <div class="informations">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Digite seu e-mail"
+            required
+            oninvalid="this.setCustomValidity('Preencha seu e-mail.')"
+            oninput="this.setCustomValidity('')"
+          />
+
+          <label for="senha">Senha</label>
+          <div class="password-container">
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              placeholder="Digite sua senha"
+              required
+              oninvalid="this.setCustomValidity('Preencha sua senha.')"
+              oninput="this.setCustomValidity('')"
+            />
+            <button
+              type="button"
+              class="toggle-password"
+              onclick="togglePassword('senha', this)"
+            >
+              <img
+                src="../assets/img/password/eye-key-look-password-security-see-svgrepo-com.svg"
+                alt="Mostrar senha"
+                class="password-icon"
+              />
+            </button>
+          </div>
+        </div>
+
+        <div class="checkbox-container">
+          <input type="checkbox" id="manterConectado" name="manterConectado" />
+          <label class="manterConectado" for="manterConectado"
+            >Manter-se conectado</label
+          >
+        </div>
+
+        <button class="cadastrarButton" type="submit">Entrar</button>
+        <a href="cadastro.html" class="login-link"
+          >Não tem uma conta? Cadastre-se</a
+        >
+      </form>
+
+      <!-- Alert -->
+      <div id="customAlert" class="custom-alert">
+        <div class="custom-alert-content">
+          <p id="customAlertMessage"></p>
+          <button id="customAlertButton">OK</button>
+        </div>
+      </div>
+    </div>
+    <script src="../../backend/controllers/login.js"></script>
+  </body>
+</html>

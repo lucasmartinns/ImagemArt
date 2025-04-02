@@ -26,7 +26,7 @@ body {
 }
 
 .form-container {
-  width: clamp(20rem, 32vw, 32vw);
+  width: clamp(20rem, 28vw, 28vw);
   color: #e7e7e8;
   padding: 2rem;
   border-radius: 15px;

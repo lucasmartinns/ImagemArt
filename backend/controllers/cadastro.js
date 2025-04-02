@@ -10,17 +10,9 @@ document
     const confirmarSenha = document
       .getElementById("confirmarSenha")
       .value.trim();
-    const mensagem = document.getElementById("mensagem");
-
-    if (!nome || !email || !telefone || !senha || !confirmarSenha) {
-      mensagem.textContent = "Por favor, preencha todos os campos.";
-      mensagem.style.color = "red";
-      return;
-    }
 
     if (senha !== confirmarSenha) {
-      mensagem.textContent = "As senhas não coincidem. Por favor, verifique.";
-      mensagem.style.color = "red";
+      showCustomAlert("As senhas não coincidem. Por favor, verifique.");
       return;
     }
 
@@ -28,27 +20,46 @@ document
     const dados = { nome, email, telefone, senha };
     console.log("Dados enviados:", dados);
 
-    mensagem.textContent = "Cadastro realizado com sucesso!";
-    mensagem.style.color = "green";
+    showCustomAlert("Cadastro realizado com sucesso!");
 
     // Limpa o formulário
     document.getElementById("cadastroForm").reset();
   });
 
+// Alerta customizado
+function showCustomAlert(message) {
+  const alertBox = document.getElementById("customAlert");
+  const alertMessage = document.getElementById("customAlertMessage");
+  const alertButton = document.getElementById("customAlertButton");
+
+  alertMessage.textContent = message;
+  alertBox.classList.add("show");
+
+  alertButton.onclick = function () {
+    alertBox.classList.remove("show");
+  };
+}
+
 // Alternar visibilidade da senha
-function togglePassword(inputId) {
+function togglePassword(inputId, button) {
   const input = document.getElementById(inputId);
+  const img = button.querySelector("img");
+
   if (input.type === "password") {
     input.type = "text";
+    img.src = "../assets/img/password/eye-password-see-view-svgrepo-com.svg";
+    img.alt = "Ocultar senha";
   } else {
     input.type = "password";
+    img.src =
+      "../assets/img/password/eye-key-look-password-security-see-svgrepo-com.svg";
+    img.alt = "Mostrar senha";
   }
 }
 
-
 // Formatar telefone no padrão brasileiro
 document.getElementById("telefone").addEventListener("input", function (e) {
-  let value = e.target.value.replace(/\D/g, ""); // Remove caracteres não numéricos
+  let value = e.target.value.replace(/\D/g, "");
   if (value.length > 10) {
     value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
   } else if (value.length > 5) {

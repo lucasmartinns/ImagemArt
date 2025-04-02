@@ -207,7 +207,7 @@ function gotoDate() {
       return;
     }
   }
-  alert("Data inválida");
+  showCustomAlert("Data inválida");
 }
 
 // Função para obter o dia ativo
@@ -260,14 +260,6 @@ addEventCloseBtn.addEventListener("click", () => {
   clearEventForm();
 });
 
-// Adiciona event listener para fechar o formulário de adicionar evento ao clicar fora dele
-document.addEventListener("click", (e) => {
-  if (e.target !== addEventBtn && !addEventWrapper.contains(e.target)) {
-    addEventWrapper.classList.remove("active");
-    clearEventForm();
-  }
-});
-
 // Função para limpar o formulário de adicionar evento
 function clearEventForm() {
   addEventTitle.value = "";
@@ -301,7 +293,9 @@ function validateEventTime() {
     timeFrom.setHours(timeFromArr[0], timeFromArr[1]);
     timeTo.setHours(timeToArr[0], timeToArr[1]);
     if (timeTo < timeFrom) {
-      alert("O horário final não pode ser anterior ao horário inicial.");
+      showCustomAlert(
+        "O horário final não pode ser anterior ao horário inicial."
+      );
       addEventTo.value = "";
     }
   }
@@ -324,7 +318,7 @@ addEventSubmit.addEventListener("click", () => {
   const eventTimeFrom = addEventFrom.value;
   const eventTimeTo = addEventTo.value;
   if (eventTitle === "" || eventTimeFrom === "" || eventTimeTo === "") {
-    alert("Por favor, preencha todos os campos");
+    showCustomAlert("Por favor, preencha todos os campos");
     return;
   }
 
@@ -338,7 +332,7 @@ addEventSubmit.addEventListener("click", () => {
     timeToArr[0] > 23 ||
     timeToArr[1] > 59
   ) {
-    alert("Formato de Hora Inválido");
+    showCustomAlert("Formato de Hora Inválido");
     return;
   }
 
@@ -360,7 +354,7 @@ addEventSubmit.addEventListener("click", () => {
     }
   });
   if (eventExist) {
-    alert("Evento já adicionado");
+    showCustomAlert("Evento já adicionado");
     return;
   }
   const newEvent = {
@@ -449,4 +443,18 @@ function convertTime(time) {
   timeHour = timeHour % 12 || 12;
   time = timeHour + ":" + timeMin + " " + timeFormat;
   return time;
+}
+
+// Alerta customizado
+function showCustomAlert(message) {
+  const alertBox = document.getElementById("customAlert");
+  const alertMessage = document.getElementById("customAlertMessage");
+  const alertButton = document.getElementById("customAlertButton");
+
+  alertMessage.textContent = message;
+  alertBox.classList.add("show");
+
+  alertButton.onclick = function () {
+    alertBox.classList.remove("show");
+  };
 }
