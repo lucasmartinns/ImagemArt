@@ -161,8 +161,9 @@ button {
 
 
 .botaoAcess {
-    font-family: "Montserrat";
-    letter-spacing: 1px;
+    font-size: 16px;
+    font-family: "Abhaya Libre";
+    letter-spacing: 2px;
     font-weight: 500;
     background-color: #63783D;
     color: #E7E7E8;
@@ -173,7 +174,9 @@ button {
     margin-right: 5rem;
 }
 
-
+.botaoAcess a{
+    color: #E7E7E8;
+}
 .botaoAcess:hover {
     cursor: pointer;
     background-color: #46552b;

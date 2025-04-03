@@ -18,7 +18,9 @@ body {
     width: 100vw;
     height: 100%;
     display: block;
+    overflow-x: hidden;
 }
+
 
 .inicio {
     display: flex;
@@ -74,8 +76,8 @@ body {
 }
 
 .fotoinicial img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -253,122 +255,6 @@ body {
 
 }
 
-/* @media (max-width: 1200px) {
-    .foto_titulo {
-        display: flex;
-        align-items: center;
-        margin: -8% 3.5%;
-        justify-content: space-evenly;
-        width: 100%;
-    }
-
-    .titulo {
-        display: flex;
-        margin-right: 10%;
-        font-family: "Montserrat";
-        text-decoration: none;
-        color: #E7E7E8;
-        font-size: 60px;
-        position: relative;
-        padding-bottom: 2%;
-        margin-left: 3%;
-        gap: 5%;
-        user-select: none;
-        letter-spacing: 5%;
-        font-weight: bold;
-    }
-
-    .titulo2 {
-        color: #63783d;
-        font-family: "Montserrat";
-        top: 48%;
-        position: absolute;
-        left: 6.5%;
-        font-size: 30px;
-        user-select: none;
-        font-weight: bold;
-    }
-
-    .linha {
-        display: flex;
-        justify-content: flex-start;
-        margin-left: -115%;
-        float: left;
-        width: 5%;
-        z-index: -1;
-        top: -5%;
-        user-select: none;
-    }
-
-    .titulo-eventos {
-        & p {
-            text-decoration: none;
-        }
-    }
-
-    .botao img {
-        width: 400px;
-    }
-
-
-    .imagemeventos {
-        margin-left: 1px;
-    }
-
-    .titulo-eventos {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
-
-    .titulo-eventos p {
-        color: #E7E7E8;
-        font-family: "Montserrat";
-        font-size: 32px;
-        letter-spacing: 2px;
-        font-weight: 700;
-        text-decoration: none;
-
-    }
-
-    .polaroid {
-
-        & img {
-            width: 50vw;
-            height: 89vh;
-        }
-    }
-
-    .tituloeventos {
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        color: #E7E7E8;
-        text-decoration: none;
-        font-family: "Montserrat";
-        letter-spacing: 2px;
-        font-weight: 800;
-        font-size: 85px;
-        user-select: none;
-        margin: 0;
-        padding: 0;
-        transform: rotate(90deg);
-
-    }
-
-    .titulo-eventos a {
-        display: flex;
-        color: #E7E7E8;
-        background-color: #63783d;
-        text-decoration: none;
-        font-family: "AbhayaLibre-Bold";
-        padding: 8% 60%;
-        border-radius: 3px;
-        letter-spacing: 5px;
-        /*   margin-top: 18px;*/
-/* margin-bottom: 1.5rem; */
-
 
 .botoes-eventos {
     display: flex;
@@ -392,7 +278,6 @@ body {
     align-items: start;
     justify-content: start;
     flex-wrap: wrap;
-    margin-left: 28rem;
 }
 
 .botao {
@@ -408,18 +293,17 @@ body {
 .sobrenos {
     text-align: end;
     color: #E7E7E8;
-    font-size: 45px;
-    margin-top: 15%;
-    margin-left: 12%;
+    font-size: 65px;
+    margin-top: 16%;
+    margin-left: 15%;
     font-family: "Montserrat";
     position: absolute;
     z-index: -1;
-    letter-spacing: 8%;
+    letter-spacing: 6px;
     font-weight: bold;
 }
 
 .linhas {
-    width: 16px;
     height: 2px;
     background-color: #63783d;
     margin-top: 40%;
@@ -429,10 +313,10 @@ body {
 }
 
 .linhas2 {
-    width: 59%;
+    width: 55%;
     height: 2px;
     background-color: #63783d;
-    margin-top: 20%;
+    margin-top: 17%;
     margin-left: 50%;
     transform: rotate(90deg)
 }
@@ -440,10 +324,10 @@ body {
 .text-sobre1 {
     color: #E7E7E8;
     font-family: "Montserrat";
-    margin-bottom: 10%;
+    margin-top: -15%;
     margin-left: 16.5%;
-    font-size: 18px;
-    font-weight: 200;
+    font-size: 28px;
+    font-weight: 400;
     letter-spacing: 2px;
     width: 60%;
     text-align: right;
@@ -598,7 +482,6 @@ body {
         align-items: start;
         justify-content: start;
         flex-wrap: wrap;
-        margin-left: 28rem;
     }
 
     .botao {
@@ -650,4 +533,3 @@ body {
 
     }
 }
-
