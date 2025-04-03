@@ -187,18 +187,11 @@ h1 span:last-child {
   cursor: pointer;
 }
 
-.topBar .addItemForm img {
-  width: 100%;
-  height: auto;
-  max-width: 15rem;
-  max-height: 15rem;
-}
-
 .addItemForm img {
   width: 100%;
   height: auto;
-  max-width: 8rem;
-  max-height: 8rem;
+  width: clamp(8rem, 10vw, 10vw);
+  height: auto;
   transition: filter 0.5s ease, transform 0.1s ease;
 }
 
@@ -363,7 +356,7 @@ h1 span:last-child {
 .table-container {
   width: 100%;
   overflow-x: auto;
-  max-height: calc(50px * 5);
+  max-height: calc(40px * 5);
   overflow-y: auto;
   display: flex;
   flex-wrap: wrap;
@@ -408,18 +401,13 @@ h1 span:last-child {
   transform: scale(0.95);
 }
 
-/* media queries */
-@media screen and (max-width: 1000px) {
+/* MEDIA QUERIES */
+@media screen and (max-width: 1024px) {
   .topBar {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
-  }
-
-  .addItemForm {
-    width: 40%;
-    margin-top: 10%;
   }
 
   .topBarRight {

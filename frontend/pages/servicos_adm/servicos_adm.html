@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Serviços</title>
-    <link rel="stylesheet" href="../components/navbar/navbar.css" />
-    <link rel="stylesheet" href="../css/servicos_adm.css" />
+    <link rel="stylesheet" href="../../components/navbar/navbar.css" />
+    <link rel="stylesheet" href="../../components/alert/alert.css" />
+    <link rel="stylesheet" href="../servicos_adm/servicos_adm.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
       rel="stylesheet"
@@ -16,23 +17,22 @@
     />
   </head>
   <body>
-    <!-- Navbar -->
+    <!-- NAVBAR -->
     <div id="navbar-container">
-      <script src="../components/navbar/navbar.js"></script>
+      <script src="../../components/navbar/navbar.html"></script>
     </div>
 
-    <!-- Calendario -->
+    <!-- SERVIÇOS -->
     <div class="center">
       <div class="serviceContainer">
         <h1><span>Serviç</span><span>o</span></h1>
         <div class="line"></div>
         <div class="itens" id="itemsContainer">
-          <!-- REPONSÁVEL PELA CRIAÇÃO DOS SERVIÇOS  -->
           <div class="addItem">
             <div class="image-container">
               <img
                 id="createItemImg"
-                src="../assets/img/servicos/backgroundImage.png"
+                src="../../assets/img/servicos/backgroundImage.png"
                 alt="Adicionar Serviço"
               />
               <span class="plus-symbol">+</span>
@@ -49,7 +49,7 @@
                   <div class="addItemForm">
                     <img
                       id="backgroundImage"
-                      src="../assets/img/servicos/backgroundImage.png"
+                      src="../../assets/img/servicos/backgroundImage.png"
                       alt="Adicionar Imagem"
                     />
                     <img id="selectedImage" src="" alt="Imagem Selecionada" />
@@ -81,21 +81,15 @@
                       <tr class="table-header">
                         <th>Detalhes</th>
                         <th>Preços</th>
-                        <th>Quantidade mínima</th>
+                        <th>Quantidade Mínima</th>
                         <th>Ações</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr class="editable-row">
-                        <td contenteditable="true">
-                          Clique para adicionar detalhes
-                        </td>
-                        <td contenteditable="true" class="price">
-                          Clique para adicionar preço
-                        </td>
-                        <td contenteditable="true" class="quantity">
-                          Clique para adicionar quantidade
-                        </td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true" class="price"></td>
+                        <td contenteditable="true" class="quantity"></td>
                         <td></td>
                       </tr>
                     </tbody>
@@ -108,6 +102,16 @@
       </div>
     </div>
 
-    <script src="../../backend/controllers/servicos_adm.js"></script>
+    <!-- ALERTA -->
+    <div id="customAlertContainer"></div>
+    <script src="../servicos_adm/servicos_adm.js"></script>
+    <script>
+      fetch("../../components/alert/alert.html")
+        .then((response) => response.text())
+        .then((html) => {
+          document.getElementById("customAlertContainer").innerHTML = html;
+        });
+    </script>
+    <script src="../../components/alert/alert.js"></script>
   </body>
 </html>
