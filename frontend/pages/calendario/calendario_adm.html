@@ -18,15 +18,19 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../components/navbar/navbar.css" />
-    <link rel="stylesheet" href="../css/calendario_adm.css" />
+    <link rel="stylesheet" href="../../components/navbar/navbar.css" />
+    <link rel="stylesheet" href="../../components/alert/alert.css" />
+    <link rel="stylesheet" href="../calendario/calendario_adm.css" />
     <title>Calendário</title>
   </head>
 
   <body>
+    <!-- NAVBAR -->
     <div id="navbar-container">
-      <script src="../components/navbar/navbar.js"></script>
+      <script src="../../components/navbar/navbar.js"></script>
     </div>
+
+    <!-- CALENDÁRIO -->
     <div class="center">
       <div class="container">
         <div class="left">
@@ -100,13 +104,24 @@
       </div>
     </div>
 
-    <!-- Alert -->
+    <!-- ALERTA -->
     <div id="customAlert" class="custom-alert">
       <div class="custom-alert-content">
         <p id="customAlertMessage"></p>
         <button id="customAlertButton">OK</button>
       </div>
     </div>
-    <script src="../../backend/controllers/calendario.js"></script>
+    <div id="customConfirm" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customConfirmMessage"></p>
+        <div class="confirm-buttons">
+          <button id="customConfirmYes">Sim</button>
+          <button id="customConfirmNo">Não</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../calendario/calendario.js"></script>
+    <script src="../../components/alert/alert.js"></script>
   </body>
 </html>
