@@ -47,12 +47,11 @@ function togglePassword(inputId, button) {
 
   if (input.type === "password") {
     input.type = "text";
-    img.src = "../assets/img/password/eye-password-see-view-svgrepo-com.svg";
+    img.src = "../../assets/img/password/eye.svg";
     img.alt = "Ocultar senha";
   } else {
     input.type = "password";
-    img.src =
-      "../assets/img/password/eye-key-look-password-security-see-svgrepo-com.svg";
+    img.src = "../../assets/img/password/eye-off.svg";
     img.alt = "Mostrar senha";
   }
 }

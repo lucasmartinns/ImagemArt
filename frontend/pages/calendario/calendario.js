@@ -163,13 +163,21 @@ function getActiveDay(dayNum) {
 
 function updateEvents(dayNum) {
   let eventsHTML = "";
+  let hasAnyEvent = false;
   eventsArr.forEach((eventObj) => {
     if (
       eventObj.day === dayNum &&
       eventObj.month === month + 1 &&
       eventObj.year === year
     ) {
-      eventObj.events.forEach((event) => {
+      hasAnyEvent = true;
+      // Ordena os eventos pelo horário de início
+      const sortedEvents = eventObj.events.sort((a, b) => {
+        const startA = a.time.split(" - ")[0];
+        const startB = b.time.split(" - ")[0];
+        return startA.localeCompare(startB);
+      });
+      sortedEvents.forEach((event) => {
         eventsHTML += `
            <div class="event">
              <div class="title">
@@ -183,10 +191,20 @@ function updateEvents(dayNum) {
       });
     }
   });
-  if (!eventsHTML) {
+  if (!hasAnyEvent) {
     eventsHTML = `<div class="no-event"><h3>Sem Eventos</h3></div>`;
   }
   eventsContainer.innerHTML = eventsHTML;
+
+  // Atualiza a classe "event" do dia ativo
+  const activeDayEl = document.querySelector(".day.active");
+  if (activeDayEl) {
+    if (hasAnyEvent) {
+      activeDayEl.classList.add("event");
+    } else {
+      activeDayEl.classList.remove("event");
+    }
+  }
   saveEvents();
 }
 
@@ -319,10 +337,12 @@ addEventSubmit.addEventListener("click", () => {
   }
 });
 
-eventsContainer.addEventListener("click", (e) => {
+eventsContainer.addEventListener("click", async (e) => {
   if (e.target.classList.contains("event") || e.target.closest(".event")) {
-    // Alterado para o confirm nativo para confirmação da exclusão
-    if (showCustomConfirm("Tem certeza de que deseja excluir este evento?")) {
+    const confirm = await showCustomConfirm(
+      "Tem certeza de que deseja excluir este evento?"
+    );
+    if (confirm) {
       const eventTitle = e.target
         .closest(".event")
         .querySelector(".event-title").innerText;

@@ -1,10 +1,7 @@
 .navbar {
-  margin-top: 1%;
-  margin-bottom: 2%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: sticky;
 }
 
 .nav-links a {
@@ -47,6 +44,6 @@
   height: clamp(1.45rem, 3vw, 2.5rem);
   user-select: none;
   position: absolute;
+  top: 2%;
   left: 1%;
-  top: 1%;
 }

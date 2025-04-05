@@ -11,23 +11,24 @@ function showCustomAlert(message) {
   };
 }
 
-function showCustomConfirm(message, onConfirm) {
-  const confirmBox = document.getElementById("customConfirm");
-  const confirmMessage = document.getElementById("customConfirmMessage");
-  const confirmYes = document.getElementById("customConfirmYes");
-  const confirmNo = document.getElementById("customConfirmNo");
+function showCustomConfirm(message) {
+  return new Promise((resolve) => {
+    const confirmBox = document.getElementById("customConfirm");
+    const confirmMessage = document.getElementById("customConfirmMessage");
+    const confirmYes = document.getElementById("customConfirmYes");
+    const confirmNo = document.getElementById("customConfirmNo");
 
-  confirmMessage.textContent = message;
-  confirmBox.classList.add("show");
+    confirmMessage.textContent = message;
+    confirmBox.classList.add("show");
 
-  confirmYes.onclick = function () {
-    confirmBox.classList.remove("show");
-    if (typeof onConfirm === "function") {
-      onConfirm();
-    }
-  };
+    confirmYes.onclick = function () {
+      confirmBox.classList.remove("show");
+      resolve(true);
+    };
 
-  confirmNo.onclick = function () {
-    confirmBox.classList.remove("show");
-  };
+    confirmNo.onclick = function () {
+      confirmBox.classList.remove("show");
+      resolve(false);
+    };
+  });
 }

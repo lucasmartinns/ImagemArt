@@ -12,27 +12,31 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #0a0809;
   padding: 0;
   margin: 0;
   width: 100vw;
   min-height: 100vh;
-  display: block;
   overflow-x: hidden;
 }
 
 .center {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .container {
-  margin: 1% auto;
+  margin: 1%;
   position: relative;
   width: 100%;
   max-width: 1200px;
-  min-height: 800px;
+  min-height: 500px;
   padding: 5px;
   color: #0a0809;
   display: flex;
