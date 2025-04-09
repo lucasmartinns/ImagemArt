@@ -15,7 +15,7 @@
 
 body {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100vw;
   min-height: 100vh;
@@ -25,14 +25,39 @@ body {
   overflow-x: hidden;
 }
 
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .form-container {
-  width: clamp(20rem, 28vw, 28vw);
+  position: relative;
+  width: clamp(18rem, 32vw, 36vw);
   color: #e7e7e8;
   padding: 2rem;
   border-radius: 15px;
-  border: 2px solid #4b4b4b;
-  background: #282828;
   background-color: #282828;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.form-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(to bottom, #4b4b4b, #393939);
+  border-radius: 15px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
 }
 
 h1 {
@@ -60,8 +85,8 @@ form {
 .informations input {
   display: flex;
   padding: 1rem;
-  width: clamp(12rem, 15vw, 15vw);
-  height: clamp(2rem, 3vw, 3rem);
+  width: clamp(13rem, 15vw, 15vw);
+  height: clamp(2.5rem, 3vw, 3rem);
   font-size: clamp(0.8rem, 1vw, 1rem);
   background-color: #e7e7e8;
   color: #0a0809;
@@ -76,7 +101,6 @@ form {
   outline: 2px solid var(--secundary-clr);
 }
 
-/* Estilo para o container da senha */
 .password-container {
   position: relative;
   display: flex;
@@ -90,11 +114,12 @@ form {
   position: absolute;
   right: 10px;
   top: 40%;
-  transform: translateY(-50%);
+  transform: translateY(-51%);
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0.5;
 }
 
 .toggle-password img.password-icon {
@@ -140,7 +165,7 @@ form {
 }
 
 #manterConectado:checked {
-  accent-color: var(--secundary-clr);
+  accent-color: var(--primary-clr);
 }
 
 .login-link {

@@ -14,19 +14,6 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   console.log("Dados enviados:", dados);
 });
 
-// Reutiliza a função de alerta customizado
-function showCustomAlert(message) {
-  const alertBox = document.getElementById("customAlert");
-  const alertMessage = document.getElementById("customAlertMessage");
-  const alertButton = document.getElementById("customAlertButton");
-
-  alertMessage.textContent = message;
-  alertBox.classList.add("show");
-
-  alertButton.onclick = function () {
-    alertBox.classList.remove("show");
-  };
-}
 
 // Função de alternar visibilidade da senha
 function togglePassword(inputId, button) {
@@ -35,12 +22,11 @@ function togglePassword(inputId, button) {
 
   if (input.type === "password") {
     input.type = "text";
-    img.src = "../assets/img/password/eye-password-see-view-svgrepo-com.svg";
+    img.src = "../../assets/img/password/eye.svg";
     img.alt = "Ocultar senha";
   } else {
     input.type = "password";
-    img.src =
-      "../assets/img/password/eye-key-look-password-security-see-svgrepo-com.svg";
+    img.src = "../../assets/img/password/eye-off.svg";
     img.alt = "Mostrar senha";
   }
 }

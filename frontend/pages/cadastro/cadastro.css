@@ -34,13 +34,30 @@ body {
 }
 
 .form-container {
-  width: clamp(20rem, 32vw, 36vw);
+  position: relative;
+  width: clamp(18rem, 32vw, 36vw);
   color: #e7e7e8;
   padding: 2rem;
   border-radius: 15px;
-  border: 2px solid #4b4b4b;
-  background: #282828;
   background-color: #282828;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.form-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(to bottom, #4b4b4b, #393939);
+  border-radius: 15px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
 }
 
 h1 {
@@ -97,13 +114,13 @@ form {
   cursor: pointer;
   position: absolute;
   right: 10px;
-  top: 42%;
-  transform: translateY(-50%);
+  top: 40%;
+  transform: translateY(-51%);
   padding: 0;
-  opacity: 0.5;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0.5;
 }
 
 .toggle-password img.password-icon {
@@ -149,7 +166,7 @@ form {
 }
 
 #manterConectado:checked {
-  accent-color: var(--secundary-clr);
+  accent-color: var(--primary-clr);
 }
 
 .login-link {
