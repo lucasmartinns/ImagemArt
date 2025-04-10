@@ -1,52 +1,49 @@
-const connection = require('../config/database');
+const db = require('../config/database');
 const bcrypt = require('bcrypt');
-const router = require('../routes/router');
 
 const usuario = {
 
-  // 🔹 Login de usuário
+  // 🔹 Login de usuári
   Login: async (req, res) => {
     const { email, senha } = req.body;
 
-    connection.query(
-      "SELECT * FROM usuario WHERE email = ?",
-      [email],
-      async (err, results) => {
-        if (err) {
-          return res
-            .status(500)
-            .json({ mensagem: "Erro ao consultar o servidor" });
-        }
+    try {
+      const [results] = await db.query('SELECT * FROM usuario WHERE email = ?', [email]);
 
-        if (results.length === 0) {
-          return res.status(400).json({ error: "Usuário não encontrado!" });
-        }
-
-        const usuario = results[0];
-        const SenhaCorreta = await bcrypt.compare(senha, usuario.senha);
-
-        if (!SenhaCorreta) {
-          return res.status(400).json({ error: "Senha incorreta!" });
-        }
-
-        return res
-          .status(200)
-          .json({
-            mensagem: "Login realizado com sucesso!",
-            usuario: {
-              id: usuario.idusuario,
-              nome: usuario.nome,
-              email: usuario.email,
-              tipo_usuario: usuario.tipo_usuario_idtipo_usuario // Retorna se é Admin (1) ou Usuário comum (2)
-            }
-          });
+      if (results.length === 0) {
+        return res.status(401).json({ error: 'E-mail ou senha incorretos' });
       }
-    );
+
+      const usuario = results[0];
+      const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+
+      if (!senhaCorreta) {
+        return res.status(401).json({ error: 'E-mail ou senha incorretos' });
+      }
+
+      // Login bem-sucedido
+      return res.status(200).json({
+        mensagem: 'Login realizado com sucesso',
+        usuario: {
+          id: usuario.idusuario,
+          nome: usuario.nome,
+          email: usuario.email,
+          tipo_usuario_idtipo_usuario: usuario.tipo_usuario_idtipo_usuario
+        }
+      });
+
+    } catch (err) {
+      console.error('Erro ao buscar usuário:', err);
+      return res.status(500).json({ error: 'Erro ao processar o login' });
+    }
   },
+
+
+
 
   // 🔹 Buscar Usuários
   ListarUsuario: (req, res) => {
-    connection.query(
+    db.query(
       "SELECT * FROM `usuario`",
       (err, results) => {
         if (err) {
@@ -68,7 +65,7 @@ const usuario = {
 
     const sql = "SELECT * FROM usuario WHERE idusuario = ?";
 
-    connection.query(sql, [id], (err, results) => {
+    db.query(sql, [id], (err, results) => {
       if (err) return res.status(500).json({ error: "Erro ao buscar usuário" });
 
       if (results.length === 0) {
@@ -101,9 +98,9 @@ const usuario = {
 
       // Verifica se já existe um usuário com o mesmo e-mail
       const sqlSelect = "SELECT * FROM usuario WHERE email = ?";
-      connection.query(sqlSelect, [email], async (err, results) => {
+      db.query(sqlSelect, [email], async (err, results) => {
         if (err) {
-          return res.status(500).json({ error: "Erro ao verificar usuário!" });
+          return res.status(500).json({ error: "Erro ao verificar usuário!", err });
         }
 
         if (results.length > 0) {
@@ -115,7 +112,7 @@ const usuario = {
 
         // Insere o usuário no banco de dados
         const sql = `INSERT INTO usuario (nome, email, senha, telefone, tipo_usuario_idtipo_usuario) VALUES (?, ?, ?, ?, ?)`;
-        connection.query(sql, [nome, email, hashedSenha, telefone, tipo_usuario_idtipo_usuario], (err, results) => {
+        db.query(sql, [nome, email, hashedSenha, telefone, tipo_usuario_idtipo_usuario], (err, results) => {
           if (err) {
             console.error("Erro ao inserir usuário:", err);
             return res.status(500).json({ error: "Erro ao criar usuário!" });
@@ -142,12 +139,12 @@ const usuario = {
       return res.status(400).json({ mensagem: "Preencha todos os campos!" });
     }
 
-    try { 
+    try {
       let SenhaCriptografada = await bcrypt.hash(senha, 10);
-   
+
       const sql = `UPDATE usuario SET nome=?, email=?, ${senha ? "senha=?, " : ""} telefone=?, tipo_usuario_idtipo_usuario=? WHERE idusuario=?`;
-    
-      connection.query(sql, [nome, email, SenhaCriptografada, telefone, tipo_usuario_idtipo_usuario, id], (err, results) => {
+
+      db.query(sql, [nome, email, SenhaCriptografada, telefone, tipo_usuario_idtipo_usuario, id], (err, results) => {
         if (err) {
           return res.status(500).json({ error: "Erro ao alterar o usuário", err });
         }
@@ -164,7 +161,7 @@ const usuario = {
     console.log("ID recebido:", id);
 
     const sql = "DELETE FROM usuario WHERE idusuario = ?";
-    connection.query(sql, [id], (err, results) => {
+    db.query(sql, [id], (err, results) => {
       if (err) {
         return res.status(500).json({ error: "Erro ao deletar o usuário" });
       }

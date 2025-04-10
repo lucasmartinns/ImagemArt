@@ -1,17 +1,42 @@
-document.getElementById("loginForm").addEventListener("submit", function (e) {
+document.getElementById("loginForm").addEventListener("submit", async function (e) {
   e.preventDefault();
+  
+  const email = document.getElementById('email').value;
+  const senha = document.getElementById('senha').value;
 
-  const email = document.getElementById("email").value.trim();
-  const senha = document.getElementById("senha").value.trim();
+  try {
+    const response = await fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, senha })
+    });
 
-  if (!email || !senha) {
-    showCustomAlert("Por favor, preencha todos os campos.");
-    return;
+    const data = await response.json();
+
+    if (response.ok) {
+      document.getElementById('resultados').innerHTML = `<p>${data.mensagem}</p>`;
+
+      // Armazena usuário no localStorage
+      localStorage.setItem('usuario', JSON.stringify(data.usuario));
+
+      // Redireciona conforme o tipo de usuário
+      const tipo = data.usuario.tipo_usuario_idtipo_usuario;
+
+      if (tipo === 1) {
+        window.location.href = '/admin';
+      } else {
+        window.location.href = '/home';
+      }
+
+    } else {
+      throw new Error(data.error || 'Erro ao fazer login');
+    }
+
+  } catch (error) {
+    document.getElementById('resultados').innerHTML = `<p>Erro: ${error.message}</p>`;
   }
-
-  // Simula o envio dos dados para o backend
-  const dados = { email, senha };
-  console.log("Dados enviados:", dados);
 });
 
 
@@ -30,3 +55,6 @@ function togglePassword(inputId, button) {
     img.alt = "Mostrar senha";
   }
 }
+
+
+
