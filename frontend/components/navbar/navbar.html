@@ -1,15 +1,58 @@
-<div class="navbar">
-  <div class="logo">
-    <img src="../../assets/img/logo.png" alt="logo" />
-  </div>
-  <div class="nav-links">
-    <ul class="text-nav">
-      <a href="../home/home.html">Eventos</a>
-      <a href="../servicos_adm/servicos_adm.html">Serviços</a>
-      <a href="../calendario/calendario_adm.html">Calendário</a>
-    </ul>
-  </div>
-  <div class="user">
-    <img src="../../assets/img/logo.png" alt="logo" />
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="navbar.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav>
+      <img src="../../assets/img/logos/logo.png" class="logo" />
+      <ul>
+        <li>
+          <a href="../../pages/home/home.html">Home</a>
+          <a href="../../pages/servicos_adm/servicos_adm.html">Serviços</a>
+          <a href="../../pages/calendario/calendario_adm.html">Calendário</a>
+        </li>
+      </ul>
+      <img
+        src="../../assets/img/navbar/user.png"
+        class="user-pic"
+        onclick="toggleMenu()"
+      />
+
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div class="user-info">
+            <img src="../../assets/img/navbar/user-black.png" alt="" />
+            <h3>Nome do Usuário</h3>
+          </div>
+          <hr />
+
+          <a href="#" class="sub-menu-link"
+            ><span class="material-symbols-outlined"> manage_accounts </span>
+            <p>Editar Perfil</p>
+          </a>
+          <a href="#" class="sub-menu-link"
+            ><span class="material-symbols-outlined">logout</span>
+            <p>Sair</p>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <script src="navbar.js"></script>
+  </body>
+</html>
