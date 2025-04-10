@@ -4,17 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Serviços</title>
-    <link rel="stylesheet" href="../../components/navbar/navbar.css" />
-    <link rel="stylesheet" href="../../components/alert/alert.css" />
     <link rel="stylesheet" href="../servicos_adm/servicos_adm.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+    <script src="../../components/head/head.js"></script>
   </head>
   <body>
     <!-- NAVBAR -->
@@ -103,16 +94,23 @@
     </div>
 
     <!-- ALERTA -->
-    <div id="customAlertContainer"></div>
+    <div id="customAlert" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customAlertMessage"></p>
+        <button id="customAlertButton">OK</button>
+      </div>
+    </div>
+    <div id="customConfirm" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customConfirmMessage"></p>
+        <div class="confirm-buttons">
+          <button id="customConfirmYes">Sim</button>
+          <button id="customConfirmNo">Não</button>
+        </div>
+      </div>
+    </div>
 
     <script src="../servicos_adm/servicos_adm.js"></script>
-    <script>
-      fetch("../../components/alert/alert.html")
-        .then((response) => response.text())
-        .then((html) => {
-          document.getElementById("customAlertContainer").innerHTML = html;
-        });
-    </script>
     <script src="../../components/alert/alert.js"></script>
   </body>
 </html>

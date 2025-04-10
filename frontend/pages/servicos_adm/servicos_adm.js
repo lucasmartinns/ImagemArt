@@ -13,9 +13,7 @@ const selectedImage = document.getElementById("selectedImage");
 const imageInput = document.getElementById("imageInput");
 const addItemForm = document.querySelector(".addItemForm");
 const modalPlusSymbol = document.getElementById("modalPlusSymbol");
-// Note: backgroundImage e serviceImagePreview foram removidos por não serem utilizados
-
-let currentItem = null; // Armazena o item atualmente sendo editado
+let currentItem = null;
 
 // ---------- FUNÇÕES UTILITÁRIAS ----------
 
@@ -50,6 +48,10 @@ function addEmptyRow() {
           "data-placeholder",
           cell.getAttribute("data-placeholder")
         );
+      }
+      // Se o item já estiver criado, atualiza seus detalhes sempre que uma célula perder o foco
+      if (currentItem) {
+        currentItem.dataset.details = JSON.stringify(getDetailsFromTable());
       }
     };
     cell.addEventListener("input", checkLastRow);
@@ -99,14 +101,15 @@ function getDetailsFromTable() {
   for (let i = 0; i < detailsTable.rows.length; i++) {
     const row = detailsTable.rows[i];
     const detail = {
-      detail: row.cells[0].innerText,
-      price: row.cells[1].innerText,
-      quantity: row.cells[2].innerText,
+      detail: row.cells[0].innerText.trim(),
+      price: row.cells[1].innerText.trim(),
+      quantity: row.cells[2].innerText.trim(),
     };
     if (detail.detail && detail.price && detail.quantity) {
       details.push(detail);
     }
   }
+  console.log("Detalhes coletados:", details);
   return details;
 }
 
@@ -121,9 +124,11 @@ function loadDetailsToTable(details) {
       <td contenteditable="true" class="quantity">${detail.quantity}</td>
       <td><button type="button" class="deleteRowBtn" style="text-align: center;">x</button></td>
     `;
-
     row.querySelector(".deleteRowBtn").onclick = function () {
       detailsTable.deleteRow(row.rowIndex - 1);
+      if (currentItem) {
+        currentItem.dataset.details = JSON.stringify(getDetailsFromTable());
+      }
     };
   });
   addEmptyRow();
@@ -150,6 +155,11 @@ closeModal.onclick = function () {
 
 // Salvar item
 saveBtn.onclick = function () {
+  // Força a finalização da edição de qualquer célula em foco
+  if (document.activeElement && document.activeElement.blur) {
+    document.activeElement.blur();
+  }
+
   const serviceName = document.getElementById("serviceName").value;
   const serviceImage = imageInput.files[0];
 
@@ -163,6 +173,8 @@ saveBtn.onclick = function () {
     return;
   }
 
+  const updatedDetails = getDetailsFromTable();
+
   const reader = new FileReader();
   reader.onload = function (e) {
     if (currentItem) {
@@ -170,10 +182,12 @@ saveBtn.onclick = function () {
         e.target.result || currentItem.dataset.image;
       currentItem.dataset.image = e.target.result || currentItem.dataset.image;
       currentItem.querySelector("h3").innerText = serviceName;
-      currentItem.dataset.details = JSON.stringify(getDetailsFromTable());
+      currentItem.dataset.details = JSON.stringify(updatedDetails); // <-- atualiza aqui!
     } else {
       const item = document.createElement("div");
       item.className = "service-item";
+      item.dataset.details = JSON.stringify(updatedDetails);
+      item.dataset.image = e.target.result; // Adiciona a imagem ao dataset
       item.innerHTML = `
         <div class="image-container">
           <img src="../../assets/img/servicos/backgroundImage.png" alt="${serviceName}" />
@@ -181,29 +195,35 @@ saveBtn.onclick = function () {
         </div>
         <h3>${serviceName}</h3>
       `;
-      item.dataset.details = JSON.stringify(getDetailsFromTable());
-      item.dataset.image = e.target.result;
+
       item.onclick = function () {
         currentItem = item;
-        itemModal.style.display = "flex";
-        document.getElementById("serviceName").value = serviceName;
-        loadDetailsToTable(JSON.parse(item.dataset.details));
-        deleteBtn.style.display = "block";
+        document.getElementById("serviceName").value =
+          item.querySelector("h3").innerText;
         selectedImage.src = item.dataset.image;
         selectedImage.style.display = "block";
         modalPlusSymbol.style.display = "none";
+        imageInput.value = "";
+        loadDetailsToTable(JSON.parse(item.dataset.details || "[]"));
+        deleteBtn.style.display = "block";
+        itemModal.style.display = "flex";
       };
-      itemsContainer.insertBefore(item, itemsContainer.lastElementChild);
+
+      const addItemBlock = document.querySelector(".addItem");
+
+      // Insere o novo item antes do bloco de criação, mas mantém o bloco de criação no topo
+      itemsContainer.insertBefore(item, addItemBlock.nextSibling);
     }
     itemModal.style.display = "none";
-    clearForm();
   };
 
-  if (serviceImage) {
-    reader.readAsDataURL(serviceImage);
-  } else {
+  // Se não tiver imagem nova, só salva com os dados existentes
+  if (!serviceImage && currentItem) {
+    currentItem.dataset.details = JSON.stringify(updatedDetails);
+    currentItem.querySelector("h3").innerText = serviceName;
     itemModal.style.display = "none";
-    clearForm();
+  } else {
+    reader.readAsDataURL(serviceImage);
   }
 };
 
