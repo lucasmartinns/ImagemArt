@@ -43,7 +43,6 @@ body {
   border-radius: 5px;
   background-color: #282828;
 }
-
 .container::after,
 .container::before {
   content: "";

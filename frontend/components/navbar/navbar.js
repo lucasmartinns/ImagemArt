@@ -12,7 +12,7 @@ function initializeNavbar() {
   const subMenu = document.getElementById("subMenu");
 
   // Simulação de estado: true = logado / false = não logado
-  let isLoggedIn = false;
+  let isLoggedIn = true;
 
   window.toggleMenu = function () {
     subMenu.classList.toggle("open-menu");
@@ -28,7 +28,7 @@ function initializeNavbar() {
             <h3>Nome do Usuário</h3>
           </div>
           <hr />
-          <a href="#" class="sub-menu-link">
+          <a href="../../pages/edit/edit.html" class="sub-menu-link">
             <span class="material-symbols-outlined"> manage_accounts </span>
             <p>Editar Perfil</p>
           </a>

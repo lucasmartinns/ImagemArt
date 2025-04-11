@@ -34,13 +34,29 @@ body {
 
 .form-container {
   position: relative;
-  width: clamp(18rem, 32vw, 36vw);
+  width: clamp(18rem, 34vw, 40vw);
   color: #e7e7e8;
   padding: 2rem;
   border-radius: 15px;
   background-color: #282828;
   z-index: 0;
   overflow: hidden;
+}
+
+.form-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(to bottom, #4b4b4b, #393939);
+  border-radius: 15px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
 }
 
 h1 {

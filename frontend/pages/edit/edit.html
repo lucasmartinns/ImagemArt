@@ -16,37 +16,30 @@
     <!-- EDITAR PERFIL -->
     <div class="content-wrapper">
       <div class="form-container">
-        <h1>Editar Perfil</h1>
+        <h1>Nome do Usuário</h1>
         <form id="editProfileForm">
           <div class="informations">
-            <label for="nome">Nome</label>
-            <input
-              type="text"
-              id="nome"
-              name="nome"
-              placeholder="Digite seu nome"
-              required
-            />
-
+            <!-- E-mail (não editável) -->
             <label for="email">E-mail</label>
             <input
               type="email"
               id="email"
               name="email"
-              placeholder="Digite seu e-mail"
-              required
+              value="usuario@exemplo.com"
+              readonly
             />
 
+            <!-- Telefone (editável) -->
             <label for="telefone">Telefone</label>
             <input
               type="tel"
-              id="telefone"
-              name="telefone"
+              id="phone"
+              name="phone"
+              value="(11) 91234-5678"
               placeholder="Digite seu telefone"
-              maxlength="15"
-              required
             />
 
+            <!-- Alterar senha -->
             <label for="senha">Nova Senha</label>
             <div class="password-container">
               <input
@@ -59,27 +52,6 @@
                 type="button"
                 class="toggle-password"
                 onclick="togglePassword('senha', this)"
-              >
-                <img
-                  src="../../assets/img/password/eye-off.svg"
-                  alt="Mostrar senha"
-                  class="password-icon"
-                />
-              </button>
-            </div>
-
-            <label for="confirmarSenha">Confirmar Nova Senha</label>
-            <div class="password-container">
-              <input
-                type="password"
-                id="confirmarSenha"
-                name="confirmarSenha"
-                placeholder="Confirme sua nova senha"
-              />
-              <button
-                type="button"
-                class="toggle-password"
-                onclick="togglePassword('confirmarSenha', this)"
               >
                 <img
                   src="../../assets/img/password/eye-off.svg"

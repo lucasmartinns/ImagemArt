@@ -198,7 +198,7 @@ h1 span:last-child {
 .addItemForm img {
   width: 100%;
   height: auto;
-  width: clamp(8rem, 10vw, 10vw);
+  width: clamp(8rem, 13vw, 13vw);
   height: auto;
   transition: filter 0.5s ease, transform 0.1s ease;
 }
