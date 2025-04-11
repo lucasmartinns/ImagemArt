@@ -12,7 +12,7 @@ const pedido = {
         const sql = "INSERT INTO pedido (usuario_idusuario, servico_idservico, quantidade) VALUES (?, ?, ?)";
         connection.query(sql, [usuario_idusuario, servico_idservico, quantidade], (err, result) => {
             if (err) {
-                return res.status(500).json({ error: "Erro ao criar pedido", detalhes: err });
+                return res.status(500).json({ error: "Erro ao criar pedido", err });
             }
             return res.status(201).json({ mensagem: "Pedido cadastrado com sucesso!", id: result.insertId });
         });
@@ -33,7 +33,7 @@ const pedido = {
 
         connection.query(sql, [idpedido], (err, results) => {
             if (err) {
-                return res.status(500).json({ error: "Erro ao gerar orçamento", detalhes: err });
+                return res.status(500).json({ error: "Erro ao gerar orçamento", err });
             }
 
             if (results.length === 0) {

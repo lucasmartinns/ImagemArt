@@ -12,7 +12,7 @@ const servico = {
         const sql = "INSERT INTO servico (nome, descricao, valor) VALUES (?, ?, ?)";
         connection.query(sql, [nome, descricao, valor], (err, result) => {
             if (err) {
-                return res.status(500).json({ error: "Erro ao inserir serviço", detalhes: err });
+                return res.status(500).json({ error: "Erro ao inserir serviço",err });
             }
             return res.status(201).json({ mensagem: "Serviço cadastrado com sucesso!", id: result.insertId });
         });

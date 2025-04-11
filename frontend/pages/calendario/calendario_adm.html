@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../../components/head/head.js"></script>
+    <link rel="stylesheet" href="../calendario/calendario_adm.css" />
+    <title>Calendário</title>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <div id="navbar-container">
+      <script src="../../components/navbar/navbar.js"></script>
+    </div>
+
+    <!-- CALENDÁRIO -->
+    <div class="center">
+      <div class="container">
+        <div class="left">
+          <div class="calendar">
+            <div class="month">
+              <i class="fas fa-angle-left prev"></i>
+              <div class="date">dezembro 2025</div>
+              <i class="fas fa-angle-right next"></i>
+            </div>
+            <div class="weekdays">
+              <div>Dom</div>
+              <div>Seg</div>
+              <div>Ter</div>
+              <div>Qua</div>
+              <div>Qui</div>
+              <div>Sex</div>
+              <div>Sab</div>
+            </div>
+            <div class="days"></div>
+            <div class="goto-today">
+              <div class="goto">
+                <input type="text" placeholder="mês / ano" class="date-input" />
+                <button class="goto-btn">Ir</button>
+              </div>
+              <button class="today-btn">Hoje</button>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="today-date">
+            <div class="event-day">qua</div>
+            <div class="event-date">12 de dezembro de 2025</div>
+          </div>
+          <div class="events"></div>
+          <div class="add-event-wrapper">
+            <div class="add-event-header">
+              <div class="title">Adicionar Evento</div>
+              <i class="fas fa-times close"></i>
+            </div>
+            <div class="add-event-body">
+              <div class="add-event-input">
+                <input
+                  type="text"
+                  placeholder="Nome do Evento"
+                  class="event-name"
+                />
+              </div>
+              <div class="add-event-input">
+                <input
+                  type="text"
+                  placeholder="Hora Inicial"
+                  class="event-time-from"
+                />
+              </div>
+              <div class="add-event-input">
+                <input
+                  type="text"
+                  placeholder="Hora Final"
+                  class="event-time-to"
+                />
+              </div>
+            </div>
+            <div class="add-event-footer">
+              <button class="add-event-btn">Adicionar Evento</button>
+            </div>
+          </div>
+        </div>
+        <button class="add-event">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ALERTA -->
+    <div id="customAlert" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customAlertMessage"></p>
+        <button id="customAlertButton">OK</button>
+      </div>
+    </div>
+    <div id="customConfirm" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customConfirmMessage"></p>
+        <div class="confirm-buttons">
+          <button id="customConfirmYes">Sim</button>
+          <button id="customConfirmNo">Não</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../calendario/calendario.js"></script>
+    <script src="../../components/alert/alert.js"></script>
+  </body>
+</html>

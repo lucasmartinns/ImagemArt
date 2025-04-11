@@ -1,0 +1,55 @@
+.custom-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.custom-alert.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.custom-alert-content {
+  background-color: #282828;
+  color: #e7e7e8;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+.custom-alert-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.custom-alert-content button {
+  background-color: var(--primary-clr);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 5px;
+}
+
+.custom-alert-content button:hover {
+  background-color: var(--secundary-clr);
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+}

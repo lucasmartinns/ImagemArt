@@ -1,0 +1,231 @@
+/* ESSENCIAIS */
+:root {
+  --primary-clr: #a6b826;
+  --secundary-clr: #838d35;
+  --tertiary-clr: #cbd4b6;
+  --white: #e7e7e8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #0a0809;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.form-container {
+  position: relative;
+  width: clamp(18rem, 32vw, 36vw);
+  color: #e7e7e8;
+  padding: 2rem;
+  border-radius: 15px;
+  background-color: #282828;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.form-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(to bottom, #4b4b4b, #393939);
+  border-radius: 15px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+}
+
+h1 {
+  font-family: "Montserrat";
+  font-size: clamp(1.5rem, 2vw, 2vw);
+  text-align: center;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-clr);
+  letter-spacing: 1.5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.informations label {
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  color: #e7e7e8;
+}
+
+.informations input {
+  display: flex;
+  padding: 1rem;
+  width: clamp(13rem, 15vw, 15vw);
+  height: clamp(2.5rem, 3vw, 3rem);
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  background-color: #e7e7e8;
+  color: #0a0809;
+  margin-bottom: 1rem;
+  margin-top: 0.2rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.informations input:focus {
+  outline: 2px solid var(--secundary-clr);
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-51%);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+}
+
+.toggle-password img.password-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.checkbox-container input {
+  margin-right: 0.5rem;
+}
+
+.cadastrarButton {
+  width: clamp(10rem, 8vw, 8vw);
+  height: clamp(2.5rem, 3vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--white);
+  border-radius: 10px;
+  border: 2px solid #1d1d1d;
+  box-shadow: inset 0px -13.58px 18.11px rgba(0, 0, 0, 0.05),
+    inset 0px 9.05px 13.58px rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.1s ease, background-color 0.1s ease;
+}
+
+.cadastrarButton:hover {
+  background-color: var(--secundary-clr);
+}
+
+.manterConectado {
+  font-size: clamp(0.8rem, 1vw, 1rem);
+}
+
+#manterConectado:checked {
+  accent-color: var(--primary-clr);
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--primary-clr);
+  text-decoration: none;
+  font-size: clamp(0.8rem, 1vw, 1rem);
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+.custom-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.custom-alert-content {
+  background-color: #282828;
+  color: #e7e7e8;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+.custom-alert-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.custom-alert-content button {
+  background-color: var(--primary-clr);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.custom-alert-content button:hover {
+  background-color: var(--secundary-clr);
+}
+
+.custom-alert.show {
+  visibility: visible;
+  opacity: 1;
+}
