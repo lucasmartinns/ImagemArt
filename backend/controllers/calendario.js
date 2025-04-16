@@ -1,46 +1,37 @@
 const connection = require('../config/database');
-const router = require('../routes/router');
 
 const calendario = {
     // 🔹 Criar evento
-    criarEvento: (req, res) => {
+    criarEvento: async (req, res) => {
+        const { nome, descricao, data } = req.body;
+
+        if (!nome || !descricao || !data) {
+            return res.status(400).json({ mensagem: "Preencha todos os campos!" });
+        }
+
+        const sql = `INSERT INTO calendario(nome, descricao, data) VALUES (?, ?, ?)`;
+
         try {
-            const { nome, descricao, data } = req.body; // Desestruture os dados do corpo da requisição
-    
-            if (!nome || !descricao || !data) {
-                return res.status(400).json({ mensagem: "Preencha todos os campos!" }); // Verifique se os campos estão presentes
-            }
-    
-            const sql = `INSERT INTO calendario(nome, descricao, data) VALUES (?, ?, ?)`;
-            const valores = [nome, descricao, data]; // Use as variáveis corretamente
-    
-            connection.query(sql, valores, (err, results) => {
-                if (err) {
-                    console.error("Erro ao inserir evento:", err);
-                    return res.status(500).json({ error: "Erro ao criar evento" });
-                }
-                console.log("Evento cadastrado!");
-                return res.status(200).json({ mensagem: "Evento cadastrado com sucesso!" });
-            });
-    
-        } catch (error) {
-            console.error("Erro ao criar evento:", error);
-            return res.status(500).json({ error: "Erro ao criar evento" });
+            await connection.query(sql, [nome, descricao, data]);
+            res.status(200).json({ mensagem: "Evento cadastrado com sucesso!" });
+        } catch (err) {
+            console.error("Erro ao criar evento:", err);
+            res.status(500).json({ error: "Erro ao criar evento" });
         }
     },
-    
+
     // 🔹 Listar eventos
-    listarEventos: (req, res) => {
-        connection.query("SELECT * FROM calendario", (err, results) => {
-            if (err) {
-                return res.status(500).json({ error: "Erro ao buscar eventos" });
-            }
-            return res.status(200).json(results);
-        });
+    listarEventos: async (req, res) => {
+        try {
+            const [results] = await connection.query("SELECT * FROM calendario");
+            res.status(200).json(results);
+        } catch (err) {
+            res.status(500).json({ error: "Erro ao buscar eventos" });
+        }
     },
-    
-    // 🔹 Buscar evento por id
-    buscarEventoID: (req, res) => {
+
+    // 🔹 Buscar evento por ID
+    buscarEventoID: async (req, res) => {
         const id = req.params.id;
 
         if (!id) {
@@ -48,62 +39,57 @@ const calendario = {
         }
 
         const sql = "SELECT * FROM calendario WHERE idcalendario = ?";
-        connection.query(sql, [id], (err, results) => {
-            if (err) {
-                console.error("Erro ao buscar evento:", err);
-                return res.status(500).json({ error: "Erro ao buscar evento" });
-            }
+
+        try {
+            const [results] = await connection.query(sql, [id]);
+
             if (results.length === 0) {
                 return res.status(404).json({ error: "Evento não encontrado!" });
             }
-            return res.status(200).json(results[0]);
-        });
+
+            res.status(200).json(results[0]);
+        } catch (err) {
+            console.error("Erro ao buscar evento:", err);
+            res.status(500).json({ error: "Erro ao buscar evento" });
+        }
     },
-    
+
     // 🔹 Atualizar evento
-    atualizarEvento: (req, res) => {
+    atualizarEvento: async (req, res) => {
         const id = req.params.id;
         const { nome, descricao, data } = req.body;
-    
+
         if (!nome || !descricao || !data) {
             return res.status(400).json({ mensagem: "Preencha todos os campos!" });
         }
-    
-        const sql = "SELECT * FROM calendario WHERE idcalendario = ?";
-        connection.query(sql, [id], (err, results) => {
-            if (err) {
-                return res.status(500).json({ error: "Erro ao verificar evento" });
-            }
+
+        try {
+            const [results] = await connection.query("SELECT * FROM calendario WHERE idcalendario = ?", [id]);
+
             if (results.length === 0) {
                 return res.status(404).json({ error: "Evento não encontrado para atualizar!" });
             }
 
-            // Evento encontrado, agora realizar a atualização
             const updateSql = "UPDATE calendario SET nome = ?, descricao = ?, data = ? WHERE idcalendario = ?";
-            const valores = [nome, descricao, data, id];
-            connection.query(updateSql, valores, (err, results) => {
-                if (err) {
-                    return res.status(500).json({ error: "Erro ao atualizar o evento" });
-                }
-                return res.status(200).json({ mensagem: "Evento atualizado com sucesso!" });
-            });
-        });
+            await connection.query(updateSql, [nome, descricao, data, id]);
+
+            res.status(200).json({ mensagem: "Evento atualizado com sucesso!" });
+        } catch (err) {
+            res.status(500).json({ error: "Erro ao atualizar o evento" });
+        }
     },
 
     // 🔹 Deletar evento
-    deletarEvento: (req, res) => {
+    deletarEvento: async (req, res) => {
         const id = req.params.id;
-        const sql = "DELETE FROM calendario WHERE idcalendario = ?";
-    
-        connection.query(sql, [id], (err, results) => {
-            if (err) {
-                return res.status(500).json({ error: "Erro ao deletar evento" });
-            }
-            return res.json({ mensagem: "Evento deletado com sucesso!" });
-        });
-    }
-    
-};
 
+        try {
+            await connection.query("DELETE FROM calendario WHERE idcalendario = ?", [id]);
+            res.json({ mensagem: "Evento deletado com sucesso!" });
+        } catch (err) {
+            res.status(500).json({ error: "Erro ao deletar evento" });
+        }
+    }
+};
 
 module.exports = calendario;
