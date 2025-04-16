@@ -39,7 +39,7 @@ const FRONTEND_DIR = path.join(__dirname, '..', '..', 'frontend');
 
 router.use(express.static(path.join(__dirname, '../../frontend')));
 
-//Rotas HTML
+// 🔹Rotas login
 router.get('/login', (req, res) => {
     res.sendFile(path.join(FRONTEND_DIR, 'pages', 'login', 'login.html'));
 });
@@ -48,10 +48,13 @@ router.get('/home', (req, res) => {
     res.sendFile(path.join(FRONTEND_DIR, 'pages', 'home', 'home.html'));
 });
 
-// //Rotas para paginas
-// router.get("/home", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../views/index.html"));
-// });
+
+// 🔹Rotas cadastro
+router.get('/cadastrar', (req, res) => {
+    res.sendFile(path.join(FRONTEND_DIR, 'pages', 'cadastro', 'cadastro.html'));
+});
+
+
 
 //🔹 Rota para Upload de Imagem
 router.post("/upload", upload.single("imagem"), (req, res) => {

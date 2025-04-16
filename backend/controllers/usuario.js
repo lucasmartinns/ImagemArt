@@ -72,9 +72,21 @@ const usuario = {
   Cadastrar: async (req, res) => {
     let { nome, email, senha, telefone, tipo_usuario_idtipo_usuario } = req.body;
 
-    if (!nome || !email || !senha || !telefone || tipo_usuario_idtipo_usuario === undefined) {
-      return res.status(400).json({ error: "Preencha todos os campos!" });
+    console.log("Corpo recebido no cadastro:", req.body);
+
+    console.log("Tipos:", {
+      nome: typeof nome,
+      email: typeof email,
+      senha: typeof senha,
+      telefone: typeof telefone,
+      tipo_usuario_idtipo_usuario,
+      tipo: typeof tipo_usuario_idtipo_usuario,
+    });
+
+    if (!nome || !email || !senha || !telefone || ![1, 2].includes(Number(tipo_usuario_idtipo_usuario))) {
+      return res.status(400).json({ error: "Preencha todos os campos corretamente!" });
     }
+    
 
     if (![1, 2].includes(tipo_usuario_idtipo_usuario)) {
       return res.status(400).json({ error: "Tipo de usuário inválido!" });
@@ -84,7 +96,7 @@ const usuario = {
       const [existingUser] = await db.query("SELECT * FROM usuario WHERE email = ?", [email]);
 
       if (existingUser.length > 0) {
-        return res.status(400).json({ mensagem: "Usuário já cadastrado!" });
+      return res.status(400).json({ mensagem: "Usuário já cadastrado!" });
       }
 
       const hashedSenha = await bcrypt.hash(senha, 10);
@@ -99,6 +111,8 @@ const usuario = {
       return res.status(500).json({ error: "Erro interno do servidor" });
     }
   },
+
+  
 
   // 🔹 Alterar usuário
   AlterarUsuario: async (req, res) => {
