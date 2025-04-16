@@ -93,6 +93,10 @@ form {
   border-radius: 10px;
 }
 
+.email-container {
+  user-select: none;
+}
+
 .informations label {
   font-size: clamp(0.8rem, 1vw, 1rem);
   color: #e7e7e8;

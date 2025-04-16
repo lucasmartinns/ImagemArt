@@ -24,11 +24,11 @@ body {
 .center {
   display: flex;
   justify-content: center;
+  min-height: 78vh;
 }
 
 /* CONTAINER SERVIÇO */
 .serviceContainer {
-  margin-top: 1.5%;
   display: flex;
   flex-direction: column;
   align-items: center;

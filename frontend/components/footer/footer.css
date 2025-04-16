@@ -1,78 +1,122 @@
-footer {
-    width: 100vw;
-    height: 22vh;
-    margin-top: 12%;
-    background-color: #161515;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
-.nome-empresa {
-    color: #E7E7E8;
-    font-family: "Montserrat";
-    margin-top: -99px;
-    margin-left: 80vw;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 1.6px;
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #e7e7e8;
+  /* overflow-x: hidden; */
 }
 
-.nome-empresa1 {
-    color: #63783d;
-    font-family: "Montserrat";
-    margin-top: -40px;
-    margin-left: 80.5vw;
-    font-size: 26px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 1.6px;
+.footer-container {
+  display: flex;
+  margin-top: 1rem;
+  width: 100vw;
+  background-color: #282828;
+  align-items: center;
+  padding: 1.4rem 1.8rem;
+  justify-content: space-between;
 }
 
-
-.local {
-    display: flex;
-    color: #E7E7E8;
-    margin-left: 90px;
-    position: relative;
-    margin-top: -19px;
-    font-family: "AbhayaLibre-Medium";
-    padding-top: 20px;
+.left-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.3vw;
 }
 
-.redes {
-    margin-left: 90px;
+hr {
+  width: 13.5rem;
+  border: none;
+  height: 2px;
+  background-color: #63783d;
 }
 
-logo-footer {
-    width: 120px;
-    height: 70.909px;
+#p-footer {
+  color: #e7e7e8;
+  font-family: "Montserrat";
+  font-size: clamp(1rem, 1.2vw, 1rem);
 }
 
-.footer img {
-    margin-top: 190px;
-}
-
-.empresaLogo {
-    display: flex;
-
-    & img {
-        position: absolute;
-        margin-left: 76%;
-        margin-top: -5%;
-
-    }
+.contato {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vw;
 }
 
 .redes-sociais {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1%
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
 }
 
 .redes-sociais img {
-    display: block;
-    width: 29px;
-    height: 100%;
+  width: clamp(1.5rem, 2vw, 2rem);
+  height: auto;
+}
+
+.empresa {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.empresa img {
+  width: clamp(3rem, 5vw, 5rem);
+  height: auto;
+}
+
+.nome-empresa {
+  color: #e7e7e8;
+  font-family: "Montserrat";
+  font-size: clamp(0.7rem, 2vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-align: center;
+}
+
+.nome-empresa1 {
+  color: #63783d;
+  font-family: "Montserrat";
+  font-size: clamp(0.7rem, 2vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .left-footer {
+    gap: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .contato {
+    gap: clamp(0.3rem, 2vw, 1.7rem);
+  }
+
+  .left-footer,
+  .contato,
+  .empresa {
+    align-items: center;
+    text-align: center;
+  }
+
+  .redes-sociais {
+    gap: 1rem;
+  }
+
+  .empresa img {
+    width: clamp(4rem, 8vw, 6rem);
+  }
 }
