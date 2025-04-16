@@ -1,3 +1,9 @@
+// Carregar dados do usuário ao carregar a página
+document.addEventListener("DOMContentLoaded", function () {
+  fetchUserData();
+});
+
+// Submeter o formulário de edição de perfil
 document
   .getElementById("editProfileForm")
   .addEventListener("submit", function (e) {
@@ -19,6 +25,7 @@ document
     const dados = { nome, email, telefone, senha };
     console.log("Dados enviados:", dados);
 
+    // Aqui você pode enviar os dados para o backend usando fetch/axios
     showCustomAlert("Perfil atualizado com sucesso!");
   });
 
@@ -30,10 +37,30 @@ function togglePassword(inputId, button) {
   if (input.type === "password") {
     input.type = "text";
     img.src = "../../assets/img/password/eye.svg";
-    img.alt = "Ocultar senha";
   } else {
     input.type = "password";
     img.src = "../../assets/img/password/eye-off.svg";
-    img.alt = "Mostrar senha";
   }
+}
+
+// Buscar dados do usuário do backend
+function fetchUserData() {
+  const userId = 1; // Substitua pelo ID do usuário autenticado
+
+  fetch(`/buscar/${userId}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Erro ao buscar dados do usuário");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      document.getElementById("nome").value = data.nome || "";
+      document.getElementById("email").value = data.email || "";
+      document.getElementById("telefone").value = data.telefone || "";
+    })
+    .catch((error) => {
+      console.error("Erro ao carregar dados do usuário:", error);
+      showCustomAlert("Erro ao carregar dados do usuário.");
+    });
 }

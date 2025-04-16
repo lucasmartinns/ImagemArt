@@ -32,7 +32,7 @@ body {
 }
 
 .container {
-  margin: 1%;
+  margin-bottom: 1%;
   position: relative;
   width: 100%;
   max-width: 1200px;
@@ -264,23 +264,23 @@ body {
   border: none;
   border-radius: 0;
   padding: 0 20px;
-  color: #282828;
+  color: #e7e7e8;
   background-color: transparent;
 }
 
 .calendar .goto-today button {
   height: 30px;
   padding: 5px 10px;
-  border: 1px solid var(--primary-clr);
   border-radius: 5px;
+  border: none;
   background-color: var(--primary-clr);
   cursor: pointer;
-  color: #282828;
+  color: #e7e7e8;
 }
 
 .calendar .goto-today button:hover {
   color: #e7e7e8;
-  background-color: var(--primary-clr);
+  background-color: var(--secundary-clr);
 }
 
 .calendar .goto-today .goto button {
@@ -544,7 +544,7 @@ body {
   font-weight: 500;
   outline: none;
   border: none;
-  color: #0a0809;
+  color: #e7e7e8;
   background-color: var(--primary-clr);
   border-radius: 5px;
   cursor: pointer;

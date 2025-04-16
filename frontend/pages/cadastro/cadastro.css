@@ -80,25 +80,30 @@ form {
 .informations label {
   font-size: clamp(0.8rem, 1vw, 1rem);
   color: #e7e7e8;
+  font-weight: 600;
 }
 
 .informations input {
   display: flex;
   padding: 1rem;
+  text-align: start;
+  outline: none;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  margin-top: 0.2rem;
   width: clamp(12rem, 15vw, 15vw);
   height: clamp(2rem, 3vw, 3rem);
   font-size: clamp(0.8rem, 1vw, 1rem);
-  background-color: #e7e7e8;
-  color: #0a0809;
-  margin-bottom: 1rem;
-  margin-top: 0.2rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  color: rgba(231, 231, 232, 0.7);
   border-radius: 10px;
-  border: none;
-  outline: none;
+  border: 2px solid #1d1d1d;
+  box-shadow: inset 0px -13.58px 18.11px rgba(0, 0, 0, 0.05),
+    inset 0px 9.05px 13.58px rgba(255, 255, 255, 0.08);
 }
 
 .informations input:focus {
-  outline: 2px solid var(--secundary-clr);
+  border: 2px solid var(--secundary-clr);
 }
 
 /* Estilo para o container da senha */
@@ -128,6 +133,8 @@ form {
   height: 20px;
   object-fit: contain;
   pointer-events: none;
+  filter: invert(88%) sepia(4%) saturate(0%) hue-rotate(180deg) brightness(96%)
+    contrast(92%);
 }
 
 .checkbox-container {
@@ -156,9 +163,15 @@ form {
   cursor: pointer;
   transition: transform 0.2s ease, filter 0.1s ease, background-color 0.1s ease;
 }
-
 .cadastrarButton:hover {
   background-color: var(--secundary-clr);
+  filter: brightness(0.8);
+  transform: scale(0.95);
+}
+
+.topBarRight button {
+  width: clamp(7.2rem, 10vw, 10vw);
+  height: clamp(3.2rem, 5vw, 4vw);
 }
 
 .manterConectado {
@@ -175,10 +188,12 @@ form {
   color: var(--primary-clr);
   text-decoration: none;
   font-size: clamp(0.8rem, 1vw, 1rem);
+  transition: transform 0.2s ease, filter 0.1s ease, background-color 0.1s ease;
 }
 
 .login-link:hover {
-  text-decoration: underline;
+  filter: brightness(0.8);
+  transform: scale(0.98);
 }
 
 .custom-alert {

@@ -1,74 +1,96 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../login/login.css" />
+    <script src="../../components/head/head.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
-  <link rel="stylesheet" href="pages/login/login.css" />
-  <script src="components/head/head.js"></script>
-</head>
+  <body>
+    <!-- NAVBAR -->
+    <div id="navbar-container"></div>
 
-<body>
-  <!-- NAVBAR -->
-  <div id="navbar-container">
-    <script src="/components/navbar/navbar.js"></script>
-  </div>
-
-  <div class="content-wrapper">
     <!-- LOGIN -->
-    <div class="form-container">
-      <h1>LOGIN</h1>
-      <form id="loginForm">
-        <div class="informations">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required
-            oninvalid="this.setCustomValidity('Preencha seu e-mail.')" />
+    <div class="content-wrapper">
+      <div class="form-container">
+        <h1>LOGIN</h1>
+        <form id="loginForm">
+          <div class="informations">
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Digite seu e-mail"
+              required
+              oninvalid="this.setCustomValidity('Preencha seu e-mail.')"
+            />
 
-          <label for="senha">Senha</label>
-          <div class="password-container">
-            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required
-              oninvalid="this.setCustomValidity('Preencha o campo da senha.')" />
-            <button type="button" class="toggle-password" onclick="togglePassword('senha', this)">
-              <img src="/assets/img/password/eye-off.svg" alt="Mostrar senha" class="password-icon" />
-            </button>
+            <label for="senha">Senha</label>
+            <div class="password-container">
+              <input
+                type="password"
+                id="senha"
+                name="senha"
+                placeholder="Digite sua senha"
+                required
+                oninvalid="this.setCustomValidity('Preencha o campo da senha.')"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                onclick="togglePassword('senha', this)"
+              >
+                <img
+                  src="../../assets/img/password/eye-off.svg"
+                  alt="Mostrar senha"
+                  class="password-icon"
+                />
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div class="checkbox-container">
-          <input type="checkbox" id="manterConectado" name="manterConectado" />
-          <label class="manterConectado" for="manterConectado">Manter-se conectado</label>
-        </div>
+          <div class="checkbox-container">
+            <input
+              type="checkbox"
+              id="manterConectado"
+              name="manterConectado"
+            />
+            <label class="manterConectado" for="manterConectado"
+              >Manter-se conectado</label
+            >
+          </div>
 
-        <button class="cadastrarButton" type="submit">Entrar</button>
-        <a href="pages/cadastro/cadastro.html" class="login-link">Não tem uma conta? Cadastre-se</a>
-        <div id="resultados"></div>
-      </form>
-
-    </div>
-
-  </div>
-
-
-  <!-- ALERTA -->
-  <div id="customAlert" class="custom-alert">
-    <div class="custom-alert-content">
-      <p id="customAlertMessage"></p>
-      <button id="customAlertButton">OK</button>
-    </div>
-  </div>
-  <div id="customConfirm" class="custom-alert">
-    <div class="custom-alert-content">
-      <p id="customConfirmMessage"></p>
-      <div class="confirm-buttons">
-        <button id="customConfirmYes">Sim</button>
-        <button id="customConfirmNo">Não</button>
+          <button class="cadastrarButton" type="submit">Entrar</button>
+          <a href="../cadastro/cadastro.html" class="login-link"
+            >Não tem uma conta? Cadastre-se</a
+          >
+          <div id="resultados"></div>
+        </form>
       </div>
     </div>
-  </div>
 
-  <script src="/components/alert/alert.js"></script>
-  <script src="pages/login/login.js"></script>
-</body>
+    <!-- ALERTA -->
+    <div id="customAlert" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customAlertMessage"></p>
+        <button id="customAlertButton">OK</button>
+      </div>
+    </div>
+    <div id="customConfirm" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customConfirmMessage"></p>
+        <div class="confirm-buttons">
+          <button id="customConfirmYes">Sim</button>
+          <button id="customConfirmNo">Não</button>
+        </div>
+      </div>
+    </div>
 
+    <script src="../../components/navbar/navbar.js"></script>
+    <script src="../../components/alert/alert.js"></script>
+    <script src="../login/login.js"></script>
+  </body>
 </html>

@@ -12,7 +12,7 @@ function initializeNavbar() {
   const subMenu = document.getElementById("subMenu");
 
   // Simulação de estado: true = logado / false = não logado
-  let isLoggedIn = true;
+  let isLoggedIn = false;
 
   window.toggleMenu = function () {
     subMenu.classList.toggle("open-menu");

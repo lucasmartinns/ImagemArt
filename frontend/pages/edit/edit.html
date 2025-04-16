@@ -21,20 +21,24 @@
           <div class="informations">
             <!-- E-mail (não editável) -->
             <label for="email">E-mail</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value="usuario@exemplo.com"
-              readonly
-            />
+            <div class="email-container">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value="usuario@exemplo.com"
+                readonly
+                unselectable="on"
+                style="user-select: none"
+              />
+            </div>
 
             <!-- Telefone (editável) -->
             <label for="telefone">Telefone</label>
             <input
               type="tel"
-              id="phone"
-              name="phone"
+              id="telefone"
+              name="telefone"
               value="(11) 91234-5678"
               placeholder="Digite seu telefone"
             />
@@ -48,6 +52,7 @@
                 name="senha"
                 placeholder="Digite sua nova senha"
               />
+
               <button
                 type="button"
                 class="toggle-password"
@@ -60,9 +65,32 @@
                 />
               </button>
             </div>
+            <label for="confirmarSenha">Confirmar nova senha</label>
+            <div class="password-container">
+              <input
+                type="password"
+                id="confirmarSenha"
+                name="confirmarSenha"
+                placeholder="Confirme sua senha"
+                required
+                oninvalid="this.setCustomValidity('As senhas não coincidem. Por favor, verifique.')"
+                oninput="this.setCustomValidity('')"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                onclick="togglePassword('confirmarSenha', this)"
+              >
+                <img
+                  src="../../assets/img/password/eye-off.svg"
+                  alt="Mostrar senha"
+                  class="password-icon"
+                />
+              </button>
+            </div>
           </div>
 
-          <button class="saveButton" type="submit">Salvar Alterações</button>
+          <button class="saveButton" type="submit">Salvar</button>
         </form>
       </div>
     </div>
