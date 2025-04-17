@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Serviços</title>
+    <link rel="stylesheet" href="../servico/servico.css" />
+    <script src="../../components/head/head.js"></script>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <div id="navbar-container"></div>
+
+    <!-- SERVIÇOS -->
+    <div class="center">
+      <div class="serviceContainer">
+        <h1><span>Serviço</span><span>s</span></h1>
+        <div class="line"></div>
+        <div class="itens" id="itemsContainer">
+          <!-- Os itens serão carregados dinamicamente -->
+        </div>
+        <div id="itemModal" class="modal">
+          <div class="modal-content">
+            <div class="closeBar">
+              <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+              <h2 id="serviceName"></h2>
+              <div class="table-container">
+                <table id="detailsTable">
+                  <thead>
+                    <tr class="table-header">
+                      <th>Detalhes</th>
+                      <th>Preços</th>
+                      <th>Quantidade Disponível</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <div class="selection">
+                <p>Detalhe Selecionado: <span id="selectedDetails"></span></p>
+                <label for="selectedQuantity">Quantidade:</label>
+                <input type="number" id="selectedQuantity" min="1" />
+              </div>
+              <button id="confirmBtn">Confirmar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALERTA -->
+    <div id="customAlert" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customAlertMessage"></p>
+        <button id="customAlertButton">OK</button>
+      </div>
+    </div>
+    <div id="customConfirm" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customConfirmMessage"></p>
+        <div class="confirm-buttons">
+          <button id="customConfirmYes">Sim</button>
+          <button id="customConfirmNo">Não</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer-container"></div>
+
+    <script src="../../components/footer/footer.js"></script>
+    <script src="../../components/navbar/navbar.js"></script>
+    <script src="../servico/servico.js"></script>
+    <script src="../../components/alert/alert.js"></script>
+  </body>
+</html>

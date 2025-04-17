@@ -8,11 +8,40 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => console.error("Erro ao carregar a navbar:", error));
 });
 
+// Simulação de usuário para testes
+let simulatedUser = {
+  nome: "Usuario Teste",
+  tipo_usuario_idtipo_usuario: 2,
+};
+
+function toggleUserType() {
+  simulatedUser.tipo_usuario_idtipo_usuario =
+    simulatedUser.tipo_usuario_idtipo_usuario === 1 ? 2 : 1;
+  initializeNavbar();
+}
+
 function initializeNavbar() {
   const subMenu = document.getElementById("subMenu");
 
-  // Simulação de estado: true = logado / false = não logado
-  let isLoggedIn = false;
+  const user = simulatedUser;
+  const isLoggedIn = true;
+  const isAdmin = user.tipo_usuario_idtipo_usuario === 1;
+
+  // Atualiza o estado do menu de navegação com base no login e tipo de usuário
+  const navLinks = document.querySelector("nav ul li");
+  if (navLinks) {
+    navLinks.innerHTML = `
+      <a href="../../pages/home/home.html">Home</a>
+      <a href="../../pages/${
+        isAdmin ? "servicos_adm/servicos_adm.html" : "servico/servico.html"
+      }">Serviços</a>
+      ${
+        isAdmin
+          ? '<a href="../../pages/calendario/calendario_adm.html">Calendário</a>'
+          : ""
+      }
+    `;
+  }
 
   window.toggleMenu = function () {
     subMenu.classList.toggle("open-menu");
@@ -20,12 +49,12 @@ function initializeNavbar() {
 
   function updateNavbarState() {
     if (isLoggedIn) {
-      // Estado logado
+      // Logged in state
       subMenu.innerHTML = `
       <div class="sub-menu">
           <div class="user-info">
             <img src="../../assets/img/navbar/user-black.png" alt="" />
-            <h3>Nome do Usuário</h3>
+            <h3>${user.nome || "Nome do Usuário"}</h3>
           </div>
           <hr />
           <a href="../../pages/edit/edit.html" class="sub-menu-link">
@@ -39,7 +68,7 @@ function initializeNavbar() {
       </div>`;
       subMenu.classList.remove("not-logged");
     } else {
-      // Estado não logado
+      // Not logged in state
       subMenu.innerHTML = `
       <div class="sub-menu">
           <a href="../../pages/login/login.html" class="sub-menu-link">
