@@ -18,7 +18,10 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     if (response.ok) {
       document.getElementById('resultados').innerHTML = `<p>${data.mensagem}</p>`;
 
-      // Armazena usuário no localStorage
+      // Armazenar o token JWT recebido
+      localStorage.setItem('token', data.token);
+      
+      // Armazenar dados do usuário
       localStorage.setItem('usuario', JSON.stringify(data.usuario));
 
       // Redireciona conforme o tipo de usuário
@@ -39,7 +42,6 @@ document.getElementById("loginForm").addEventListener("submit", async function (
   }
 });
 
-
 // Função de alternar visibilidade da senha
 function togglePassword(inputId, button) {
   const input = document.getElementById(inputId);
@@ -56,5 +58,18 @@ function togglePassword(inputId, button) {
   }
 }
 
-
-
+// Verificar se o usuário já está autenticado ao carregar a página
+document.addEventListener('DOMContentLoaded', function() {
+  const token = localStorage.getItem('token');
+  const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+  
+  if (token && usuario.id) {
+    // Se já estiver logado, redirecionar para a página apropriada
+    const tipo = usuario.tipo_usuario_idtipo_usuario;
+    if (tipo === 1) {
+      window.location.href = '/admin';
+    } else {
+      window.location.href = '/home';
+    }
+  }
+});

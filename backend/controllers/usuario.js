@@ -1,5 +1,6 @@
 const db = require('../config/database');
 const bcrypt = require('bcrypt');
+const { gerarToken } = require("../middlewares/auth");
 
 const usuario = {
 
@@ -21,6 +22,13 @@ const usuario = {
         return res.status(401).json({ error: 'E-mail ou senha incorretos' });
       }
 
+      const token = gerarToken({
+        id: usuario.idusuario,
+        nome: usuario.nome,
+        email: usuario.email,
+        tipo: usuario.tipo_usuario_idtipo_usuario
+      });
+
       return res.status(200).json({
         mensagem: 'Login realizado com sucesso',
         usuario: {
@@ -28,7 +36,8 @@ const usuario = {
           nome: usuario.nome,
           email: usuario.email,
           tipo_usuario_idtipo_usuario: usuario.tipo_usuario_idtipo_usuario
-        }
+        },
+        token
       });
 
     } catch (err) {
