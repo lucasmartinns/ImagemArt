@@ -24,7 +24,7 @@ body {
 .center {
   display: flex;
   justify-content: center;
-  min-height: 78vh;
+  min-height: 76vh;
 }
 
 /* CONTAINER SERVIÇO */
@@ -50,16 +50,17 @@ h1 span:last-child {
 
 .line {
   background-color: var(--white);
-  width: clamp(15rem, 35vw, 35vw);
+  min-width: clamp(15rem, 35vw, 35vw);
   height: 1px;
   margin-top: 2%;
-  margin-bottom: 4%;
+  margin-bottom: 3%;
 }
 
 .itens {
   display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  justify-content: center;
   max-width: 631px;
   gap: 2rem;
 }
@@ -259,10 +260,10 @@ h1 span:last-child {
 }
 
 .service-item {
+  max-width: 10rem !important;
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
   cursor: pointer;
   transition: filter 0.5s ease, transform 0.1s ease;
 }
@@ -288,11 +289,15 @@ h1 span:last-child {
 }
 
 .service-item h3 {
+  max-width: 100%;
   color: var(--white);
   font-size: 1.2rem;
   font-weight: bold;
   letter-spacing: 0.1rem;
   text-align: center;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .service-item:active .image-container img,

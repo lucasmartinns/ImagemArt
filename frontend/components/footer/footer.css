@@ -19,7 +19,7 @@ body {
   width: 100vw;
   background-color: #282828;
   align-items: center;
-  padding: 1.4rem 1.8rem;
+  padding: 1rem 2.5rem;
   justify-content: space-between;
 }
 
@@ -27,11 +27,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 0.3vw;
+  gap: 0.25vw;
 }
 
-hr {
-  width: 13.5rem;
+.footer-container hr {
+  width: 20rem;
   border: none;
   height: 2px;
   background-color: #63783d;
@@ -40,24 +40,18 @@ hr {
 #p-footer {
   color: #e7e7e8;
   font-family: "Montserrat";
-  font-size: clamp(1rem, 1.2vw, 1rem);
-}
-
-.contato {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5vw;
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
 }
 
 .redes-sociais {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(0.5rem, 2vw, 1rem);
+  gap: clamp(0.7rem, 1.2vw, 0.9rem);
 }
 
 .redes-sociais img {
-  width: clamp(1.5rem, 2vw, 2rem);
+  width: clamp(1.5rem, 2vw, 1.7rem);
   height: auto;
 }
 
@@ -92,13 +86,13 @@ hr {
 
 @media (max-width: 768px) {
   .footer-container {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     gap: 1rem;
   }
 
   .left-footer {
-    gap: clamp(0.5rem, 2vw, 1rem);
+    gap: 0.4rem;
   }
 
   .contato {
@@ -106,10 +100,10 @@ hr {
   }
 
   .left-footer,
-  .contato,
   .empresa {
     align-items: center;
     text-align: center;
+    flex-direction: column;
   }
 
   .redes-sociais {
@@ -118,5 +112,9 @@ hr {
 
   .empresa img {
     width: clamp(4rem, 8vw, 6rem);
+  }
+
+  .footer-container hr {
+    width: 17rem;
   }
 }
