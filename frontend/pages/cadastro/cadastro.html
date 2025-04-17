@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro</title>
-    <link rel="stylesheet" href="../cadastro/cadastro.css" />
+    <link rel="stylesheet" href="pages/cadastro/cadastro.css" />
     <script src="../../components/head/head.js"></script>
   </head>
   <body>
@@ -22,8 +22,6 @@
               name="nome"
               placeholder="Digite seu nome"
               required
-              oninvalid="this.setCustomValidity('Preencha seu nome.')"
-              oninput="this.setCustomValidity('')"
             />
 
             <label for="email">E-mail</label>
@@ -43,8 +41,6 @@
               placeholder="Digite seu telefone"
               maxlength="15"
               required
-              oninvalid="this.setCustomValidity('Digite seu telefone.')"
-              oninput="this.setCustomValidity('')"
             />
 
             <label for="senha">Senha</label>
@@ -55,8 +51,6 @@
                 name="senha"
                 placeholder="Digite sua senha"
                 required
-                oninvalid="this.setCustomValidity('Preencha o campo da senha.')"
-                oninput="this.setCustomValidity('')"
               />
               <button
                 type="button"
@@ -79,8 +73,6 @@
                 name="confirmarSenha"
                 placeholder="Confirme sua senha"
                 required
-                oninvalid="this.setCustomValidity('As senhas não coincidem. Por favor, verifique.')"
-                oninput="this.setCustomValidity('')"
               />
               <button
                 type="button"
@@ -108,7 +100,7 @@
           </div>
 
           <button class="cadastrarButton" type="submit">Cadastrar</button>
-          <a href="../login/login.html" class="login-link"
+          <a href="/login" class="login-link"
             >Já tem uma conta? Faça login</a
           >
         </form>
@@ -134,6 +126,6 @@
 
 
     <script src="../../components/alert/alert.js"></script>
-    <script src="../cadastro/cadastro.js"></script>
+    <script src="/pages/cadastro/cadastro.js"></script>
   </body>
 </html>

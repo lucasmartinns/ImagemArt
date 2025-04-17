@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const connection = require('.//config/database');
 const router = require('./routes/router');
 const app = express();
+const path = require("path");
 
 app.use(cookieParser());
 app.use(cors());

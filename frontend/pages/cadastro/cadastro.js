@@ -1,6 +1,6 @@
 document
   .getElementById("cadastroForm")
-  .addEventListener("submit", function (e) {
+  .addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const nome = document.getElementById("nome").value.trim();
@@ -10,23 +10,57 @@ document
     const confirmarSenha = document
       .getElementById("confirmarSenha")
       .value.trim();
+    const manterConectado = document.getElementById("manterConectado").checked;
 
     if (senha !== confirmarSenha) {
       showCustomAlert("As senhas não coincidem. Por favor, verifique.");
       return;
     }
 
-    // Simula o envio dos dados para o backend
-    const dados = { nome, email, telefone, senha };
-    console.log("Dados enviados:", dados);
+    // Criar objeto com os dados para enviar ao backend
+    const dadosUsuario = { 
+      nome, 
+      email, 
+      telefone, 
+      senha,
+      tipo_usuario_idtipo_usuario: 2
+    };
 
-    showCustomAlert("Cadastro realizado com sucesso!");
+    try {
+      // Enviar os dados para o back-end
+      const resposta = await fetch('/cadastrar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dadosUsuario)
+      });
 
-    // Limpa o formulário
-    document.getElementById("cadastroForm").reset();
+      const dados = await resposta.json();
+
+      if (resposta.ok) {
+        // Cadastro realizado com sucesso
+        showCustomAlert("Cadastro realizado com sucesso!");
+        
+        // Limpar o formulário
+        document.getElementById("cadastroForm").reset();
+        
+        // Redirecionar para a página de login após o usuário clicar em OK no alerta
+        // Você pode adicionar isso no seu código de alerta customizado
+        // Exemplo: após o usuário clicar em OK no alerta
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000); // Redireciona após 2 segundos
+      } else {
+        // Mostrar mensagem de erro retornada pelo servidor
+        showCustomAlert(dados.message || "Erro ao cadastrar. Tente novamente.");
+      }
+    } catch (erro) {
+      console.error("Erro ao conectar com o servidor:", erro);
+      showCustomAlert("Não foi possível conectar ao servidor. Tente novamente mais tarde.");
+    }
   });
 
-// Alternar visibilidade da senha
 function togglePassword(inputId, button) {
   const input = document.getElementById(inputId);
   const img = button.querySelector("img");

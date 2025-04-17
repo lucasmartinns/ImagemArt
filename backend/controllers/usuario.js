@@ -1,9 +1,10 @@
 const db = require('../config/database');
 const bcrypt = require('bcrypt');
+const { gerarToken } = require("../middlewares/auth");
 
 const usuario = {
 
-  // 🔹 Login de usuári
+  // 🔹 Login de usuário
   Login: async (req, res) => {
     const { email, senha } = req.body;
 
@@ -21,7 +22,13 @@ const usuario = {
         return res.status(401).json({ error: 'E-mail ou senha incorretos' });
       }
 
-      // Login bem-sucedido
+      const token = gerarToken({
+        id: usuario.idusuario,
+        nome: usuario.nome,
+        email: usuario.email,
+        tipo: usuario.tipo_usuario_idtipo_usuario
+      });
+
       return res.status(200).json({
         mensagem: 'Login realizado com sucesso',
         usuario: {
@@ -29,7 +36,8 @@ const usuario = {
           nome: usuario.nome,
           email: usuario.email,
           tipo_usuario_idtipo_usuario: usuario.tipo_usuario_idtipo_usuario
-        }
+        },
+        token
       });
 
     } catch (err) {
@@ -38,101 +46,86 @@ const usuario = {
     }
   },
 
-
-
-
-  // 🔹 Buscar Usuários
-  ListarUsuario: (req, res) => {
-    db.query(
-      "SELECT * FROM `usuario`",
-      (err, results) => {
-        if (err) {
-          return res.status(500).json({ error: "Erro ao buscar usuários" });
-        }
-        return res.json(results);
-      }
-    );
+  // 🔹 Listar todos os usuários
+  ListarUsuario: async (req, res) => {
+    try {
+      const [results] = await db.query("SELECT * FROM usuario");
+      return res.json(results);
+    } catch (err) {
+      return res.status(500).json({ error: "Erro ao buscar usuários" });
+    }
   },
 
-  // 🔹 Buscar Usuários por id
-  BuscarUsuarioPorId: (req, res) => {
+  // 🔹 Buscar usuário por ID
+  BuscarUsuarioPorId: async (req, res) => {
     const id = req.params.id;
 
-    // Verifica se o ID foi passado corretamente
     if (!id) {
       return res.status(400).json({ error: "ID do usuário é obrigatório!" });
     }
 
-    const sql = "SELECT * FROM usuario WHERE idusuario = ?";
-
-    db.query(sql, [id], (err, results) => {
-      if (err) return res.status(500).json({ error: "Erro ao buscar usuário" });
+    try {
+      const [results] = await db.query("SELECT * FROM usuario WHERE idusuario = ?", [id]);
 
       if (results.length === 0) {
         return res.status(404).json({ error: "Usuário não encontrado!" });
       }
 
-      return res.json(results[0]); // Retorna o usuário encontrado
-    });
+      return res.json(results[0]);
+    } catch (err) {
+      return res.status(500).json({ error: "Erro ao buscar usuário" });
+    }
   },
 
-  // 🔹 Cadastrar Usuário
+  // 🔹 Cadastrar novo usuário
   Cadastrar: async (req, res) => {
-    const { nome, email, senha, telefone, tipo_usuario_idtipo_usuario } = req.body;
+    let { nome, email, senha, telefone, tipo_usuario_idtipo_usuario } = req.body;
+
+    console.log("Corpo recebido no cadastro:", req.body);
+
+    console.log("Tipos:", {
+      nome: typeof nome,
+      email: typeof email,
+      senha: typeof senha,
+      telefone: typeof telefone,
+      tipo_usuario_idtipo_usuario,
+      tipo: typeof tipo_usuario_idtipo_usuario,
+    });
+
+    if (!nome || !email || !senha || !telefone || ![1, 2].includes(Number(tipo_usuario_idtipo_usuario))) {
+      return res.status(400).json({ error: "Preencha todos os campos corretamente!" });
+    }
+    
+
+    if (![1, 2].includes(tipo_usuario_idtipo_usuario)) {
+      return res.status(400).json({ error: "Tipo de usuário inválido!" });
+    }
 
     try {
+      const [existingUser] = await db.query("SELECT * FROM usuario WHERE email = ?", [email]);
 
-      if (!nome || !email || !senha || !telefone || tipo_usuario_idtipo_usuario === undefined) {
-        return res.status(400).json({ error: "Preencha todos os campos!" });
+      if (existingUser.length > 0) {
+      return res.status(400).json({ mensagem: "Usuário já cadastrado!" });
       }
 
-      // Se o tipo de usuário não for informado, assume que é um usuário comum (2)
-      if (tipo_usuario_idtipo_usuario == undefined) {
-        tipo_usuario_idtipo_usuario = 2;
-      }
+      const hashedSenha = await bcrypt.hash(senha, 10);
 
-      // Verifica se o tipo de usuário é válido (1 = adm, 2 = usuário comum)
-      if (![1, 2].includes(tipo_usuario_idtipo_usuario)) {
-        return res.status(400).json({ error: "Tipo de usuário inválido!" });
-      }
+      const sql = `INSERT INTO usuario (nome, email, senha, telefone, tipo_usuario_idtipo_usuario) VALUES (?, ?, ?, ?, ?)`;
+      const [results] = await db.query(sql, [nome, email, hashedSenha, telefone, tipo_usuario_idtipo_usuario]);
 
-      // Verifica se já existe um usuário com o mesmo e-mail
-      const sqlSelect = "SELECT * FROM usuario WHERE email = ?";
-      db.query(sqlSelect, [email], async (err, results) => {
-        if (err) {
-          return res.status(500).json({ error: "Erro ao verificar usuário!", err });
-        }
-
-        if (results.length > 0) {
-          return res.status(400).json({ mensagem: "Usuário já cadastrado!" });
-        }
-        // Criptografa a senha
-        const saltRounds = 10;
-        const hashedSenha = await bcrypt.hash(senha, saltRounds);
-
-        // Insere o usuário no banco de dados
-        const sql = `INSERT INTO usuario (nome, email, senha, telefone, tipo_usuario_idtipo_usuario) VALUES (?, ?, ?, ?, ?)`;
-        db.query(sql, [nome, email, hashedSenha, telefone, tipo_usuario_idtipo_usuario], (err, results) => {
-          if (err) {
-            console.error("Erro ao inserir usuário:", err);
-            return res.status(500).json({ error: "Erro ao criar usuário!" });
-          }
-          return res.status(201).json({ message: "Usuário criado com sucesso!", id: results.insertId });
-        })
-      });
+      return res.status(201).json({ message: "Usuário criado com sucesso!", id: results.insertId });
 
     } catch (error) {
       console.error("Erro ao processar o cadastro:", error);
       return res.status(500).json({ error: "Erro interno do servidor" });
     }
-
   },
 
+  
 
-  // 🔹 Alterar Usuário
+  // 🔹 Alterar usuário
   AlterarUsuario: async (req, res) => {
     const id = req.params.id;
-    console.log("ID recebido:", id);
     const { nome, email, senha, telefone, tipo_usuario_idtipo_usuario } = req.body;
 
     if (!nome || !email || !telefone || tipo_usuario_idtipo_usuario === undefined) {
@@ -140,33 +133,37 @@ const usuario = {
     }
 
     try {
-      let SenhaCriptografada = await bcrypt.hash(senha, 10);
+      let sql = `UPDATE usuario SET nome = ?, email = ?, telefone = ?, tipo_usuario_idtipo_usuario = ?`;
+      const params = [nome, email, telefone, tipo_usuario_idtipo_usuario];
 
-      const sql = `UPDATE usuario SET nome=?, email=?, ${senha ? "senha=?, " : ""} telefone=?, tipo_usuario_idtipo_usuario=? WHERE idusuario=?`;
+      if (senha) {
+        const senhaCriptografada = await bcrypt.hash(senha, 10);
+        sql += `, senha = ?`;
+        params.push(senhaCriptografada);
+      }
 
-      db.query(sql, [nome, email, SenhaCriptografada, telefone, tipo_usuario_idtipo_usuario, id], (err, results) => {
-        if (err) {
-          return res.status(500).json({ error: "Erro ao alterar o usuário", err });
-        }
-        return res.status(200).json({ mensagem: "Usuário alterado com sucesso!" });
-      });
+      sql += ` WHERE idusuario = ?`;
+      params.push(id);
+
+      await db.query(sql, params);
+
+      return res.status(200).json({ mensagem: "Usuário alterado com sucesso!" });
+
     } catch (error) {
       return res.status(500).json({ error: "Erro ao processar a solicitação", error });
     }
   },
 
-  // 🔹 Deletar Usuário
-  Deletar: (req, res) => {
+  // 🔹 Deletar usuário
+  Deletar: async (req, res) => {
     const id = req.params.id;
-    console.log("ID recebido:", id);
 
-    const sql = "DELETE FROM usuario WHERE idusuario = ?";
-    db.query(sql, [id], (err, results) => {
-      if (err) {
-        return res.status(500).json({ error: "Erro ao deletar o usuário" });
-      }
+    try {
+      await db.query("DELETE FROM usuario WHERE idusuario = ?", [id]);
       return res.json({ mensagem: "Usuário deletado com sucesso!" });
-    });
+    } catch (err) {
+      return res.status(500).json({ error: "Erro ao deletar o usuário" });
+    }
   },
 };
 

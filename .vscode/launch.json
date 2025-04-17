@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Launch API",
+        "skipFiles": ["<node_internals>/**"],
+        "program": "${workspaceFolder}/backend/server.js",
+        "runtimeArgs": [
+          "--inspect-brk"
+        ],
+        "env": {
+          "NODE_ENV": "development"
+        },
+        "outFiles": [
+          "${workspaceFolder}/**/*.js"
+        ]
+      }
+    ]
+  }
+  
