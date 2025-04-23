@@ -17,52 +17,29 @@
         <h1><span>Serviço</span><span>s</span></h1>
         <div class="line"></div>
         <div class="itens" id="itemsContainer">
-          <!-- Os itens serão carregados dinamicamente -->
-        </div>
-        <div id="itemModal" class="modal">
-          <div class="modal-content">
-            <div class="closeBar">
-              <span class="close">&times;</span>
-            </div>
-            <div class="modal-body">
-              <h2 id="serviceName"></h2>
-              <div class="table-container">
-                <table id="detailsTable">
-                  <thead>
-                    <tr class="table-header">
-                      <th>Detalhes</th>
-                      <th>Preços</th>
-                      <th>Quantidade Disponível</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-              <div class="selection">
-                <p>Detalhe Selecionado: <span id="selectedDetails"></span></p>
-                <label for="selectedQuantity">Quantidade:</label>
-                <input type="number" id="selectedQuantity" min="1" />
-              </div>
-              <button id="confirmBtn">Confirmar</button>
-            </div>
-          </div>
+          <!-- Serviços carregados dinamicamente -->
         </div>
       </div>
     </div>
 
-    <!-- ALERTA -->
-    <div id="customAlert" class="custom-alert">
-      <div class="custom-alert-content">
-        <p id="customAlertMessage"></p>
-        <button id="customAlertButton">OK</button>
-      </div>
-    </div>
-    <div id="customConfirm" class="custom-alert">
-      <div class="custom-alert-content">
-        <p id="customConfirmMessage"></p>
-        <div class="confirm-buttons">
-          <button id="customConfirmYes">Sim</button>
-          <button id="customConfirmNo">Não</button>
+    <!-- MODAL -->
+    <div id="itemModal" class="modal">
+      <div class="modal-content">
+        <div class="closeBar">
+          <span class="close">&times;</span>
+        </div>
+        <h2 id="modalServiceName">Nome do Serviço</h2>
+        <div class="modal-body">
+          <label for="serviceDropdown">Selecione o Serviço:</label>
+          <select id="serviceDropdown">
+            <option value="opcao1" data-price="100">Opção 1 - R$100</option>
+            <option value="opcao2" data-price="200">Opção 2 - R$200</option>
+          </select>
+          <label for="serviceQuantity">Quantidade:</label>
+          <input type="number" id="serviceQuantity" min="1" value="1" />
+          <p id="servicePrice">Preço: R$<span>0.00</span></p>
+          <button type="button" id="calculateBudget">Fazer Orçamento</button>
+          <p id="budgetResult"></p>
         </div>
       </div>
     </div>
