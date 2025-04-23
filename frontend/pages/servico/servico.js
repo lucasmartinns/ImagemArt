@@ -1,72 +1,71 @@
-// ---------- CONSTANTES DE ELEMENTOS ----------
-const itemModal = document.getElementById("itemModal");
-const closeModal = document.getElementsByClassName("close")[0];
-const itemsContainer = document.getElementById("itemsContainer");
-const detailsTable = document
-  .getElementById("detailsTable")
-  .getElementsByTagName("tbody")[0];
-const selectedDetails = document.getElementById("selectedDetails");
-const selectedQuantity = document.getElementById("selectedQuantity");
-const confirmBtn = document.getElementById("confirmBtn");
-let currentItem = null;
+document.addEventListener("DOMContentLoaded", () => {
+  const itemsContainer = document.getElementById("itemsContainer");
+  const itemModal = document.getElementById("itemModal");
+  const closeModal = document.querySelector(".close");
+  const modalServiceName = document.getElementById("modalServiceName");
+  const servicePrice = document
+    .getElementById("servicePrice")
+    .querySelector("span");
+  const serviceQuantity = document.getElementById("serviceQuantity");
+  const calculateBudget = document.getElementById("calculateBudget");
+  const budgetResult = document.getElementById("budgetResult");
 
-// ---------- FUNÇÕES UTILITÁRIAS ----------
+  // Mock de serviços (substituir com fetch do backend)
+  const services = [
+    {
+      id: 1,
+      nome: "Serviço 1",
+      valor: 100,
+      imagem: "../../assets/img/servicos/servico1.png",
+    },
+    {
+      id: 2,
+      nome: "Serviço 2",
+      valor: 200,
+      imagem: "../../assets/img/servicos/servico2.png",
+    },
+    {
+      id: 3,
+      nome: "Serviço 3",
+      valor: 300,
+      imagem: "../../assets/img/servicos/servico3.png",
+    },
+  ];
 
-// Limpa o formulário e a tabela de detalhes
-function clearForm() {
-  detailsTable.innerHTML = "";
-  selectedDetails.innerText = "";
-  selectedQuantity.value = 1;
-}
-
-// Carregar detalhes no modal
-function loadDetailsToModal(details) {
-  detailsTable.innerHTML = "";
-  details.forEach((detail) => {
-    const row = detailsTable.insertRow();
-    row.innerHTML = `
-      <td>${detail.detail}</td>
-      <td>${detail.price}</td>
-      <td>${detail.quantity}</td>
+  // Renderizar serviços
+  services.forEach((service) => {
+    const serviceItem = document.createElement("div");
+    serviceItem.className = "service-item";
+    serviceItem.innerHTML = `
+      <div class="image-container">
+        <img src="${service.imagem}" alt="${service.nome}" />
+      </div>
+      <h3>${service.nome}</h3>
     `;
-    row.onclick = function () {
-      selectedDetails.innerText = detail.detail;
-      selectedQuantity.max = detail.quantity;
-      selectedQuantity.value = 1;
-    };
+    serviceItem.addEventListener("click", () => {
+      modalServiceName.textContent = service.nome;
+      servicePrice.textContent = service.valor.toFixed(2);
+      itemModal.style.display = "flex";
+    });
+    itemsContainer.appendChild(serviceItem);
   });
-}
 
-// ---------- EVENTOS ----------
-// Abrir modal ao clicar em um item
-itemsContainer.addEventListener("click", function (event) {
-  const item = event.target.closest(".service-item");
-  if (item) {
-    currentItem = item;
-    document.getElementById("serviceName").innerText =
-      item.querySelector("h3").innerText;
-    loadDetailsToModal(JSON.parse(item.dataset.details || "[]"));
-    itemModal.style.display = "flex";
-  }
+  // Fechar modal
+  closeModal.addEventListener("click", () => {
+    itemModal.style.display = "none";
+  });
+
+  // Calcular orçamento
+  calculateBudget.addEventListener("click", () => {
+    const quantity = parseInt(serviceQuantity.value, 10);
+    const price = parseFloat(servicePrice.textContent);
+
+    if (isNaN(quantity) || quantity <= 0) {
+      budgetResult.textContent = "Por favor, insira uma quantidade válida.";
+      return;
+    }
+
+    const total = quantity * price;
+    budgetResult.textContent = `Orçamento: R$${total.toFixed(2)}`;
+  });
 });
-
-// Fechar modal ao clicar no botão fechar
-closeModal.onclick = function () {
-  itemModal.style.display = "none";
-};
-
-// Confirmar seleção
-confirmBtn.onclick = function () {
-  const selectedDetail = selectedDetails.innerText;
-  const quantity = selectedQuantity.value;
-
-  if (!selectedDetail || !quantity) {
-    alert("Por favor, selecione um detalhe e uma quantidade.");
-    return;
-  }
-
-  alert(
-    `Você selecionou: ${selectedDetail}, Quantidade: ${quantity}. Obrigado!`
-  );
-  itemModal.style.display = "none";
-};
