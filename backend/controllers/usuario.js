@@ -122,37 +122,36 @@ const usuario = {
   },
 
   
+// 🔹 Alterar usuário
+AlterarUsuario: async (req, res) => {
+  const id = req.params.id;
+  const { nome, email, senha, telefone } = req.body;
 
-  // 🔹 Alterar usuário
-  AlterarUsuario: async (req, res) => {
-    const id = req.params.id;
-    const { nome, email, senha, telefone, tipo_usuario_idtipo_usuario } = req.body;
+  if (!nome || !email || !telefone) {
+    return res.status(400).json({ mensagem: "Preencha todos os campos!" });
+  }
 
-    if (!nome || !email || !telefone || tipo_usuario_idtipo_usuario === undefined) {
-      return res.status(400).json({ mensagem: "Preencha todos os campos!" });
+  try {
+    let sql = `UPDATE usuario SET nome = ?, email = ?, telefone = ?`;
+    const params = [nome, email, telefone];
+
+    if (senha) {
+      const senhaCriptografada = await bcrypt.hash(senha, 10);
+      sql += `, senha = ?`;
+      params.push(senhaCriptografada);
     }
 
-    try {
-      let sql = `UPDATE usuario SET nome = ?, email = ?, telefone = ?, tipo_usuario_idtipo_usuario = ?`;
-      const params = [nome, email, telefone, tipo_usuario_idtipo_usuario];
+    sql += ` WHERE idusuario = ?`;
+    params.push(id);
 
-      if (senha) {
-        const senhaCriptografada = await bcrypt.hash(senha, 10);
-        sql += `, senha = ?`;
-        params.push(senhaCriptografada);
-      }
+    await db.query(sql, params);
 
-      sql += ` WHERE idusuario = ?`;
-      params.push(id);
+    return res.status(200).json({ mensagem: "Usuário alterado com sucesso!" });
 
-      await db.query(sql, params);
-
-      return res.status(200).json({ mensagem: "Usuário alterado com sucesso!" });
-
-    } catch (error) {
-      return res.status(500).json({ error: "Erro ao processar a solicitação", error });
-    }
-  },
+  } catch (error) {
+    return res.status(500).json({ error: "Erro ao processar a solicitação", error });
+  }
+},
 
   // 🔹 Deletar usuário
   Deletar: async (req, res) => {

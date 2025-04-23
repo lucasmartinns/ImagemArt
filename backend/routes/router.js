@@ -49,12 +49,29 @@ router.get('/home', (req, res) => {
     res.sendFile(path.join(FRONTEND_DIR, 'pages', 'home', 'home.html'));
 });
 
+// 🔹Rotas de alterar usuário
+router.get('/edit', (req, res) => {
+    res.sendFile(path.join(FRONTEND_DIR, 'pages', 'edit', 'edit.html'));
+});
+
 
 // 🔹Rotas cadastro
 router.get('/cadastrar', (req, res) => {
     res.sendFile(path.join(FRONTEND_DIR, 'pages', 'cadastro', 'cadastro.html'));
 });
 
+// 🔹Rota calendario
+router.get('/calendario', (req, res) => {
+    res.sendFile(path.join(FRONTEND_DIR, 'pages', 'calendario', 'calendario_adm.html'));
+});
+
+// 🔹Rota serviços
+router.get('/servico_adm', (req, res) => {
+    res.sendFile(path.join(FRONTEND_DIR, 'pages', 'servicos_adm', 'servico_adm.html'));
+});
+router.get('/servico', (req, res) => {
+    res.sendFile(path.join(FRONTEND_DIR, 'pages', 'servicos', 'servico.html'));
+});
 
 
 //🔹 Rota para Upload de Imagem
