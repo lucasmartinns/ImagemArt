@@ -11,8 +11,11 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
 }
-
 body {
   display: flex;
   flex-direction: column;
@@ -81,7 +84,13 @@ h1 span:last-child {
   max-width: clamp(8rem, 15vw, 10rem);
   max-height: clamp(8rem, 15vw, 10rem);
   cursor: pointer;
+}
+.addItem {
   transition: filter 0.5s ease, transform 0.1s ease;
+}
+.addItem:active {
+  filter: brightness(0.1);
+  transform: scale(0.95);
 }
 
 .image-container {
@@ -97,13 +106,6 @@ h1 span:last-child {
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   color: var(--white);
   pointer-events: none;
-  transition: filter 0.5s ease, transform 0.1s ease;
-}
-
-.image-container:active img,
-.image-container:active .plus-symbol {
-  filter: brightness(0.1);
-  transform: scale(0.95);
 }
 
 .addItem {
@@ -274,7 +276,6 @@ h1 span:last-child {
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: filter 0.5s ease, transform 0.1s ease;
 }
 
 .service-item .image-container {
@@ -309,8 +310,11 @@ h1 span:last-child {
   overflow-wrap: break-word;
 }
 
-.service-item:active .image-container img,
-.service-item:active h3 {
+.service-item {
+  transition: filter 0.5s ease, transform 0.1s ease;
+}
+
+.service-item:active {
   filter: brightness(0.1);
   transform: scale(0.95);
 }
