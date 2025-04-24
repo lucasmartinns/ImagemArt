@@ -3,6 +3,10 @@
 
 }
 
+.carousel button {
+    display: none;
+}
+
 @font-face {
     font-family: 'AbhayaLibre-Bold';
     src: url('../assets/font/AbhayaLibre-Bold.ttf');
@@ -12,6 +16,7 @@ a {
     text-decoration: none;
 }
 
+
 body {
     padding: 0;
     margin: 0;
@@ -19,8 +24,13 @@ body {
     min-height: 100vh;
     display: block;
     overflow-x: hidden;
+    background-color: #0A0809 !important;
+
 }
 
+.carousel-control-prev-icon .span-icon {
+    opacity: 0;
+}
 
 .teste {
     display: flex;
@@ -38,7 +48,7 @@ body {
     z-index: 2;
     margin-top: 1.6%;
     margin-left: 7.5%;
-    user-select: none;
+    /* user-select: none; */
     font-weight: 700;
     color: #E7E7E8;
     letter-spacing: 6px;
@@ -75,7 +85,7 @@ body {
     z-index: 2;
     margin-top: 19.75%;
     margin-left: 14%;
-    user-select: none;
+    /* user-select: none; */
     font-weight: 700;
     letter-spacing: 6px;
 
@@ -101,23 +111,23 @@ body {
     font-family: "Montserrat";
     font-size: 16px;
     width: 25%;
-    margin-top: 19%;
+    margin-top: 5%;
     margin-left: 9%;
     font-style: normal;
     line-height: normal;
     letter-spacing: 4px;
-    user-select: none;
+    /* user-select: none; */
 }
 
 .imagens-eventos {
     display: flex;
     justify-content: center;
-    margin-left: 50px;
+    margin-left: 70px;
     margin-top: -650px;
     align-items: center;
     flex-wrap: wrap;
     gap: 25%;
-    user-select: none;
+    /* user-select: none; */
 }
 
 .imagens-eventos2 {
@@ -127,8 +137,8 @@ body {
     flex-wrap: wrap;
     gap: 40%;
     margin-top: -9%;
-    margin-left: 36%;
-    user-select: none;
+    margin-left: 40%;
+    /* user-select: none; */
 }
 
 .linha {
@@ -141,7 +151,7 @@ body {
     height: 1px;
     position: absolute;
     margin-top: 10rem;
-    user-select: none;
+    /* user-select: none; */
 }
 
 button {
@@ -149,34 +159,37 @@ button {
     width: 284.12px;
     height: 57.238px;
     flex-shrink: 0;
-    user-select: none;
+    /* user-select: none; */
     color: #E7E7E8;
     font-size: 16px;
     color: black;
     align-items: center;
     justify-content: center;
+    margin-top: 10%;
 
 }
 
 
 
 .botaoAcess {
-    font-size: 16px;
-    font-family: "Abhaya Libre";
+    font-size: 18px;
+    font-family: "abhaya Libre";
     letter-spacing: 2px;
-    font-weight: 500;
+    font-weight: 600;
     background-color: #63783D;
     color: #E7E7E8;
     border: 1px solid #1D1D1D;
     border-radius: 15px;
     cursor: pointer;
     transition-duration: 0.5s;
-    margin-right: 5rem;
 }
 
-.botaoAcess a{
+.botaoAcess a {
     color: #E7E7E8;
+    text-decoration: none;
+
 }
+
 .botaoAcess:hover {
     cursor: pointer;
     background-color: #46552b;
@@ -187,8 +200,8 @@ button {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    margin-top: 13rem;
-    margin-bottom: -10%;
+    margin-top: 15%;
+
 }
 
 .conteudo {
@@ -213,3 +226,399 @@ img:hover {
 .conteudo1 {
     margin-top: 15rem;
 }
+
+.imagem-casamento img {
+    position: relative;
+
+}
+
+.imagem-casamento {
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.imagem-casamento:hover {
+    transform: scale(1.2);
+}
+
+.imagem-casamento::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 30px;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 1);
+    transition: box-shadow 0.3s ease;
+    pointer-events: none;
+}
+
+.imagem-casamento:hover::after {
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 1);
+}
+
+.imagem-casamento img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+}
+
+.imagens-eventos2-respansive {
+    display: none;
+}
+
+.footer-container {
+    display: flex;
+}
+
+#imageCarousel {
+    display: none;
+}
+
+#linha-respansiva {
+    display: none;
+}
+
+.imageCarousel2 {
+    display: none;
+}
+
+#imageCarousel3 {
+    display: none;
+}
+
+.subtitulo {
+    display: none;
+}
+
+.text {
+    display: none;
+}
+
+.texto {
+    display: none;
+}
+
+.carousel-control-next-icon {
+    display: none;
+}
+
+.carousel-inner {
+    display: none;
+}
+
+
+
+@media (max-width: 1400px) {
+    .teste {
+        font-size: 90px;
+    }
+
+    .S {
+        margin-top: 4.75%;
+        margin-left: 7.5%;
+        /* user-select: none; */
+        font-weight: 700;
+        color: #E7E7E8;
+        letter-spacing: 6px;
+
+
+        & span {
+            color: #E7E7E8;
+            font-family: "Abhaya Libre";
+            font-size: 65px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 7.8px;
+
+        }
+    }
+
+
+
+    .imagem-casamento {
+        margin-top: 8rem;
+        margin-left: 10%;
+
+        & img {
+            position: absolute;
+        }
+
+        z-index: 1;
+    }
+
+
+    .R {
+        margin-top: 8rem;
+        position: absolute;
+        z-index: 2;
+        margin-top: 30%;
+        margin-left: 14%;
+        user-select: none;
+        font-weight: 700;
+        letter-spacing: 6px;
+
+        & span {
+            color: #E7E7E8;
+            font-family: "Abhaya Libre";
+            font-size: 65px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 7.8px;
+
+        }
+    }
+
+    .texto-eventos {
+        color: #d4d4d4;
+        font-family: "Montserrat";
+        font-size: 16px;
+        width: 35%;
+        margin-top: 5%;
+        margin-left: 9%;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 3px;
+        user-select: none;
+    }
+
+    .imagens-eventos {
+        margin-left: 25%;
+        margin-top: -50%;
+        user-select: none;
+    }
+
+    .imagens-eventos2 {
+        display: none;
+    }
+
+    .imagens-eventos2-respansive {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 23%;
+        margin-top: -11%;
+
+    }
+
+    .teste1 {
+        margin-left: 15%;
+    }
+
+    .conteudo {
+        margin-top: 60rem;
+    }
+
+    img {
+        margin-top: 1rem
+    }
+
+    .botaoAcess {
+        font-size: 16px;
+        font-family: "Abhaya Libre";
+        letter-spacing: 2px;
+        font-weight: 500;
+        background-color: #63783D;
+        color: #E7E7E8;
+        border: 1px solid #1D1D1D;
+        border-radius: 15px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+        margin-left: 11%;
+        margin-top: 4%;
+    }
+
+    .alinhar {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        margin-top: 13rem;
+        margin-bottom: -10%;
+    }
+
+    .conteudo {
+        margin-top: 5rem;
+    }
+
+    .conteudo1 {
+        margin-top: 15rem;
+    }
+
+    .imagem-casamento img {
+        position: relative;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+
+
+
+    #imageCarousel {
+        display: block;
+    }
+
+    .linha {
+        display: none;
+    }
+
+    .texto-eventos {
+        display: none;
+    }
+
+    img {
+        display: none;
+    }
+
+    .conteudo1 {
+        display: none;
+    }
+
+    .conteudo {
+        display: none;
+    }
+
+    .botaoAcess {
+        display: none;
+    }
+
+    .conteudo1 {
+        display: none;
+    }
+
+    .imagem-casamento img {
+        display: none;
+    }
+
+    .imagem-casamento {
+        display: none;
+    }
+
+    .imagem-casamento img {
+        display: none;
+    }
+
+    .footer-container {
+        display: none;
+    }
+
+    .texto {
+        display: flex;
+        font-family: "Abhaya Libre";
+        font-size: 100%;
+        margin-top: 1%;
+        color: #E7E7E8;
+        font-weight: 400;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .text {
+        justify-content: center;
+    }
+
+    #imageCarousel1 {
+        display: block;
+    }
+
+    .subtitulo {
+        display: flex;
+        text-align: center;
+        font-family: "Montserrat";
+        font-size: 10px;
+        color: #E7E7E8;
+        font-weight: 300;
+        margin-left: 10%;
+        margin-top: -3%;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+    }
+
+    #imageCarousel {
+        display: block;
+    }
+
+    #linha-respansiva {
+        display: block;
+    }
+
+    .imageCarousel2 {
+        display: block;
+    }
+
+    #imageCarousel3 {
+        display: block;
+    }
+
+    .subtitulo {
+        display: block;
+        justify-content: center;
+    }
+
+    .text {
+        display: block;
+    }
+
+    .texto {
+        display: block;
+        text-align: center;
+    }
+
+    .carousel-control-next-icon {
+        display: block;
+    }
+
+    .carousel-inner {
+        display: block;
+    
+        .carousel-control-prev,
+        .carousel-control-next {
+            display: block;
+        } 
+     }
+
+    .carousel button {
+        display: inline-block;
+
+    }
+
+    .relatos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-image: -moz-linear-gradient(7.8px);
+        text-align: center;
+        color: #E7E7E8;
+        font-weight: 600;
+        font-family: "montserrat";
+        font-size: 200%;
+    }
+
+    .alinhar {
+        display: none;
+    }
+
+    .tituloRelatos {
+        text-decoration: underline #63783d solid 2px;
+        padding: -20%;
+
+    }
+
+
+    .carousel-item img:hover {
+        transform: none;
+    } 
+
+    .descricao {
+        font-weight: 600;
+        justify-content: start;
+        align-items: center;
+
+        justify-content: center;
+        color: #E7E7E8;
+        font-family: 'Montserrat';
+
+} }

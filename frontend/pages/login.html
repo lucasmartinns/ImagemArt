@@ -16,17 +16,171 @@
     />
     <title>ImagemArt</title>
   </head>
-  <body>
-    <div class="container">
-      <div class="form">
-        <div class="titulo">
-          <p>Seja Bem-Vindo</p>
+</style>
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="card-container">
+                <div class="card">
+                    <img src="https://www.psicologo.com.br/wp-content/uploads/casamento-feliz-um-guia-para-casamentos-felizes.jpg" alt="galaxy 1">
+                </div>
+                <div class="card">
+                    <img src="https://s31880.pcdn.co/wp-content/uploads/2019/07/tipos-casamento-atual.jpg" alt="galaxy 2">
+                </div>
+                <div class="card">
+                    <img src="https://joliz.com.br/dicas/wp-content/uploads/2023/08/pexels-carsten-vollrath-13381459-scaled.jpg" alt="nebula center">
+                </div>
+                <div class="card">
+                    <img src="https://celebrantedecasamento.net.br/wp-content/uploads/2022/03/votos-de-casamento.jpg" alt="stars 1">
+                </div>
+                <div class="card">
+                    <img src="https://cdn0.casamentos.com.br/article/3874/3_2/960/png/64783-2.jpeg" alt="galaxy 3">
+                </div>
+            </div>
         </div>
-        <div class="login">
-          <input type="email" placeholder="Digite seu Email" />
-          <input type="password" placeholder="Digite sua Senha" />
+        <div class="controls">
+            <button id="prev">Previous</button>
+            <button id="next">Next</button>
         </div>
-      </div>
     </div>
-  </body>
-</html>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            const prevBtn = document.getElementById('prev');
+            const nextBtn = document.getElementById('next');
+            let currentIndex = 2; // Começamos com o card do meio como ativo
+            let autoSlideInterval;
+            
+            // Ajustando para tela de 480px
+            const isMobile = window.innerWidth <= 480;
+            
+            // Configurações dos cards nas diferentes posições para tela maior
+            const positionsDesktop = [
+                { transform: 'translateX(-230px) scale(0.75)', opacity: 0.7, zIndex: 1 },
+                { transform: 'translateX(-115px) scale(0.85)', opacity: 0.8, zIndex: 2 },
+                { transform: 'translateX(0) scale(1)', opacity: 1, zIndex: 5 },
+                { transform: 'translateX(115px) scale(0.85)', opacity: 0.8, zIndex: 2 },
+                { transform: 'translateX(230px) scale(0.75)', opacity: 0.7, zIndex: 1 }
+            ];
+            
+            // Configurações dos cards nas diferentes posições para mobile
+            const positionsMobile = [
+                { transform: 'translateX(-180px) scale(0.75)', opacity: 0.7, zIndex: 1 },
+                { transform: 'translateX(-90px) scale(0.85)', opacity: 0.8, zIndex: 2 },
+                { transform: 'translateX(0) scale(1)', opacity: 1, zIndex: 5 },
+                { transform: 'translateX(90px) scale(0.85)', opacity: 0.8, zIndex: 2 },
+                { transform: 'translateX(180px) scale(0.75)', opacity: 0.7, zIndex: 1 }
+            ];
+            
+            // Escolher as posições com base no tamanho da tela
+            const positions = isMobile ? positionsMobile : positionsDesktop;
+            
+            // Função para atualizar o carrossel
+            function updateCarousel() {
+                cards.forEach((card, index) => {
+                    // Nova lógica para movimentação para a direita
+                    let positionIndex;
+                    
+                    // Calculamos a posição relativa considerando movimento circular
+                    const diff = (index - currentIndex + cards.length) % cards.length;
+                    
+                    // Atribuímos as posições de 0 a 4 de forma que os cards 
+                    // se movam para a direita quando desaparecem
+                    if (diff === 0) {
+                        positionIndex = 2; // Card central
+                    } else if (diff === 1) {
+                        positionIndex = 3; // Primeira posição à direita
+                    } else if (diff === 2) {
+                        positionIndex = 4; // Segunda posição à direita
+                    } else if (diff === cards.length - 2) {
+                        positionIndex = 0; // Segunda posição à esquerda
+                    } else if (diff === cards.length - 1) {
+                        positionIndex = 1; // Primeira posição à esquerda
+                    }
+                    
+                    // Aplicar transformações com atraso para criar efeito "em cascata"
+                    setTimeout(() => {
+                        card.style.transform = positions[positionIndex].transform;
+                        card.style.opacity = positions[positionIndex].opacity;
+                        card.style.zIndex = positions[positionIndex].zIndex;
+                    }, index * 80); // Pequeno atraso entre cada card
+                });
+            }
+            
+            // Função para avançar automaticamente o carrossel
+            function startAutoSlide() {
+                stopAutoSlide(); // Limpa qualquer intervalo existente
+                autoSlideInterval = setInterval(function() {
+                    currentIndex = (currentIndex + 1) % cards.length;
+                    updateCarousel();
+                }, 3500); // Muda a cada 3.5 segundos para dar tempo à animação em cascata
+            }
+            
+            // Função para parar o avanço automático
+            function stopAutoSlide() {
+                if (autoSlideInterval) {
+                    clearInterval(autoSlideInterval);
+                }
+            }
+            
+            // Evento de clique para botão anterior
+            prevBtn.addEventListener('click', function() {
+                stopAutoSlide(); // Para o avanço automático quando o usuário interage
+                currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                updateCarousel();
+                startAutoSlide(); // Reinicia o avanço automático
+            });
+            
+            // Evento de clique para próximo botão
+            nextBtn.addEventListener('click', function() {
+                stopAutoSlide(); // Para o avanço automático quando o usuário interage
+                currentIndex = (currentIndex + 1) % cards.length;
+                updateCarousel();
+                startAutoSlide(); // Reinicia o avanço automático
+            });
+            
+            // Configurar o carrossel inicialmente
+            updateCarousel();
+            
+            // Iniciar o avanço automático
+            startAutoSlide();
+            
+            // Pausa o carrossel ao passar o mouse (apenas em dispositivos não-touch)
+            document.querySelector('.carousel-container').addEventListener('mouseenter', stopAutoSlide);
+            
+            // Reinicia o carrossel ao retirar o mouse (apenas em dispositivos não-touch)
+            document.querySelector('.carousel-container').addEventListener('mouseleave', startAutoSlide);
+            
+            // Adicionar interatividade de toque para dispositivos móveis
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.querySelector('.carousel').addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+                stopAutoSlide();
+            }, false);
+            
+            document.querySelector('.carousel').addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                startAutoSlide();
+            }, false);
+            
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    // Swipe esquerda
+                    currentIndex = (currentIndex + 1) % cards.length;
+                    updateCarousel();
+                }
+                if (touchEndX > touchStartX + 50) {
+                    // Swipe direita
+                    currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                    updateCarousel();
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

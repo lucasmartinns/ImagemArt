@@ -29,7 +29,7 @@ body {
     display: flex;
     justify-content: center;
     color: #63783D;
-    font-size: 65px;
+    font-size: 75px;
     font-weight: 700;
     user-select: none;
     letter-spacing: 2px;
@@ -41,7 +41,7 @@ body {
     display: flex;
     color: aliceblue;
     text-align: center;
-    font-size: 24px;
+    font-size: 25px;
     font-weight: 200;
     font-family: "Montserrat";
     justify-content: center;
@@ -53,16 +53,17 @@ body {
 
 .carrossel {
     display: flex;
-    justify-content: center;
-    margin-top: 1%;
-    ;
+    /* Ativa o flexbox */
+    justify-content: space-around;
+    /* Espaço igual entre os itens */
+    align-items: center;
+    /* Alinha os itens verticalmente ao centro */
+    margin: 2%;
+    width: 70%;
+    /* Garante que o contêiner ocupe toda a largura disponível */
 }
 
-.carrossel-RESPOSIVE img {
-    display: none;
-}
-
-@media (max-width: 900px) {
+/* @media (max-width: 900px) {
     .carrossel-RESPASIVE {
         display: flex;
         justify-content: center;
@@ -73,10 +74,11 @@ body {
         display: none;
     }
 
-}
+} */
+
+
 
 button {
-
     justify-content: center;
     align-items: center;
     width: 284.12px;
@@ -93,13 +95,251 @@ button {
     cursor: pointer;
 }
 
+
 .botao {
     margin: 8%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-a{text-decoration: none;}
+
+a {
+    text-decoration: none;
+}
+
 .botao a {
     text-decoration: none;
+}
+
+img {
+    display: flex;
+    margin: auto;
+    max-width: 50%;
+    height: auto;
+}
+
+.tela1 {
+    color: #E7E7E8;
+    font-family: "Montserrat";
+    font-weight: 300;
+    text-align: center;
+    margin-top: 7%;
+}
+
+.textodrone {
+    color: #E7E7E8;
+    font-weight: 500;
+    margin-top: 1%;
+}
+
+button {
+    display: flex;
+    width: 284.12px;
+    height: 57.238px;
+    flex-shrink: 0;
+    user-select: none;
+    color: #E7E7E8;
+    font-size: 16px;
+    color: black;
+    align-items: center;
+    justify-content: center;
+}
+
+.botaoAcess {
+    display: flex;
+    margin-top: -40%;
+
+}
+
+
+
+.botaoAcess {
+    font-size: 16px;
+    font-family: "Abhaya Libre";
+    letter-spacing: 2px;
+    font-weight: 500;
+    background-color: #63783D;
+    color: #E7E7E8;
+    border: 1px solid #1D1D1D;
+    border-radius: 15px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    margin-right: 5rem;
+}
+
+.botaoAcess a {
+    color: #E7E7E8;
+}
+
+.botaoAcess:hover {
+    cursor: pointer;
+    background-color: #46552b;
+    transform: translate(0, -5px);
+}
+
+.alinhar {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 13rem;
+    margin-top: 4%;
+    margin-left: 3%;
+}
+
+.drone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+    font-weight: 700;
+    font-size: 60px;
+    color: #E7E7E8;
+    margin-top: 0%;
+}
+
+
+hr {
+    color: #bfff48;
+    width: 50%;
+    border: none;
+
+}
+
+@media (max-width: 1400px) {
+
+    .imagens-eventos{
+        width: -10%;
+    }
+
+    .carrossel {
+        display: none;
+    }
+
+
+    button {
+        justify-content: center;
+        align-items: center;
+        width: 284.12px;
+        height: 57.238px;
+        flex-shrink: 0;
+        font-family: "Abhaya Libre";
+        font-weight: 400;
+        font-size: 16px;
+        background-color: #63783D;
+        color: #E7E7E8;
+        border: none;
+        border-radius: 10px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+    .botao {
+        margin: 8%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .botao a {
+        text-decoration: none;
+    }
+
+    img {
+        display: flex;
+        margin: auto;
+        max-width: 50%;
+        height: auto;
+    }
+
+    .tela1 {
+        color: #E7E7E8;
+        font-family: "Montserrat";
+        font-weight: 300;
+        text-align: center;
+        margin-top: 7%;
+    }
+
+    .textodrone {
+        color: #E7E7E8;
+        font-weight: 500;
+        margin-top: 1%;
+    }
+
+    button {
+        display: flex;
+        width: 284.12px;
+        height: 57.238px;
+        flex-shrink: 0;
+        user-select: none;
+        color: #E7E7E8;
+        font-size: 16px;
+        color: black;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .botaoAcess {
+        display: flex;
+        margin-top: -40%;
+
+    }
+
+
+
+    .botaoAcess {
+        font-size: 16px;
+        font-family: "Abhaya Libre";
+        letter-spacing: 2px;
+        font-weight: 500;
+        background-color: #63783D;
+        color: #E7E7E8;
+        border: 1px solid #1D1D1D;
+        border-radius: 15px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+        margin-right: 5rem;
+    }
+
+    .botaoAcess a {
+        color: #E7E7E8;
+    }
+
+    .botaoAcess:hover {
+        cursor: pointer;
+        background-color: #46552b;
+        transform: translate(0, -5px);
+    }
+
+    .alinhar {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        margin-top: 13rem;
+        margin-top: 4%;
+        margin-left: 3%;
+    }
+
+    .drone {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1%;
+        font-weight: 700;
+        font-size: 60px;
+        color: #E7E7E8;
+        margin-top: 0%;
+    }
+
+
+    hr {
+        color: #bfff48;
+        width: 50%;
+        border: none;
+
+    }
 }
