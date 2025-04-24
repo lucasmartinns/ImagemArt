@@ -125,15 +125,17 @@ const usuario = {
 // 🔹 Alterar usuário
 AlterarUsuario: async (req, res) => {
   const id = req.params.id;
-  const { nome, email, senha, telefone } = req.body;
+  console.log(req.body)
+  const { nome, senha } = req.body;
 
-  if (!nome || !email || !telefone) {
+  console.log(req.body)
+  if (!nome || !senha) {
     return res.status(400).json({ mensagem: "Preencha todos os campos!" });
   }
 
   try {
-    let sql = `UPDATE usuario SET nome = ?, email = ?, telefone = ?`;
-    const params = [nome, email, telefone];
+    let sql = `UPDATE usuario SET nome = ?, senha = ?`;
+    const params = [nome, senha];
 
     if (senha) {
       const senhaCriptografada = await bcrypt.hash(senha, 10);
