@@ -4,12 +4,27 @@
   --white: #e7e7e8;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+}
+
 body {
   font-family: "Montserrat", sans-serif;
   background-color: #0a0809;
   color: var(--white);
   margin: 0;
   padding: 0;
+}
+
+.body-no-scroll {
+  overflow: hidden;
 }
 
 .center {
@@ -57,24 +72,28 @@ h1 span:last-child {
   align-items: start;
 }
 
-.service-item {
-  width: clamp(8rem, 15vw, 12rem);
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 2px solid #1d1d1d;
-  border-radius: 10px;
-  padding: 1rem;
-  text-align: center;
+.image-container img {
+  max-width: clamp(8rem, 15vw, 10rem);
+  max-height: clamp(8rem, 15vw, 10rem);
   cursor: pointer;
-  transition: transform 0.2s ease, filter 0.1s ease;
+  transition: filter 0.5s ease, transform 0.1s ease;
 }
 
-.service-item:hover {
-  filter: brightness(0.8);
-  transform: scale(0.98);
+.image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.service-item {
+  max-width: 10rem !important;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: filter 0.5s ease, transform 0.1s ease;
 }
 
 .service-item .image-container {
@@ -91,6 +110,12 @@ h1 span:last-child {
   max-height: 10rem;
 }
 
+.service-item .service-image {
+  position: absolute;
+  width: 70% !important;
+  height: 70% !important;
+}
+
 .service-item h3 {
   max-width: 100%;
   color: var(--white);
@@ -101,6 +126,15 @@ h1 span:last-child {
   word-wrap: break-word;
   word-break: break-word;
   overflow-wrap: break-word;
+}
+
+.service-item {
+  transition: filter 0.5s ease, transform 0.1s ease;
+}
+
+.service-item:active {
+  filter: brightness(0.1);
+  transform: scale(0.95);
 }
 
 .modal {
@@ -116,6 +150,11 @@ h1 span:last-child {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.8);
+  transition: transform 0.1s ease;
+}
+
+.modal::after {
+  transform: scale(0.95);
 }
 .modal-content {
   display: flex;
@@ -190,4 +229,18 @@ button:hover {
   font-size: 1.2rem;
   color: var(--white);
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .itens {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .itens {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1rem;
+  }
 }

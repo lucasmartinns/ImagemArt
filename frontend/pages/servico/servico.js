@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       id: 3,
       nome: "Serviço 3",
       valor: 300,
-      imagem: "../../assets/img/servicos/servico3.png",
+      imagem: "../../assets/img/364547.png",
     },
   ];
 
@@ -38,7 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
     serviceItem.className = "service-item";
     serviceItem.innerHTML = `
       <div class="image-container">
-        <img src="${service.imagem}" alt="${service.nome}" />
+      <img src="../../assets/img/servicos/backgroundImage.png"/>
+        <img src="${service.imagem}" class="service-image"/>
       </div>
       <h3>${service.nome}</h3>
     `;
