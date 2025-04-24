@@ -4,30 +4,56 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Submeter o formulário de edição de perfil
-document
-  .getElementById("editProfileForm")
-  .addEventListener("submit", function (e) {
-    e.preventDefault();
+document.getElementById("editProfileForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-    const nome = document.getElementById("nome").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const telefone = document.getElementById("telefone").value.trim();
-    const senha = document.getElementById("senha").value.trim();
-    const confirmarSenha = document
-      .getElementById("confirmarSenha")
-      .value.trim();
+  const nome = document.getElementById("nome").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const senha = document.getElementById("senha").value.trim();
+  const confirmarSenha = document.getElementById("confirmarSenha").value.trim();
 
-    if (senha && senha !== confirmarSenha) {
-      showCustomAlert("As senhas não coincidem. Por favor, verifique.");
-      return;
-    }
+  if (senha && senha !== confirmarSenha) {
+    showCustomAlert("As senhas não coincidem. Por favor, verifique.");
+    return;
+  }
 
-    const dados = { nome, email, telefone, senha };
-    console.log("Dados enviados:", dados);
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const id = usuario?.id;
 
-    // Aqui você pode enviar os dados para o backend usando fetch/axios
-    showCustomAlert("Perfil atualizado com sucesso!");
-  });
+  const dados = {
+    nome,
+    email,
+    telefone,
+    tipo_usuario_idtipo_usuario: usuario?.tipo_usuario_idtipo_usuario, // mantendo o tipo
+  };
+
+  if (senha) {
+    dados.senha = senha; // só envia a senha se for preenchida
+  }
+
+  fetch(`/alterar/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dados),
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Erro ao atualizar o perfil.");
+      return res.json();
+    })
+    .then((data) => {
+      showCustomAlert("Perfil atualizado com sucesso!");
+      // Atualiza o localStorage com o nome novo, se foi alterado
+      usuario.nome = nome;
+      localStorage.setItem("usuario", JSON.stringify(usuario));
+    })
+    .catch((err) => {
+      console.error("Erro ao atualizar perfil:", err);
+      showCustomAlert("Erro ao atualizar perfil.");
+    });
+});
 
 // Alternar visibilidade da senha
 function togglePassword(inputId, button) {
@@ -45,7 +71,13 @@ function togglePassword(inputId, button) {
 
 // Buscar dados do usuário do backend
 function fetchUserData() {
-  const userId = 1; // Substitua pelo ID do usuário autenticado
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const userId = usuario?.id;
+
+  if (!userId) {
+    showCustomAlert("Usuário não encontrado.");
+    return;
+  }
 
   fetch(`/buscar/${userId}`)
     .then((response) => {
