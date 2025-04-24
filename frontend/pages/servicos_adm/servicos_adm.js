@@ -190,7 +190,7 @@ saveBtn.onclick = function () {
       item.dataset.image = e.target.result; // Adiciona a imagem ao dataset
       item.innerHTML = `
         <div class="image-container">
-          <img src="../../assets/img/servicos/backgroundImage.png" alt="${serviceName}" />
+          <img class="background-image" src="../../assets/img/servicos/backgroundImage.png" alt="${serviceName}" />
           <img src="${e.target.result}" alt="${serviceName}" class="service-image"/>
         </div>
         <h3>${serviceName}</h3>
