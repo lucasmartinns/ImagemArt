@@ -1,40 +1,38 @@
-document.getElementById("loginForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
-  
-  const email = document.getElementById('email').value;
-  const senha = document.getElementById('senha').value;
+document
+  .getElementById("loginForm")
+  .addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-  try {
-    const response = await fetch('http://localhost:3000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, senha })
-    });
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
 
-    const data = await response.json();
+    try {
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, senha }),
+      });
 
-    if (response.ok) {
-      // Exibir mensagem de sucesso
-      document.getElementById('resultados').innerHTML = `<p>${data.mensagem}</p>`;
+      const data = await response.json();
 
-      // Armazenar o token JWT e os dados do usuário
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('usuario', JSON.stringify(data.usuario));
+      if (response.ok) {
+        // Armazenar o token JWT e os dados do usuário
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("usuario", JSON.stringify(data.usuario));
 
-      // Redirecionar todos para /home
-      window.location.href = '/home';
-    } else {
-      throw new Error(data.error || 'Erro ao fazer login');
+        // Redirecionar todos para /home
+        window.location.href = "/home";
+      } else {
+        throw new Error(data.error || "Erro ao fazer login");
+      }
+    } catch (error) {
+      showCustomAlert(`${error.message}`);
     }
+  });
 
-  } catch (error) {
-    document.getElementById('resultados').innerHTML = `<p>Erro: ${error.message}</p>`;
-  }
-});
-
-// 🔒 Alternar visibilidade da senha
+// Alternar visibilidade da senha
 function togglePassword(inputId, button) {
   const input = document.getElementById(inputId);
   const img = button.querySelector("img");
@@ -50,13 +48,13 @@ function togglePassword(inputId, button) {
   }
 }
 
-// 🔐 Verifica se o usuário já está logado ao carregar a página
-document.addEventListener('DOMContentLoaded', function () {
-  const token = localStorage.getItem('token');
-  const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+// Verifica se o usuário já está logado ao carregar a página
+document.addEventListener("DOMContentLoaded", function () {
+  const token = localStorage.getItem("token");
+  const usuario = JSON.parse(localStorage.getItem("usuario") || "{}");
 
   if (token && usuario.id) {
     // Já está logado, manda direto para /home
-    window.location.href = '/home';
+    window.location.href = "/home";
   }
 });
