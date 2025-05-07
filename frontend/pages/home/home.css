@@ -56,13 +56,13 @@ body {
 .inicio h2 {
   margin-top: 3vw;
   color: #e7e7e7;
-  font-size: clamp(1rem, 5vw, 4rem);
+  font-size: clamp(1.3rem, 5vw, 4rem);
   font-weight: 700;
 }
 
 .inicio h3 {
   color: var(--secundary-clr);
-  font-size: clamp(0.8rem, 3vw, 3rem);
+  font-size: clamp(1rem, 3vw, 3rem);
   font-weight: 700;
 }
 
@@ -75,7 +75,7 @@ body {
 }
 
 .polaroid img {
-  width: 45vw;
+  width: clamp(17rem, 50vw, 45vw);
 }
 
 .sobre-container {
@@ -107,7 +107,7 @@ body {
 .linha-vertical {
   position: absolute;
   width: 2px;
-  height: 19vw;
+  height: clamp(13.5rem, 18vw, 18vw);
   background-color: var(--secundary-clr);
   right: 0;
   top: -4vw;
@@ -123,12 +123,93 @@ body {
 .sobre-container p {
   font-size: clamp(0.8rem, 1.5vw, 1.3rem);
   font-weight: 200;
-  width: 26vw;
+  width: 30vw;
   text-align: end;
   margin: 0.5vw 1vw;
 }
 
+.eventos {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 3vw;
+  margin-bottom: 3vw;
+}
+
+.eventos img {
+  width: 19vw;
+  height: 14vw;
+}
+
+.eventos h1 {
+  font-size: clamp(1.3rem, 4vw, 4rem);
+  font-weight: 700;
+  color: #e7e7e7;
+  transform: rotate(90deg);
+  white-space: nowrap;
+}
+
+hr {
+  display: none;
+}
+.eventos a {
+  text-decoration: none;
+  color: #e7e7e7;
+  transition: filter 0.5s ease, transform 0.1s ease;
+}
+
+.eventos a:active {
+  filter: brightness(0.1);
+  transform: scale(0.95);
+}
+
+.aniversario,
+.casamento,
+.gerais {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo-container {
+  display: flex;
+  font-size: clamp(0.8rem, 1.9vw, 1.7rem);
+  width: 19vw;
+  height: 4vw;
+  background-color: #282828;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+@media (max-width: 1440px) {
+  .linha-vertical {
+    height: 25vw;
+  }
+}
+
 @media (max-width: 768px) {
+  .sobre-container .titulo {
+    margin: 0;
+  }
+
+  hr {
+    display: flex;
+    width: 50vw;
+    height: 2px;
+    border: none;
+    background-color: var(--secundary-clr);
+    margin: 0.65vw;
+  }
+  .inicio h2 {
+    width: 50vw;
+  }
+
+  .inicio img {
+    margin-left: -6vw;
+  }
+
   .sobre {
     display: flex;
     flex-direction: column;
@@ -139,5 +220,88 @@ body {
   }
 
   .sobre-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .sobre-container h2 {
+    width: 55vw;
+    font-size: clamp(1.3rem, 4vw, 3rem);
+    font-weight: 700;
+    text-align: center;
+    margin: 0.5vw 1vw;
+  }
+
+  .sobre-container p {
+    font-size: clamp(0.8rem, 1.5vw, 1.3rem);
+    width: 70vw;
+    text-align: center;
+    margin: 0.5vw 1vw;
+  }
+
+  .eventos {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .eventos hr {
+    order: -1;
+  }
+
+  .eventos h1 {
+    transform: none;
+    white-space: none;
+    order: -2;
+  }
+
+  .eventos img {
+    width: 45vw;
+    height: 32vw;
+  }
+
+  .titulo-container {
+    display: flex;
+    width: 45vw;
+    height: 7vw;
+  }
+
+  .aniversario {
+    margin-top: 1vw;
+  }
+  .casamento,
+  .gerais {
+    margin-top: 2vw;
+  }
+}
+
+@media (max-width: 375px) {
+  .polaroid img {
+    width: clamp(13rem, 50vw, 45vw);
+  }
+  .eventos img {
+    width: 50vw;
+    height: 36vw;
+  }
+  .titulo-container {
+    display: flex;
+    width: 50vw;
+    height: 7vw;
+
+    font-size: clamp(0.7rem, 2.2vw, 1.7rem);
+  }
+
+  .aniversario {
+    margin-top: 2vw;
+  }
+  .casamento,
+  .gerais {
+    margin-top: 3vw;
+  }
+
+  hr {
+    margin: 1vw;
   }
 }
