@@ -24,7 +24,7 @@ function clearForm() {
   addEmptyRow();
   selectedImage.src = "";
   selectedImage.style.display = "none";
-  modalPlusSymbol.style.display = "block";
+  modalPlusSymbol.style.display = "block ";
 }
 
 // Adiciona uma linha vazia na tabela de detalhes

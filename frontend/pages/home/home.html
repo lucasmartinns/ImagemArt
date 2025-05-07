@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="../home/home.css" />
+    <link rel="stylesheet" href="pages/home/home.css" />
     <script src="../../components/head/head.js"></script>
+    <link rel="stylesheet" href="../../components/animations/animation.css" />
   </head>
   <body>
     <!-- NAVBAR -->
@@ -14,16 +15,14 @@
     <div class="background">
       <img src="../../assets/img/linha.png" alt="" />
     </div>
-
-    <div class="inicio">
+    <div class="inicio fade-in">
       <div class="left">
         <h2>IMAGEM ART</h2>
         <h3>photo e vídeo</h3>
       </div>
       <img src="../../assets/img/home/imagemHome.png" alt="" />
     </div>
-
-    <div class="sobre">
+    <div class="sobre fade-in">
       <div class="polaroid">
         <img src="../../assets/img/home/polaroids.png" alt="" />
       </div>
@@ -48,12 +47,13 @@
       </div>
     </div>
 
-    <div class="eventos">
+    <div class="eventos fade-in">
       <a href="#">
         <div class="aniversario">
           <img src="../../assets/img/home/aniversario.png" alt="" />
           <div class="titulo-container">
             <h3>ANIVERSÁRIO</h3>
+            <p>Veja Mais</p>
           </div>
         </div></a
       >
@@ -62,6 +62,7 @@
           <img src="../../assets/img/home/aniversario.png" alt="" />
           <div class="titulo-container">
             <h3>CASAMENTO</h3>
+            <p>Veja Mais</p>
           </div>
         </div></a
       >
@@ -70,6 +71,7 @@
           <img src="../../assets/img/home/aniversario.png" alt="" />
           <div class="titulo-container">
             <h3>GERAIS</h3>
+            <p>Veja Mais</p>
           </div>
         </div></a
       >
@@ -82,5 +84,7 @@
 
     <script src="../../components/footer/footer.js"></script>
     <script src="../../components/navbar/navbar.js"></script>
+
+    <script src="../../components/animations/animation.js"></script>
   </body>
 </html>
