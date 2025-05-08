@@ -197,7 +197,7 @@ function updateEvents(dayNum) {
     }
   });
   if (!hasAnyEvent) {
-    eventsHTML = `<div class="no-event"><h3>Sem Eventos</h3></div>`;
+    eventsHTML = `<div class="no-event"><h3>Nenhuma Tarefa</h3></div>`;
   }
   eventsContainer.innerHTML = eventsHTML;
 
@@ -342,76 +342,272 @@ addEventSubmit.addEventListener("click", () => {
   }
 });
 
-eventsContainer.addEventListener("click", async (e) => {
-  if (e.target.classList.contains("event") || e.target.closest(".event")) {
-    const confirm = await showCustomConfirm(
-      "Tem certeza de que deseja concluir este evento?"
-    );
-    if (confirm) {
-      const eventTitle = e.target
-        .closest(".event")
-        .querySelector(".event-title").innerText;
-      eventsArr.forEach((eventObj, indexObj) => {
-        if (
-          eventObj.day === activeDay &&
-          eventObj.month === month + 1 &&
-          eventObj.year === year
-        ) {
-          eventObj.events = eventObj.events.filter(
-            (ev) => ev.title !== eventTitle
-          );
-          if (eventObj.events.length === 0) {
-            eventsArr.splice(indexObj, 1);
-          }
+eventsContainer.addEventListener("click", async function (e) {
+  // Se o clique foi dentro de um evento
+  const eventElement = e.target.closest(".event");
+  if (!eventElement) {
+    return;
+  }
+
+  // Obter o título do evento
+  const eventTitleElement = eventElement.querySelector(".event-title");
+  if (!eventTitleElement) {
+    return;
+  }
+
+  const title = eventTitleElement.textContent.trim();
+
+  // Confirmar com o usuário
+  const confirmed = await showCustomConfirm(
+    "Tem certeza de que deseja concluir este evento?"
+  );
+  if (!confirmed) {
+    return;
+  }
+
+  // Variável para acompanhar se o evento foi removido
+  let eventRemoved = false;
+
+  // Iterar através de cada objeto de evento
+  for (let i = 0; i < eventsArr.length; i++) {
+    const eventObj = eventsArr[i];
+
+    // Verificar se encontramos o dia correto
+    if (
+      eventObj.day === activeDay &&
+      eventObj.month === month + 1 &&
+      eventObj.year === year
+    ) {
+      // Procurar o evento pelo título
+      const initialLength = eventObj.events.length;
+      const eventsToKeep = [];
+
+      // Busca manual para localizar o evento exato
+      for (let j = 0; j < eventObj.events.length; j++) {
+        const event = eventObj.events[j];
+
+        if (event.title.trim() === title) {
+          eventRemoved = true;
+          // Não adicionar ao array de eventos para manter
+        } else {
+          eventsToKeep.push(event);
         }
-      });
-      updateEvents(activeDay);
+      }
+
+      // Atualizar a lista de eventos
+      eventObj.events = eventsToKeep;
+
+      // Se não houver mais eventos, remover o objeto do dia
+      if (eventObj.events.length === 0) {
+        eventsArr.splice(i, 1);
+      }
+
+      // Uma vez que encontramos o dia, não precisamos continuar procurando
+      break;
     }
   }
+
+  if (eventRemoved) {
+    updateEvents(activeDay);
+    saveEvents();
+  }
+});
+
+// Envolver inicialização do modal dentro do DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+  const viewPendingTasksBtn = document.querySelector(".view-pending-tasks-btn");
+  const pendingTasksModal = document.getElementById("pendingTasksModal");
+  const closePendingTasksBtn = pendingTasksModal.querySelector(".close-modal");
+
+  viewPendingTasksBtn.addEventListener("click", () => {
+    loadPendingTasks();
+    pendingTasksModal.classList.add("active");
+  });
+
+  closePendingTasksBtn.addEventListener("click", () => {
+    pendingTasksModal.classList.remove("active");
+  });
+
+  // Fechar modal ao clicar fora do conteúdo
+  pendingTasksModal.addEventListener("click", (e) => {
+    if (e.target === pendingTasksModal) {
+      pendingTasksModal.classList.remove("active");
+    }
+  });
 });
 
 // Tarefas Pendentes
-const viewPendingTasksBtn = document.querySelector(".view-pending-tasks-btn");
-const pendingTasksModal = document.getElementById("pendingTasksModal");
-const closePendingTasksBtn = pendingTasksModal.querySelector(".close-modal");
-const pendingTasksContainer = pendingTasksModal.querySelector(
-  "#pendingTasksContainer"
-);
+const pendingTasksContainer = document.getElementById("pendingTasksContainer");
 
-viewPendingTasksBtn.addEventListener("click", () => {
-  loadPendingTasks();
-  pendingTasksModal.classList.add("active");
-});
+// Função para atualizar o indicador de evento em qualquer dia do calendário
+function updateEventIndicator(day) {
+  const dayElements = document.querySelectorAll(
+    ".day:not(.prev-date):not(.next-date)"
+  );
 
-closePendingTasksBtn.addEventListener("click", () => {
-  pendingTasksModal.classList.remove("active");
-});
+  // Encontrar o elemento do dia específico
+  const dayElement = Array.from(dayElements).find(
+    (el) => parseInt(el.innerText, 10) === day
+  );
 
-// Fechar modal ao clicar fora do conteúdo
-pendingTasksModal.addEventListener("click", (e) => {
-  if (e.target === pendingTasksModal) {
-    pendingTasksModal.classList.remove("active");
+  if (dayElement) {
+    // Verificar se ainda existem eventos para este dia
+    const hasEvent = eventsArr.some(
+      (eventObj) =>
+        eventObj.day === day &&
+        eventObj.month === month + 1 &&
+        eventObj.year === year &&
+        eventObj.events.length > 0
+    );
+
+    // Atualizar a classe "event" com base na existência de eventos
+    if (hasEvent) {
+      dayElement.classList.add("event");
+    } else {
+      dayElement.classList.remove("event");
+    }
   }
-});
+}
 
 function loadPendingTasks() {
   let tasksHTML = "";
   if (eventsArr.length === 0) {
     tasksHTML = "<p>Sem Tarefas Pendentes</p>";
   } else {
-    eventsArr.forEach((eventObj) => {
-      const dateStr = `${eventObj.day}/${eventObj.month}/${eventObj.year}`;
-      eventObj.events.forEach((ev) => {
+    // Ordenar os eventos por data (mais próximos primeiro)
+    const sortedEvents = [...eventsArr].sort((a, b) => {
+      // Comparar anos
+      if (a.year !== b.year) return a.year - b.year;
+      // Comparar meses
+      if (a.month !== b.month) return a.month - b.month;
+      // Comparar dias
+      return a.day - b.day;
+    });
+
+    sortedEvents.forEach((eventObj) => {
+      const day = String(eventObj.day).padStart(2, "0");
+      const month = String(eventObj.month).padStart(2, "0");
+      const year = String(eventObj.year).padStart(4, "0");
+      const dateStr = `${day}/${month}/${year}`;
+
+      // Ordenar eventos do dia por horário
+      const sortedDayEvents = [...eventObj.events].sort((a, b) => {
+        const timeA = a.time.split(" - ")[0];
+        const timeB = b.time.split(" - ")[0];
+        return timeA.localeCompare(timeB);
+      });
+
+      sortedDayEvents.forEach((ev) => {
+        // Escapar possíveis caracteres especiais no título para evitar problemas com HTML
+        const safeTitle = ev.title.replace(/"/g, "&quot;");
+
+        // Adicionar data-* atributos para permitir identificação dos eventos
         tasksHTML += `
-          <div class="pending-task">
-            <h4>${ev.title}</h4>
-            <span>${dateStr} - ${ev.time}</span>
+          <div class="pending-task" 
+               data-day="${eventObj.day}" 
+               data-month="${eventObj.month}" 
+               data-year="${eventObj.year}" 
+               data-title="${safeTitle}">
+            <div class="left-date">
+              <h4>${ev.title}</h4>
+              <span id="span1">${dateStr}</span>
+              <span id="circle">•</span>
+              <span id="span2">${ev.time}</span>
+            </div>
+            <div class="right-date">
+              <i>✓</i>
+            </div>            
           </div>`;
       });
     });
   }
   pendingTasksContainer.innerHTML = tasksHTML;
 }
+
+// Função para atualizar o status de evento do dia (separa a lógica de updateEvents)
+function updateDayEventStatus(dayNum) {
+  const activeDayEl = document.querySelector(".day.active");
+  if (activeDayEl) {
+    // Verificar se há eventos neste dia
+    const hasEvent = eventsArr.some(
+      (eventObj) =>
+        eventObj.day === dayNum &&
+        eventObj.month === month + 1 &&
+        eventObj.year === year &&
+        eventObj.events.length > 0
+    );
+
+    // Atualizar a classe "event"
+    if (hasEvent) {
+      activeDayEl.classList.add("event");
+    } else {
+      activeDayEl.classList.remove("event");
+    }
+  }
+
+  // Garantir que os eventos sejam salvos após qualquer modificação
+  saveEvents();
+}
+
+pendingTasksContainer.addEventListener("click", (e) => {
+  const taskDiv = e.target.closest(".pending-task");
+  if (taskDiv) {
+    const day = parseInt(taskDiv.dataset.day, 10);
+    const month = parseInt(taskDiv.dataset.month, 10);
+    const year = parseInt(taskDiv.dataset.year, 10);
+    const title = taskDiv.dataset.title;
+
+    showCustomConfirm("Tem certeza de que deseja concluir este evento?").then(
+      (result) => {
+        if (result) {
+          // Itera o array de trás para frente para evitar problemas com splice
+          for (let i = eventsArr.length - 1; i >= 0; i--) {
+            let eventObj = eventsArr[i];
+            if (
+              eventObj.day === day &&
+              eventObj.month === month &&
+              eventObj.year === year
+            ) {
+              eventObj.events = eventObj.events.filter(
+                (ev) => ev.title !== title
+              );
+              if (eventObj.events.length === 0) {
+                eventsArr.splice(i, 1);
+              }
+              break;
+            }
+          }
+
+          // Atualiza o armazenamento
+          saveEvents();
+
+          // Verificar se o evento excluído pertence ao mês atualmente exibido
+          const isSameMonth = month - 1 === window.month;
+          const isSameYear = year === window.year;
+
+          if (isSameMonth && isSameYear) {
+            // Atualizar o indicador de evento nos dias do calendário
+            updateEventIndicator(day);
+          }
+
+          // SEMPRE atualizar a lista de eventos atual se houver um dia ativo
+          if (activeDay) {
+            updateEvents(activeDay);
+          }
+
+          // Recarregar a lista de tarefas pendentes
+          loadPendingTasks();
+
+          // Remover o elemento da tarefa do DOM para feedback visual imediato
+          taskDiv.classList.add("fade-out");
+          setTimeout(() => {
+            taskDiv.remove();
+          }, 300);
+        }
+      }
+    );
+  }
+});
 
 // ---------- UTILITÁRIOS & ARMAZENAMENTO ----------
 function clearEventForm() {

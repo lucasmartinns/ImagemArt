@@ -14,7 +14,7 @@
     <!-- EDITAR PERFIL -->
     <div class="content-wrapper fade-in">
       <div class="form-container">
-        <h1>Nome do Usuário</h1>
+        <h1 id="nome" name="nome">Nome do Usuário</h1>
         <form id="editProfileForm">
           <div class="informations">
             <!-- E-mail (não editável) -->
@@ -29,15 +29,6 @@
                 style="user-select: none"
               />
             </div>
-
-            <!-- Telefone (editável) -->
-            <label for="nome">Nome</label>
-            <input
-              type="tel"
-              id="nome"
-              name="nome"
-              placeholder="Digite seu telefone"
-            />
 
             <!-- Alterar senha -->
             <label for="senha">Nova Senha</label>
@@ -96,6 +87,15 @@
       <div class="custom-alert-content">
         <p id="customAlertMessage"></p>
         <button id="customAlertButton">OK</button>
+      </div>
+    </div>
+    <div id="customConfirm" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customConfirmMessage"></p>
+        <div class="confirm-buttons">
+          <button id="customConfirmYes">Sim</button>
+          <button id="customConfirmNo">Não</button>
+        </div>
       </div>
     </div>
 

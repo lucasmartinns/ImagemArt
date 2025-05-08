@@ -362,6 +362,7 @@ body {
 }
 
 .events .event .title {
+  text-transform: capitalize;
   display: flex;
   align-items: center;
   pointer-events: none;
@@ -632,6 +633,7 @@ body {
 .view-pending-tasks-btn:hover {
   opacity: 1;
 }
+
 #pendingTasksModal {
   position: fixed;
   top: 0;
@@ -650,27 +652,92 @@ body {
 }
 
 #pendingTasksModal .modal-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   background-color: #282828;
-  padding: 20px;
+  padding: 2rem;
+  width: 80%;
+  height: 80%;
+  border: 2px solid #393939;
   border-radius: 5px;
-  width: 90%;
-  max-width: 500px;
-  color: #e7e7e8;
-  position: relative;
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
 }
 
 #pendingTasksModal .modal-content .close-modal {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 1.5rem;
+  top: 9%;
+  right: 10%;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
-#pendingTasksModal .pending-task {
-  margin-bottom: 15px;
-  border-bottom: 1px solid #878895;
-  padding-bottom: 10px;
+#pendingTasksModal .modal-content .close-modal:hover {
+  color: var(--secundary-clr);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#pendingTasksContainer {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.pending-task span {
+  font-style: italic;
+  font-weight: 300;
+  color: #e7e7e8;
+}
+
+.pending-task .left-date {
+  text-transform: capitalize;
+  gap: 5px;
+}
+
+.pending-task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: linear-gradient(90deg, #3d3d3d, transparent);
+}
+
+.pending-task:nth-child(even) {
+  background: transparent;
+}
+
+.pending-task:hover {
+  background: linear-gradient(90deg, var(--secundary-clr), transparent);
+}
+
+.right-date i {
+  font-size: 1.5rem;
+  font-weight: 1000;
+  opacity: 0.4;
+  color: var(--secundary-clr);
+}
+
+.left-date #span1 {
+  color: var(--secundary-clr);
+}
+
+.pending-task .right-date {
+  display: none;
+  transition: opacity 0.3s;
+}
+.pending-task:hover .right-date,
+.pending-task.show-right-date .right-date {
+  display: block;
+}
+
+.modal-content h2 {
+  color: var(--secundary-clr);
+  font-size: clamp(1.5rem, 2.3vw, 2.5rem);
+  text-align: center;
+  margin-bottom: 1vw;
 }
 
 /* media queries */
@@ -735,5 +802,33 @@ body {
 
   .events .no-event {
     font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .left-date h4 {
+    font-size: 3.8vw;
+  }
+
+  .left-date #span1 {
+    font-size: clamp(0.6rem, 0.5vw, 0.9rem);
+  }
+  .left-date #span2 {
+    font-size: clamp(0.6rem, 0.8vw, 0.9rem);
+  }
+
+  .left-date #circle {
+    display: none;
+  }
+
+  .left-date {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .right-date i {
+    font-size: 1.5rem;
+    font-weight: 1000;
+    opacity: 0.4;
   }
 }

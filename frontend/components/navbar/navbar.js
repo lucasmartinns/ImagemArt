@@ -21,7 +21,9 @@ function initializeNavbar() {
   if (navLinks) {
     navLinks.innerHTML = `
       <a href="/home">Home</a>
-      <a href="../../pages/${isAdmin ? "servicos_adm/servicos_adm.html" : "servico/servico.html"}">Serviços</a>
+      <a href="../../pages/${
+        isAdmin ? "servicos_adm/servicos_adm.html" : "servico/servico.html"
+      }">Serviços</a>
       ${isAdmin ? '<a href="/calendario">Calendário</a>' : ""}
     `;
   }
@@ -54,11 +56,11 @@ function initializeNavbar() {
       // Usuário não logado
       subMenu.innerHTML = `
       <div class="sub-menu">
-          <a href="../../pages/login/login.html" class="sub-menu-link">
+          <a href="/login" class="sub-menu-link">
             <span class="material-symbols-outlined"> person </span>
             <p>Entrar</p>
           </a>
-          <a href="../../pages/cadastro/cadastro.html" class="sub-menu-link">
+          <a href="/cadastrar" class="sub-menu-link">
             <span class="material-symbols-outlined"> person_add </span>
             <p>Cadastre-se</p>
           </a>
