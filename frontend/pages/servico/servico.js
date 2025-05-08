@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <h3>${service.nome}</h3>
         `;
+
+        // Torna o item clicável
         serviceItem.addEventListener("click", () => {
           selectedService = service;
           modalServiceName.textContent = service.nome;
@@ -72,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
           budgetResult.textContent = "";
           itemModal.style.display = "flex";
         });
+
         itemsContainer.appendChild(serviceItem);
       });
     } catch (err) {
@@ -109,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Feedback visual
     calculateBudget.disabled = true;
     calculateBudget.textContent = "Enviando...";
     budgetResult.textContent = "Criando pedido...";
@@ -130,22 +132,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) throw new Error("Erro ao criar pedido");
 
       const data = await response.json();
-      budgetResult.textContent = `✅ Pedido criado com sucesso! ID: ${data.id}`;
+      budgetResult.textContent = `✅ Pedido criado com sucesso! ID ${data.id}`;
     } catch (err) {
       console.error("Erro ao criar pedido:", err);
       budgetResult.textContent = "❌ Erro ao criar o pedido.";
     } finally {
       calculateBudget.disabled = false;
       calculateBudget.textContent = "Fazer Orçamento";
-
-      // Limpar feedback após 5 segundos
       setTimeout(() => {
         budgetResult.textContent = "";
       }, 5000);
     }
   });
 
-  // Simular pedido via WhatsApp
   placeOrder.addEventListener("click", () => {
     const quantity = parseInt(serviceQuantity.value, 10);
     const selectedOption = serviceDropdown.selectedOptions[0];
@@ -154,13 +153,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const total = price * quantity;
 
     const mensagem = `Olá! Gostaria de fazer um pedido. 📸
-  
-  *Serviço:* ${selectedService.nome}
-  *Opção:* ${optionName}
-  *Quantidade:* ${quantity}
-  *Total:* R$${total.toFixed(2)}
-  
-  Por favor, me avise sobre a disponibilidade e confirme os valores. Aguardo seu retorno! 😊`;
+
+Serviço: ${selectedService.nome}
+Opção: ${optionName}
+Quantidade: ${quantity}
+Total: R$${total.toFixed(2)}
+
+Por favor, me avise sobre a disponibilidade e confirme os valores. Aguardo seu retorno! 😊`;
 
     const whatsappURL = `https://api.whatsapp.com/send?phone=5514999034536&text=${encodeURIComponent(
       mensagem
