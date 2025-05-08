@@ -28,20 +28,31 @@
         <div class="closeBar">
           <span class="close">&times;</span>
         </div>
-        <h1 id="modalServiceName">LOGIN</h1>
+        <h1 id="modalServiceName"></h1>
 
         <div class="modal-body">
-          <label for="serviceDropdown">Selecione o Serviço:</label>
-          <select id="serviceDropdown">
-            <!-- As opções de serviço serão carregadas dinamicamente -->
-          </select>
-          <label for="serviceQuantity">Quantidade:</label>
-          <input type="number" id="serviceQuantity" min="1" value="1" />
-          <p id="servicePrice">Preço: R$<span>0.00</span></p>
-          <button type="button" id="calculateBudget">Fazer Orçamento</button>
+          <div class="choice">
+            <div class="left">
+              <label for="serviceDropdown">Opções:</label>
+              <select id="serviceDropdown">
+                <option value="opcao1" data-price="100">Opção 1</option>
+                <option value="opcao2" data-price="200">Opção 2</option>
+              </select>
+            </div>
+            <div class="right">
+              <label for="serviceQuantity">Quantidade:</label>
+              <input type="number" id="serviceQuantity" min="1" value="1" />
+            </div>
+          </div>
+          <p id="servicePrice">Preço Por Unidade: R$<span>0.00</span></p>
+          <div class="botoes">
+            <button id="calculateBudget" class="calculateBudget" type="submit">
+              Fazer Orçamento
+            </button>
+            <button class="calculateBudget" type="submit">Fazer Pedido</button>
+          </div>
+
           <p id="budgetResult"></p>
-          <!-- Botão para criar pedido -->
-          <button type="button" id="createOrder">Criar Pedido</button>
         </div>
       </div>
     </div>
@@ -68,7 +79,7 @@
 
     <script src="../../components/footer/footer.js"></script>
     <script src="../../components/navbar/navbar.js"></script>
-    <script src="../../pages/servico/servico.js"></script>
+    <script src="../servico/servico.js"></script>
     <script src="../../components/alert/alert.js"></script>
   </body>
 </html>

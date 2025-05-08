@@ -111,6 +111,26 @@ const servico = {
         } catch (err) {
             res.status(500).json({ error: "Erro ao deletar serviço", err });
         }
+    },
+
+    // 🔹 Buscar variações de um serviço
+    buscarVariacoesPorServico: async (req, res) => {
+        const servicoId = req.params.id;
+
+        try {
+            const [results] = await connection.query(
+                "SELECT * FROM servico_variacao WHERE servico_id = ?",
+                [servicoId]
+            );
+
+            if (results.length === 0) {
+                return res.status(404).json({ mensagem: "Nenhuma variação encontrada para este serviço." });
+            }
+
+            res.json(results);
+        } catch (err) {
+            res.status(500).json({ error: "Erro ao buscar variações", err });
+        }
     }
 };
 

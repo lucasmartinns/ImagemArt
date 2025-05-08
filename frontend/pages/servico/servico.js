@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const budgetResult = document.getElementById("budgetResult");
   const placeOrder = document.getElementById("placeOrder");
 
-  let selectedServiceId = null;
+  let selectedService = null;
 
   const fetchServices = async () => {
     try {
@@ -23,17 +23,59 @@ document.addEventListener("DOMContentLoaded", () => {
         serviceItem.className = "service-item";
         serviceItem.innerHTML = `
           <div class="image-container">
-            <img src="${service.imagem}" alt="${service.nome}" />
+            <img src="../../assets/img/servicos/backgroundImage.png"/>
+            <img src="${service.imagem}" class="service-image"/>
           </div>
           <h3>${service.nome}</h3>
         `;
+
+        // Torna o item clicável
         serviceItem.addEventListener("click", () => {
-          selectedServiceId = service.idservico;
+          selectedService = service;
           modalServiceName.textContent = service.nome;
-          servicePrice.textContent = service.valor.toFixed(2);
-          itemModal.style.display = "flex";
-          budgetResult.textContent = ""; // Limpa texto anterior
+          serviceDropdown.innerHTML = ""; // Limpa as opções anteriores
+          servicePrice.textContent = "0.00";
+
+          // Faz uma requisição para buscar as variações do serviço
+          fetch(`/servico/${service.idservico}/variacoes`)
+            .then((res) => {
+              if (!res.ok) throw new Error("Erro ao carregar variações");
+              return res.json();
+            })
+            .then((variacoes) => {
+              if (variacoes.length > 0) {
+                variacoes.forEach((variacao) => {
+                  const option = document.createElement("option");
+                  option.value = variacao.nome;
+                  option.setAttribute("data-price", variacao.preco);
+                  option.textContent = variacao.nome;
+                  serviceDropdown.appendChild(option);
+                });
+
+                // Define o preço da primeira variação como inicial
+                const precoInicial = parseFloat(variacoes[0].preco);
+                servicePrice.textContent = precoInicial.toFixed(2);
+              } else {
+                // Sem variações, usar valor padrão do serviço
+                const option = document.createElement("option");
+                option.value = service.nome;
+                option.setAttribute("data-price", service.valor || 0);
+                option.textContent = service.nome;
+                serviceDropdown.appendChild(option);
+
+                servicePrice.textContent = (service.valor || 0).toFixed(2);
+              }
+
+              serviceQuantity.value = 1;
+              budgetResult.textContent = "";
+              itemModal.style.display = "flex";
+            })
+            .catch((err) => {
+              console.error("Erro ao buscar variações:", err);
+              alert("Erro ao carregar variações do serviço.");
+            });
         });
+
         itemsContainer.appendChild(serviceItem);
       });
     } catch (err) {
@@ -49,6 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
     budgetResult.textContent = "";
   });
 
+  serviceDropdown.addEventListener("change", () => {
+    const selectedOption = serviceDropdown.selectedOptions[0];
+    const price = parseFloat(selectedOption.getAttribute("data-price"));
+    servicePrice.textContent = price.toFixed(2);
+  });
+
   calculateBudget.addEventListener("click", async () => {
     const quantity = parseInt(serviceQuantity.value, 10);
     const usuarioSalvo = localStorage.getItem("usuario");
@@ -60,16 +108,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (isNaN(quantity) || quantity <= 0) {
-      showCustomAlert = "Por favor, insira uma quantidade válida.";
+      showCustomAlert("Por favor, insira uma quantidade válida.");
       return;
     }
 
-    if (!selectedServiceId) {
-      budgetResult.textContent = "Por favor, selecione um serviço.";
+    if (!selectedService) {
+      showCustomAlert("Por favor, selecione um serviço.");
       return;
     }
 
-    // Feedback visual
     calculateBudget.disabled = true;
     calculateBudget.textContent = "Enviando...";
     budgetResult.textContent = "Criando pedido...";
@@ -82,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify({
           usuario_idusuario: userId,
-          servico_idservico: selectedServiceId,
+          servico_idservico: selectedService.idservico,
           quantidade: quantity,
         }),
       });
@@ -90,22 +137,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) throw new Error("Erro ao criar pedido");
 
       const data = await response.json();
-      budgetResult.textContent = `✅ Pedido criado com sucesso! ID: ${data.id}`;
+      budgetResult.textContent = `✅ Pedido criado com sucesso! ID ${data.id}`;
     } catch (err) {
       console.error("Erro ao criar pedido:", err);
       budgetResult.textContent = "❌ Erro ao criar o pedido.";
     } finally {
       calculateBudget.disabled = false;
       calculateBudget.textContent = "Fazer Orçamento";
-
-      // Limpar feedback após 5 segundos
       setTimeout(() => {
         budgetResult.textContent = "";
       }, 5000);
     }
   });
 
-  // Simular pedido via WhatsApp
   placeOrder.addEventListener("click", () => {
     const quantity = parseInt(serviceQuantity.value, 10);
     const selectedOption = serviceDropdown.selectedOptions[0];
@@ -114,13 +158,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const total = price * quantity;
 
     const mensagem = `Olá! Gostaria de fazer um pedido. 📸
-  
-  *Serviço:* ${selectedService.nome}
-  *Opção:* ${optionName}
-  *Quantidade:* ${quantity}
-  *Total:* R$${total.toFixed(2)}
-  
-  Por favor, me avise sobre a disponibilidade e confirme os valores. Aguardo seu retorno! 😊`;
+
+Serviço: ${selectedService.nome}
+Opção: ${optionName}
+Quantidade: ${quantity}
+Total: R$${total.toFixed(2)}
+
+Por favor, me avise sobre a disponibilidade e confirme os valores. Aguardo seu retorno! 😊`;
 
     const whatsappURL = `https://api.whatsapp.com/send?phone=5514999034536&text=${encodeURIComponent(
       mensagem

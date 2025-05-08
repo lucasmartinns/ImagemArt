@@ -23,7 +23,9 @@ router.post("/criarservico", servico.criarServico);
 router.put("/alterarservico/:id", servico.alterarServico);
 router.get("/servico", servico.listarServicos);
 router.get("/buscarservico/:id", servico.buscarServicoPorId);
+router.get("/servico/:id/variacoes", servico.buscarVariacoesPorServico);
 router.delete("/deletarservico/:id", servico.deletarServico);
+
 
 //🔹Rotas de Pedido
 router.post("/pedidos", autenticarToken, pedido.criarPedido);
