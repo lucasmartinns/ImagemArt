@@ -1,9 +1,9 @@
 const connection = require('../config/database');
 
 const servico = {
-    // 🔹 Criar um novo serviço
+    // 🔹 Criar um novo serviço (com ou sem variações)
     criarServico: async (req, res) => {
-        const { nome, descricao, valor } = req.body;
+        const { nome, descricao, valor, variacoes } = req.body;
 
         if (!nome || !valor) {
             return res.status(400).json({ error: "Nome e valor são obrigatórios!" });
@@ -14,9 +14,45 @@ const servico = {
                 "INSERT INTO servico (nome, descricao, valor) VALUES (?, ?, ?)",
                 [nome, descricao, valor]
             );
-            res.status(201).json({ mensagem: "Serviço cadastrado com sucesso!", id: result.insertId });
+
+            const servicoId = result.insertId;
+
+            // Inserir variações se existirem
+            if (Array.isArray(variacoes)) {
+                for (const v of variacoes) {
+                    await connection.query(
+                        "INSERT INTO servico_variacao (servico_id, descricao, preco) VALUES (?, ?, ?)",
+                        [servicoId, v.descricao, v.preco]
+                    );
+                }
+            }
+
+            res.status(201).json({ mensagem: "Serviço cadastrado com sucesso!", id: servicoId });
         } catch (err) {
             res.status(500).json({ error: "Erro ao inserir serviço", err });
+        }
+    },
+
+    // 🔹 Adicionar variações a um serviço existente
+    adicionarVariacoes: async (req, res) => {
+        const servicoId = req.params.id;
+        const { variacoes } = req.body;
+
+        if (!Array.isArray(variacoes) || variacoes.length === 0) {
+            return res.status(400).json({ error: "Informe uma lista de variações válidas!" });
+        }
+
+        try {
+            for (const v of variacoes) {
+                await connection.query(
+                    "INSERT INTO servico_variacao (servico_id, descricao, preco) VALUES (?, ?, ?)",
+                    [servicoId, v.descricao, v.preco]
+                );
+            }
+
+            res.status(201).json({ mensagem: "Variações adicionadas com sucesso!" });
+        } catch (err) {
+            res.status(500).json({ error: "Erro ao adicionar variações", err });
         }
     },
 
