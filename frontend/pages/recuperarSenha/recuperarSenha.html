@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recuperar Senha</title>
+    <script src="components/head/head.js"></script>
+    <link rel="stylesheet" href="pages/recuperarSenha/recuperarSenha.css" />
+  </head>
+  <body>
+    <div class="content-wrapper">
+      <div class="form-container">
+        <h1>RECUPERAR SENHA</h1>
+        <p class="info-text">
+          Digite seu e-mail cadastrado para receber as instruções de recuperação
+          de senha.
+        </p>
+        <form id="recuperarSenhaForm">
+          <div class="informations">
+            <div class="email">
+              <input
+                placeholder="Digite seu email"
+                type="email"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+          </div>
+          <button type="submit" class="cadastrarButton">Enviar</button>
+          <a href="/login" class="login-link">Voltar para login</a>
+        </form>
+      </div>
+    </div>
+
+    <!-- ALERTA -->
+    <div id="customAlert" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customAlertMessage"></p>
+        <button id="customAlertButton">OK</button>
+      </div>
+    </div>
+    <div id="customConfirm" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customConfirmMessage"></p>
+        <div class="confirm-buttons">
+          <button id="customConfirmYes">Sim</button>
+          <button id="customConfirmNo">Não</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/components/alert/alert.js"></script>
+    <script src="pages/recuperarSenha/recuperarSenha.js"></script>
+  </body>
+</html>

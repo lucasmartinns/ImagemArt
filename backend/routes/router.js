@@ -47,6 +47,10 @@ router.get('/login', (req, res) => {
     res.sendFile(path.join(FRONTEND_DIR, 'pages', 'login', 'login.html'));
 });
 
+router.get('/recuperarSenha', (req, res) => {
+    res.sendFile(path.join(FRONTEND_DIR, 'pages', 'recuperarSenha', 'recuperarSenha.html'));
+});
+
 router.get('/home', (req, res) => {
     res.sendFile(path.join(FRONTEND_DIR, 'pages', 'home', 'home.html'));
 });

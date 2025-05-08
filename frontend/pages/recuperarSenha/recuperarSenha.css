@@ -29,7 +29,6 @@ body {
   margin: 0;
   overflow-x: hidden;
 }
-
 .content-wrapper {
   flex: 1;
   display: flex;
@@ -71,9 +70,16 @@ h1 {
   text-align: center;
   font-weight: bold;
   margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
   color: var(--primary-clr);
   letter-spacing: 1.5px;
+}
+
+.info-text {
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  text-align: center;
+  margin: 0.5rem 0rem;
+  font-style: italic;
+  opacity: 0.9;
 }
 
 form {
@@ -82,10 +88,10 @@ form {
   align-items: center;
 }
 
-.informations label {
-  font-size: clamp(0.8rem, 1vw, 1rem);
-  color: #e7e7e8;
-  font-weight: 600;
+.informations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .informations input {
@@ -111,46 +117,6 @@ form {
   border: 2px solid var(--secundary-clr);
 }
 
-.password-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.toggle-password {
-  background: none;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  right: 10px;
-  top: 40%;
-  transform: translateY(-51%);
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.5;
-}
-
-.toggle-password img.password-icon {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  pointer-events: none;
-  filter: invert(88%) sepia(4%) saturate(0%) hue-rotate(180deg) brightness(96%)
-    contrast(92%);
-}
-
-.checkbox-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.checkbox-container input {
-  margin-right: 0.5rem;
-}
-
 .cadastrarButton {
   width: clamp(10rem, 8vw, 8vw);
   height: clamp(2.5rem, 3vw, 3rem);
@@ -173,14 +139,6 @@ form {
   transform: scale(0.95);
 }
 
-.manterConectado {
-  font-size: clamp(0.8rem, 1vw, 1rem);
-}
-
-#manterConectado:checked {
-  accent-color: var(--primary-clr);
-}
-
 .login-link {
   text-align: center;
   margin-top: 1rem;
@@ -193,69 +151,4 @@ form {
 .login-link:hover {
   filter: brightness(0.8);
   transform: scale(0.98);
-}
-
-.forgot-password {
-  text-align: center;
-  margin-top: 1rem;
-  color: #e7e7e8;
-  opacity: 0.8;
-  text-decoration: none;
-  font-size: clamp(0.8rem, 1vw, 1rem);
-  transition: transform 0.2s ease, filter 0.1s ease, background-color 0.1s ease;
-}
-
-.forgot-password:hover {
-  filter: brightness(0.8);
-  transform: scale(0.98);
-}
-
-.custom-alert {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s, opacity 0.3s ease-in-out;
-}
-
-.custom-alert-content {
-  background-color: #282828;
-  color: #e7e7e8;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 300px;
-}
-
-.custom-alert-content p {
-  margin-bottom: 20px;
-  font-size: 16px;
-}
-
-.custom-alert-content button {
-  background-color: var(--primary-clr);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.custom-alert-content button:hover {
-  background-color: var(--secundary-clr);
-}
-
-.custom-alert.show {
-  visibility: visible;
-  opacity: 1;
 }
