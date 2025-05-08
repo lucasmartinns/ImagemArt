@@ -69,10 +69,10 @@ router.get('/calendario', (req, res) => {
 
 // 🔹Rota serviços
 router.get('/servico_adm', (req, res) => {
-    res.sendFile(path.join(FRONTEND_DIR, 'pages', 'servicos_adm', 'servico_adm.html'));
+    res.sendFile(path.join(FRONTEND_DIR, 'pages', 'servicos_adm', 'servicos_adm.html'));
 });
-router.get('/servico', (req, res) => {
-    res.sendFile(path.join(FRONTEND_DIR, 'pages', 'servicos', 'servico.html'));
+router.get('/servico_page', (req, res) => {
+    res.sendFile(path.join(FRONTEND_DIR, 'pages', 'servico', 'servico.html'));
 });
 
 

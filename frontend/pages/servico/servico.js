@@ -46,9 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
               if (variacoes.length > 0) {
                 variacoes.forEach((variacao) => {
                   const option = document.createElement("option");
-                  option.value = variacao.nome;
+                  option.value = variacao.descricao;
                   option.setAttribute("data-price", variacao.preco);
-                  option.textContent = variacao.nome;
+                  option.textContent = variacao.descricao;
                   serviceDropdown.appendChild(option);
                 });
 
