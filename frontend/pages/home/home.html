@@ -1,92 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
     <link rel="stylesheet" href="pages/home/home.css" />
     <script src="../../components/head/head.js"></script>
-    <title>ImagemArt</title>
+    <link rel="stylesheet" href="../../components/animations/animation.css" />
   </head>
   <body>
     <!-- NAVBAR -->
     <div id="navbar-container"></div>
 
-    <div class="foto_titulo">
-      <div class="titulo">
-        <span class="textTitle">IMAGEM </span>
-        <span class="textTitle">ART</span>
-      </div>
-      <div class="titulo2">
-        <span class="textTitle">photo e vídeo </span>
-      </div>
-      <div class="fotoinicial">
-        <img src="../assets/img/imagem home.png" alt="" />
-      </div>
-      <div class="linha">
-        <img src="../assets/img/linha.png" alt="" />
-      </div>
+    <div class="background">
+      <img src="../../assets/img/linha.png" alt="" />
     </div>
-    <div class="sobre">
+    <div class="inicio fade-in">
+      <div class="left">
+        <h2>IMAGEM ART</h2>
+        <h3>photo e vídeo</h3>
+      </div>
+      <img src="../../assets/img/home/imagemHome.png" alt="" />
+    </div>
+    <div class="sobre fade-in">
       <div class="polaroid">
-        <img src="../assets/img/polaroids.png" alt="" />
+        <img src="../../assets/img/home/polaroids.png" alt="" />
       </div>
-      <div class="sobrenos">
-        <span class="textTitle">SOBRE NÓS</span>
-      </div>
-      <div class="text-sobre">
-        <div class="linhas"></div>
-        <div class="linhas2"></div>
-        <h1 class="text-sobre1">
+      <div class="sobre-container">
+        <h2 class="titulo">SOBRE NÓS</h2>
+        <hr />
+
+        <!-- Linhas cruzadas -->
+        <div class="linhas">
+          <div class="linha-horizontal"></div>
+          <div class="linha-vertical"></div>
+        </div>
+
+        <p class="texto">
           Na Imagem Art Photo e Vídeo, transformamos momentos em obras de arte.
           Com sensibilidade e técnica, capturamos cada detalhe, luz e emoção,
           criando imagens elegantes e atemporais. Seja para retratos, eventos ou
           campanhas, oferecemos uma experiência única, onde cada foto conta uma
           história que emociona. Descubra o poder de uma narrativa visual feita
           sob medida para você.
-        </h1>
+        </p>
       </div>
     </div>
 
-    <div class="botoes-eventos">
-      <p class="tituloeventos">EVENTOS</p>
-      <div class="teste">
-        <div class="botao">
-          <a href="../pages/eventos.html">
-            <div class="imagemeventos">
-              <img src="../assets/img/imamagemeventos.png" alt="" />
-            </div>
-            <div class="titulo-eventos">
-              <p>ANIVERSÁRIOS</p>
-            </div></a
-          >
-        </div>
-        <div class="botao">
-          <a href="../pages/eventos.html">
-            <div class="imagemeventos">
-              <img src="../assets/img/imamagemeventos.png" alt="" />
-            </div>
-            <div class="titulo-eventos">
-              <p>CASAMENTOS</p>
-            </div></a
-          >
-        </div>
-        <div>
-          <div class="botao">
-            <a href="../pages/eventos.html">
-              <div class="imagemeventos">
-                <img src="../assets/img/imamagemeventos.png" alt="" />
-              </div>
-              <div class="titulo-eventos">
-                <p>GERAIS</p>
-              </div></a
-            >
+    <div class="eventos fade-in">
+      <a href="#">
+        <div class="aniversario">
+          <img src="../../assets/img/home/aniversario.png" alt="" />
+          <div class="titulo-container">
+            <h3>ANIVERSÁRIO</h3>
+            <p>Veja Mais</p>
           </div>
-        </div>
-      </div>
+        </div></a
+      >
+      <a href="#">
+        <div class="casamento">
+          <img src="../../assets/img/home/aniversario.png" alt="" />
+          <div class="titulo-container">
+            <h3>CASAMENTO</h3>
+            <p>Veja Mais</p>
+          </div>
+        </div></a
+      >
+      <a href="#">
+        <div class="gerais">
+          <img src="../../assets/img/home/aniversario.png" alt="" />
+          <div class="titulo-container">
+            <h3>GERAIS</h3>
+            <p>Veja Mais</p>
+          </div>
+        </div></a
+      >
+      <hr />
+      <h1>EVENTOS</h1>
     </div>
+
+    <!-- FOOTER -->
     <div id="footer-container"></div>
 
+    <script src="../../components/footer/footer.js"></script>
     <script src="../../components/navbar/navbar.js"></script>
-    <script src="../components/footer/footer.js"></script>
+
+    <script src="../../components/animations/animation.js"></script>
   </body>
 </html>

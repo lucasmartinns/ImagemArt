@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="../../components/head/head.js"></script>
     <link rel="stylesheet" href="pages/calendario/calendario_adm.css" />
+    <link rel="stylesheet" href="../../components/animations/animation.css" />
     <title>Calendário</title>
   </head>
 
@@ -14,7 +15,7 @@
 
     <!-- CALENDÁRIO -->
     <div class="center">
-      <div class="container">
+      <div class="container fade-in">
         <div class="left">
           <div class="calendar">
             <div class="month">
@@ -47,6 +48,7 @@
             <div class="event-date">12 de dezembro de 2025</div>
           </div>
           <div class="events"></div>
+          <button class="view-pending-tasks-btn">Tarefas Pendentes</button>
           <div class="add-event-wrapper">
             <div class="add-event-header">
               <div class="title">Adicionar Evento</div>
@@ -103,6 +105,17 @@
       </div>
     </div>
 
+    <!-- Modal de Tarefas Pendentes -->
+    <div id="pendingTasksModal" class="custom-modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Tarefas Pendentes</h2>
+        <div id="pendingTasksContainer">
+          <!-- Tarefas carregadas dinamicamente -->
+        </div>
+      </div>
+    </div>
+
     <!-- FOOTER -->
     <div id="footer-container"></div>
 
@@ -110,5 +123,6 @@
     <script src="../../components/navbar/navbar.js"></script>
     <script src="../../pages/calendario/calendario.js"></script>
     <script src="../../components/alert/alert.js"></script>
+    <script src="../../components/animations/animation.js"></script>
   </body>
 </html>

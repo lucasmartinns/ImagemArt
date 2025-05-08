@@ -93,6 +93,11 @@ function initCalendar() {
 }
 
 function prevMonth() {
+  // Prevent navigating to year 0 or below
+  if (month === 0 && year === 1) {
+    showCustomAlert("Foque no presente");
+    return;
+  }
   month--;
   if (month < 0) {
     month = 11;
@@ -236,7 +241,7 @@ function gotoDate() {
   if (dateArr.length === 2) {
     const m = parseInt(dateArr[0], 10);
     const y = parseInt(dateArr[1], 10);
-    if (m > 0 && m < 13 && dateArr[1].length === 4) {
+    if (m > 0 && m < 13 && y >= 1 && dateArr[1].length === 4) {
       month = m - 1;
       year = y;
       initCalendar();
@@ -340,7 +345,7 @@ addEventSubmit.addEventListener("click", () => {
 eventsContainer.addEventListener("click", async (e) => {
   if (e.target.classList.contains("event") || e.target.closest(".event")) {
     const confirm = await showCustomConfirm(
-      "Tem certeza de que deseja excluir este evento?"
+      "Tem certeza de que deseja concluir este evento?"
     );
     if (confirm) {
       const eventTitle = e.target
@@ -364,6 +369,49 @@ eventsContainer.addEventListener("click", async (e) => {
     }
   }
 });
+
+// Tarefas Pendentes
+const viewPendingTasksBtn = document.querySelector(".view-pending-tasks-btn");
+const pendingTasksModal = document.getElementById("pendingTasksModal");
+const closePendingTasksBtn = pendingTasksModal.querySelector(".close-modal");
+const pendingTasksContainer = pendingTasksModal.querySelector(
+  "#pendingTasksContainer"
+);
+
+viewPendingTasksBtn.addEventListener("click", () => {
+  loadPendingTasks();
+  pendingTasksModal.classList.add("active");
+});
+
+closePendingTasksBtn.addEventListener("click", () => {
+  pendingTasksModal.classList.remove("active");
+});
+
+// Fechar modal ao clicar fora do conteúdo
+pendingTasksModal.addEventListener("click", (e) => {
+  if (e.target === pendingTasksModal) {
+    pendingTasksModal.classList.remove("active");
+  }
+});
+
+function loadPendingTasks() {
+  let tasksHTML = "";
+  if (eventsArr.length === 0) {
+    tasksHTML = "<p>Sem Tarefas Pendentes</p>";
+  } else {
+    eventsArr.forEach((eventObj) => {
+      const dateStr = `${eventObj.day}/${eventObj.month}/${eventObj.year}`;
+      eventObj.events.forEach((ev) => {
+        tasksHTML += `
+          <div class="pending-task">
+            <h4>${ev.title}</h4>
+            <span>${dateStr} - ${ev.time}</span>
+          </div>`;
+      });
+    });
+  }
+  pendingTasksContainer.innerHTML = tasksHTML;
+}
 
 // ---------- UTILITÁRIOS & ARMAZENAMENTO ----------
 function clearEventForm() {
