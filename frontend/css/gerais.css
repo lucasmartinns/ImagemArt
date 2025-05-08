@@ -34,6 +34,7 @@ body {
     user-select: none;
     letter-spacing: 2px;
     margin-top: -1%;
+    font-family: "Montserrat";
 
 }
 
@@ -147,13 +148,17 @@ button {
 
 .botaoAcess {
     display: flex;
-    margin-top: -40%;
+    margin-top: 10%;
 
 }
 
 
 
 .botaoAcess {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    place-content: center;
     font-size: 16px;
     font-family: "Abhaya Libre";
     letter-spacing: 2px;
@@ -164,7 +169,7 @@ button {
     border-radius: 15px;
     cursor: pointer;
     transition-duration: 0.5s;
-    margin-right: 5rem;
+    
 }
 
 .botaoAcess a {
@@ -190,7 +195,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1%;
+    margin-top: 10%;
     font-weight: 700;
     font-size: 60px;
     color: #E7E7E8;
