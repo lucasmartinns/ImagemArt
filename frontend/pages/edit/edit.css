@@ -72,6 +72,7 @@ h1 {
   margin-bottom: 1.5rem;
   color: var(--primary-clr);
   letter-spacing: 1.5px;
+  text-transform: capitalize;
 }
 
 form {

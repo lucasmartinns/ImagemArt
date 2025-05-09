@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("/servico");
       if (!response.ok) throw new Error("Erro ao carregar os serviços.");
       const services = await response.json();
+      
+      // Verifique os dados carregados
+      console.log(services); 
 
       services.forEach((service) => {
         const serviceItem = document.createElement("div");
@@ -31,8 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Torna o item clicável
         serviceItem.addEventListener("click", () => {
-          selectedService = service;
-          modalServiceName.textContent = service.nome;
+          if (service) {
+            selectedService = service;
+            modalServiceName.textContent = service.nome || "Serviço Indisponível"; // Exibindo nome do serviço
+          } else {
+            modalServiceName.textContent = "Serviço Indisponível";
+          }
+
           serviceDropdown.innerHTML = ""; // Limpa as opções anteriores
           servicePrice.textContent = "0.00";
 

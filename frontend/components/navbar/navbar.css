@@ -114,6 +114,7 @@ nav ul li a:active {
   font-weight: 700;
   color: #0a0809;
   font-size: clamp(0.7rem, 2vw, 1.1rem);
+  text-transform: capitalize;
 }
 
 .user-info img {
