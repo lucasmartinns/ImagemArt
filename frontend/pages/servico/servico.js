@@ -12,6 +12,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let selectedService = null;
 
+  // Função para carregar imagens do banco
+  const carregarImagens = async () => {
+    try {
+      const response = await fetch('/imagens'); // Fazendo a requisição para buscar as imagens
+      const imagens = await response.json(); // Recebe as imagens do backend
+
+      imagens.forEach(imagem => {
+        const imgElement = document.createElement('img');
+        imgElement.src = imagem.caminho; // Caminho da imagem no backend
+        imgElement.alt = 'Imagem de Serviço'; // Texto alternativo para acessibilidade
+        imgElement.classList.add('imagem-servico'); // Adiciona uma classe CSS para as imagens (opcional)
+
+        // Adiciona a imagem ao container
+        itemsContainer.appendChild(imgElement);
+      });
+    } catch (error) {
+      console.error('Erro ao carregar as imagens:', error);
+    }
+  };
+
+  // Carrega as imagens quando a página for carregada
+  carregarImagens();
+
+  // Função para carregar os serviços
   const fetchServices = async () => {
     try {
       const response = await fetch("/servico");
