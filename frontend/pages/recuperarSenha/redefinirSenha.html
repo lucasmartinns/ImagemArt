@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redefinir Senha</title>
+    <script src="/components/head/head.js"></script>
+    <link rel="stylesheet" href="/components/animations/animation.css" />
+    <link rel="stylesheet" href="/pages/recuperarSenha/recuperarSenha.css" />
+  </head>
+  <body>
+    <div class="content-wrapper">
+      <div class="form-container">
+        <h1>REDEFINIR SENHA</h1>
+        <p class="info-text">Digite sua nova senha!</p>
+        <form id="recuperarSenhaForm">
+          <div class="informations">
+            <div class="password-container">
+              <input
+                type="password"
+                id="senha"
+                name="senha"
+                placeholder="Digite sua senha"
+                required
+              />
+
+              <button
+                type="button"
+                class="toggle-password"
+                onclick="togglePassword('senha', this)"
+              >
+                <img
+                  src="/assets/img/password/eye-off.svg"
+                  alt="Mostrar senha"
+                  class="password-icon"
+                />
+              </button>
+            </div>
+            <div class="password-container">
+              <input
+                type="password"
+                id="confirmarSenha"
+                name="confirmarSenha"
+                placeholder="Confirme sua senha"
+                required
+                oninvalid="this.setCustomValidity('As senhas não coincidem. Por favor, verifique.')"
+                oninput="this.setCustomValidity('')"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                onclick="togglePassword('confirmarSenha', this)"
+              >
+                <img
+                  src="/assets/img/password/eye-off.svg"
+                  alt="Mostrar senha"
+                  class="password-icon"
+                />
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="cadastrarButton">Enviar</button>
+          <a href="/login" class="login-link">Voltar para login</a>
+        </form>
+      </div>
+    </div>
+
+    <script src="/components/alert/alert.js"></script>
+    <script src="/components/animations/animation.js"></script>
+    <script src="/pages/recuperarSenha/redefinirSenha.js"></script>
+  </body>
+</html>

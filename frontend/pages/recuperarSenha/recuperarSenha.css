@@ -152,3 +152,33 @@ form {
   filter: brightness(0.8);
   transform: scale(0.98);
 }
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-51%);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+}
+
+.toggle-password img.password-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  pointer-events: none;
+  filter: invert(88%) sepia(4%) saturate(0%) hue-rotate(180deg) brightness(96%)
+    contrast(92%);
+}
