@@ -144,9 +144,9 @@ h1 span:last-child {
   font-weight: bold;
   letter-spacing: 0.1rem;
   text-align: center;
-  word-wrap: break-word;
-  word-break: break-word;
-  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: normal;
+  hyphens: manual;
 }
 
 .service-item {

@@ -6,7 +6,7 @@
     <title>Serviços</title>
     <link rel="stylesheet" href="pages/servicos_adm/servicos_adm.css" />
     <script src="../../components/head/head.js"></script>
-    
+    <link rel="stylesheet" href="../../components/animations/animation.css" />
   </head>
   <body>
     <!-- NAVBAR -->
@@ -15,10 +15,10 @@
     <!-- SERVIÇOS -->
     <div class="center">
       <div class="serviceContainer">
-        <h1><span>Serviço</span><span>s</span></h1>
-        <div class="line"></div>
+        <h1 class="fade-in"><span>Serviço</span><span>s</span></h1>
+        <div class="line fade-in"></div>
         <div class="itens" id="itemsContainer">
-          <div class="addItem">
+          <div class="addItem fade-in">
             <div class="image-container">
               <img
                 id="createItemImg"
@@ -57,6 +57,7 @@
                       id="serviceName"
                       name="serviceName"
                       placeholder="Nome do Serviço"
+                      maxlength="30"
                       autocomplete="off"
                     />
                     <div class="buttons">
@@ -116,6 +117,6 @@
     <script src="../../components/navbar/navbar.js"></script>
     <script src="pages/servicos_adm/servicos_adm.js"></script>
     <script src="../../components/alert/alert.js"></script>
-  
+    <script src="../../components/animations/animation.js"></script>
   </body>
 </html>

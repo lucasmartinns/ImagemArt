@@ -38,6 +38,7 @@ CREATE TABLE servico (
 );
 
 CREATE TABLE pedido (
+<<<<<<< HEAD
   idpedido INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   data TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   quantidade INT NOT NULL,
@@ -54,3 +55,20 @@ CREATE TABLE servico_variacao (
   preco DECIMAL(10,2) NOT NULL,
   FOREIGN KEY (servico_id) REFERENCES servico(idservico) ON DELETE CASCADE
 );
+=======
+  idpedido int NOT NULL AUTO_INCREMENT,
+  data timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  quantidade int NOT NULL,
+  usuario_idusuario int NOT NULL,
+  servico_idservico int NOT NULL,
+  PRIMARY KEY (idpedido),
+  KEY fk_pedido_usuario1_idx (usuario_idusuario),
+  KEY fk_pedido_servico1_idx (servico_idservico),
+  CONSTRAINT fk_pedido_usuario1 FOREIGN KEY (usuario_idusuario) REFERENCES usuario (idusuario),
+  CONSTRAINT fk_pedido_servico1 FOREIGN KEY (servico_idservico) REFERENCES servico (idservico)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ALTER TABLE usuarios
+-- ADD COLUMN passwordResetToken VARCHAR(100),
+-- ADD COLUMN passwordResetExpires DATETIME;
+>>>>>>> f7fc104bddf6e16d4ee821d003765d1c4ffbe8fd
