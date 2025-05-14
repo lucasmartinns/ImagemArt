@@ -4,8 +4,12 @@ document
     e.preventDefault();
 
     const email = document.getElementById("email").value;
+    const button = e.target.querySelector('button[type="submit"]');
+    const originalText = button.textContent;
 
     try {
+      button.disabled = true;
+      button.textContent = "Enviando...";
       const response = await fetch("/recuperar-senha", {
         method: "POST",
         headers: {
@@ -28,5 +32,8 @@ document
       }
     } catch (error) {
       showCustomAlert(error.message);
+    } finally {
+      button.disabled = false;
+      button.textContent = originalText;
     }
   });

@@ -41,7 +41,7 @@ document
         showCustomAlert("Senha alterada com sucesso!");
         setTimeout(() => {
           window.location.href = "/login";
-        }, 2000);
+        }, 1000);
       } else {
         throw new Error(data.message || "Erro ao redefinir senha");
       }
@@ -49,3 +49,18 @@ document
       showCustomAlert(error.message || "Erro ao redefinir senha");
     }
   });
+
+function togglePassword(inputId, button) {
+  const input = document.getElementById(inputId);
+  const img = button.querySelector("img");
+
+  if (input.type === "password") {
+    input.type = "text";
+    img.src = "../../assets/img/password/eye.svg";
+    img.alt = "Ocultar senha";
+  } else {
+    input.type = "password";
+    img.src = "../../assets/img/password/eye-off.svg";
+    img.alt = "Mostrar senha";
+  }
+}
