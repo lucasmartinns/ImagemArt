@@ -1,4 +1,4 @@
-* {
+/* * {
     box-sizing: border-box;
 
 }
@@ -54,15 +54,11 @@ body {
 
 .carrossel {
     display: flex;
-    /* Ativa o flexbox */
+
     justify-content: space-around;
-    /* Espaço igual entre os itens */
     align-items: center;
-    /* Alinha os itens verticalmente ao centro */
     margin: 2%;
-    width: 70%;
-    /* Garante que o contêiner ocupe toda a largura disponível */
-}
+    width: 70%;} */
 
 /* @media (max-width: 900px) {
     .carrossel-RESPASIVE {
@@ -79,7 +75,7 @@ body {
 
 
 
-button {
+/* button {
     justify-content: center;
     align-items: center;
     width: 284.12px;
@@ -347,4 +343,4 @@ hr {
         border: none;
 
     }
-}
+} */

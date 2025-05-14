@@ -7,12 +7,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>ImagemArt</title>
     <style>
-        * {
+
+       * {
+        
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
+             box-sizing: border-box;
+           
+            
         }
+        @font-face {
+    font-family: 'AbhayaLibre-Bold';
+    src: url('../assets/font/AbhayaLibre-Bold.ttf');
+}
         
         body {
             display: flex;
@@ -27,9 +34,25 @@
 
         .title {
             text-align: center;
-            color: #fff;
-            font-size: 60px;
+            color: #e7e7e7;
+            font-size: 65px;
             margin-bottom: 20px;
+            font-family: "AbhayaLibre";
+            font-weight: 500;
+        }
+        .title2{
+            font-family: 'Montserrat', sans-serif; 
+            text-align: center;
+            color: #e7e7e7;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        .imagelinha{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 80px;
         }
 
         .outer-container {
@@ -43,8 +66,8 @@
         }
         
         .carousel-container {
-            width: 80vw;
-            max-width: 1000px;
+            width: 90vw;
+            max-width: 1200px;
             padding: 2vw;
             overflow: hidden;
             margin: 0 auto;
@@ -54,15 +77,16 @@
             display: flex;
             gap: 20px;
             padding: 10px;
+            transition: none;
         }
         
         .card {
-            flex: 0 0 220px;
+            flex: 0 0 300px;
+            max-width: 280px;
             border-radius: 10px;
             overflow: hidden;
             position: relative;
-            background: #e7e7e7;
-            max-width: 200px;
+            background: #282828;;
         }
         
         .card.active {
@@ -71,13 +95,13 @@
         
         .card-img {
             width: 100%;
-            height: 150px;
+            height: 200px;
             object-fit: cover;
             border-radius: 10px 10px 0 0;
         }
         
         .card-content {
-            padding: 1%;
+            padding: 7%;
         }
         
         .card-tag {
@@ -88,23 +112,27 @@
             font-size: 8px;
             border-radius: 20px;
             text-transform: uppercase;
-            margin-bottom: 9px;
+            margin-top: 10px;
+            margin-left: 10px;
+            font-family: "Montserrat";
         }
         
         .card-title {
-            color: #000000;
+            color: #e7e7e7;
             font-size: 14px;
             font-weight: bold;
             margin-bottom: 5px;
             margin-left: 1%;
+            font-family: "Montserrat";
         }
         
         .card-location {
             display: flex;
             align-items: center;
-            color: #000000be;
+            color: #e7e7e7;
             font-size: 10px;
             margin-left: 1%;
+            font-family: "Montserrat";
         }
         
         .card-location::before {
@@ -134,6 +162,7 @@
         
         .dot.active {
             background: rgb(87, 87, 87);
+            transform: scale(1.2);
         }
         
         .prev-btn, .next-btn {
@@ -151,6 +180,7 @@
             z-index: 10;
             border: none;
             flex-shrink: 0;
+            margin-top: 20%;
         }
         
         .prev-btn {
@@ -175,8 +205,11 @@
 
         @media (max-width: 768px) {
             .card {
-                flex: 0 0 160px;
-                max-width: 160px;
+                flex: 0 0 22px;
+                max-width: 200px;
+            }
+            .card img{
+                height: 150px;
             }
             
             .carousel-container {
@@ -213,13 +246,15 @@
     <div class="outer-container">
         <button class="prev-btn" onclick="moveCarousel(0, -1)">❮</button>
         <div class="carousel-container">
-            <div class="title"><p>DRONE</p></div>
+            <div class="title"><p>Drone</p>
+            <div class="title2"><p>Vídeos que transformam momentos em memórias. Com técnica e sensibilidade, capturamos a essência de cada história.</p></div>
+            <div class="imagelinha"><img src="../assets/img/linhareta.png" alt=""></div> </div>
             <div class="carousel" id="carousel-1">
                 <!-- Cards originais -->
                 <div class="card active">
                     <img src="https://tse3.mm.bing.net/th?id=OIP.yHDW0URvOWEnewzRXfSCKwHaE8&cb=iwp1&pid=Api" alt="Paris" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">20.10.2020</span>
                         <h3 class="card-title">Paisagens Naturais</h3>
                         <p class="card-location">Pompeia, SP</p>
                     </div>
@@ -227,8 +262,8 @@
                 
                 <div class="card">
                     <img src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg" alt="México" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">20.10.2020</span>
                         <h3 class="card-title">Um dos sítios antigos</h3>
                         <p class="card-location">Tulum, México</p>
                     </div>
@@ -236,8 +271,8 @@
                 
                 <div class="card active">
                     <img src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg" alt="Austrália" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">20.10.2020</span>
                         <h3 class="card-title">O destino de iate</h3>
                         <p class="card-location">Whitsunday Islands, Austrália</p>
                     </div>
@@ -245,8 +280,8 @@
                 
                 <div class="card">
                     <img src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg" alt="México" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">20.10.2020</span>
                         <h3 class="card-title">Um dos sítios antigos</h3>
                         <p class="card-location">Tulum, México</p>
                     </div>
@@ -254,8 +289,8 @@
                 
                 <div class="card">
                     <img src="https://4ea53a68b530b930e823-181b81c0bd280c5688e804225438ba83.ssl.cf1.rackcdn.com/PostImagem/16164/sessatildeo-de-fotos-do-casal-dicas-de-poses-corretas_adult-affection-bride-1923292a5625d3f84e9681b60d8dce600772f7.jpg" alt="México" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">20.10.2020</span>
                         <h3 class="card-title">Um dos sítios antigos</h3>
                         <p class="card-location">Tulum, México</p>
                     </div>
@@ -263,8 +298,8 @@
                 
                 <div class="card">
                     <img src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1" alt="México Pirâmide" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">20.10.2020</span>
                         <h3 class="card-title">Pirâmides antigas</h3>
                         <p class="card-location">Yucatán, México</p>
                     </div>
@@ -273,8 +308,8 @@
                 <!-- Imagens adicionais -->
                 <div class="card">
                     <img src="https://tse3.mm.bing.net/th?id=OIP.yHDW0URvOWEnewzRXfSCKwHaE8&cb=iwp1&pid=Api" alt="Vista Aérea" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">15.03.2021</span>
                         <h3 class="card-title">Vista Panorâmica</h3>
                         <p class="card-location">Campos do Jordão, SP</p>
                     </div>
@@ -282,8 +317,8 @@
                 
                 <div class="card">
                     <img src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg" alt="Praia" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">22.04.2021</span>
                         <h3 class="card-title">Mar Cristalino</h3>
                         <p class="card-location">Fernando de Noronha, PE</p>
                     </div>
@@ -291,8 +326,8 @@
                 
                 <div class="card">
                     <img src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg" alt="Vista de Cima" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">10.05.2021</span>
                         <h3 class="card-title">Jardins Suspensos</h3>
                         <p class="card-location">Gramado, RS</p>
                     </div>
@@ -300,8 +335,8 @@
                 
                 <div class="card">
                     <img src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg" alt="Cachoeira" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">30.06.2021</span>
                         <h3 class="card-title">Quedas D'água</h3>
                         <p class="card-location">Foz do Iguaçu, PR</p>
                     </div>
@@ -309,8 +344,8 @@
                 
                 <div class="card">
                     <img src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1" alt="Parque" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">12.07.2021</span>
                         <h3 class="card-title">Parque Nacional</h3>
                         <p class="card-location">Chapada dos Veadeiros, GO</p>
                     </div>
@@ -333,13 +368,15 @@
     <div class="outer-container">
         <button class="prev-btn" onclick="moveCarousel(1, -1)">❮</button>
         <div class="carousel-container">
-            <div class="title"><p>CASAMENTOS</p></div>
+            <div class="title"><p>Casamento</p>
+                <div class="title2"><p>Vídeos que transformam momentos em memórias. Com técnica e sensibilidade, capturamos a essência de cada história.</p></div>
+                <div class="imagelinha"><img src="../assets/img/linhareta.png" alt=""></div> </div>
             <div class="carousel" id="carousel-2">
                 <!-- Cards originais -->
                 <div class="card active">
                     <img src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg" alt="Casamento" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">15.05.2021</span>
                         <h3 class="card-title">Cerimônia Elegante</h3>
                         <p class="card-location">Curitiba, PR</p>
                     </div>
@@ -347,8 +384,8 @@
                 
                 <div class="card">
                     <img src="https://4ea53a68b530b930e823-181b81c0bd280c5688e804225438ba83.ssl.cf1.rackcdn.com/PostImagem/16164/sessatildeo-de-fotos-do-casal-dicas-de-poses-corretas_adult-affection-bride-1923292a5625d3f84e9681b60d8dce600772f7.jpg" alt="Casal" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">12.08.2021</span>
                         <h3 class="card-title">Ensaio Pré-Wedding</h3>
                         <p class="card-location">São Paulo, SP</p>
                     </div>
@@ -356,8 +393,8 @@
                 
                 <div class="card active">
                     <img src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg" alt="Austrália" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">03.06.2022</span>
                         <h3 class="card-title">Destination Wedding</h3>
                         <p class="card-location">Whitsunday Islands, Austrália</p>
                     </div>
@@ -365,8 +402,8 @@
                 
                 <div class="card">
                     <img src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg" alt="15 Anos" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">10.11.2023</span>
                         <h3 class="card-title">Festa de 15 Anos</h3>
                         <p class="card-location">Rio de Janeiro, RJ</p>
                     </div>
@@ -374,8 +411,8 @@
                 
                 <div class="card">
                     <img src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1" alt="Formatura" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">25.02.2024</span>
                         <h3 class="card-title">Ensaio de Formatura</h3>
                         <p class="card-location">Salvador, BA</p>
                     </div>
@@ -384,8 +421,8 @@
                 <!-- Imagens adicionais -->
                 <div class="card">
                     <img src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg" alt="Casamento Igreja" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">05.10.2021</span>
                         <h3 class="card-title">Casamento Religioso</h3>
                         <p class="card-location">Belo Horizonte, MG</p>
                     </div>
@@ -393,8 +430,8 @@
                 
                 <div class="card">
                     <img src="https://4ea53a68b530b930e823-181b81c0bd280c5688e804225438ba83.ssl.cf1.rackcdn.com/PostImagem/16164/sessatildeo-de-fotos-do-casal-dicas-de-poses-corretas_adult-affection-bride-1923292a5625d3f84e9681b60d8dce600772f7.jpg" alt="Casal Praia" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">22.12.2021</span>
                         <h3 class="card-title">Ensaio na Praia</h3>
                         <p class="card-location">Florianópolis, SC</p>
                     </div>
@@ -402,17 +439,18 @@
                 
                 <div class="card">
                     <img src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg" alt="Destino" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">14.02.2022</span>
                         <h3 class="card-title">Casamento na Praia</h3>
                         <p class="card-location">Maceió, AL</p>
                     </div>
                 </div>
                 
                 <div class="card">
-                    <img src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg" alt="Festa" class="card-img">
-                    <div class="card-content">
-                        <span class="card-tag">30.03.2022</span>
+                    
+                <img src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg" alt="Festa" class="card-img">
+                <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+                <div class="card-content">
                         <h3 class="card-title">Festa de Debutante</h3>
                         <p class="card-location">Brasília, DF</p>
                     </div>
@@ -420,8 +458,8 @@
                 
                 <div class="card">
                     <img src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1" alt="Formatura Externa" class="card-img">
+                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
                     <div class="card-content">
-                        <span class="card-tag">18.05.2022</span>
                         <h3 class="card-title">Formatura ao Ar Livre</h3>
                         <p class="card-location">Porto Alegre, RS</p>
                     </div>
