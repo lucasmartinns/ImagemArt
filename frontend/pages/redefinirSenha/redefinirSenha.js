@@ -41,7 +41,7 @@ document
         showCustomAlert("Senha alterada com sucesso!");
         setTimeout(() => {
           window.location.href = "/login";
-        }, 1000);
+        }, 2000);
       } else {
         throw new Error(data.message || "Erro ao redefinir senha");
       }

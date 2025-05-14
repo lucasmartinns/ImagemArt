@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const itemModal = document.getElementById("itemModal");
   const closeModal = document.querySelector(".close");
   const modalServiceName = document.getElementById("modalServiceName");
-  const servicePrice = document.getElementById("servicePrice").querySelector("span");
+  const servicePrice = document
+    .getElementById("servicePrice")
+    .querySelector("span");
   const serviceQuantity = document.getElementById("serviceQuantity");
   const serviceDropdown = document.getElementById("serviceDropdown");
   const calculateBudget = document.getElementById("calculateBudget");
@@ -15,20 +17,20 @@ document.addEventListener("DOMContentLoaded", () => {
   // Função para carregar imagens do banco
   const carregarImagens = async () => {
     try {
-      const response = await fetch('/imagens'); // Fazendo a requisição para buscar as imagens
+      const response = await fetch("/imagens"); // Fazendo a requisição para buscar as imagens
       const imagens = await response.json(); // Recebe as imagens do backend
 
-      imagens.forEach(imagem => {
-        const imgElement = document.createElement('img');
+      imagens.forEach((imagem) => {
+        const imgElement = document.createElement("img");
         imgElement.src = imagem.caminho; // Caminho da imagem no backend
-        imgElement.alt = 'Imagem de Serviço'; // Texto alternativo para acessibilidade
-        imgElement.classList.add('imagem-servico'); // Adiciona uma classe CSS para as imagens (opcional)
+        imgElement.alt = "Imagem de Serviço"; // Texto alternativo para acessibilidade
+        imgElement.classList.add("imagem-servico"); // Adiciona uma classe CSS para as imagens (opcional)
 
         // Adiciona a imagem ao container
         itemsContainer.appendChild(imgElement);
       });
     } catch (error) {
-      console.error('Erro ao carregar as imagens:', error);
+      console.error("Erro ao carregar as imagens:", error);
     }
   };
 
@@ -41,9 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("/servico");
       if (!response.ok) throw new Error("Erro ao carregar os serviços.");
       const services = await response.json();
-      
+
       // Verifique os dados carregados
-      console.log(services); 
+      console.log(services);
 
       services.forEach((service) => {
         const serviceItem = document.createElement("div");
@@ -60,7 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
         serviceItem.addEventListener("click", () => {
           if (service) {
             selectedService = service;
-            modalServiceName.textContent = service.nome || "Serviço Indisponível"; // Exibindo nome do serviço
+            modalServiceName.textContent =
+              service.nome || "Serviço Indisponível"; // Exibindo nome do serviço
           } else {
             modalServiceName.textContent = "Serviço Indisponível";
           }

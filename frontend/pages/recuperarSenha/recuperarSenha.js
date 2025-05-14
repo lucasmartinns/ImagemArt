@@ -26,7 +26,7 @@ document
         );
         setTimeout(() => {
           window.location.href = "/home";
-        }, 3000);
+        }, 2000);
       } else {
         throw new Error(data.message);
       }
