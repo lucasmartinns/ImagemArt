@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redefinir Senha</title>
+    <link rel="stylesheet" href="/pages/redefinirSenha/redefinirSenha.css" />
+
+    <link rel="stylesheet" href="/components/animations/animation.css" />
+    <script src="/components/head/head.js"></script>
+  </head>
+  <body>
+    <div class="content-wrapper">
+      <div class="form-container fade-in">
+        <h1>REDEFINIR SENHA</h1>
+        <form id="redefinirSenhaForm">
+          <div class="informations">
+            <div class="password-container">
+              <input
+                type="password"
+                id="senha"
+                name="senha"
+                placeholder="Nova senha"
+                required
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                onclick="togglePassword('senha', this)"
+              >
+                <img
+                  src="/assets/img/password/eye-off.svg"
+                  alt="Mostrar senha"
+                  class="password-icon"
+                />
+              </button>
+            </div>
+            <div class="password-container">
+              <input
+                type="password"
+                id="confirmarSenha"
+                name="confirmarSenha"
+                placeholder="Confirme sua senha"
+                required
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                onclick="togglePassword('confirmarSenha', this)"
+              >
+                <img
+                  src="/assets/img/password/eye-off.svg"
+                  alt="Mostrar senha"
+                  class="password-icon"
+                />
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="cadastrarButton">Redefinir Senha</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="customAlertMessage"></p>
+        <button id="customAlertButton">OK</button>
+      </div>
+    </div>
+
+    <script src="/components/alert/alert.js"></script>
+    <script src="/components/animations/animation.js"></script>
+    <script src="/pages/redefinirSenha/redefinirSenha.js"></script>
+  </body>
+</html>

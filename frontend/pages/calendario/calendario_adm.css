@@ -713,6 +713,10 @@ body {
   background: linear-gradient(90deg, var(--secundary-clr), transparent);
 }
 
+.pending-task:hover #span1 {
+  color: #0a0809;
+}
+
 .right-date i {
   font-size: 1.5rem;
   font-weight: 1000;

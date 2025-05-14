@@ -58,3 +58,7 @@ CREATE TABLE pedido (
   CONSTRAINT fk_pedido_usuario1 FOREIGN KEY (usuario_idusuario) REFERENCES usuario (idusuario),
   CONSTRAINT fk_pedido_servico1 FOREIGN KEY (servico_idservico) REFERENCES servico (idservico)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ALTER TABLE usuarios
+-- ADD COLUMN passwordResetToken VARCHAR(100),
+-- ADD COLUMN passwordResetExpires DATETIME;
