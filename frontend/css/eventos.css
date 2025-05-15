@@ -298,6 +298,9 @@ img:hover {
 .carousel-inner {
     display: none;
 }
+.carousel-container {
+    display: none;
+}
 @media (max-height: 1440px) and (max-width: 1670px){
     .conteudo{
         margin-top: 20%;
@@ -397,29 +400,25 @@ img:hover {
 }
 @media (min-width: 425px) and (max-width: 767px) {
     .conteudo{
-        margin-top: 30%;
+        display: none;
     }
-    .S{
-        margin-top: -26%;
-        font-size: 100px;
-        span{
-            font-size: 50px;
-        }
+    .conteudo2{
+        display: none;
     }
-    .R{
-        margin-top: 58%;
-        margin-left: 30%;
-        font-size: 80px;
-        span{
-            font-size: 50px;
-        }
+    .carousel-container{
+        display: block;
     }
-    .texto-eventos{
-        width: 70%;
-        margin-top: 13%;
+    #navbar-container{
+        display: none;
     }
-    .imagens-eventos{
-        margin-left: 0%;
-        margin-top: 20%;
+    .linha{
+        display: none;
     }
+    .linha1{
+        display: none;
+    }
+    .botaoAcess{
+        display: none;
+    }
+    
 }
