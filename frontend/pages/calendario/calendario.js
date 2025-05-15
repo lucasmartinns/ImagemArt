@@ -276,8 +276,8 @@ addEventTo.addEventListener("input", () => autoFormatTime(addEventTo));
 
 addEventSubmit.addEventListener("click", () => {
   const eventTitle = addEventTitle.value,
-    eventTimeFrom = addEventFrom.value,
-    eventTimeTo = addEventTo.value;
+    eventTimeFrom = addEventFrom.value;
+  let eventTimeTo = addEventTo.value;
 
   if (!eventTitle || !eventTimeFrom || !eventTimeTo) {
     showCustomAlert("Por favor, preencha todos os campos");
@@ -287,6 +287,10 @@ addEventSubmit.addEventListener("click", () => {
   if (!isValidTime(eventTimeFrom) || !isValidTime(eventTimeTo)) {
     showCustomAlert("Formato de Hora Inválido");
     return;
+  }
+
+  if (eventTimeTo === "00:00") {
+    eventTimeTo = "23:59";
   }
 
   if (convertTime(eventTimeFrom) >= convertTime(eventTimeTo)) {

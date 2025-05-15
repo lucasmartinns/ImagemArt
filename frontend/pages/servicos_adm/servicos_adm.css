@@ -343,6 +343,13 @@ h1 span:last-child {
     inset 0px 9.05px 13.58px rgba(255, 255, 255, 0.05);
   overflow: hidden;
 }
+
+tr td {
+  word-break: break-word;
+  white-space: pre-wrap;
+  max-width: 720px;
+}
+
 #detailsTable th,
 #detailsTable td {
   padding: 10px;

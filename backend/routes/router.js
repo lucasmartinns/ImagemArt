@@ -23,7 +23,7 @@ router.post("/login", usuario.Login);
 router.post("/cadastrar", usuario.Cadastrar);
 router.put("/alterar/:id", usuario.AlterarUsuario);
 router.delete("/deletar/:id", usuario.Deletar);
-router.get("/", usuario.ListarUsuario);
+router.get("/", autenticarToken, autenticarAdmin, usuario.ListarUsuario);
 router.get("/buscar/:id", usuario.BuscarUsuarioPorId);
 
 //🔹Rotas de Serviço
