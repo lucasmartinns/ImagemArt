@@ -276,8 +276,8 @@ addEventTo.addEventListener("input", () => autoFormatTime(addEventTo));
 
 addEventSubmit.addEventListener("click", () => {
   const eventTitle = addEventTitle.value,
-    eventTimeFrom = addEventFrom.value,
-    eventTimeTo = addEventTo.value;
+    eventTimeFrom = addEventFrom.value;
+  let eventTimeTo = addEventTo.value;
 
   if (!eventTitle || !eventTimeFrom || !eventTimeTo) {
     showCustomAlert("Por favor, preencha todos os campos");
@@ -287,6 +287,10 @@ addEventSubmit.addEventListener("click", () => {
   if (!isValidTime(eventTimeFrom) || !isValidTime(eventTimeTo)) {
     showCustomAlert("Formato de Hora Inválido");
     return;
+  }
+
+  if (eventTimeTo === "00:00") {
+    eventTimeTo = "23:59";
   }
 
   if (convertTime(eventTimeFrom) >= convertTime(eventTimeTo)) {
@@ -649,3 +653,19 @@ next.addEventListener("click", nextMonth);
 
 // ---------- INICIALIZAÇÃO ----------
 initCalendar();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("token");
+  let tipo = null;
+  if (token) {
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      tipo = payload.tipo;
+    } catch {
+      tipo = null;
+    }
+  }
+  if (!token || tipo !== 1) {
+    window.location.href = "/home";
+  }
+});

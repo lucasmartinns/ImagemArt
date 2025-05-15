@@ -111,6 +111,7 @@ form {
 .informations input {
   display: flex;
   padding: 1rem;
+  padding-right: 2rem;
   text-align: start;
   outline: none;
   font-weight: 500;

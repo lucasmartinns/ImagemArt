@@ -12,14 +12,18 @@ const upload = require("../middlewares/upload");
 const path = require("path");
 const crypto = require("crypto");
 const { enviarEmailRecuperacao } = require("../controllers/mailer");
-const { gerarToken, autenticarToken } = require("../middlewares/auth");
+const {
+  gerarToken,
+  autenticarToken,
+  autenticarAdmin,
+} = require("../middlewares/auth");
 
 //🔹Rotas de Usuário
 router.post("/login", usuario.Login);
 router.post("/cadastrar", usuario.Cadastrar);
 router.put("/alterar/:id", usuario.AlterarUsuario);
 router.delete("/deletar/:id", usuario.Deletar);
-router.get("/", usuario.ListarUsuario);
+router.get("/", autenticarToken, autenticarAdmin, usuario.ListarUsuario);
 router.get("/buscar/:id", usuario.BuscarUsuarioPorId);
 
 //🔹Rotas de Serviço
