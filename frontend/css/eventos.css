@@ -427,9 +427,18 @@ img:hover {
     .texto-eventos {
         width: 50%;
     }
+    .S1{
+        display: none;
+    }
+    .R1{
+        display: none;
+    }
+    .texto-eventos1{
+        display: none;
+    }
 }
 
-@media (max-width: 425px) {
+@media (min-width: 425px) and (max-width: 767px) {
     .conteudo {
         display: none;
     }
@@ -461,5 +470,62 @@ img:hover {
     .botaoAcess {
         display: none;
     }
+    .carrosel{
+        display: flex;
+        justify-self: center;
+        width: 50%;
+        margin-top:-20%
+    }
+    .S1{
+        margin-top: -39%;
+        margin-left: 22%;
+        font-size: 80px;
+        position: absolute;
+        font-weight: 700;
+        color: #E7E7E8;
+        letter-spacing: 6px;
+        span{
+            font-size: 50px;
+            color: #E7E7E8;
+            font-family: "Abhaya Libre";
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 7.8px;
+
+        }
+    }
+    .R1{
+        margin-top: -45%;
+        margin-left: 50%;
+        font-size: 80px;
+        position: absolute;
+        z-index: 2;
+        font-weight: 700;
+        letter-spacing: 6px;
+        span{
+            font-size: 50px;
+            color: #E7E7E8;
+            font-family: "Abhaya Libre";
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 7.8px;
+
+        }
+    }
+    .texto-eventos1{
+        justify-self: center;
+        margin: auto;
+        width: 70%;
+        margin-top: 5%;
+        color: #d4d4d4;
+        font-family: "Montserrat";
+        font-size: 16px;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 4px;
+    }
+    
 
 }
