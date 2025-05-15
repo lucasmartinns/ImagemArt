@@ -45,6 +45,13 @@ async function salvarAlteracoes(event) {
   const senha = document.getElementById("senha").value;
   const confirmarSenha = document.getElementById("confirmarSenha").value;
 
+  // Obtendo o ID do usuário a partir do token
+  const usuarioId = getUserIdFromToken();
+  if (!usuarioId) {
+    showCustomAlert("Não foi possível identificar o usuário.");
+    return;
+  }
+
   // Obtendo os dados do usuário do localStorage
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -84,8 +91,6 @@ async function salvarAlteracoes(event) {
     return;
   }
 
-  const usuarioId = usuario.id; // ID do usuário armazenado no localStorage
-
   const dados = {
     nome: nome,
     senha: senha || undefined, // Se não houver senha, envia undefined
@@ -115,21 +120,27 @@ async function salvarAlteracoes(event) {
       return response.json();
     })
     .then((data) => {
-      if (data.success) {
-        // Atualiza apenas a senha no localStorage se necessário
-        if (senha) usuario.senha = senha;
-        localStorage.setItem("usuario", JSON.stringify(usuario));
-        console.log("Usuário atualizado:", usuario);
-        showCustomAlert("Perfil atualizado com sucesso!");
-      } else {
-        console.error("Erro na resposta do servidor:", data);
-        showCustomAlert("Alterações salvas com sucesso!");
-      }
+      showCustomAlert("Alterações salvas com sucesso!");
+      setTimeout(() => {
+        window.location.href = "/home";
+      }, 1500);
     })
     .catch((err) => {
       console.error("Erro completo:", err);
       showCustomAlert("Erro na comunicação com o servidor: " + err.message);
     });
+}
+
+// Função para obter o ID do usuário a partir do token
+function getUserIdFromToken() {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.id;
+  } catch {
+    return null;
+  }
 }
 
 // Chama a função para carregar os dados do usuário ao carregar a página
