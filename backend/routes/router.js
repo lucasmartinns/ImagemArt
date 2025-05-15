@@ -25,7 +25,7 @@ router.get("/buscar/:id", usuario.BuscarUsuarioPorId);
 //🔹Rotas de Serviço
 router.post("/criarservico", servico.criarServico);
 router.put("/alterarservico/:id", servico.alterarServico);
-router.get("/servico", servico.listarServicos);
+router.get("/servico",servico.uploadImagem , servico.listarServicos);
 router.get("/buscarservico/:id", servico.buscarServicoPorId);
 router.get("/servico/:id/variacoes", servico.buscarVariacoesPorServico);
 router.delete("/deletarservico/:id", servico.deletarServico);

@@ -21,7 +21,7 @@ function initializeNavbar() {
   if (navLinks) {
     navLinks.innerHTML = `
       <a href="/home">Home</a>
-      <a href="${isAdmin ? "/servico_adm" : "/servico_page"}">Serviços</a>
+      <a href="${isAdmin ? "/servico_page" : "/servico_page"}">Serviços</a>
       ${isAdmin ? '<a href="/calendario">Calendário</a>' : ""}
     `;
   }

@@ -3,9 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const itemModal = document.getElementById("itemModal");
   const closeModal = document.querySelector(".close");
   const modalServiceName = document.getElementById("modalServiceName");
-  const servicePrice = document
-    .getElementById("servicePrice")
-    .querySelector("span");
+  const servicePrice = document.getElementById("servicePrice").querySelector("span");
   const serviceQuantity = document.getElementById("serviceQuantity");
   const serviceDropdown = document.getElementById("serviceDropdown");
   const calculateBudget = document.getElementById("calculateBudget");
@@ -13,38 +11,66 @@ document.addEventListener("DOMContentLoaded", () => {
   const placeOrder = document.getElementById("placeOrder");
 
   let selectedService = null;
+  let variacoesServico = []; // guarda as variações do serviço selecionado
 
   // Função para carregar imagens do banco
   const carregarImagens = async () => {
     try {
-      const response = await fetch("/imagens"); // Fazendo a requisição para buscar as imagens
+      const response = await fetch('/imagens'); // Fazendo a requisição para buscar as imagens
       const imagens = await response.json(); // Recebe as imagens do backend
 
-      imagens.forEach((imagem) => {
-        const imgElement = document.createElement("img");
+      imagens.forEach(imagem => {
+        const imgElement = document.createElement('img');
         imgElement.src = imagem.caminho; // Caminho da imagem no backend
-        imgElement.alt = "Imagem de Serviço"; // Texto alternativo para acessibilidade
-        imgElement.classList.add("imagem-servico"); // Adiciona uma classe CSS para as imagens (opcional)
+        imgElement.alt = 'Imagem de Serviço'; // Texto alternativo para acessibilidade
+        imgElement.classList.add('imagem-servico'); // Adiciona uma classe CSS para as imagens (opcional)
 
         // Adiciona a imagem ao container
         itemsContainer.appendChild(imgElement);
       });
     } catch (error) {
-      console.error("Erro ao carregar as imagens:", error);
+      console.error('Erro ao carregar as imagens:', error);
     }
   };
 
   // Carrega as imagens quando a página for carregada
   carregarImagens();
 
-  // Função para carregar os serviços
+  // Função para atualizar o preço baseado na variação selecionada e quantidade
+  function atualizaPrecoCalculado() {
+    const quantity = parseInt(serviceQuantity.value, 10) || 1;
+    const selectedOption = serviceDropdown.selectedOptions[0];
+    if (!selectedOption) return;
+
+    const precoBase = parseFloat(selectedOption.getAttribute("data-price"));
+    const quantidadeMinima = parseInt(selectedOption.getAttribute("data-quantidade-minima")) || 1;
+
+    // Encontrar o preço correto baseado na quantidade
+    // Procura a maior quantidade_minima <= quantity e mesma descrição
+    let precoFinal = precoBase;
+    if (variacoesServico.length > 0) {
+      const opDescricao = selectedOption.value;
+      const variacoesValidas = variacoesServico
+        .filter(v => v.quantidade_minima <= quantity && v.descricao === opDescricao)
+        .sort((a,b) => b.quantidade_minima - a.quantidade_minima);
+
+      if (variacoesValidas.length > 0) {
+        precoFinal = variacoesValidas[0].preco;
+      }
+    }
+
+    const quantidadeFinal = Math.max(quantity, quantidadeMinima);
+    const total = precoFinal * quantidadeFinal;
+    servicePrice.textContent = total.toFixed(2);
+  }
+
+  // Função para buscar serviços e montar itens clicáveis
   const fetchServices = async () => {
     try {
       const response = await fetch("/servico");
       if (!response.ok) throw new Error("Erro ao carregar os serviços.");
       const services = await response.json();
 
-      // Verifique os dados carregados
       console.log(services);
 
       services.forEach((service) => {
@@ -58,43 +84,42 @@ document.addEventListener("DOMContentLoaded", () => {
           <h3>${service.nome}</h3>
         `;
 
-        // Torna o item clicável
         serviceItem.addEventListener("click", () => {
           if (service) {
             selectedService = service;
-            modalServiceName.textContent =
-              service.nome || "Serviço Indisponível"; // Exibindo nome do serviço
+            modalServiceName.textContent = service.nome || "Serviço Indisponível";
           } else {
             modalServiceName.textContent = "Serviço Indisponível";
           }
 
-          serviceDropdown.innerHTML = ""; // Limpa as opções anteriores
+          serviceDropdown.innerHTML = "";
           servicePrice.textContent = "0.00";
 
-          // Faz uma requisição para buscar as variações do serviço
           fetch(`/servico/${service.idservico}/variacoes`)
             .then((res) => {
               if (!res.ok) throw new Error("Erro ao carregar variações");
               return res.json();
             })
             .then((variacoes) => {
-              if (variacoes.length > 0) {
+              variacoesServico = variacoes;
+              serviceDropdown.innerHTML = "";
+
+              if (variacoes && variacoes.length > 0) {
                 variacoes.forEach((variacao) => {
                   const option = document.createElement("option");
                   option.value = variacao.descricao;
                   option.setAttribute("data-price", variacao.preco);
+                  option.setAttribute("data-quantidade-minima", variacao.quantidade_minima || 1);
                   option.textContent = variacao.descricao;
                   serviceDropdown.appendChild(option);
                 });
 
-                // Define o preço da primeira variação como inicial
-                const precoInicial = parseFloat(variacoes[0].preco);
-                servicePrice.textContent = precoInicial.toFixed(2);
+                atualizaPrecoCalculado();
               } else {
-                // Sem variações, usar valor padrão do serviço
                 const option = document.createElement("option");
                 option.value = service.nome;
                 option.setAttribute("data-price", service.valor || 0);
+                option.setAttribute("data-quantidade-minima", 1);
                 option.textContent = service.nome;
                 serviceDropdown.appendChild(option);
 
@@ -126,11 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
     budgetResult.textContent = "";
   });
 
-  serviceDropdown.addEventListener("change", () => {
-    const selectedOption = serviceDropdown.selectedOptions[0];
-    const price = parseFloat(selectedOption.getAttribute("data-price"));
-    servicePrice.textContent = price.toFixed(2);
-  });
+  serviceDropdown.addEventListener("change", atualizaPrecoCalculado);
+  serviceQuantity.addEventListener("input", atualizaPrecoCalculado);
 
   calculateBudget.addEventListener("click", async () => {
     const quantity = parseInt(serviceQuantity.value, 10);
@@ -143,18 +165,37 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (isNaN(quantity) || quantity <= 0) {
-      showCustomAlert("Por favor, insira uma quantidade válida.");
+      alert("Por favor, insira uma quantidade válida.");
       return;
     }
 
     if (!selectedService) {
-      showCustomAlert("Por favor, selecione um serviço.");
+      alert("Por favor, selecione um serviço.");
       return;
     }
 
+    const selectedOption = serviceDropdown.selectedOptions[0];
+    const quantidadeMinima = parseInt(selectedOption.getAttribute("data-quantidade-minima")) || 1;
+    const quantidadeFinal = Math.max(quantity, quantidadeMinima);
+
+    let precoBase = parseFloat(selectedOption.getAttribute("data-price"));
+    let precoFinal = precoBase;
+    if (variacoesServico.length > 0) {
+      const opDescricao = selectedOption.value;
+      const variacoesValidas = variacoesServico
+        .filter(v => v.quantidade_minima <= quantidadeFinal && v.descricao === opDescricao)
+        .sort((a,b) => b.quantidade_minima - a.quantidade_minima);
+
+      if (variacoesValidas.length > 0) {
+        precoFinal = variacoesValidas[0].preco;
+      }
+    }
+
+    const total = precoFinal * quantidadeFinal;
+    budgetResult.textContent = `Total: R$ ${total.toFixed(2)}`;
+
     calculateBudget.disabled = true;
     calculateBudget.textContent = "Enviando...";
-    budgetResult.textContent = "Criando pedido...";
 
     try {
       const response = await fetch("/pedidos", {
@@ -165,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({
           usuario_idusuario: userId,
           servico_idservico: selectedService.idservico,
-          quantidade: quantity,
+          quantidade: quantidadeFinal,
         }),
       });
 
