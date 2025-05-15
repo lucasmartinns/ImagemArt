@@ -1,48 +1,47 @@
-const db = require('../config/database');
-const bcrypt = require('bcrypt');
+const db = require("../config/database");
+const bcrypt = require("bcrypt");
 const { gerarToken } = require("../middlewares/auth");
 
 const usuario = {
-
   // 🔹 Login de usuário
   Login: async (req, res) => {
     const { email, senha } = req.body;
 
     try {
-      const [results] = await db.query('SELECT * FROM usuario WHERE email = ?', [email]);
+      const [results] = await db.query(
+        "SELECT * FROM usuario WHERE email = ?",
+        [email]
+      );
 
       if (results.length === 0) {
-        return res.status(401).json({ error: 'E-mail ou senha incorretos' });
+        return res.status(401).json({ error: "E-mail ou senha incorretos" });
       }
 
       const usuario = results[0];
       const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
 
       if (!senhaCorreta) {
-        return res.status(401).json({ error: 'E-mail ou senha incorretos' });
+        return res.status(401).json({ error: "E-mail ou senha incorretos" });
       }
 
       const token = gerarToken({
         id: usuario.idusuario,
         nome: usuario.nome,
         email: usuario.email,
-        tipo: usuario.tipo_usuario_idtipo_usuario
+        tipo: usuario.tipo_usuario_idtipo_usuario,
       });
 
       return res.status(200).json({
-        mensagem: 'Login realizado com sucesso',
+        mensagem: "Login realizado com sucesso",
         usuario: {
-          id: usuario.idusuario,
           nome: usuario.nome,
           email: usuario.email,
-          tipo_usuario_idtipo_usuario: usuario.tipo_usuario_idtipo_usuario
         },
-        token
+        token,
       });
-
     } catch (err) {
-      console.error('Erro ao buscar usuário:', err);
-      return res.status(500).json({ error: 'Erro ao processar o login' });
+      console.error("Erro ao buscar usuário:", err);
+      return res.status(500).json({ error: "Erro ao processar o login" });
     }
   },
 
@@ -65,7 +64,10 @@ const usuario = {
     }
 
     try {
-      const [results] = await db.query("SELECT * FROM usuario WHERE idusuario = ?", [id]);
+      const [results] = await db.query(
+        "SELECT * FROM usuario WHERE idusuario = ?",
+        [id]
+      );
 
       if (results.length === 0) {
         return res.status(404).json({ error: "Usuário não encontrado!" });
@@ -79,7 +81,8 @@ const usuario = {
 
   // 🔹 Cadastrar novo usuário
   Cadastrar: async (req, res) => {
-    let { nome, email, senha, telefone, tipo_usuario_idtipo_usuario } = req.body;
+    let { nome, email, senha, telefone, tipo_usuario_idtipo_usuario } =
+      req.body;
 
     console.log("Corpo recebido no cadastro:", req.body);
 
@@ -92,68 +95,87 @@ const usuario = {
       tipo: typeof tipo_usuario_idtipo_usuario,
     });
 
-    if (!nome || !email || !senha || !telefone || ![1, 2].includes(Number(tipo_usuario_idtipo_usuario))) {
-      return res.status(400).json({ error: "Preencha todos os campos corretamente!" });
+    if (
+      !nome ||
+      !email ||
+      !senha ||
+      !telefone ||
+      ![1, 2].includes(Number(tipo_usuario_idtipo_usuario))
+    ) {
+      return res
+        .status(400)
+        .json({ error: "Preencha todos os campos corretamente!" });
     }
-    
 
     if (![1, 2].includes(tipo_usuario_idtipo_usuario)) {
       return res.status(400).json({ error: "Tipo de usuário inválido!" });
     }
 
     try {
-      const [existingUser] = await db.query("SELECT * FROM usuario WHERE email = ?", [email]);
+      const [existingUser] = await db.query(
+        "SELECT * FROM usuario WHERE email = ?",
+        [email]
+      );
 
       if (existingUser.length > 0) {
-      return res.status(400).json({ mensagem: "Usuário já cadastrado!" });
+        return res.status(400).json({ mensagem: "Usuário já cadastrado!" });
       }
 
       const hashedSenha = await bcrypt.hash(senha, 10);
 
       const sql = `INSERT INTO usuario (nome, email, senha, telefone, tipo_usuario_idtipo_usuario) VALUES (?, ?, ?, ?, ?)`;
-      const [results] = await db.query(sql, [nome, email, hashedSenha, telefone, tipo_usuario_idtipo_usuario]);
+      const [results] = await db.query(sql, [
+        nome,
+        email,
+        hashedSenha,
+        telefone,
+        tipo_usuario_idtipo_usuario,
+      ]);
 
-      return res.status(201).json({ message: "Usuário criado com sucesso!", id: results.insertId });
-
+      return res
+        .status(201)
+        .json({ message: "Usuário criado com sucesso!", id: results.insertId });
     } catch (error) {
       console.error("Erro ao processar o cadastro:", error);
       return res.status(500).json({ error: "Erro interno do servidor" });
     }
   },
 
-  
-// 🔹 Alterar usuário
-AlterarUsuario: async (req, res) => {
-  const id = req.params.id;
-  console.log(req.body)
-  const { nome, senha } = req.body;
+  // 🔹 Alterar usuário
+  AlterarUsuario: async (req, res) => {
+    const id = req.params.id;
+    console.log(req.body);
+    const { nome, senha } = req.body;
 
-  console.log(req.body)
-  if (!nome || !senha) {
-    return res.status(400).json({ mensagem: "Preencha todos os campos!" });
-  }
-
-  try {
-    let sql = `UPDATE usuario SET nome = ?, senha = ?`;
-    const params = [nome, senha];
-
-    if (senha) {
-      const senhaCriptografada = await bcrypt.hash(senha, 10);
-      sql += `, senha = ?`;
-      params.push(senhaCriptografada);
+    console.log(req.body);
+    if (!nome || !senha) {
+      return res.status(400).json({ mensagem: "Preencha todos os campos!" });
     }
 
-    sql += ` WHERE idusuario = ?`;
-    params.push(id);
+    try {
+      let sql = `UPDATE usuario SET nome = ?, senha = ?`;
+      const params = [nome, senha];
 
-    await db.query(sql, params);
+      if (senha) {
+        const senhaCriptografada = await bcrypt.hash(senha, 10);
+        sql += `, senha = ?`;
+        params.push(senhaCriptografada);
+      }
 
-    return res.status(200).json({ mensagem: "Usuário alterado com sucesso!" });
+      sql += ` WHERE idusuario = ?`;
+      params.push(id);
 
-  } catch (error) {
-    return res.status(500).json({ error: "Erro ao processar a solicitação", error });
-  }
-},
+      await db.query(sql, params);
+
+      return res
+        .status(200)
+        .json({ mensagem: "Usuário alterado com sucesso!" });
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ error: "Erro ao processar a solicitação", error });
+    }
+  },
 
   // 🔹 Deletar usuário
   Deletar: async (req, res) => {

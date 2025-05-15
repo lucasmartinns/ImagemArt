@@ -649,3 +649,19 @@ next.addEventListener("click", nextMonth);
 
 // ---------- INICIALIZAÇÃO ----------
 initCalendar();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("token");
+  let tipo = null;
+  if (token) {
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      tipo = payload.tipo;
+    } catch {
+      tipo = null;
+    }
+  }
+  if (!token || tipo !== 1) {
+    window.location.href = "/home";
+  }
+});

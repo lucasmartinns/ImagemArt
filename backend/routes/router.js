@@ -12,7 +12,11 @@ const upload = require("../middlewares/upload");
 const path = require("path");
 const crypto = require("crypto");
 const { enviarEmailRecuperacao } = require("../controllers/mailer");
-const { gerarToken, autenticarToken } = require("../middlewares/auth");
+const {
+  gerarToken,
+  autenticarToken,
+  autenticarAdmin,
+} = require("../middlewares/auth");
 
 //🔹Rotas de Usuário
 router.post("/login", usuario.Login);

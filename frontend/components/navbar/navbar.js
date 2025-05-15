@@ -8,13 +8,23 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => console.error("Erro ao carregar a navbar:", error));
 });
 
-function initializeNavbar() {
-  const subMenu = document.getElementById("subMenu");
+function getUserTypeFromToken() {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.tipo;
+  } catch {
+    return null;
+  }
+}
 
-  // Pegando usuário do localStorage
+function initializeNavbar() {
   const user = JSON.parse(localStorage.getItem("usuario"));
-  const isLoggedIn = !!user;
-  const isAdmin = user && user.tipo_usuario_idtipo_usuario === 1;
+  const subMenu = document.getElementById("subMenu");
+  const tipo = getUserTypeFromToken();
+  const isLoggedIn = !!tipo;
+  const isAdmin = tipo === 1;
 
   // Atualiza os links da navbar com base no tipo de usuário
   const navLinks = document.querySelector("nav ul li");
@@ -25,7 +35,6 @@ function initializeNavbar() {
       ${isAdmin ? '<a href="/calendario">Calendário</a>' : ""}
     `;
   }
-  
 
   window.toggleMenu = function () {
     subMenu.classList.toggle("open-menu");

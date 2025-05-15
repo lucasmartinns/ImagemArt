@@ -23,7 +23,7 @@ function autenticarToken(req, res, next) {
   jwt.verify(token, JWT_SECRET, (err, usuario) => {
     if (err)
       return res.status(403).json({ mensagem: "Token inválido ou expirado" });
-    req.usuario = usuario; // Agora você pode acessar os dados do usuário nas rotas protegidas
+    req.usuario = usuario;
     next();
   });
 }
@@ -33,4 +33,14 @@ function gerarToken(payload) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
 }
 
-module.exports = { autenticarToken, gerarToken };
+const autenticarAdmin = (req, res, next) => {
+  if (!req.usuario) {
+    return res.status(401).json({ mensagem: "Usuário não autenticado" });
+  }
+  if (req.usuario.tipo !== 1) {
+    return res.status(403).json({ mensagem: "Acesso permitido apenas para administradores" });
+  }
+  next();
+};
+
+module.exports = { autenticarToken, gerarToken, autenticarAdmin };
