@@ -1,23 +1,39 @@
 const connection = require('../config/database');
+const upload = require('../middlewares/upload'); // Importa o middleware de upload
 
 const servico = {
-    // 🔹 Criar um novo serviço (com ou sem variações)
+    // 🔹 Middleware de upload (para usar na rota)
+    uploadImagem: upload.single('imagem'),
+
+    // 🔹 Criar um novo serviço (com ou sem variações + imagem)
     criarServico: async (req, res) => {
-        const { nome, descricao, valor, variacoes } = req.body;
+        const { nome, descricao, valor } = req.body;
 
         if (!nome || !valor) {
             return res.status(400).json({ error: "Nome e valor são obrigatórios!" });
         }
 
+        // Verifica se há uma imagem
+        const imagem = req.file ? req.file.filename : null;
+
+        // Trata as variações (esperadas como JSON no body)
+        let variacoes = [];
+        if (req.body.variacoes) {
+            try {
+                variacoes = JSON.parse(req.body.variacoes);
+            } catch {
+                return res.status(400).json({ error: "Variações inválidas. Envie um JSON válido!" });
+            }
+        }
+
         try {
             const [result] = await connection.query(
-                "INSERT INTO servico (nome, descricao, valor) VALUES (?, ?, ?)",
-                [nome, descricao, valor]
+                "INSERT INTO servico (nome, descricao, valor, imagem) VALUES (?, ?, ?, ?)",
+                [nome, descricao, valor, imagem]
             );
 
             const servicoId = result.insertId;
 
-            // Inserir variações se existirem
             if (Array.isArray(variacoes)) {
                 for (const v of variacoes) {
                     await connection.query(
@@ -118,16 +134,16 @@ const servico = {
         const servicoId = req.params.id;
 
         try {
-            const [results] = await connection.query(
-                "SELECT * FROM servico_variacao WHERE servico_id = ?",
+            const [variacoes] = await connection.query(
+                "SELECT descricao, id, servico_id, preco, quantidade_minima FROM servico_variacao WHERE servico_id = ?",
                 [servicoId]
             );
 
-            if (results.length === 0) {
+            if (variacoes.length === 0) {
                 return res.status(404).json({ mensagem: "Nenhuma variação encontrada para este serviço." });
             }
 
-            res.json(results);
+            res.json(variacoes);
         } catch (err) {
             res.status(500).json({ error: "Erro ao buscar variações", err });
         }
