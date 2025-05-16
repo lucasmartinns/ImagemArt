@@ -32,6 +32,8 @@ document
       "hotmail.com",
       "outlook.com",
       "yahoo.com",
+      "proton.me",
+      "protonmail.com",
     ];
     if (!dominiosPermitidos.includes(dominio)) {
       showCustomAlert("Por favor, use um provedor de email conhecido.");
@@ -44,6 +46,38 @@ document
       showCustomAlert(
         "Por favor, insira um número de telefone válido com DDD."
       );
+      return;
+    }
+
+    // Verificar se o email já está cadastrado
+    try {
+      const resp = await fetch(
+        `/verificar-email?email=${encodeURIComponent(email)}`
+      );
+      const data = await resp.json();
+      if (data.existe) {
+        showCustomAlert("O email já está cadastrado.");
+        return;
+      }
+    } catch (err) {
+      showCustomAlert("Erro ao verificar email. Tente novamente.");
+      return;
+    }
+
+    // Verificar se o telefone já está cadastrado
+    try {
+      const respTel = await fetch(
+        `/verificar-telefone?telefone=${encodeURIComponent(
+          telefone.replace(/\D/g, "")
+        )}`
+      );
+      const dataTel = await respTel.json();
+      if (dataTel.existe) {
+        showCustomAlert("O telefone já está cadastrado.");
+        return;
+      }
+    } catch (err) {
+      showCustomAlert("Erro ao verificar telefone. Tente novamente.");
       return;
     }
 
