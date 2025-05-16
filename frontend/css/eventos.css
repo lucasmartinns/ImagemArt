@@ -303,6 +303,10 @@ img:hover {
 .carousel-container {
     display: none;
 }
+.botaoAcess1{
+    display: none;
+
+}
 
 @media (max-height: 1440px) and (max-width: 1670px) {
     .conteudo {
@@ -466,15 +470,12 @@ img:hover {
     .linha1 {
         display: none;
     }
-
-    .botaoAcess {
-        display: none;
-    }
     .carrosel{
         display: flex;
         justify-self: center;
         width: 50%;
-        margin-top:-20%
+        margin-top: -20%;
+    
     }
     .S1{
         margin-top: -39%;
@@ -483,25 +484,6 @@ img:hover {
         position: absolute;
         font-weight: 700;
         color: #E7E7E8;
-        letter-spacing: 6px;
-        span{
-            font-size: 50px;
-            color: #E7E7E8;
-            font-family: "Abhaya Libre";
-            font-style: normal;
-            font-weight: 700;
-            line-height: normal;
-            letter-spacing: 7.8px;
-
-        }
-    }
-    .R1{
-        margin-top: -45%;
-        margin-left: 50%;
-        font-size: 80px;
-        position: absolute;
-        z-index: 2;
-        font-weight: 700;
         letter-spacing: 6px;
         span{
             font-size: 50px;
@@ -526,6 +508,164 @@ img:hover {
         line-height: normal;
         letter-spacing: 4px;
     }
+    .R1{
+        margin-top: -44%;
+        margin-left: 55%;
+        font-size: 80px;
+        position: absolute;
+        z-index: 2;
+        font-weight: 700;
+        letter-spacing: 6px;
+        span{
+            font-size: 50px;
+            color: #E7E7E8;
+            font-family: "Abhaya Libre";
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 7.8px;}}
+
+    .botaoAcess{
+        display: none;
+
+    }
+    .botaoAcess1{
+        display: block;
+        justify-content: center;
+        text-align: center;
+        font-size: 18px;
+        font-family: "abhaya Libre";
+        letter-spacing: 2px;
+        font-weight: 600;
+        background-color: #63783D;
+        color: #E7E7E8;
+        border: 1px solid #1D1D1D;
+        border-radius: 15px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+        margin-left: 20%;
+        margin-top: 20%;
+    }
+    .botaoAcess1 a {
+        color: #E7E7E8;
+        text-decoration: none;
+    }
     
+    .botaoAcess1:hover {
+        cursor: pointer;
+        background-color: #46552b;
+        transform: translate(0, -5px);
+    }
+    
+    .texto-eventos1{
+        justify-self: center;
+        margin: auto;
+        width: 70%;
+        margin-top: 5%;
+        color: #d4d4d4;
+        font-family: "Montserrat";
+        font-size: 16px;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 4px;
+    }
+
+}
+
+@media (min-width: 375px) and (max-width: 424px) {
+    .conteudo{
+        display: none;
+    }
+    .conteudo2{
+        display: none;
+    }
+    .carousel-inner {
+        display: block !important;
+    }
+    .carousel{
+        justify-self: center;
+        width: 50%;
+        margin-top: -17.5%;
+    }
+    .botaoAcess{
+        display: none;  
+    }
+    .botaoAcess1{
+        display: block;
+        justify-content: center;
+        text-align: center;
+        font-size: 18px;
+        font-family: "abhaya Libre";
+        letter-spacing: 2px;
+        font-weight: 600;
+        background-color: #63783D;
+        color: #E7E7E8;
+        border: 1px solid #1D1D1D;
+        border-radius: 15px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+        margin-left: 12%;
+        
+    }
+    .botaoAcess1 a {
+        color: #E7E7E8;
+        text-decoration: none;
+    }
+    .linha{
+        display: none;
+    }
+    
+    .botaoAcess1:hover {
+        cursor: pointer;
+        background-color: #46552b;
+        transform: translate(0, -5px);
+    }
+    .S1{
+        margin-top: -36.5%;
+        margin-left: 22%;
+        font-size: 70px;
+        position: absolute;
+        font-weight: 700;
+        color: #E7E7E8;
+        letter-spacing: 6px;
+        span{
+            font-size: 50px;
+            color: #E7E7E8;
+            font-family: "Abhaya Libre";
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 7.8px;
+
+        }
+    }
+    .texto-eventos1{
+        justify-self: center;
+        margin: auto;
+        width: 70%;
+        margin-top: 5%;
+        color: #d4d4d4;
+        font-family: "Montserrat";
+        font-size: 16px;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 4px;
+    }
+    .R1{
+        margin-top: -44%;
+        margin-left: 55%;
+        font-size: 80px;
+        position: absolute;
+        z-index: 2;
+        font-weight: 700;
+        letter-spacing: 6px;
+        span{
+            font-size: 50px;
+            color: #E7E7E8;
+            font-family: "Abhaya Libre";
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 7.8px;}}
 
 }
