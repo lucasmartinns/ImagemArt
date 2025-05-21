@@ -7,7 +7,7 @@ const usuario = require("../controllers/usuario");
 const connection = require("../config/database");
 const servico = require("../controllers/servico");
 const pedido = require("../controllers/pedidos");
-const calendario = require("../controllers/calendario");
+const calendario = require("../controllers/calendarioController");
 const upload = require("../middlewares/upload");
 const path = require("path");
 const crypto = require("crypto");
@@ -29,7 +29,7 @@ router.get("/buscar/:id", usuario.BuscarUsuarioPorId);
 //🔹Rotas de Serviço
 router.post("/criarservico", servico.criarServico);
 router.put("/alterarservico/:id", servico.alterarServico);
-router.get("/servico",servico.uploadImagem , servico.listarServicos);
+router.get("/servico", servico.uploadImagem, servico.listarServicos);
 router.get("/buscarservico/:id", servico.buscarServicoPorId);
 router.get("/servico/:id/variacoes", servico.buscarVariacoesPorServico);
 router.delete("/deletarservico/:id", servico.deletarServico);
@@ -78,6 +78,55 @@ router.get("/edit", (req, res) => {
 // 🔹Rotas cadastro
 router.get("/cadastrar", (req, res) => {
   res.sendFile(path.join(FRONTEND_DIR, "pages", "cadastro", "cadastro.html"));
+});
+
+// 🔹Verificar se email já está cadastrado
+router.get("/verificar-email", async (req, res) => {
+  const { email } = req.query;
+  if (!email) {
+    return res
+      .status(400)
+      .json({ existe: false, message: "Email não informado" });
+  }
+  try {
+    const [results] = await connection.query(
+      "SELECT idusuario FROM usuario WHERE email = ?",
+      [email]
+    );
+    if (results.length > 0) {
+      return res.json({ existe: true });
+    } else {
+      return res.json({ existe: false });
+    }
+  } catch (err) {
+    console.error("Erro ao verificar email:", err);
+    return res.status(500).json({ existe: false, message: "Erro no servidor" });
+  }
+});
+
+// 🔹Verificar se telefone já está cadastrado
+router.get("/verificar-telefone", async (req, res) => {
+  const { telefone } = req.query;
+  if (!telefone) {
+    return res
+      .status(400)
+      .json({ existe: false, message: "Telefone não informado" });
+  }
+  try {
+    // Remove todos os caracteres não numéricos do telefone salvo no banco e do telefone recebido
+    const [results] = await connection.query(
+      "SELECT idusuario FROM usuario WHERE REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(telefone, '(', ''), ')', ''), '-', ''), ' ', ''), '.', '') = ?",
+      [telefone.replace(/\D/g, "")]
+    );
+    if (results.length > 0) {
+      return res.json({ existe: true });
+    } else {
+      return res.json({ existe: false });
+    }
+  } catch (err) {
+    console.error("Erro ao verificar telefone:", err);
+    return res.status(500).json({ existe: false, message: "Erro no servidor" });
+  }
 });
 
 // 🔹Rota calendario
@@ -131,7 +180,7 @@ router.get("/imagens", (req, res) => {
   });
 });
 
-//🔹Rotas de Recuperação de Senha
+//🔹Rota de Recuperação de Senha
 router.post("/recuperar-senha", async (req, res) => {
   try {
     const { email } = req.body;
@@ -187,12 +236,12 @@ router.post("/recuperar-senha", async (req, res) => {
   }
 });
 
-// Rota para processar redefinição de senha
+// 🔹Rota para processar redefinição de senha
 router.post("/redefinir-senha", async (req, res) => {
   const { token, newPassword } = req.body;
 
   try {
-    // Check token validity and expiration
+    // Verifica se o token é valido
     const [user] = await db.query(
       "SELECT * FROM usuario WHERE passwordResetToken = ? AND passwordResetExpires > ?",
       [token, new Date()]
@@ -205,10 +254,10 @@ router.post("/redefinir-senha", async (req, res) => {
       });
     }
 
-    // Hash new password
+    // Criptografa a nova senha
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-    // Update password and clear reset token
+    // Update no banco de dados
     await db.query(
       "UPDATE usuario SET senha = ?, passwordResetToken = NULL, passwordResetExpires = NULL WHERE passwordResetToken = ?",
       [hashedPassword, token]

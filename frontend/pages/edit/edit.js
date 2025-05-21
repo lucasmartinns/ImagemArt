@@ -16,6 +16,7 @@ function togglePassword(inputId, button) {
 function preencheFormulario(usuario) {
   // Preenche o campo de email (não editável)
   document.getElementById("email").value = usuario.email;
+  document.getElementById("nome-edit").value = usuario.nome;
   console.log(usuario.email);
 
   // Define o nome como texto não editável (apenas visual)
@@ -42,6 +43,7 @@ async function salvarAlteracoes(event) {
 
   // Obtém o nome do elemento (agora apenas visual, não um campo de entrada)
   const nome = document.getElementById("nome").textContent;
+  const nomeEdit = document.getElementById("nome-edit").value;
   const senha = document.getElementById("senha").value;
   const confirmarSenha = document.getElementById("confirmarSenha").value;
 
@@ -92,7 +94,7 @@ async function salvarAlteracoes(event) {
   }
 
   const dados = {
-    nome: nome,
+    nome: nomeEdit || nome, // Se não houver novo nome, mantém o atual
     senha: senha || undefined, // Se não houver senha, envia undefined
   };
 
@@ -120,9 +122,9 @@ async function salvarAlteracoes(event) {
       return response.json();
     })
     .then((data) => {
-      showCustomAlert("Alterações salvas com sucesso!");
+      showCustomAlert("Alterações salvas com sucesso! Faça login novamente.");
       setTimeout(() => {
-        window.location.href = "/home";
+        logout(); // Remove token e usuário do localStorage e redireciona para /login
       }, 1500);
     })
     .catch((err) => {
@@ -141,6 +143,13 @@ function getUserIdFromToken() {
   } catch {
     return null;
   }
+}
+
+// Função para realizar logout
+function logout() {
+  localStorage.removeItem("usuario");
+  localStorage.removeItem("token");
+  window.location.href = "/login";
 }
 
 // Chama a função para carregar os dados do usuário ao carregar a página

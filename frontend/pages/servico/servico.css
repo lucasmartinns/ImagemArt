@@ -743,4 +743,8 @@ tr td {
     grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: 1rem;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6bb7bbaa07c7d4386f71d5ae7ed55f603537db02
