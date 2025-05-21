@@ -26,6 +26,11 @@ body {
     background-color: #0A0809 !important;
 }
 
+span {
+    width: 10vw;
+    height: 10vh;
+}
+
 .carousel-control-prev-icon .span-icon {
     opacity: 0;
 }
@@ -69,6 +74,7 @@ body {
     margin-top: -2%;
     margin-left: 9%;
     z-index: 1;
+    transition-duration: 0.5s;
 }
 
 .imagem-casamento img {
@@ -156,8 +162,8 @@ body {
 
 button {
     display: flex;
-    width: 284.12px;
-    height: 57.238px;
+    width: 20vw;
+    height: 5vh;
     flex-shrink: 0;
     color: #E7E7E8;
     font-size: 16px;
@@ -231,10 +237,6 @@ img:hover {
     overflow: hidden;
 }
 
-.imagem-casamento:hover {
-    transform: scale(1.2);
-}
-
 .imagem-casamento::after {
     content: '';
     position: absolute;
@@ -247,6 +249,13 @@ img:hover {
 
 .imagem-casamento:hover::after {
     box-shadow: inset 0 0 30px rgba(0, 0, 0, 1);
+}
+
+.imagem-casamento:hover {
+    transform: scale(1.2);
+}
+.imagem-casamento img:hover {
+    transform: scale(1.0);
 }
 
 .imagem-casamento img {
@@ -303,9 +312,21 @@ img:hover {
 .carousel-container {
     display: none;
 }
-.botaoAcess1{
-    display: none;
 
+.botaoAcess1 {
+    display: none;
+}
+
+.S1 {
+    display: none;
+}
+
+.R1 {
+    display: none;
+}
+
+.texto-eventos1 {
+    display: none;
 }
 
 @media (max-height: 1440px) and (max-width: 1670px) {
@@ -351,8 +372,28 @@ img:hover {
         margin-top: 50%;
     }
 
+    .S1 {
+        display: none;
+    }
+
+    .R1 {
+        display: none;
+    }
+
+    .texto-eventos1 {
+        display: none;
+    }
+
+    .sr-only {
+        display: none;
+    }
+
     .conteudo2 {
         margin-top: 70%;
+    }
+
+    .carousel-control-prev-icon {
+        display: none;
     }
 
     .texto-eventos {
@@ -387,10 +428,18 @@ img:hover {
     }
 
     .linha1 {
-        margin-top: 10%;
+        display: none;
     }
 
-    ;
+    .botaoAcess {
+        display: flex;
+        width: 25vw;
+        height: 8vh;
+    }
+
+    .botaoAcess a {
+        font-size: 18px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -402,12 +451,20 @@ img:hover {
         margin-top: 28%;
     }
 
+    .linha1 {
+        display: none;
+    }
+
     .conteudo {
         margin-top: 45%;
     }
 
     .conteudo2 {
         margin-top: 70%;
+    }
+
+    .sr-only {
+        display: none;
     }
 
     .imagens-eventos {
@@ -431,14 +488,31 @@ img:hover {
     .texto-eventos {
         width: 50%;
     }
-    .S1{
+
+    .S1 {
         display: none;
     }
-    .R1{
+
+    .R1 {
         display: none;
     }
-    .texto-eventos1{
+
+    .texto-eventos1 {
         display: none;
+    }
+
+    .section-divider {
+        display: none;
+    }
+
+    .botaoAcess {
+        display: flex;
+        width: 25vw;
+        height: 8vh;
+    }
+
+    .botaoAcess a {
+        font-size: 16px;
     }
 }
 
@@ -447,8 +521,16 @@ img:hover {
         display: none;
     }
 
+    .carrosel {
+        margin-top: 60%;
+    }
+
     .conteudo2 {
         display: none;
+    }
+
+    .conteudo1 {
+        margin-top: 60%
     }
 
     .carousel-container {
@@ -470,14 +552,27 @@ img:hover {
     .linha1 {
         display: none;
     }
-    .carrosel{
+
+    .linha2 {
+        display: flex;
+        margin-left: 20%;
+        background-color: #282828;
+        float: left;
+        width: 60%;
+        height: 1px;
+        margin-top: 3rem;
+    }
+
+    .carrosel {
         display: flex;
         justify-self: center;
         width: 50%;
         margin-top: -20%;
-    
+
     }
-    .S1{
+
+    .S1 {
+        display: block;
         margin-top: -39%;
         margin-left: 22%;
         font-size: 80px;
@@ -485,7 +580,8 @@ img:hover {
         font-weight: 700;
         color: #E7E7E8;
         letter-spacing: 6px;
-        span{
+
+        span {
             font-size: 50px;
             color: #E7E7E8;
             font-family: "Abhaya Libre";
@@ -496,7 +592,9 @@ img:hover {
 
         }
     }
-    .texto-eventos1{
+
+    .texto-eventos1 {
+        display: block;
         justify-self: center;
         margin: auto;
         width: 70%;
@@ -506,9 +604,11 @@ img:hover {
         font-size: 16px;
         font-style: normal;
         line-height: normal;
-        letter-spacing: 4px;
+        letter-spacing: 2px;
     }
-    .R1{
+
+    .R1 {
+        display: block;
         margin-top: -44%;
         margin-left: 55%;
         font-size: 80px;
@@ -516,24 +616,42 @@ img:hover {
         z-index: 2;
         font-weight: 700;
         letter-spacing: 6px;
-        span{
+
+        span {
             font-size: 50px;
             color: #E7E7E8;
             font-family: "Abhaya Libre";
             font-style: normal;
             font-weight: 700;
             line-height: normal;
-            letter-spacing: 7.8px;}}
-
-    .botaoAcess{
-        display: none;
-
+            letter-spacing: 7.8px;
+        }
     }
-    .botaoAcess1{
+
+    .botaoAcess {
+        display: none;
+    }
+
+    button {
+        display: flex;
+        width: 41vw;
+        height: 5vh;
+        flex-shrink: 0;
+        color: #E7E7E8;
+        font-size: 16px;
+        color: black;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10%;
+    }
+
+
+
+    .botaoAcess1 {
         display: block;
         justify-content: center;
         text-align: center;
-        font-size: 18px;
+        font-size: 14px;
         font-family: "abhaya Libre";
         letter-spacing: 2px;
         font-weight: 600;
@@ -543,21 +661,22 @@ img:hover {
         border-radius: 15px;
         cursor: pointer;
         transition-duration: 0.5s;
-        margin-left: 20%;
-        margin-top: 20%;
+        margin-left: 29%;
+        margin-top: 25%;
     }
+
     .botaoAcess1 a {
         color: #E7E7E8;
         text-decoration: none;
     }
-    
+
     .botaoAcess1:hover {
         cursor: pointer;
         background-color: #46552b;
         transform: translate(0, -5px);
     }
-    
-    .texto-eventos1{
+
+    .texto-eventos1 {
         justify-self: center;
         margin: auto;
         width: 70%;
@@ -573,28 +692,52 @@ img:hover {
 }
 
 @media (min-width: 375px) and (max-width: 424px) {
-    .conteudo{
+
+    button {
+        display: flex;
+        width: 42vw;
+        height: 5vh;
+        flex-shrink: 0;
+        color: #E7E7E8;
+        font-size: 16px;
+        color: black;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10%;
+    }
+
+    .conteudo1 {
+        margin-top: 50%;
+    }
+
+    .conteudo {
         display: none;
     }
-    .conteudo2{
+
+    .conteudo2 {
         display: none;
     }
+
     .carousel-inner {
         display: block !important;
     }
-    .carousel{
+
+    .carousel {
         justify-self: center;
         width: 50%;
         margin-top: -17.5%;
     }
-    .botaoAcess{
-        display: none;  
+
+    .botaoAcess {
+        display: none;
     }
-    .botaoAcess1{
+
+    .botaoAcess1 {
         display: block;
+        margin-top: 25%;
         justify-content: center;
         text-align: center;
-        font-size: 18px;
+        font-size: 12px;
         font-family: "abhaya Libre";
         letter-spacing: 2px;
         font-weight: 600;
@@ -604,23 +747,32 @@ img:hover {
         border-radius: 15px;
         cursor: pointer;
         transition-duration: 0.5s;
-        margin-left: 12%;
-        
+        margin-left: 30%;
+        margin-bottom: 2vh;
+
     }
+
     .botaoAcess1 a {
         color: #E7E7E8;
         text-decoration: none;
     }
-    .linha{
+
+    .linha {
         display: none;
     }
-    
+
+    .linha1 {
+        display: none;
+    }
+
     .botaoAcess1:hover {
         cursor: pointer;
         background-color: #46552b;
         transform: translate(0, -5px);
     }
-    .S1{
+
+    .S1 {
+        display: block;
         margin-top: -36.5%;
         margin-left: 22%;
         font-size: 70px;
@@ -628,7 +780,8 @@ img:hover {
         font-weight: 700;
         color: #E7E7E8;
         letter-spacing: 6px;
-        span{
+
+        span {
             font-size: 50px;
             color: #E7E7E8;
             font-family: "Abhaya Libre";
@@ -639,11 +792,14 @@ img:hover {
 
         }
     }
-    .texto-eventos1{
+
+    .texto-eventos1 {
+        display: block;
         justify-self: center;
         margin: auto;
         width: 70%;
-        margin-top: 5%;
+        margin-left: 20%;
+        margin-top: 1%;
         color: #d4d4d4;
         font-family: "Montserrat";
         font-size: 16px;
@@ -651,21 +807,54 @@ img:hover {
         line-height: normal;
         letter-spacing: 4px;
     }
-    .R1{
+
+    .R1 {
+        display: block;
         margin-top: -44%;
-        margin-left: 55%;
-        font-size: 80px;
+        margin-left: 40%;
+        font-size: 71px;
         position: absolute;
         z-index: 2;
         font-weight: 700;
         letter-spacing: 6px;
-        span{
+
+        span {
             font-size: 50px;
             color: #E7E7E8;
             font-family: "Abhaya Libre";
             font-style: normal;
             font-weight: 700;
             line-height: normal;
-            letter-spacing: 7.8px;}}
+            letter-spacing: 7.8px;
+        }
+    }
 
+    .linha2 {
+        display: flex;
+        margin-left: 20%;
+        margin-top: 12%;
+        background-color: #282828;
+        float: left;
+        width: 60%;
+        height: 1px;
+    }
+
+}
+
+@media (min-width: 320px) and (max-width: 374px) {
+    /* .content{
+        display: none;
+    }
+    .conteudo2{
+        display: none;
+    }
+    .conteudo1{
+        display: block;
+    }
+    .carrosel{
+        display: block !important;
+    }
+    .S1{
+        display: block;
+    } */
 }

@@ -1,613 +1,802 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../assets/img/logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/img/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <title>ImagemArt</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      @font-face {
+        font-family: "AbhayaLibre-Bold";
+        src: url("../assets/font/AbhayaLibre-Bold.ttf");
+      }
 
-       * {
-        
-            margin: 0;
-            padding: 0;
-             box-sizing: border-box;
-           
-            
-        }
-        @font-face {
-    font-family: 'AbhayaLibre-Bold';
-    src: url('../assets/font/AbhayaLibre-Bold.ttf');
-}
-        
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(#000000 100%);
-            padding: 1%;
-            gap: 50px; /* Espaço entre os carrosséis */
-        }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(#000000 100%);
+        padding: 1%;
+        gap: 50px; /* Espaço entre os carrosséis */
+      }
 
+      .title {
+        text-align: center;
+        color: #e7e7e7;
+        font-size: 65px;
+        margin-bottom: 20px;
+        font-family: "AbhayaLibre";
+        font-weight: 500;
+      }
+      .title2 {
+        font-family: "Montserrat", sans-serif;
+        text-align: center;
+        color: #e7e7e7;
+        font-size: 24px;
+        margin-bottom: 20px;
+        font-weight: 300;
+      }
+      .imagelinha {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 80px;
+      }
+
+      .outer-container {
+        position: relative;
+        width: 90vw;
+        max-width: 1100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px; /* Mais espaço entre os carrosséis */
+      }
+
+      .carousel-container {
+        width: 90vw;
+        max-width: 1200px;
+        padding: 2vw;
+        overflow: hidden;
+        margin: 0 auto;
+      }
+
+      .carousel {
+        display: flex;
+        gap: 20px;
+        padding: 10px;
+        transition: none;
+      }
+
+      .card {
+        flex: 0 0 300px;
+        max-width: 280px;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        background: #282828;
+      }
+
+      .card.active {
+        transform: scale(1);
+      }
+
+      .card-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .card-content {
+        padding: 7%;
+      }
+
+      .card-tag {
+        display: inline-block;
+        background: #63783d;
+        color: #e7e7ee;
+        padding: 2% 8%;
+        font-size: 8px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        margin-top: 10px;
+        margin-left: 10px;
+        font-family: "Montserrat";
+      }
+
+      .card-title {
+        color: #e7e7e7;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        margin-left: 1%;
+        font-family: "Montserrat";
+      }
+
+      .card-location {
+        display: flex;
+        align-items: center;
+        color: #e7e7e7;
+        font-size: 10px;
+        margin-left: 1%;
+        font-family: "Montserrat";
+      }
+
+      .card-location::before {
+        content: "";
+        display: inline-block;
+        background: #698f24;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+
+      .dots {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #40492f;
+        margin: 0 5px;
+        cursor: pointer;
+      }
+
+      .dot.active {
+        background: rgb(87, 87, 87);
+        transform: scale(1.2);
+      }
+
+      .prev-btn,
+      .next-btn {
+        position: relative;
+        background: rgba(201, 197, 197, 0.3);
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 18px;
+        z-index: 10;
+        border: none;
+        flex-shrink: 0;
+        margin-top: 20%;
+      }
+
+      .prev-btn {
+        margin-right: 10px;
+      }
+
+      .next-btn {
+        margin-left: 10px;
+      }
+      .botaoAcess {
+        width: 18vw;
+        height: 5vh;
+        border-radius: 15px;
+        border: none;
+        background-color: #63783d;
+        font-size: 2vh;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: normal;
+        color: inherit;
+      }
+      .botaoAcess a{
+        text-decoration: none;
+        color: #e7e7e7;
+        font-family: "AbhayaLibre"; 
+      }
+
+      .botao {
+        text-decoration: none;
+      }
+      @media (min-width: 1024px) and (max-width: 1439px) {
         .title {
-            text-align: center;
-            color: #e7e7e7;
-            font-size: 65px;
-            margin-bottom: 20px;
-            font-family: "AbhayaLibre";
-            font-weight: 500;
+          font-size: 60px;
         }
-        .title2{
-            font-family: 'Montserrat', sans-serif; 
-            text-align: center;
-            color: #e7e7e7;
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: 300;
+        .title2 {
+          font-size: 20px;
+        }
+        .imagelinha img {
+          width: 90%;
+        }
+        .card {
+          flex: 0 0 300px;
+          max-width: 200px;
+        }
+      }
+
+      @media (max-width: 768px) and (max-width: 1023px) {
+        .botaoAcess {
+          width: 20vw;
+          height: 5vh;
+          font-size: 1.8vh;
+        }
+        .card {
+          flex: 0 0 220px;
+          max-width: 220px;
+          margin-top: -8%;
+        }
+        .card img {
+          height: 150px;
+        }
+        .title {
+          font-size: 50px;
+        }
+        .title2 {
+          font-size: 15px;
+        }
+
+        .carousel-container {
+          width: 70vw;
+        }
+
+        .prev-btn,
+        .next-btn {
+          width: 40px;
+          height: 40px;
+          font-size: 16px;
+        }
+      }
+
+      @media (max-width: 425px) and (max-width: 763px) {
+        .card {
+          flex: 0 0 160px;
+          max-width: 160px;
+          margin-top: -30%;
+        }
+        .title {
+          font-size: 40px;
+        }
+        .title2 {
+          font-size: 10px;
+          width: 100%;
+        }
+        .carousel-container {
+          width: 60vw;
+        }
+        #dots {
+          width: 10%;
+        }
+
+        .prev-btn,
+        .next-btn {
+          width: 30px;
+          height: 30px;
+          font-size: 14px;
+        }
+        .botaoAcess {
+          width: 25vw;
+          height: 5vh;
+          font-size: 1.2vh;
+        }
+      }
+      @media (max-width: 375px) and (max-width: 424px) {
+        .title {
+          font-size: 35px;
+        }
+        .title2 {
+          font-size: 8px;
+        }
+        .card {
+          margin-top: -40%;
+        }}
+        @media (max-width: 320px) and (max-width: 376px) {
+        .title {
+          font-size: 30px;
         }
         .imagelinha{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 80px;
+          margin-top: -5%;
         }
-
-        .outer-container {
-            position: relative;
-            width: 90vw;
-            max-width: 1100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px; /* Mais espaço entre os carrosséis */
+        .title2 {
+          font-size: 5px;
         }
-        
-        .carousel-container {
-            width: 90vw;
-            max-width: 1200px;
-            padding: 2vw;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-        
-        .carousel {
-            display: flex;
-            gap: 20px;
-            padding: 10px;
-            transition: none;
-        }
-        
         .card {
-            flex: 0 0 300px;
-            max-width: 280px;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            background: #282828;;
-        }
-        
-        .card.active {
-            transform: scale(1);
-        }
-        
-        .card-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px 10px 0 0;
-        }
-        
-        .card-content {
-            padding: 7%;
-        }
-        
-        .card-tag {
-            display: inline-block;
-            background: #63783D;
-            color: #e7e7ee;
-            padding: 2% 8%;
-            font-size: 8px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            margin-top: 10px;
-            margin-left: 10px;
-            font-family: "Montserrat";
-        }
-        
-        .card-title {
-            color: #e7e7e7;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            margin-left: 1%;
-            font-family: "Montserrat";
-        }
-        
-        .card-location {
-            display: flex;
-            align-items: center;
-            color: #e7e7e7;
-            font-size: 10px;
-            margin-left: 1%;
-            font-family: "Montserrat";
-        }
-        
-        .card-location::before {
-            content: '';
-            display: inline-block;
-            background: #698f24;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
-        
-        .dots {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #40492f;
-            margin: 0 5px;
-            cursor: pointer;
-        }
-        
-        .dot.active {
-            background: rgb(87, 87, 87);
-            transform: scale(1.2);
-        }
-        
-        .prev-btn, .next-btn {
-            position: relative;
-            background: rgba(201, 197, 197, 0.3);
-            color: #fff;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            font-size: 18px;
-            z-index: 10;
-            border: none;
-            flex-shrink: 0;
-            margin-top: 20%;
-        }
-        
-        .prev-btn {
-            margin-right: 10px;
-        }
-        
-        .next-btn {
-            margin-left: 10px;
+          margin-top: -45%;
         }
         .botaoAcess{
-            width: 10vw;
-            height: 5vh;
-            border-radius: 15px;
-            border: none;
-            background-color:#40492f;
-            font-size: 13px;
-            font-weight: 500;
-            text-decoration: none;
-            cursor: pointer;
-
+          font-size: 1vh;
         }
-
-        @media (max-width: 768px) {
-            .card {
-                flex: 0 0 22px;
-                max-width: 200px;
-            }
-            .card img{
-                height: 150px;
-            }
-            
-            .carousel-container {
-                width: 70vw;
-            }
-            
-            .prev-btn, .next-btn {
-                width: 30px;
-                height: 50px;
-                font-size: 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .card {
-                flex: 0 0 140px;
-                max-width: 140px;
-            }
-            
-            .carousel-container {
-                width: 60vw;
-            }
-            
-            .prev-btn, .next-btn {
-                width: 25px;
-                height: 40px;
-                font-size: 14px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Primeiro Carrossel -->
     <div class="outer-container">
-        <button class="prev-btn" onclick="moveCarousel(0, -1)">❮</button>
-        <div class="carousel-container">
-            <div class="title"><p>Drone</p>
-            <div class="title2"><p>Vídeos que transformam momentos em memórias. Com técnica e sensibilidade, capturamos a essência de cada história.</p></div>
-            <div class="imagelinha"><img src="../assets/img/linhareta.png" alt=""></div> </div>
-            <div class="carousel" id="carousel-1">
-                <!-- Cards originais -->
-                <div class="card active">
-                    <img src="https://tse3.mm.bing.net/th?id=OIP.yHDW0URvOWEnewzRXfSCKwHaE8&cb=iwp1&pid=Api" alt="Paris" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Paisagens Naturais</h3>
-                        <p class="card-location">Pompeia, SP</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg" alt="México" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Um dos sítios antigos</h3>
-                        <p class="card-location">Tulum, México</p>
-                    </div>
-                </div>
-                
-                <div class="card active">
-                    <img src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg" alt="Austrália" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">O destino de iate</h3>
-                        <p class="card-location">Whitsunday Islands, Austrália</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg" alt="México" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Um dos sítios antigos</h3>
-                        <p class="card-location">Tulum, México</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="https://4ea53a68b530b930e823-181b81c0bd280c5688e804225438ba83.ssl.cf1.rackcdn.com/PostImagem/16164/sessatildeo-de-fotos-do-casal-dicas-de-poses-corretas_adult-affection-bride-1923292a5625d3f84e9681b60d8dce600772f7.jpg" alt="México" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Um dos sítios antigos</h3>
-                        <p class="card-location">Tulum, México</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1" alt="México Pirâmide" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Pirâmides antigas</h3>
-                        <p class="card-location">Yucatán, México</p>
-                    </div>
-                </div>
-                
-                <!-- Imagens adicionais -->
-                <div class="card">
-                    <img src="https://tse3.mm.bing.net/th?id=OIP.yHDW0URvOWEnewzRXfSCKwHaE8&cb=iwp1&pid=Api" alt="Vista Aérea" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Vista Panorâmica</h3>
-                        <p class="card-location">Campos do Jordão, SP</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg" alt="Praia" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Mar Cristalino</h3>
-                        <p class="card-location">Fernando de Noronha, PE</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg" alt="Vista de Cima" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Jardins Suspensos</h3>
-                        <p class="card-location">Gramado, RS</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg" alt="Cachoeira" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Quedas D'água</h3>
-                        <p class="card-location">Foz do Iguaçu, PR</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1" alt="Parque" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Parque Nacional</h3>
-                        <p class="card-location">Chapada dos Veadeiros, GO</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dots" id="dots-1">
-                <div class="dot active" onclick="setPosition(0, 0)"></div>
-                <div class="dot" onclick="setPosition(0, 1)"></div>
-                <div class="dot" onclick="setPosition(0, 2)"></div>
-                <div class="dot" onclick="setPosition(0, 3)"></div>
-                <div class="dot" onclick="setPosition(0, 4)"></div>
-                <div class="dot" onclick="setPosition(0, 5)"></div>
-            </div>
+      <button class="prev-btn" onclick="moveCarousel(0, -1)">❮</button>
+      <div class="carousel-container">
+        <div class="title">
+          <p>Drone</p>
+          <div class="title2">
+            <p>
+              Vídeos que transformam momentos em memórias. Com técnica e
+              sensibilidade, capturamos a essência de cada história.
+            </p>
+          </div>
+          <div class="imagelinha">
+            <img src="../assets/img/linhareta.png" alt="" />
+          </div>
         </div>
-        <button class="next-btn" onclick="moveCarousel(0, 1)">❯</button>
+        <div class="carousel" id="carousel-1">
+          <!-- Cards originais -->
+          <div class="card active">
+            <img
+              src="https://tse3.mm.bing.net/th?id=OIP.yHDW0URvOWEnewzRXfSCKwHaE8&cb=iwp1&pid=Api"
+              alt="Paris"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Paisagens Naturais</h3>
+              <p class="card-location">Pompeia, SP</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg"
+              alt="México"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Um dos sítios antigos</h3>
+              <p class="card-location">Tulum, México</p>
+            </div>
+          </div>
+
+          <div class="card active">
+            <img
+              src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg"
+              alt="Austrália"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">O destino de iate</h3>
+              <p class="card-location">Whitsunday Islands, Austrália</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg"
+              alt="México"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Um dos sítios antigos</h3>
+              <p class="card-location">Tulum, México</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://4ea53a68b530b930e823-181b81c0bd280c5688e804225438ba83.ssl.cf1.rackcdn.com/PostImagem/16164/sessatildeo-de-fotos-do-casal-dicas-de-poses-corretas_adult-affection-bride-1923292a5625d3f84e9681b60d8dce600772f7.jpg"
+              alt="México"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Um dos sítios antigos</h3>
+              <p class="card-location">Tulum, México</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1"
+              alt="México Pirâmide"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Pirâmides antigas</h3>
+              <p class="card-location">Yucatán, México</p>
+            </div>
+          </div>
+
+          <!-- Imagens adicionais -->
+          <div class="card">
+            <img
+              src="https://tse3.mm.bing.net/th?id=OIP.yHDW0URvOWEnewzRXfSCKwHaE8&cb=iwp1&pid=Api"
+              alt="Vista Aérea"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Vista Panorâmica</h3>
+              <p class="card-location">Campos do Jordão, SP</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg"
+              alt="Praia"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Mar Cristalino</h3>
+              <p class="card-location">Fernando de Noronha, PE</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg"
+              alt="Vista de Cima"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Jardins Suspensos</h3>
+              <p class="card-location">Gramado, RS</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg"
+              alt="Cachoeira"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Quedas D'água</h3>
+              <p class="card-location">Foz do Iguaçu, PR</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dots" id="dots-1">
+          <div class="dot active" onclick="setPosition(0, 0)"></div>
+          <div class="dot" onclick="setPosition(0, 1)"></div>
+          <div class="dot" onclick="setPosition(0, 2)"></div>
+          <div class="dot" onclick="setPosition(0, 3)"></div>
+          <div class="dot" onclick="setPosition(0, 4)"></div>
+          <div class="dot" onclick="setPosition(0, 5)"></div>
+        </div>
+      </div>
+      <button class="next-btn" onclick="moveCarousel(0, 1)">❯</button>
     </div>
 
     <!-- Segundo Carrossel -->
     <div class="outer-container">
-        <button class="prev-btn" onclick="moveCarousel(1, -1)">❮</button>
-        <div class="carousel-container">
-            <div class="title"><p>Casamento</p>
-                <div class="title2"><p>Vídeos que transformam momentos em memórias. Com técnica e sensibilidade, capturamos a essência de cada história.</p></div>
-                <div class="imagelinha"><img src="../assets/img/linhareta.png" alt=""></div> </div>
-            <div class="carousel" id="carousel-2">
-                <!-- Cards originais -->
-                <div class="card active">
-                    <img src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg" alt="Casamento" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Cerimônia Elegante</h3>
-                        <p class="card-location">Curitiba, PR</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="https://4ea53a68b530b930e823-181b81c0bd280c5688e804225438ba83.ssl.cf1.rackcdn.com/PostImagem/16164/sessatildeo-de-fotos-do-casal-dicas-de-poses-corretas_adult-affection-bride-1923292a5625d3f84e9681b60d8dce600772f7.jpg" alt="Casal" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Ensaio Pré-Wedding</h3>
-                        <p class="card-location">São Paulo, SP</p>
-                    </div>
-                </div>
-                
-                <div class="card active">
-                    <img src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg" alt="Austrália" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Destination Wedding</h3>
-                        <p class="card-location">Whitsunday Islands, Austrália</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg" alt="15 Anos" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Festa de 15 Anos</h3>
-                        <p class="card-location">Rio de Janeiro, RJ</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1" alt="Formatura" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Ensaio de Formatura</h3>
-                        <p class="card-location">Salvador, BA</p>
-                    </div>
-                </div>
-                
-                <!-- Imagens adicionais -->
-                <div class="card">
-                    <img src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg" alt="Casamento Igreja" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Casamento Religioso</h3>
-                        <p class="card-location">Belo Horizonte, MG</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="https://4ea53a68b530b930e823-181b81c0bd280c5688e804225438ba83.ssl.cf1.rackcdn.com/PostImagem/16164/sessatildeo-de-fotos-do-casal-dicas-de-poses-corretas_adult-affection-bride-1923292a5625d3f84e9681b60d8dce600772f7.jpg" alt="Casal Praia" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Ensaio na Praia</h3>
-                        <p class="card-location">Florianópolis, SC</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg" alt="Destino" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Casamento na Praia</h3>
-                        <p class="card-location">Maceió, AL</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    
-                <img src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg" alt="Festa" class="card-img">
-                <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                <div class="card-content">
-                        <h3 class="card-title">Festa de Debutante</h3>
-                        <p class="card-location">Brasília, DF</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1" alt="Formatura Externa" class="card-img">
-                    <div class="divdata"><span class="card-tag">20.10.2020</span></div>
-                    <div class="card-content">
-                        <h3 class="card-title">Formatura ao Ar Livre</h3>
-                        <p class="card-location">Porto Alegre, RS</p>
-                    </div>
-                </div>
-            </div>
-            <div class="dots" id="dots-2">
-                <div class="dot active" onclick="setPosition(1, 0)"></div>
-                <div class="dot" onclick="setPosition(1, 1)"></div>
-                <div class="dot" onclick="setPosition(1, 2)"></div>
-                <div class="dot" onclick="setPosition(1, 3)"></div>
-                <div class="dot" onclick="setPosition(1, 4)"></div>
-                <div class="dot" onclick="setPosition(1, 5)"></div>
-            </div>
+      <button class="prev-btn" onclick="moveCarousel(1, -1)">❮</button>
+      <div class="carousel-container">
+        <div class="title">
+          <p>Casamento</p>
+          <div class="title2">
+            <p>
+              Vídeos que transformam momentos em memórias. Com técnica e
+              sensibilidade, capturamos a essência de cada história.
+            </p>
+          </div>
+          <div class="imagelinha">
+            <img src="../assets/img/linhareta.png" alt="" />
+          </div>
         </div>
-        <button class="next-btn" onclick="moveCarousel(1, 1)">❯</button>
+        <div class="carousel" id="carousel-2">
+          <!-- Cards originais -->
+          <div class="card active">
+            <img
+              src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg"
+              alt="Casamento"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Cerimônia Elegante</h3>
+              <p class="card-location">Curitiba, PR</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://4ea53a68b530b930e823-181b81c0bd280c5688e804225438ba83.ssl.cf1.rackcdn.com/PostImagem/16164/sessatildeo-de-fotos-do-casal-dicas-de-poses-corretas_adult-affection-bride-1923292a5625d3f84e9681b60d8dce600772f7.jpg"
+              alt="Casal"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio Pré-Wedding</h3>
+              <p class="card-location">São Paulo, SP</p>
+            </div>
+          </div>
+
+          <div class="card active">
+            <img
+              src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg"
+              alt="Austrália"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Destination Wedding</h3>
+              <p class="card-location">Whitsunday Islands, Austrália</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg"
+              alt="15 Anos"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Festa de 15 Anos</h3>
+              <p class="card-location">Rio de Janeiro, RJ</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1"
+              alt="Formatura"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio de Formatura</h3>
+              <p class="card-location">Salvador, BA</p>
+            </div>
+          </div>
+
+          <!-- Imagens adicionais -->
+          <div class="card">
+            <img
+              src="https://374513bf6685f3b2ef85-aa3414e3a4ffc839692c39acc4f9579f.ssl.cf5.rackcdn.com/PostImagem/26676/como-escolher-o-melhor-fotoacutegrafo-de-casamento-em-curitiba-que-vai-combinar-comigo_o1dbjdpng1tg61lcu15f4b3s1hjbe_capa_3.jpg"
+              alt="Casamento Igreja"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Casamento Religioso</h3>
+              <p class="card-location">Belo Horizonte, MG</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://4ea53a68b530b930e823-181b81c0bd280c5688e804225438ba83.ssl.cf1.rackcdn.com/PostImagem/16164/sessatildeo-de-fotos-do-casal-dicas-de-poses-corretas_adult-affection-bride-1923292a5625d3f84e9681b60d8dce600772f7.jpg"
+              alt="Casal Praia"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio na Praia</h3>
+              <p class="card-location">Florianópolis, SC</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://i.pinimg.com/originals/30/24/5d/30245df3bc0f85d956afa1a629f27468.jpg"
+              alt="Destino"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Casamento na Praia</h3>
+              <p class="card-location">Maceió, AL</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg"
+              alt="Festa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Festa de Debutante</h3>
+              <p class="card-location">Brasília, DF</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://i0.wp.com/kikafotografa.com/wp-content/uploads/2023/02/fotografia-profissional-formatura-ensaio-13.jpg?resize=1024%2C857&ssl=1"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+        </div>
+        <div class="dots" id="dots-2">
+          <div class="dot active" onclick="setPosition(1, 0)"></div>
+          <div class="dot" onclick="setPosition(1, 1)"></div>
+          <div class="dot" onclick="setPosition(1, 2)"></div>
+          <div class="dot" onclick="setPosition(1, 3)"></div>
+          <div class="dot" onclick="setPosition(1, 4)"></div>
+          <div class="dot" onclick="setPosition(1, 5)"></div>
+        </div>
+      </div>
+      <button class="next-btn" onclick="moveCarousel(1, 1)">❯</button>
     </div>
-    <div class="botao"><button class="botaoAcess">
+    <div class="botao">
+      <button class="botaoAcess">
         <a
           href="https://api.whatsapp.com/send?phone=5514999034536&text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20sess%C3%A3o%20de%20fotografia.%20%F0%9F%93%B8%0A%0A*Tipo%20de%20ensaio%3A*%20%0A*Data%20e%20hor%C3%A1rio%20desejados%3A*%20%0A*Local%3A*%20%0A*Dura%C3%A7%C3%A3o%20aproximada%3A*%20%0A%0APor%20favor%2C%20me%20avise%20sobre%20a%20disponibilidade%20e%20valores.%20Aguardo%20seu%20retorno!%20%F0%9F%98%8A"
           >Agende sua Seção!</a
         >
-      </button></div>
+      </button>
+    </div>
 
     <script>
-        // Configuração para controlar vários carrosséis
-        const carousels = [
-            {
-                element: document.getElementById('carousel-1'),
-                cards: document.querySelectorAll('#carousel-1 .card'),
-                dots: document.querySelectorAll('#dots-1 .dot'),
-                currentIndex: 0,
-                interval: null
-            },
-            {
-                element: document.getElementById('carousel-2'),
-                cards: document.querySelectorAll('#carousel-2 .card'),
-                dots: document.querySelectorAll('#dots-2 .dot'),
-                currentIndex: 0,
-                interval: null
-            }
-        ];
-        
-        // Inicializar todos os carrosséis
+      // Configuração para controlar vários carrosséis
+      const carousels = [
+        {
+          element: document.getElementById("carousel-1"),
+          cards: document.querySelectorAll("#carousel-1 .card"),
+          dots: document.querySelectorAll("#dots-1 .dot"),
+          currentIndex: 0,
+          interval: null,
+        },
+        {
+          element: document.getElementById("carousel-2"),
+          cards: document.querySelectorAll("#carousel-2 .card"),
+          dots: document.querySelectorAll("#dots-2 .dot"),
+          currentIndex: 0,
+          interval: null,
+        },
+      ];
+
+      // Inicializar todos os carrosséis
+      carousels.forEach((carousel, index) => {
+        updateCarousel(index);
+        startAutoScroll(index);
+      });
+
+      function moveCarousel(carouselIndex, direction) {
+        const carousel = carousels[carouselIndex];
+        const cardWidth = carousel.cards[0].offsetWidth + 20; // card width + gap
+        const totalCards = carousel.cards.length;
+        const cardsToShow = window.innerWidth < 768 ? 1 : 3;
+        const maxIndex = totalCards - cardsToShow;
+
+        // Atualizar posição
+        carousel.currentIndex += direction;
+        if (carousel.currentIndex < 0) carousel.currentIndex = 0;
+        if (carousel.currentIndex > maxIndex) carousel.currentIndex = maxIndex;
+
+        updateCarousel(carouselIndex);
+        updateDots(carouselIndex);
+
+        // Reiniciar autoscroll após interação do usuário
+        resetAutoScroll(carouselIndex);
+      }
+
+      function setPosition(carouselIndex, index) {
+        const carousel = carousels[carouselIndex];
+        const cardsToShow = window.innerWidth < 768 ? 1 : 3;
+        const totalCards = carousel.cards.length;
+        const maxIndex = totalCards - cardsToShow;
+
+        // Ajustando para mostrar múltiplos cards por página
+        carousel.currentIndex = index * cardsToShow;
+        if (carousel.currentIndex > maxIndex) carousel.currentIndex = maxIndex;
+
+        updateCarousel(carouselIndex);
+        updateDots(carouselIndex);
+
+        // Reiniciar autoscroll após interação do usuário
+        resetAutoScroll(carouselIndex);
+      }
+
+      function updateCarousel(carouselIndex) {
+        const carousel = carousels[carouselIndex];
+        const cardWidth = carousel.cards[0].offsetWidth + 20; // card width + gap
+        const translateX = -carousel.currentIndex * cardWidth;
+
+        carousel.element.style.transform = `translateX(${translateX}px)`;
+
+        // Atualizar estado ativo para cards
+        const cardsToShow = window.innerWidth < 768 ? 1 : 3;
+        carousel.cards.forEach((card, index) => {
+          if (
+            index >= carousel.currentIndex &&
+            index < carousel.currentIndex + cardsToShow
+          ) {
+            card.classList.add("active");
+          } else {
+            card.classList.remove("active");
+          }
+        });
+      }
+
+      function updateDots(carouselIndex) {
+        const carousel = carousels[carouselIndex];
+        const cardsToShow = window.innerWidth < 768 ? 1 : 3;
+        const dotIndex = Math.floor(carousel.currentIndex / cardsToShow);
+
+        carousel.dots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === dotIndex);
+        });
+      }
+
+      function startAutoScroll(carouselIndex) {
+        // Iniciar auto scroll
+        carousels[carouselIndex].interval = setInterval(() => {
+          moveCarousel(carouselIndex, 1);
+        }, 5000);
+      }
+
+      function resetAutoScroll(carouselIndex) {
+        // Limpar intervalo existente e iniciar um novo
+        clearInterval(carousels[carouselIndex].interval);
+        startAutoScroll(carouselIndex);
+      }
+
+      // Configurar hover para cada carrossel
+      carousels.forEach((carousel, index) => {
+        carousel.element.addEventListener("mouseenter", () => {
+          clearInterval(carousel.interval);
+        });
+
+        carousel.element.addEventListener("mouseleave", () => {
+          startAutoScroll(index);
+        });
+      });
+
+      // Tratamento de redimensionamento para todos os carrosséis
+      window.addEventListener("resize", () => {
         carousels.forEach((carousel, index) => {
-            updateCarousel(index);
-            startAutoScroll(index);
+          const cardsToShow = window.innerWidth < 768 ? 1 : 3;
+          const totalCards = carousel.cards.length;
+          const maxIndex = totalCards - cardsToShow;
+
+          if (carousel.currentIndex > maxIndex)
+            carousel.currentIndex = maxIndex;
+          updateCarousel(index);
+          updateDots(index);
         });
-        
-        function moveCarousel(carouselIndex, direction) {
-            const carousel = carousels[carouselIndex];
-            const cardWidth = carousel.cards[0].offsetWidth + 20; // card width + gap
-            const totalCards = carousel.cards.length;
-            const cardsToShow = window.innerWidth < 768 ? 1 : 3;
-            const maxIndex = totalCards - cardsToShow;
-            
-            // Atualizar posição
-            carousel.currentIndex += direction;
-            if (carousel.currentIndex < 0) carousel.currentIndex = 0;
-            if (carousel.currentIndex > maxIndex) carousel.currentIndex = maxIndex;
-            
-            updateCarousel(carouselIndex);
-            updateDots(carouselIndex);
-            
-            // Reiniciar autoscroll após interação do usuário
-            resetAutoScroll(carouselIndex);
-        }
-        
-        function setPosition(carouselIndex, index) {
-            const carousel = carousels[carouselIndex];
-            const cardsToShow = window.innerWidth < 768 ? 1 : 3;
-            const totalCards = carousel.cards.length;
-            const maxIndex = totalCards - cardsToShow;
-            
-            // Ajustando para mostrar múltiplos cards por página
-            carousel.currentIndex = index * cardsToShow;
-            if (carousel.currentIndex > maxIndex) carousel.currentIndex = maxIndex;
-            
-            updateCarousel(carouselIndex);
-            updateDots(carouselIndex);
-            
-            // Reiniciar autoscroll após interação do usuário
-            resetAutoScroll(carouselIndex);
-        }
-        
-        function updateCarousel(carouselIndex) {
-            const carousel = carousels[carouselIndex];
-            const cardWidth = carousel.cards[0].offsetWidth + 20; // card width + gap
-            const translateX = -carousel.currentIndex * cardWidth;
-            
-            carousel.element.style.transform = `translateX(${translateX}px)`;
-            
-            // Atualizar estado ativo para cards
-            const cardsToShow = window.innerWidth < 768 ? 1 : 3;
-            carousel.cards.forEach((card, index) => {
-                if (index >= carousel.currentIndex && index < carousel.currentIndex + cardsToShow) {
-                    card.classList.add('active');
-                } else {
-                    card.classList.remove('active');
-                }
-            });
-        }
-        
-        function updateDots(carouselIndex) {
-            const carousel = carousels[carouselIndex];
-            const cardsToShow = window.innerWidth < 768 ? 1 : 3;
-            const dotIndex = Math.floor(carousel.currentIndex / cardsToShow);
-            
-            carousel.dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === dotIndex);
-            });
-        }
-        
-        function startAutoScroll(carouselIndex) {
-            // Iniciar auto scroll
-            carousels[carouselIndex].interval = setInterval(() => {
-                moveCarousel(carouselIndex, 1);
-            }, 5000);
-        }
-        
-        function resetAutoScroll(carouselIndex) {
-            // Limpar intervalo existente e iniciar um novo
-            clearInterval(carousels[carouselIndex].interval);
-            startAutoScroll(carouselIndex);
-        }
-        
-        // Configurar hover para cada carrossel
-        carousels.forEach((carousel, index) => {
-            carousel.element.addEventListener('mouseenter', () => {
-                clearInterval(carousel.interval);
-            });
-            
-            carousel.element.addEventListener('mouseleave', () => {
-                startAutoScroll(index);
-            });
-        });
-        
-        // Tratamento de redimensionamento para todos os carrosséis
-        window.addEventListener('resize', () => {
-            carousels.forEach((carousel, index) => {
-                const cardsToShow = window.innerWidth < 768 ? 1 : 3;
-                const totalCards = carousel.cards.length;
-                const maxIndex = totalCards - cardsToShow;
-                
-                if (carousel.currentIndex > maxIndex) carousel.currentIndex = maxIndex;
-                updateCarousel(index);
-                updateDots(index);
-            });
-        });
+      });
     </script>
-</body>
+  </body>
 </html>
