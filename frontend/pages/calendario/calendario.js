@@ -39,11 +39,89 @@ const months = [
 ];
 const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
-const eventsArr = [];
-getEvents(); // Carrega eventos do localStorage
+// Array para armazenar eventos carregados do banco
+let eventsArr = [];
+
+// ---------- FUNÇÕES DE INTEGRAÇÃO COM O BACKEND ----------
+
+// Busca todos os eventos do banco e atualiza eventsArr
+async function fetchAllEvents() {
+  try {
+    const res = await fetch("/listarEventos");
+    if (!res.ok) throw new Error("Erro ao buscar eventos");
+    const eventos = await res.json();
+    // Agrupa eventos por dia/mês/ano para manter compatibilidade com a lógica do calendário
+    eventsArr = [];
+    eventos.forEach((ev) => {
+      // Remove espaços e garante formato correto
+      const dataLimpa = ev.data.trim();
+      const [anoStr, mesStr, diaStr] = dataLimpa.split("-");
+      const ano = parseInt(anoStr, 10);
+      const mes = parseInt(mesStr, 10);
+      const dia = parseInt(diaStr, 10);
+
+      if (isNaN(ano) || isNaN(mes) || isNaN(dia)) {
+        console.warn("Data inválida recebida do banco:", ev.data);
+        return; // pula esse evento
+      }
+
+      const hora_inicio = ev.hora_inicio.slice(0, 5);
+      const hora_fim = ev.hora_fim.slice(0, 5);
+      const time = `${hora_inicio} - ${hora_fim}`;
+      let obj = eventsArr.find(
+        (e) => e.day === dia && e.month === mes && e.year === ano
+      );
+      if (!obj) {
+        obj = { day: dia, month: mes, year: ano, events: [] };
+        eventsArr.push(obj);
+      }
+      obj.events.push({
+        id: ev.id,
+        title: ev.nome,
+        time,
+        hora_inicio,
+        hora_fim,
+        data: ev.data,
+      });
+    });
+  } catch (err) {
+    showCustomAlert("Erro ao carregar eventos do calendário.");
+    eventsArr = [];
+  }
+}
+
+// Cria um novo evento no banco
+async function createEvent({ nome, data, hora_inicio, hora_fim }) {
+  const res = await fetch("/criarEvento", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nome, data, hora_inicio, hora_fim }),
+  });
+  if (!res.ok) throw new Error("Erro ao criar evento");
+  return res.json();
+}
+
+// Atualiza um evento existente no banco
+async function updateEvent(id, { nome, data, hora_inicio, hora_fim }) {
+  const res = await fetch(`/atualizarEvento/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nome, data, hora_inicio, hora_fim }),
+  });
+  if (!res.ok) throw new Error("Erro ao atualizar evento");
+  return res.json();
+}
+
+// Deleta um evento do banco
+async function deleteEvent(id) {
+  const res = await fetch(`/deletarEvento/${id}`, { method: "DELETE" });
+  if (!res.ok) throw new Error("Erro ao deletar evento");
+  return res.json();
+}
 
 // ---------- FUNÇÕES DO CALENDÁRIO ----------
-function initCalendar() {
+async function initCalendar() {
+  await fetchAllEvents();
   const firstDay = new Date(year, month, 1),
     lastDay = new Date(year, month + 1, 0),
     prevLastDay = new Date(year, month, 0),
@@ -93,7 +171,6 @@ function initCalendar() {
 }
 
 function prevMonth() {
-  // Prevent navigating to year 0 or below
   if (month === 0 && year === 1) {
     showCustomAlert("Foque no presente");
     return;
@@ -121,7 +198,6 @@ function addDayListener() {
   days.forEach((day) => {
     day.addEventListener("click", (e) => {
       const selectedDay = Number(e.target.innerHTML);
-      // Caso dia de meses anteriores ou próximos
       if (e.target.classList.contains("prev-date")) {
         prevMonth();
         setTimeout(() => highlightDay(selectedDay), 100);
@@ -176,7 +252,6 @@ function updateEvents(dayNum) {
       eventObj.year === year
     ) {
       hasAnyEvent = true;
-      // Ordena os eventos pelo horário de início
       const sortedEvents = eventObj.events.sort((a, b) => {
         const startA = a.time.split(" - ")[0];
         const startB = b.time.split(" - ")[0];
@@ -184,7 +259,7 @@ function updateEvents(dayNum) {
       });
       sortedEvents.forEach((event) => {
         eventsHTML += `
-           <div class="event">
+           <div class="event" data-event-id="${event.id}">
              <div class="title">
                <i class="fas fa-circle"></i>
                <h3 class="event-title">${event.title}</h3>
@@ -201,7 +276,6 @@ function updateEvents(dayNum) {
   }
   eventsContainer.innerHTML = eventsHTML;
 
-  // Atualiza a classe "event" do dia ativo
   const activeDayEl = document.querySelector(".day.active");
   if (activeDayEl) {
     if (hasAnyEvent) {
@@ -210,7 +284,6 @@ function updateEvents(dayNum) {
       activeDayEl.classList.remove("event");
     }
   }
-  saveEvents();
 }
 
 // ---------- NAVEGAÇÃO ESPECÍFICA DE DATA ----------
@@ -222,7 +295,6 @@ todayBtn.addEventListener("click", () => {
 });
 
 dateInput.addEventListener("input", (e) => {
-  // Permite somente números e barra
   dateInput.value = dateInput.value.replace(/[^0-9/]/g, "");
   if (dateInput.value.length === 2) {
     dateInput.value += "/";
@@ -232,6 +304,12 @@ dateInput.addEventListener("input", (e) => {
   }
   if (e.inputType === "deleteContentBackward" && dateInput.value.length === 3) {
     dateInput.value = dateInput.value.slice(0, 2);
+  }
+});
+
+dateInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    gotoDate();
   }
 });
 
@@ -260,7 +338,6 @@ addEventCloseBtn.addEventListener("click", () => {
   clearEventForm();
 });
 
-// Formatação automática para os campos de horário (formato 24h)
 function autoFormatTime(input) {
   let value = input.value.replace(/[^0-9:]/g, "");
   if (value.length === 2 && !value.includes(":")) {
@@ -274,7 +351,7 @@ function autoFormatTime(input) {
 addEventFrom.addEventListener("input", () => autoFormatTime(addEventFrom));
 addEventTo.addEventListener("input", () => autoFormatTime(addEventTo));
 
-addEventSubmit.addEventListener("click", () => {
+addEventSubmit.addEventListener("click", async () => {
   const eventTitle = addEventTitle.value,
     eventTimeFrom = addEventFrom.value;
   let eventTimeTo = addEventTo.value;
@@ -298,126 +375,76 @@ addEventSubmit.addEventListener("click", () => {
     return;
   }
 
-  // Verifica se o evento já existe
-  let eventExist = eventsArr.some((eventObj) => {
-    if (
-      eventObj.day === activeDay &&
-      eventObj.month === month + 1 &&
-      eventObj.year === year
-    ) {
-      return eventObj.events.some((ev) => ev.title === eventTitle);
-    }
-    return false;
-  });
-  if (eventExist) {
+  // Verifica se já existe evento com mesmo nome, data e horário
+  const dia = activeDay;
+  const mes = month + 1;
+  const ano = year;
+  const dataStr = `${ano}-${String(mes).padStart(2, "0")}-${String(
+    dia
+  ).padStart(2, "0")}`;
+  const existe = eventsArr.some(
+    (eventObj) =>
+      eventObj.day === dia &&
+      eventObj.month === mes &&
+      eventObj.year === ano &&
+      eventObj.events.some((ev) => ev.title === eventTitle)
+  );
+  if (existe) {
     showCustomAlert("Evento já adicionado");
     return;
   }
 
-  const newEvent = {
-    title: eventTitle,
-    time: `${convertTime(eventTimeFrom)} - ${convertTime(eventTimeTo)}`,
-  };
-  let eventAdded = false;
-  eventsArr.forEach((eventObj) => {
-    if (
-      eventObj.day === activeDay &&
-      eventObj.month === month + 1 &&
-      eventObj.year === year
-    ) {
-      eventObj.events.push(newEvent);
-      eventAdded = true;
-    }
-  });
-  if (!eventAdded) {
-    eventsArr.push({
-      day: activeDay,
-      month: month + 1,
-      year: year,
-      events: [newEvent],
+  try {
+    await createEvent({
+      nome: eventTitle,
+      data: dataStr,
+      hora_inicio: convertTime(eventTimeFrom),
+      hora_fim: convertTime(eventTimeTo),
     });
-  }
-  addEventWrapper.classList.remove("active");
-  clearEventForm();
-  updateEvents(activeDay);
-  const activeDayEl = document.querySelector(".day.active");
-  if (activeDayEl && !activeDayEl.classList.contains("event")) {
-    activeDayEl.classList.add("event");
+    addEventWrapper.classList.remove("active");
+    clearEventForm();
+    await initCalendar();
+    highlightDay(dia);
+    updateEvents(dia);
+  } catch (err) {
+    showCustomAlert("Erro ao criar evento.");
   }
 });
 
 eventsContainer.addEventListener("click", async function (e) {
-  // Se o clique foi dentro de um evento
   const eventElement = e.target.closest(".event");
-  if (!eventElement) {
-    return;
-  }
-
-  // Obter o título do evento
+  if (!eventElement) return;
   const eventTitleElement = eventElement.querySelector(".event-title");
-  if (!eventTitleElement) {
-    return;
-  }
-
+  if (!eventTitleElement) return;
   const title = eventTitleElement.textContent.trim();
 
-  // Confirmar com o usuário
+  // Busca o evento pelo título e dia/mês/ano
+  const dia = activeDay;
+  const mes = month + 1;
+  const ano = year;
+  const eventObj = eventsArr.find(
+    (obj) => obj.day === dia && obj.month === mes && obj.year === ano
+  );
+  if (!eventObj) return;
+  const event = eventObj.events.find((ev) => ev.title === title);
+  if (!event) return;
+
   const confirmed = await showCustomConfirm(
     "Tem certeza de que deseja concluir este evento?"
   );
-  if (!confirmed) {
-    return;
-  }
+  if (!confirmed) return;
 
-  // Variável para acompanhar se o evento foi removido
-  let eventRemoved = false;
-
-  // Iterar através de cada objeto de evento
-  for (let i = 0; i < eventsArr.length; i++) {
-    const eventObj = eventsArr[i];
-
-    // Verificar se encontramos o dia correto
-    if (
-      eventObj.day === activeDay &&
-      eventObj.month === month + 1 &&
-      eventObj.year === year
-    ) {
-      // Procurar o evento pelo título
-      const initialLength = eventObj.events.length;
-      const eventsToKeep = [];
-
-      // Busca manual para localizar o evento exato
-      for (let j = 0; j < eventObj.events.length; j++) {
-        const event = eventObj.events[j];
-
-        if (event.title.trim() === title) {
-          eventRemoved = true;
-          // Não adicionar ao array de eventos para manter
-        } else {
-          eventsToKeep.push(event);
-        }
-      }
-
-      // Atualizar a lista de eventos
-      eventObj.events = eventsToKeep;
-
-      // Se não houver mais eventos, remover o objeto do dia
-      if (eventObj.events.length === 0) {
-        eventsArr.splice(i, 1);
-      }
-
-      // Uma vez que encontramos o dia, não precisamos continuar procurando
-      break;
-    }
-  }
-
-  if (eventRemoved) {
-    updateEvents(activeDay);
-    saveEvents();
+  try {
+    await deleteEvent(event.id);
+    await initCalendar();
+    highlightDay(dia);
+    updateEvents(dia);
+  } catch (err) {
+    showCustomAlert("Erro ao remover evento.");
   }
 });
 
-// Envolver inicialização do modal dentro do DOMContentLoaded
+// ---------- MODAL DE TAREFAS PENDENTES ----------
 document.addEventListener("DOMContentLoaded", () => {
   const viewPendingTasksBtn = document.querySelector(".view-pending-tasks-btn");
   const pendingTasksModal = document.getElementById("pendingTasksModal");
@@ -432,7 +459,6 @@ document.addEventListener("DOMContentLoaded", () => {
     pendingTasksModal.classList.remove("active");
   });
 
-  // Fechar modal ao clicar fora do conteúdo
   pendingTasksModal.addEventListener("click", (e) => {
     if (e.target === pendingTasksModal) {
       pendingTasksModal.classList.remove("active");
@@ -440,51 +466,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Tarefas Pendentes
 const pendingTasksContainer = document.getElementById("pendingTasksContainer");
 
-// Função para atualizar o indicador de evento em qualquer dia do calendário
-function updateEventIndicator(day) {
-  const dayElements = document.querySelectorAll(
-    ".day:not(.prev-date):not(.next-date)"
-  );
-
-  // Encontrar o elemento do dia específico
-  const dayElement = Array.from(dayElements).find(
-    (el) => parseInt(el.innerText, 10) === day
-  );
-
-  if (dayElement) {
-    // Verificar se ainda existem eventos para este dia
-    const hasEvent = eventsArr.some(
-      (eventObj) =>
-        eventObj.day === day &&
-        eventObj.month === month + 1 &&
-        eventObj.year === year &&
-        eventObj.events.length > 0
-    );
-
-    // Atualizar a classe "event" com base na existência de eventos
-    if (hasEvent) {
-      dayElement.classList.add("event");
-    } else {
-      dayElement.classList.remove("event");
-    }
-  }
-}
-
-function loadPendingTasks() {
+async function loadPendingTasks() {
+  await fetchAllEvents();
   let tasksHTML = "";
   if (eventsArr.length === 0) {
     tasksHTML = "<p>Sem Tarefas Pendentes</p>";
   } else {
-    // Ordenar os eventos por data (mais próximos primeiro)
     const sortedEvents = [...eventsArr].sort((a, b) => {
-      // Comparar anos
       if (a.year !== b.year) return a.year - b.year;
-      // Comparar meses
       if (a.month !== b.month) return a.month - b.month;
-      // Comparar dias
       return a.day - b.day;
     });
 
@@ -494,7 +486,6 @@ function loadPendingTasks() {
       const year = String(eventObj.year).padStart(4, "0");
       const dateStr = `${day}/${month}/${year}`;
 
-      // Ordenar eventos do dia por horário
       const sortedDayEvents = [...eventObj.events].sort((a, b) => {
         const timeA = a.time.split(" - ")[0];
         const timeB = b.time.split(" - ")[0];
@@ -502,12 +493,10 @@ function loadPendingTasks() {
       });
 
       sortedDayEvents.forEach((ev) => {
-        // Escapar possíveis caracteres especiais no título para evitar problemas com HTML
         const safeTitle = ev.title.replace(/"/g, "&quot;");
-
-        // Adicionar data-* atributos para permitir identificação dos eventos
         tasksHTML += `
           <div class="pending-task" 
+               data-event-id="${ev.id}"
                data-day="${eventObj.day}" 
                data-month="${eventObj.month}" 
                data-year="${eventObj.year}" 
@@ -528,92 +517,34 @@ function loadPendingTasks() {
   pendingTasksContainer.innerHTML = tasksHTML;
 }
 
-// Função para atualizar o status de evento do dia (separa a lógica de updateEvents)
-function updateDayEventStatus(dayNum) {
-  const activeDayEl = document.querySelector(".day.active");
-  if (activeDayEl) {
-    // Verificar se há eventos neste dia
-    const hasEvent = eventsArr.some(
-      (eventObj) =>
-        eventObj.day === dayNum &&
-        eventObj.month === month + 1 &&
-        eventObj.year === year &&
-        eventObj.events.length > 0
-    );
-
-    // Atualizar a classe "event"
-    if (hasEvent) {
-      activeDayEl.classList.add("event");
-    } else {
-      activeDayEl.classList.remove("event");
-    }
-  }
-
-  // Garantir que os eventos sejam salvos após qualquer modificação
-  saveEvents();
-}
-
-pendingTasksContainer.addEventListener("click", (e) => {
+pendingTasksContainer.addEventListener("click", async (e) => {
   const taskDiv = e.target.closest(".pending-task");
   if (taskDiv) {
+    const eventId = taskDiv.dataset.eventId;
     const day = parseInt(taskDiv.dataset.day, 10);
-    const month = parseInt(taskDiv.dataset.month, 10);
-    const year = parseInt(taskDiv.dataset.year, 10);
-    const title = taskDiv.dataset.title;
 
-    showCustomConfirm("Tem certeza de que deseja concluir este evento?").then(
-      (result) => {
-        if (result) {
-          // Itera o array de trás para frente para evitar problemas com splice
-          for (let i = eventsArr.length - 1; i >= 0; i--) {
-            let eventObj = eventsArr[i];
-            if (
-              eventObj.day === day &&
-              eventObj.month === month &&
-              eventObj.year === year
-            ) {
-              eventObj.events = eventObj.events.filter(
-                (ev) => ev.title !== title
-              );
-              if (eventObj.events.length === 0) {
-                eventsArr.splice(i, 1);
-              }
-              break;
-            }
-          }
-
-          // Atualiza o armazenamento
-          saveEvents();
-
-          // Verificar se o evento excluído pertence ao mês atualmente exibido
-          const isSameMonth = month - 1 === window.month;
-          const isSameYear = year === window.year;
-
-          if (isSameMonth && isSameYear) {
-            // Atualizar o indicador de evento nos dias do calendário
-            updateEventIndicator(day);
-          }
-
-          // SEMPRE atualizar a lista de eventos atual se houver um dia ativo
-          if (activeDay) {
-            updateEvents(activeDay);
-          }
-
-          // Recarregar a lista de tarefas pendentes
-          loadPendingTasks();
-
-          // Remover o elemento da tarefa do DOM para feedback visual imediato
-          taskDiv.classList.add("fade-out");
-          setTimeout(() => {
-            taskDiv.remove();
-          }, 300);
-        }
-      }
+    const confirmed = await showCustomConfirm(
+      "Tem certeza de que deseja concluir este evento?"
     );
+    if (!confirmed) return;
+
+    try {
+      await deleteEvent(eventId);
+      await loadPendingTasks();
+      await initCalendar();
+      highlightDay(day);
+      updateEvents(day);
+      taskDiv.classList.add("fade-out");
+      setTimeout(() => {
+        taskDiv.remove();
+      }, 300);
+    } catch (err) {
+      showCustomAlert("Erro ao remover evento.");
+    }
   }
 });
 
-// ---------- UTILITÁRIOS & ARMAZENAMENTO ----------
+// ---------- UTILITÁRIOS ----------
 function clearEventForm() {
   addEventTitle.value = "";
   addEventFrom.value = "";
@@ -628,23 +559,11 @@ function isValidTime(timeStr) {
   return hour >= 0 && hour < 24 && minute >= 0 && minute < 60;
 }
 
-// Atualizada para retornar o horário em formato 24h com zero preenchido
 function convertTime(time) {
   const [h, m] = time.split(":");
   const hour = h.padStart(2, "0");
   const minute = m.padStart(2, "0");
   return `${hour}:${minute}`;
-}
-
-function saveEvents() {
-  localStorage.setItem("events", JSON.stringify(eventsArr));
-}
-
-function getEvents() {
-  const eventsFromStorage = localStorage.getItem("events");
-  if (eventsFromStorage) {
-    eventsArr.push(...JSON.parse(eventsFromStorage));
-  }
 }
 
 // ---------- EVENTOS DE NAVEGAÇÃO DOS MESES ----------
