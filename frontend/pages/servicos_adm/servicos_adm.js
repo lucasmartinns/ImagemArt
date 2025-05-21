@@ -1,30 +1,30 @@
 // ---------- CONSTANTES DE ELEMENTOS ----------
 const createItemImg = document.getElementById("createItemImg");
-const itemModal = document.getElementById("itemModal");
+const itemModalAdm = document.getElementById("itemModalAdm");
 const closeModal = document.getElementsByClassName("close")[0];
-const saveBtn = document.getElementById("saveBtn");
-const deleteBtn = document.getElementById("deleteBtn");
-const itemsContainer = document.getElementById("itemsContainer");
-const serviceForm = document.getElementById("serviceForm");
+const saveBtnAdm = document.getElementById("saveBtnAdm");
+const deleteBtnAdm = document.getElementById("deleteBtnAdm");
+const itemsContainerAdm = document.getElementById("itemsContainerAdm");
+const serviceFormAdm = document.getElementById("serviceFormAdm");
 const detailsTable = document
   .getElementById("detailsTable")
   .getElementsByTagName("tbody")[0];
-const selectedImage = document.getElementById("selectedImage");
-const imageInput = document.getElementById("imageInput");
-const addItemForm = document.querySelector(".addItemForm");
-const modalPlusSymbol = document.getElementById("modalPlusSymbol");
+const selectedImageAdm = document.getElementById("selectedImageAdm");
+const imageInputAdm = document.getElementById("imageInputAdm");
+const addItemFormAdm = document.querySelector(".addItemFormAdm");
+const modalPlusSymbolAdm = document.getElementById("modalPlusSymbolAdm");
 let currentItem = null;
 
 // ---------- FUNÇÕES UTILITÁRIAS ----------
 
 // Limpa o formulário e a tabela de detalhes
 function clearForm() {
-  serviceForm.reset();
+  serviceFormAdm.reset();
   detailsTable.innerHTML = "";
   addEmptyRow();
-  selectedImage.src = "";
-  selectedImage.style.display = "none";
-  modalPlusSymbol.style.display = "block ";
+  selectedImageAdm.src = "";
+  selectedImageAdm.style.display = "none";
+  modalPlusSymbolAdm.style.display = "block ";
 }
 
 // Adiciona uma linha vazia na tabela de detalhes
@@ -140,28 +140,28 @@ function loadDetailsToTable(details) {
 createItemImg.onclick = function () {
   clearForm();
   currentItem = null;
-  itemModal.style.display = "flex";
-  deleteBtn.style.display = "none";
-  selectedImage.src = "";
-  selectedImage.style.display = "none";
-  modalPlusSymbol.style.display = "block";
-  imageInput.value = "";
+  itemModalAdm.style.display = "flex";
+  deleteBtnAdm.style.display = "none";
+  selectedImageAdm.src = "";
+  selectedImageAdm.style.display = "none";
+  modalPlusSymbolAdm.style.display = "block";
+  imageInputAdm.value = "";
 };
 
 // Fechar modal ao clicar no botão fechar
 closeModal.onclick = function () {
-  itemModal.style.display = "none";
+  itemModalAdm.style.display = "none";
 };
 
 // Salvar item
-saveBtn.onclick = function () {
+saveBtnAdm.onclick = function () {
   // Força a finalização da edição de qualquer célula em foco
   if (document.activeElement && document.activeElement.blur) {
     document.activeElement.blur();
   }
 
   const serviceName = document.getElementById("serviceName").value;
-  const serviceImage = imageInput.files[0];
+  const serviceImage = imageInputAdm.files[0];
 
   if (!serviceName) {
     showCustomAlert("Por favor, preencha o nome do serviço.");
@@ -200,56 +200,56 @@ saveBtn.onclick = function () {
         currentItem = item;
         document.getElementById("serviceName").value =
           item.querySelector("h3").innerText;
-        selectedImage.src = item.dataset.image;
-        selectedImage.style.display = "block";
-        modalPlusSymbol.style.display = "none";
-        imageInput.value = "";
+        selectedImageAdm.src = item.dataset.image;
+        selectedImageAdm.style.display = "block";
+        modalPlusSymbolAdm.style.display = "none";
+        imageInputAdm.value = "";
         loadDetailsToTable(JSON.parse(item.dataset.details || "[]"));
-        deleteBtn.style.display = "block";
-        itemModal.style.display = "flex";
+        deleteBtnAdm.style.display = "block";
+        itemModalAdm.style.display = "flex";
       };
 
       const addItemBlock = document.querySelector(".addItem");
 
       // Insere o novo item antes do bloco de criação, mas mantém o bloco de criação no topo
-      itemsContainer.insertBefore(item, addItemBlock.nextSibling);
+      itemsContainerAdm.insertBefore(item, addItemBlock.nextSibling);
     }
-    itemModal.style.display = "none";
+    itemModalAdm.style.display = "none";
   };
 
   // Se não tiver imagem nova, só salva com os dados existentes
   if (!serviceImage && currentItem) {
     currentItem.dataset.details = JSON.stringify(updatedDetails);
     currentItem.querySelector("h3").innerText = serviceName;
-    itemModal.style.display = "none";
+    itemModalAdm.style.display = "none";
   } else {
     reader.readAsDataURL(serviceImage);
   }
 };
 
 // Remover item selecionado
-deleteBtn.onclick = function () {
+deleteBtnAdm.onclick = function () {
   if (currentItem) {
-    itemsContainer.removeChild(currentItem);
+    itemsContainerAdm.removeChild(currentItem);
     currentItem = null;
-    itemModal.style.display = "none";
+    itemModalAdm.style.display = "none";
   }
 };
 
 // Simula clique no input de arquivo ao clicar no formulário de adição de item
-addItemForm.addEventListener("click", function () {
-  imageInput.click();
+addItemFormAdm.addEventListener("click", function () {
+  imageInputAdm.click();
 });
 
 // Carregar imagem selecionada
-imageInput.addEventListener("change", function (event) {
+imageInputAdm.addEventListener("change", function (event) {
   const file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
     reader.onload = function (e) {
-      selectedImage.src = e.target.result;
-      selectedImage.style.display = "block";
-      modalPlusSymbol.style.display = "none";
+      selectedImageAdm.src = e.target.result;
+      selectedImageAdm.style.display = "block";
+      modalPlusSymbolAdm.style.display = "none";
     };
     reader.readAsDataURL(file);
   }
