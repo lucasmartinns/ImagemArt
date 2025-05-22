@@ -7,15 +7,15 @@ const servico = {
 
     // 🔹 Criar um novo serviço (com ou sem variações + imagem)
     criarServico: async (req, res) => {
-        const { nome, descricao, valor } = req.body;
-
-        if (!nome || !valor) {
-            return res.status(400).json({ error: "Nome e valor são obrigatórios!" });
+        const { nome } = req.body;
+    
+        if (!nome) {
+            return res.status(400).json({ error: "Nome é obrigatório!" });
         }
-
+    
         // Verifica se há uma imagem
-        const imagem = req.file ? req.file.filename : null;
-
+        const imagem = req.file ? `/uploads/${req.file.filename}` : null;
+    
         // Trata as variações (esperadas como JSON no body)
         let variacoes = [];
         if (req.body.variacoes) {
@@ -25,29 +25,32 @@ const servico = {
                 return res.status(400).json({ error: "Variações inválidas. Envie um JSON válido!" });
             }
         }
-
+    
         try {
+           
             const [result] = await connection.query(
-                "INSERT INTO servico (nome, descricao, valor, imagem) VALUES (?, ?, ?, ?)",
-                [nome, descricao, valor, imagem]
+                "INSERT INTO servico (nome, imagem) VALUES (?, ?)",
+                [nome, imagem]
             );
-
+    
             const servicoId = result.insertId;
-
+    
+            
             if (Array.isArray(variacoes)) {
                 for (const v of variacoes) {
                     await connection.query(
-                        "INSERT INTO servico_variacao (servico_id, descricao, preco) VALUES (?, ?, ?)",
-                        [servicoId, v.descricao, v.preco]
+                        "INSERT INTO servico_variacao (servico_id, descricao, preco, quantidade_minima) VALUES (?, ?, ?, ?)",
+                        [servicoId, v.descricao, v.preco, v.quantidade_minima]
                     );
                 }
             }
-
+    
             res.status(201).json({ mensagem: "Serviço cadastrado com sucesso!", id: servicoId });
         } catch (err) {
             res.status(500).json({ error: "Erro ao inserir serviço", err });
         }
     },
+    
 
     // 🔹 Adicionar variações a um serviço existente
     adicionarVariacoes: async (req, res) => {
