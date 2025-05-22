@@ -203,6 +203,7 @@
         text-decoration: none;
         font-weight: normal;
         color: inherit;
+        margin-bottom: 3vh;
       }
       .botaoAcess a{
         text-decoration: none;
@@ -227,11 +228,16 @@
           flex: 0 0 300px;
           max-width: 200px;
         }
+        .botaoAcess{
+          width: 25vw;
+          height: 5vh;
+          font-size: 1.6vw;
+        }
       }
 
       @media (max-width: 768px) and (max-width: 1023px) {
         .botaoAcess {
-          width: 20vw;
+          width: 30vw;
           height: 5vh;
           font-size: 1.8vh;
         }
@@ -252,7 +258,7 @@
 
         .carousel-container {
           width: 70vw;
-        }
+        } 
 
         .prev-btn,
         .next-btn {
@@ -263,6 +269,9 @@
       }
 
       @media (max-width: 425px) and (max-width: 763px) {
+        .carousel-container{
+          margin-bottom: -6vh;
+        }
         .card {
           flex: 0 0 160px;
           max-width: 160px;
@@ -289,9 +298,11 @@
           font-size: 14px;
         }
         .botaoAcess {
-          width: 25vw;
-          height: 5vh;
-          font-size: 1.2vh;
+          width: 40vw;
+          height: 4.5vh;
+          font-size: 3.5vw;
+          margin-bottom: 8vh;
+          margin-top: 2vh;
         }
       }
       @media (max-width: 375px) and (max-width: 424px) {
@@ -301,24 +312,35 @@
         .title2 {
           font-size: 8px;
         }
-        .card {
-          margin-top: -40%;
-        }}
+        .botaoAcess{
+          width: 45vw;
+          height: 5vh;
+          font-size: 1.6vh;
+        }
+      }
         @media (max-width: 320px) and (max-width: 376px) {
         .title {
-          font-size: 30px;
+          font-size: 3vh;
         }
         .imagelinha{
           margin-top: -5%;
         }
         .title2 {
-          font-size: 5px;
+          font-size: 0.9vh;
         }
         .card {
-          margin-top: -45%;
+          margin-top: -9vh;
+          margin-bottom: -5vw;
+        }
+        .outer-container{
+          margin-bottom: 8vh;
         }
         .botaoAcess{
-          font-size: 1vh;
+
+          margin-top: -10vh;
+          font-size: 68%;
+          width: 13vh;
+          font-weight: 100;
         }
       }
     </style>
