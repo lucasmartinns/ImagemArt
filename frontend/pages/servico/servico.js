@@ -140,10 +140,12 @@ document.addEventListener("DOMContentLoaded", () => {
                       if (!response.ok)
                         throw new Error("Erro ao deletar o serviço.");
 
-                      showCustomAlert("Serviço deletado com sucesso!");
-
                       itemModal.style.display = "none";
-                      loadServices(); // Atualiza a lista
+                      showLoading();
+                      setTimeout(() => {
+                        hideLoading();
+                        window.location.reload();
+                      }, 2000);
                     } catch (err) {
                       console.error("Erro ao deletar serviço:", err);
                       showCustomAlert("Erro ao deletar o serviço.");
@@ -624,13 +626,15 @@ saveBtnAdm.onclick = async function () {
     const data = await response.json();
     console.log("Serviço criado com sucesso:", data);
 
-    showCustomAlert("Serviço criado com sucesso!");
-
     // Fecha modal
     itemModalAdm.style.display = "none";
 
-    // Atualiza lista
-    loadServices();
+    // Atualiza a página para refletir as mudanças
+    showLoading();
+    setTimeout(() => {
+      hideLoading();
+      window.location.reload();
+    }, 2000);
   } catch (err) {
     console.error("Erro ao criar serviço:", err);
     showCustomAlert("Erro ao criar o serviço.");
@@ -644,7 +648,6 @@ deleteBtnAdm.onclick = function () {
     itemsContainerAdm.removeChild(currentItemAdm);
     currentItemAdm = null;
     itemModalAdm.style.display = "none";
-    loadServices(); // Atualiza lista
   }
 };
 
