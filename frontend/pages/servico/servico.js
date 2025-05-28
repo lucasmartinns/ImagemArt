@@ -119,37 +119,45 @@ document.addEventListener("DOMContentLoaded", () => {
               if (isAdmin()) {
                 deleteServiceBtn.style.display = "inline-block";
                 deleteServiceBtn.onclick = async function () {
-                  if (confirm(`Tem certeza que deseja deletar o serviço "${service.nome}"?`)) {
+                  if (
+                    await showCustomConfirm(
+                      `Tem certeza que deseja deletar o serviço "${service.nome}"?`
+                    )
+                  ) {
                     try {
-                      const response = await fetch(`/deletarservico/${service.idservico}`, {
-                        method: "DELETE",
-                        headers: {
-                          Authorization: `Bearer ${localStorage.getItem("token")}`
+                      const response = await fetch(
+                        `/deletarservico/${service.idservico}`,
+                        {
+                          method: "DELETE",
+                          headers: {
+                            Authorization: `Bearer ${localStorage.getItem(
+                              "token"
+                            )}`,
+                          },
                         }
-                      });
-              
-                      if (!response.ok) throw new Error("Erro ao deletar o serviço.");
-              
-                      alert("✅ Serviço deletado com sucesso!");
-              
+                      );
+
+                      if (!response.ok)
+                        throw new Error("Erro ao deletar o serviço.");
+
+                      showCustomAlert("Serviço deletado com sucesso!");
+
                       itemModal.style.display = "none";
-                      loadServices();  // Atualiza a lista
-              
+                      loadServices(); // Atualiza a lista
                     } catch (err) {
                       console.error("Erro ao deletar serviço:", err);
-                      alert("❌ Erro ao deletar o serviço.");
+                      showCustomAlert("Erro ao deletar o serviço.");
                     }
                   }
                 };
               } else {
                 deleteServiceBtn.style.display = "none";
               }
-
             })
-            
+
             .catch((err) => {
               console.error("Erro ao buscar variações:", err);
-              alert("Erro ao carregar variações do serviço.");
+              showCustomAlert("Erro ao carregar variações do serviço.");
             });
         });
 
@@ -157,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     } catch (err) {
       console.error("Erro ao buscar serviços:", err);
-      alert("Não foi possível carregar os serviços.");
+      showCustomAlert("Não foi possível carregar os serviços.");
     }
   };
 
@@ -182,12 +190,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (isNaN(quantity) || quantity <= 0) {
-      alert("Por favor, insira uma quantidade válida.");
+      showCustomAlert("Por favor, insira uma quantidade válida.");
       return;
     }
 
     if (!selectedService) {
-      alert("Por favor, selecione um serviço.");
+      showCustomAlert("Por favor, selecione um serviço.");
       return;
     }
 
@@ -291,7 +299,7 @@ let currentItemAdm = null;
 if (!isAdmin()) {
   const addItemAdm = document.querySelector(".addItemAdm");
   const itemModalAdm = document.getElementById("itemModalAdm");
-  
+
   if (addItemAdm) addItemAdm.remove();
   if (itemModalAdm) itemModalAdm.remove();
 }
@@ -350,7 +358,7 @@ function configureAdminFeatures() {
 
 // Função para carregar os serviços
 function loadServices() {
-  if(!itemsContainerAdm) {
+  if (!itemsContainerAdm) {
     console.warn("itemsContainerAdm não encontrado.");
     return;
   }
@@ -365,7 +373,9 @@ function loadServices() {
     .then((response) => {
       console.log("Resposta da API recebida:", response);
       if (!response.ok) {
-        throw new Error(`Erro na resposta da API: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Erro na resposta da API: ${response.status} ${response.statusText}`
+        );
       }
       return response.json();
     })
@@ -389,7 +399,9 @@ function loadServices() {
     })
     .catch((error) => {
       console.error("Erro ao carregar serviços:", error);
-      alert("Não foi possível carregar os serviços. Verifique sua conexão ou tente novamente mais tarde.");
+      showCustomAlert(
+        "Não foi possível carregar os serviços. Verifique sua conexão ou tente novamente mais tarde."
+      );
     });
 }
 
@@ -416,10 +428,11 @@ function addEmptyRowAdm() {
     };
     cell.onblur = function () {
       if (!cell.innerText.trim()) {
-        cell.setAttribute(
-          "data-placeholder",
-          cell.getAttribute("data-placeholder")
-        );
+        // Recupera o placeholder original do atributo HTML
+        const originalPlaceholder =
+          cell.getAttribute("data-placeholder-original") ||
+          cell.getAttribute("data-placeholder");
+        cell.setAttribute("data-placeholder", originalPlaceholder);
       }
       // Se o item já estiver criado, atualiza seus detalhes sempre que uma célula perder o foco
       if (currentItemAdm) {
@@ -428,9 +441,20 @@ function addEmptyRowAdm() {
         );
       }
     };
+    // Salva o placeholder original na primeira vez
+    if (
+      !cell.getAttribute("data-placeholder-original") &&
+      cell.getAttribute("data-placeholder")
+    ) {
+      cell.setAttribute(
+        "data-placeholder-original",
+        cell.getAttribute("data-placeholder")
+      );
+    }
     cell.addEventListener("input", checkLastRowAdm);
   });
 
+  // Exemplo ao adicionar linha:
   row.querySelector(".priceAdm").onblur = formatPriceAdm;
   row.querySelector(".quantityAdm").onblur = validateQuantityAdm;
 }
@@ -450,23 +474,44 @@ function checkLastRowAdm() {
 
 // Formatar preço para moeda brasileira
 function formatPriceAdm(event) {
-  let value = event.target.innerText.replace("R$", "").trim();
-  value = parseFloat(value.replace(",", ".")).toFixed(2);
-  if (!isNaN(value)) {
-    event.target.innerText = `R$ ${value.replace(".", ",")}`;
-  } else {
+  let value = event.target.innerText.replace(/[^\d.,]/g, "").replace(",", ".");
+  if (!value) {
     event.target.innerText = "";
+    // Restaurar placeholder se vazio
+    const originalPlaceholder =
+      event.target.getAttribute("data-placeholder-original") ||
+      event.target.getAttribute("data-placeholder");
+    event.target.setAttribute("data-placeholder", originalPlaceholder);
+    return;
   }
+  let number = Number(value);
+  if (isNaN(number)) {
+    event.target.innerText = "";
+    const originalPlaceholder =
+      event.target.getAttribute("data-placeholder-original") ||
+      event.target.getAttribute("data-placeholder");
+    event.target.setAttribute("data-placeholder", originalPlaceholder);
+    return;
+  }
+  event.target.innerText = `R$ ${number.toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
 }
 
 // Validar se a quantidade é um número inteiro válido
 function validateQuantityAdm(event) {
-  let value = parseInt(event.target.innerText, 10);
-  if (!isNaN(value) && value > 0) {
-    event.target.innerText = value;
-  } else {
+  let value = event.target.innerText.replace(/\D/g, "");
+  if (!value) {
     event.target.innerText = "";
+    // Restaurar placeholder se vazio
+    const originalPlaceholder =
+      event.target.getAttribute("data-placeholder-original") ||
+      event.target.getAttribute("data-placeholder");
+    event.target.setAttribute("data-placeholder", originalPlaceholder);
+    return;
   }
+  event.target.innerText = BigInt(value).toString();
 }
 
 // Obter detalhes da tabela
@@ -524,7 +569,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (addItemAdm) addItemAdm.remove();
     if (itemModalAdm) itemModalAdm.remove();
   }
-  
 });
 
 // Fechar modal ao clicar no botão fechar
@@ -556,16 +600,21 @@ saveBtnAdm.onclick = async function () {
   const formData = new FormData();
   formData.append("nome", serviceNameAdm);
   formData.append("imagem", serviceImageAdm);
-  formData.append("variacoes", JSON.stringify(updatedDetails.map((v) => ({
-    descricao: v.detail,
-    preco: parseFloat(v.price.replace("R$", "").replace(",", ".").trim()),
-    quantidade_minima: parseInt(v.quantity) || 1
-  }))));
+  formData.append(
+    "variacoes",
+    JSON.stringify(
+      updatedDetails.map((v) => ({
+        descricao: v.detail,
+        preco: parseFloat(v.price.replace("R$", "").replace(",", ".").trim()),
+        quantidade_minima: parseInt(v.quantity) || 1,
+      }))
+    )
+  );
 
   try {
     const response = await fetch("/criarservico", {
       method: "POST",
-      body: formData
+      body: formData,
     });
 
     if (!response.ok) {
@@ -575,26 +624,27 @@ saveBtnAdm.onclick = async function () {
     const data = await response.json();
     console.log("Serviço criado com sucesso:", data);
 
-    showCustomAlert("✅ Serviço criado com sucesso!");
+    showCustomAlert("Serviço criado com sucesso!");
 
     // Fecha modal
     itemModalAdm.style.display = "none";
 
     // Atualiza lista
     loadServices();
-
   } catch (err) {
     console.error("Erro ao criar serviço:", err);
-    showCustomAlert("❌ Erro ao criar o serviço.");
+    showCustomAlert("Erro ao criar o serviço.");
   }
 };
 
 // Remover item selecionado
 deleteBtnAdm.onclick = function () {
+  // Exemplo para exclusão instantânea do DOM
   if (currentItemAdm) {
     itemsContainerAdm.removeChild(currentItemAdm);
     currentItemAdm = null;
     itemModalAdm.style.display = "none";
+    loadServices(); // Atualiza lista
   }
 };
 
@@ -651,4 +701,3 @@ document.addEventListener("DOMContentLoaded", () => {
     imageInputAdm.value = "";
   };
 });
-
