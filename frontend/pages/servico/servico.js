@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const calculateBudget = document.getElementById("calculateBudget");
   const budgetResult = document.getElementById("budgetResult");
   const placeOrder = document.getElementById("placeOrder");
+  const deleteServiceBtn = document.getElementById("deleteServiceBtn");
 
   let selectedService = null;
   let variacoesServico = []; // guarda as variações do serviço selecionado
@@ -115,7 +116,37 @@ document.addEventListener("DOMContentLoaded", () => {
               serviceQuantity.value = 1;
               budgetResult.textContent = "";
               itemModal.style.display = "flex";
+              if (isAdmin()) {
+                deleteServiceBtn.style.display = "inline-block";
+                deleteServiceBtn.onclick = async function () {
+                  if (confirm(`Tem certeza que deseja deletar o serviço "${service.nome}"?`)) {
+                    try {
+                      const response = await fetch(`/deletarservico/${service.idservico}`, {
+                        method: "DELETE",
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem("token")}`
+                        }
+                      });
+              
+                      if (!response.ok) throw new Error("Erro ao deletar o serviço.");
+              
+                      alert("✅ Serviço deletado com sucesso!");
+              
+                      itemModal.style.display = "none";
+                      loadServices();  // Atualiza a lista
+              
+                    } catch (err) {
+                      console.error("Erro ao deletar serviço:", err);
+                      alert("❌ Erro ao deletar o serviço.");
+                    }
+                  }
+                };
+              } else {
+                deleteServiceBtn.style.display = "none";
+              }
+
             })
+            
             .catch((err) => {
               console.error("Erro ao buscar variações:", err);
               alert("Erro ao carregar variações do serviço.");
@@ -209,8 +240,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Erro ao criar pedido:", err);
       budgetResult.textContent = "❌ Erro ao criar o pedido.";
     } finally {
-      calculateBudget.disabled = false;
-      calculateBudget.textContent = "Fazer Orçamento";
+      // calculateBudget.disabled = false;
+      // calculateBudget.textContent = "Fazer Orçamento";
       setTimeout(() => {
         budgetResult.textContent = "";
       }, 5000);
