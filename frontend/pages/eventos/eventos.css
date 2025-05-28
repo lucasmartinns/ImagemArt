@@ -1,0 +1,65 @@
+:root {
+    --primary-clr: #a6b826;
+    --secundary-clr: #838d35;
+    --tertiary-clr: #cbd4b6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rosybrown;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.imagem-principal {
+    position: relative;
+    display: inline-block;
+}
+
+.letra-inicial-baixo {
+    position: absolute;
+    top: 79%;
+    left: 20px
+}
+
+.letra-inicial-cima {
+    padding-top: 50%;
+}
+
+
+.letra-inicial {
+    display: flex;
+    align-items: first baseline;
+}
+
+.letra-inicial p {
+    color: #E7E7E8;
+    font-family: "Abhaya Libre";
+    font-size: 115px;
+}
+
+
+.letra-inicial span {
+    color: #E7E7E8;
+    font-family: "Abhaya Libre";
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: 7.8px;
+}
+
+.imagem-principal img {
+    max-width: 240px;
+    max-height: 345px;
+}
