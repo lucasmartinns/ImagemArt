@@ -44,10 +44,17 @@ let eventsArr = [];
 
 // ---------- FUNÇÕES DE INTEGRAÇÃO COM O BACKEND ----------
 
+localStorage.removeItem("events"); // Limpa qualquer vestígio salvo
+
 // Busca todos os eventos do banco e atualiza eventsArr
 async function fetchAllEvents() {
+  const token = localStorage.getItem("token");
   try {
-    const res = await fetch("/listarEventos");
+    const res = await fetch("/listarEventos", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     if (!res.ok) throw new Error("Erro ao buscar eventos");
     const eventos = await res.json();
     // Agrupa eventos por dia/mês/ano para manter compatibilidade com a lógica do calendário
@@ -92,9 +99,13 @@ async function fetchAllEvents() {
 
 // Cria um novo evento no banco
 async function createEvent({ nome, data, hora_inicio, hora_fim }) {
+  const token = localStorage.getItem("token");
   const res = await fetch("/criarEvento", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({ nome, data, hora_inicio, hora_fim }),
   });
   if (!res.ok) throw new Error("Erro ao criar evento");
@@ -103,9 +114,13 @@ async function createEvent({ nome, data, hora_inicio, hora_fim }) {
 
 // Atualiza um evento existente no banco
 async function updateEvent(id, { nome, data, hora_inicio, hora_fim }) {
+  const token = localStorage.getItem("token");
   const res = await fetch(`/atualizarEvento/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({ nome, data, hora_inicio, hora_fim }),
   });
   if (!res.ok) throw new Error("Erro ao atualizar evento");
@@ -114,7 +129,13 @@ async function updateEvent(id, { nome, data, hora_inicio, hora_fim }) {
 
 // Deleta um evento do banco
 async function deleteEvent(id) {
-  const res = await fetch(`/deletarEvento/${id}`, { method: "DELETE" });
+  const token = localStorage.getItem("token");
+  const res = await fetch(`/deletarEvento/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   if (!res.ok) throw new Error("Erro ao deletar evento");
   return res.json();
 }

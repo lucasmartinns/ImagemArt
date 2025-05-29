@@ -616,6 +616,9 @@ saveBtnAdm.onclick = async function () {
   try {
     const response = await fetch("/criarservico", {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
       body: formData,
     });
 

@@ -38,9 +38,28 @@ const autenticarAdmin = (req, res, next) => {
     return res.status(401).json({ mensagem: "Usuário não autenticado" });
   }
   if (req.usuario.tipo !== 1) {
-    return res.status(403).json({ mensagem: "Acesso permitido apenas para administradores" });
+    return res
+      .status(403)
+      .json({ mensagem: "Acesso permitido apenas para administradores" });
   }
   next();
 };
 
-module.exports = { autenticarToken, gerarToken, autenticarAdmin };
+// ...existing code...
+
+function autenticarUsuario(req, res, next) {
+  const usuarioId = parseInt(req.params.id, 10);
+  if (req.usuario && req.usuario.id === usuarioId) {
+    return next();
+  }
+  return res
+    .status(403)
+    .json({ mensagem: "Acesso permitido apenas ao próprio usuário" });
+}
+
+module.exports = {
+  autenticarToken,
+  gerarToken,
+  autenticarAdmin,
+  autenticarUsuario,
+};
