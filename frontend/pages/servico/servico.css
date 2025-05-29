@@ -56,7 +56,7 @@ h1 span:last-child {
 
 .modal-content h1 {
   font-family: "Montserrat";
-  font-size: clamp(1.5rem, 2vw, 2vw);
+  font-size: clamp(1.3rem, 2vw, 2vw);
   text-align: center;
   font-weight: bold;
   margin-top: 0.5rem;
@@ -263,11 +263,17 @@ h1 span:last-child {
   justify-content: center;
   align-items: center;
 }
+
 .right {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.container-price {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .modal-body select,
@@ -288,6 +294,35 @@ h1 span:last-child {
 }
 
 @media (max-width: 768px) {
+  .choice {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .closeBar {
+    position: absolute;
+    top: 16.5%;
+    right: 17.7%;
+    padding: 1rem;
+  }
+
+  .modal-content {
+    max-width: 80vw;
+  }
+
+  .container-price {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+  }
+
+  .botoes {
+    display: flex;
+    flex-direction: column;
+  }
+
   .itens {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
@@ -318,8 +353,8 @@ h1 span:last-child {
 
 /* BOTÃO ADICIONAR SERVIÇO */
 .image-containerAdm img {
-  max-width: clamp(8rem, 15vw, 10rem);
-  max-height: clamp(8rem, 15vw, 10rem);
+  max-width: clamp(10rem, 15vw, 10rem);
+  max-height: clamp(10rem, 15vw, 10rem);
   cursor: pointer;
 }
 
