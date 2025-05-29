@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 :root {
     --primary-clr: #a6b826;
     --secundary-clr: #838d35;
@@ -14,8 +17,7 @@
 body {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: rosybrown;
+    background-color: #0A0809;
     padding: 0;
     margin: 0;
     width: 100vw;
@@ -23,21 +25,54 @@ body {
     overflow-x: hidden;
 }
 
+.grupo {
+    display: flex;
+    flex-direction: column;
+    margin: 3% 3%;
+}
+
+.left-right {
+    display: flex;
+    align-items: flex-end;
+}
+
+.left {
+    width: 25vw;
+    margin-left: 2rem;
+    margin-bottom: 2%;
+}
+
 .imagem-principal {
     position: relative;
     display: inline-block;
+    margin-top: 5vw;
+    max-width: 240px;
+    max-height: 345px;
 }
 
 .letra-inicial-baixo {
     position: absolute;
-    top: 79%;
-    left: 20px
+    top: 16.2rem;
+    left: 0;
+    text-align: center;
+    z-index: 2;
+    color: #E7E7E8;
+    font-family: "Abhaya Libre";
+    font-size: clamp(2rem, 8vw, 7rem);
+    pointer-events: none;
 }
 
 .letra-inicial-cima {
-    padding-top: 50%;
+    position: absolute;
+    bottom: 18rem;
+    left: 0;
+    text-align: center;
+    z-index: 2;
+    color: #E7E7E8;
+    font-family: "Abhaya Libre";
+    font-size: clamp(2rem, 8vw, 7rem);
+    pointer-events: none;
 }
-
 
 .letra-inicial {
     display: flex;
@@ -47,7 +82,7 @@ body {
 .letra-inicial p {
     color: #E7E7E8;
     font-family: "Abhaya Libre";
-    font-size: 115px;
+    font-size: 11vh;
 }
 
 
@@ -60,6 +95,109 @@ body {
 }
 
 .imagem-principal img {
+    display: block;
     max-width: 240px;
     max-height: 345px;
 }
+
+.grupo .texto {
+    margin-left: 2.5vw;
+    max-width: 27vw;
+    color: #E7E7E8;
+    font-family: "Montserrat", sans-serif;
+    font-style: italic;
+}
+
+.imagens {
+    display: flex;
+    gap: 6vw;
+    margin-right: 6rem;
+}
+
+.imagens img {
+    max-width: 240px;
+    max-height: 345px;
+}
+
+.imagens #img2,
+.imagens #img4 {
+    margin-top: 15vw;
+}
+
+.linha {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    width: 50%;
+    height: 1.5px;
+    opacity: 0.3;
+    align-self: center;
+}
+.alinhar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1%;
+}
+button a{
+    display: flex;
+    width: 18vw;
+    height: 6vh;
+    flex-shrink: 0;
+    color: #1b1baf;
+    font-size: 2vh;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+.botaoAcess{
+    background-color:#63783d;
+}
+@media (max-width: 1440px) {
+#img4{
+    display: none;
+}
+.left-right{
+    margin-left: 5%;
+}
+.texto{
+    margin-left: 8% !important;
+}
+}
+@media (max-width: 1024px) {
+    #img3{
+        display: none;
+    }
+    .texto{
+        margin-left: 10% !important;
+    }
+    #img1{
+        margin-left: 10%;
+    }
+
+  }
+  
+  @media (max-width: 768px) {
+    #img2{
+        display: none;
+    }
+    #img1{
+        margin-left: 80%;
+    }
+    .letra-inicial p{
+        font-size: 9vh !important;
+    span{
+        font-size: 6vh;
+    }}
+    .botaoAcess a{
+        font-size: 1.5vh;
+    }
+    .texto p{
+        font-size: 1.5vh;
+        width: 4+-0vh !important;
+    }
+  }
+  
+
