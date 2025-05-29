@@ -89,30 +89,30 @@ document.addEventListener("DOMContentLoaded", () => {
               serviceDropdown.innerHTML = "";
 
               if (variacoes && variacoes.length > 0) {
-                variacoes.forEach((variacao) => {
-                  const option = document.createElement("option");
-                  option.value = variacao.descricao;
-                  option.setAttribute("data-price", variacao.preco);
-                  option.setAttribute(
-                    "data-quantidade-minima",
-                    variacao.quantidade_minima || 1
-                  );
-                  option.textContent = variacao.descricao;
-                  serviceDropdown.appendChild(option);
-                });
-
+                // ✅ Pega a variação com quantidade mínima = 1 ou a primeira disponível
+                const variacaoBase = variacoes.find(v => v.quantidade_minima === 1) || variacoes[0];
+          
+                const option = document.createElement("option");
+                option.value = variacaoBase.descricao;
+                option.setAttribute("data-price", variacaoBase.preco);
+                option.setAttribute("data-quantidade-minima", variacaoBase.quantidade_minima || 1);
+                option.textContent = variacaoBase.descricao;
+          
+                serviceDropdown.appendChild(option);
+          
                 atualizaPrecoCalculado();
               } else {
+                // ✅ Caso não tenha variação, usa nome e preço do serviço
                 const option = document.createElement("option");
                 option.value = service.nome;
                 option.setAttribute("data-price", service.valor || 0);
                 option.setAttribute("data-quantidade-minima", 1);
                 option.textContent = service.nome;
+          
                 serviceDropdown.appendChild(option);
-
+          
                 servicePrice.textContent = (service.valor || 0).toFixed(2);
               }
-
               serviceQuantity.value = 1;
               budgetResult.textContent = "";
               itemModal.style.display = "flex";
