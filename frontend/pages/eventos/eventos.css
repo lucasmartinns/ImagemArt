@@ -154,6 +154,13 @@ button a{
 }
 .botaoAcess{
     background-color:#63783d;
+    border-radius: 1.5vh;
+}
+
+.botaoAcess:hover {
+    cursor: pointer;
+    background-color: #739436;
+    transform: translate(0, -2px);
 }
 @media (max-width: 1440px) {
 #img4{
@@ -196,7 +203,7 @@ button a{
     }
     .texto p{
         font-size: 1.5vh;
-        width: 4+-0vh !important;
+        width: 40vh !important;
     }
   }
   
