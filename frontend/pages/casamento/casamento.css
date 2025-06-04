@@ -329,17 +329,14 @@ body {
 
 .footer-container,
 .footer-container * {
-  all: unset;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
-  /* Reaplique suas propriedades essenciais */
   color: #e7e7e8;
   background: none;
   margin: 0;
   padding: 0;
 }
 .footer-container {
-  all: unset;
   display: flex;
   margin-top: 1rem;
   width: 100vw;

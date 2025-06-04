@@ -31,6 +31,7 @@ body {
 }
 
 .footer-container hr {
+  display: flex !important;
   width: 20rem;
   border: none;
   height: 2px;

@@ -1,19 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap");
+:root {
+  --primary-clr: #a6b826;
+  --secundary-clr: #63783d;
+  --tertiary-clr: #cbd4b6;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap");
 
 body {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-content: flex-start;
   align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(#000000 100%);
-  padding: 1%;
+  flex-direction: column;
+  background-color: #0a0809;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 .title {
@@ -180,6 +192,7 @@ body {
 .next-btn {
   margin-left: 10px;
 }
+
 .botaoAcess {
   width: 18vw;
   height: 5vh;
@@ -188,22 +201,29 @@ body {
   background-color: #63783d;
   font-size: 2vh;
   font-weight: 500;
-  text-decoration: none;
   cursor: pointer;
-  text-decoration: none;
   font-weight: normal;
   color: inherit;
   margin-bottom: 3vh;
 }
-.botaoAcess a {
+
+.botao {
+  color: #e7e7e7;
   text-decoration: none;
+  outline: none;
+  transition: filter 0.5s ease, transform 0.1s ease;
+}
+
+.botao:hover {
+  filter: brightness(0.5);
+  transform: scale(0.95);
+}
+
+.botaoAcess a {
   color: #ebebeb;
   font-family: "Abhaya Libre";
 }
 
-.botao {
-  text-decoration: none;
-}
 @media (min-width: 1024px) and (max-width: 1439px) {
   .title {
     font-size: 60px;
@@ -271,7 +291,7 @@ body {
     font-size: 40px;
   }
   .title2 {
-    font-size: 10px;
+    font-size: 14px;
     width: 100%;
   }
   .carousel-container {
@@ -300,7 +320,7 @@ body {
     font-size: 35px;
   }
   .title2 {
-    font-size: 8px;
+    font-size: 14px;
   }
   .botaoAcess {
     width: 45vw;
@@ -316,7 +336,7 @@ body {
     margin-top: -5%;
   }
   .title2 {
-    font-size: 0.9vh;
+    font-size: 12px;
   }
   .card {
     margin-top: -9vh;

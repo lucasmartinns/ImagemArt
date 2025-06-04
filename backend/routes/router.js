@@ -106,16 +106,6 @@ router.get("/login", (req, res) => {
   res.sendFile(path.join(FRONTEND_DIR, "pages", "login", "login.html"));
 });
 
-router.get("/aniversario", (req, res) => {
-  res.sendFile(
-    path.join(FRONTEND_DIR, "pages", "aniversario", "aniversario.html")
-  );
-});
-
-router.get("/gerais", (req, res) => {
-  res.sendFile(path.join(FRONTEND_DIR, "pages", "gerais", "gerais.html"));
-});
-
 router.get("/recuperarSenha", (req, res) => {
   res.sendFile(
     path.join(FRONTEND_DIR, "pages", "recuperarSenha", "recuperarSenha.html")
@@ -130,6 +120,20 @@ router.get("/redefinir-Senha", (req, res) => {
 
 router.get("/home", (req, res) => {
   res.sendFile(path.join(FRONTEND_DIR, "pages", "home", "home.html"));
+});
+
+router.get("/aniversario", (req, res) => {
+  res.sendFile(
+    path.join(FRONTEND_DIR, "pages", "aniversario", "aniversario.html")
+  );
+});
+
+router.get("/casamento", (req, res) => {
+  res.sendFile(path.join(FRONTEND_DIR, "pages", "casamento", "casamento.html"));
+});
+
+router.get("/gerais", (req, res) => {
+  res.sendFile(path.join(FRONTEND_DIR, "pages", "gerais", "gerais.html"));
 });
 
 // 🔹Rotas de alterar usuário
