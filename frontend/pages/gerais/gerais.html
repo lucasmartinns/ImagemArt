@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="pages/gerais/gerais.css" />
+    <script src="../../components/head/head.js"></script>
+    <link rel="stylesheet" href="../../components/animations/animation.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <div id="navbar-container"></div>
+
+    <!-- Primeiro Carrossel -->
+    <div class="outer-container">
+      <button class="prev-btn" onclick="moveCarousel(0, -1)">❮</button>
+      <div class="carousel-container">
+        <div class="title">
+          <p id="nome-do-evento">Drone</p>
+          <div class="title2">
+            <p>
+              Vídeos que transformam momentos em memórias. Com técnica e
+              sensibilidade, capturamos a essência de cada história.
+            </p>
+          </div>
+          <div class="imagelinha">
+            <img src="../../assets/img/linhareta.png" alt="" />
+          </div>
+        </div>
+        <div class="carousel" id="carousel-1">
+          <!-- Cards originais -->
+          <div class="card active">
+            <img
+              src="https://tse3.mm.bing.net/th?id=OIP.yHDW0URvOWEnewzRXfSCKwHaE8&cb=iwp1&pid=Api"
+              alt="Paris"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Paisagens Naturais</h3>
+              <p class="card-location">Pompeia, SP</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone1.jpeg"
+              alt="México"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Um dos sítios antigos</h3>
+              <p class="card-location">Tulum, México</p>
+            </div>
+          </div>
+
+          <div class="card active">
+            <img
+              src="../../assets/img/portfolio/drone2.jpeg"
+              alt="Austrália"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">O destino de iate</h3>
+              <p class="card-location">Whitsunday Islands, Austrália</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone3.webp"
+              alt="México"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Um dos sítios antigos</h3>
+              <p class="card-location">Tulum, México</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone4.jpeg"
+              alt="México"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Um dos sítios antigos</h3>
+              <p class="card-location">Tulum, México</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone5.jpeg"
+              alt="México Pirâmide"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Pirâmides antigas</h3>
+              <p class="card-location">Yucatán, México</p>
+            </div>
+          </div>
+
+          <!-- Imagens adicionais -->
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone6.jpeg"
+              alt="Vista Aérea"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Vista Panorâmica</h3>
+              <p class="card-location">Campos do Jordão, SP</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone7.jpeg"
+              alt="Praia"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Mar Cristalino</h3>
+              <p class="card-location">Fernando de Noronha, PE</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone8.jpeg"
+              alt="Vista de Cima"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Jardins Suspensos</h3>
+              <p class="card-location">Gramado, RS</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone9.jpeg"
+              alt="Cachoeira"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Quedas D'água</h3>
+              <p class="card-location">Foz do Iguaçu, PR</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone10.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone11.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone12.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone13.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone14.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone15.webp"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone16.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone17.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone18.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone19.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone20.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone21.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/drone22.jpeg"
+              alt="Parque"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Parque Nacional</h3>
+              <p class="card-location">Chapada dos Veadeiros, GO</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dots" id="dots-1">
+          <div class="dot active" onclick="setPosition(0, 0)"></div>
+          <div class="dot" onclick="setPosition(0, 1)"></div>
+          <div class="dot" onclick="setPosition(0, 2)"></div>
+          <div class="dot" onclick="setPosition(0, 3)"></div>
+          <div class="dot" onclick="setPosition(0, 4)"></div>
+          <div class="dot" onclick="setPosition(0, 5)"></div>
+        </div>
+      </div>
+      <button class="next-btn" onclick="moveCarousel(0, 1)">❯</button>
+    </div>
+
+    <!-- Segundo Carrossel -->
+    <div class="outer-container">
+      <button class="prev-btn" onclick="moveCarousel(1, -1)">❮</button>
+      <div class="carousel-container">
+        <div class="title">
+          <p id="nome-do-evento">Debutante</p>
+          <div class="title2">
+            <p>
+              Capturamos a beleza do corpo com arte, respeito e autenticidade.
+              Agende seu ensaio e descubra a força da sua imagem.
+            </p>
+          </div>
+          <div class="imagelinha">
+            <img src="../../assets/img/linhareta.png" alt="" />
+          </div>
+        </div>
+        <div class="carousel" id="carousel-2">
+          <!-- Cards originais -->
+          <div class="card active">
+            <img
+              src="../../assets/img/portfolio/festa1.webp"
+              alt="Casamento"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Cerimônia Elegante</h3>
+              <p class="card-location">Curitiba, PR</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa3.webp"
+              alt="Casal"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio Pré-Wedding</h3>
+              <p class="card-location">São Paulo, SP</p>
+            </div>
+          </div>
+
+          <div class="card active">
+            <img
+              src="../../assets/img/portfolio/festa2.jpeg"
+              alt="Austrália"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Destination Wedding</h3>
+              <p class="card-location">Whitsunday Islands, Austrália</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="http://aceitosim.com.br/15-anos/wp-content/uploads/2019/05/vestido-de-debutante-para-festa-tema-mil-e-uma-noites-7.jpg"
+              alt="15 Anos"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Festa de 15 Anos</h3>
+              <p class="card-location">Rio de Janeiro, RJ</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa4.jpeg"
+              alt="Formatura"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio de Formatura</h3>
+              <p class="card-location">Salvador, BA</p>
+            </div>
+          </div>
+
+          <!-- Imagens adicionais -->
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa5.jpeg"
+              alt="Casamento Igreja"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Casamento Religioso</h3>
+              <p class="card-location">Belo Horizonte, MG</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa6.jpeg"
+              alt="Casal Praia"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio na Praia</h3>
+              <p class="card-location">Florianópolis, SC</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa7.jpeg"
+              alt="Destino"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Casamento na Praia</h3>
+              <p class="card-location">Maceió, AL</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa8.webp"
+              alt="Festa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Festa de Debutante</h3>
+              <p class="card-location">Brasília, DF</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa9.webp"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa10.jpeg"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa11.webp"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa12.jpeg"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa13.webp"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa11.webp"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa15.webp"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa16.jpeg"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa17.webp"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa19.jpeg"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa20.jpeg"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/festa21.jpeg"
+              alt="Formatura Externa"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">20.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Formatura ao Ar Livre</h3>
+              <p class="card-location">Porto Alegre, RS</p>
+            </div>
+          </div>
+        </div>
+        <div class="dots" id="dots-2">
+          <div class="dot active" onclick="setPosition(1, 0)"></div>
+          <div class="dot" onclick="setPosition(1, 1)"></div>
+          <div class="dot" onclick="setPosition(1, 2)"></div>
+          <div class="dot" onclick="setPosition(1, 3)"></div>
+          <div class="dot" onclick="setPosition(1, 4)"></div>
+          <div class="dot" onclick="setPosition(1, 5)"></div>
+        </div>
+      </div>
+      <button class="next-btn" onclick="moveCarousel(1, 1)">❯</button>
+    </div>
+
+    <!-- Terceiro Carrossel (independente, igual ao segundo, com outros cards e dots próprios) -->
+    <div class="outer-container">
+      <button class="prev-btn" onclick="moveCarousel(2, -1)">❮</button>
+      <div class="carousel-container">
+        <div class="title">
+          <p id="nome-do-evento">Ensaios</p>
+          <div class="title2">
+            <p>
+              Ensaios fotográficos que eternizam emoções e lugares especiais.
+              Cada clique, uma nova história.
+            </p>
+          </div>
+          <div class="imagelinha">
+            <img src="../../assets/img/linhareta.png" alt="" />
+          </div>
+        </div>
+        <div class="carousel" id="carousel-3">
+          <div class="card active">
+            <img
+              src="../../assets/img/portfolio/ensaio1.webp"
+              alt="Ensaio 1"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">21.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio Urbano</h3>
+              <p class="card-location">São Paulo, SP</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/ensaio2.jpeg"
+              alt="Ensaio 2"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">22.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio no Campo</h3>
+              <p class="card-location">Interior, MG</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/ensaio3.webp"
+              alt="Ensaio 3"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">23.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio na Praia</h3>
+              <p class="card-location">Florianópolis, SC</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/ensaio4.jpeg"
+              alt="Ensaio 4"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">24.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio Noturno</h3>
+              <p class="card-location">Rio de Janeiro, RJ</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/ensaio5.webp"
+              alt="Ensaio 5"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">25.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio na Serra</h3>
+              <p class="card-location">Serra Gaúcha, RS</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/ensaio6.jpeg"
+              alt="Ensaio 6"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">26.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio no Parque</h3>
+              <p class="card-location">Belo Horizonte, MG</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/ensaio7.webp"
+              alt="Ensaio 7"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">27.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio no Jardim</h3>
+              <p class="card-location">Curitiba, PR</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/ensaio8.jpeg"
+              alt="Ensaio 8"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">28.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio Artístico</h3>
+              <p class="card-location">Recife, PE</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/ensaio12.jpeg"
+              alt="Ensaio 9"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">29.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio Conceitual</h3>
+              <p class="card-location">Salvador, BA</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/ensaio11.jpeg"
+              alt="Ensaio 9"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">29.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio Conceitual</h3>
+              <p class="card-location">Salvador, BA</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="../../assets/img/portfolio/ensaio12.jpeg"
+              alt="Ensaio 9"
+              class="card-img"
+            />
+            <div class="divdata"><span class="card-tag">29.10.2020</span></div>
+            <div class="card-content">
+              <h3 class="card-title">Ensaio Conceitual</h3>
+              <p class="card-location">Salvador, BA</p>
+            </div>
+          </div>
+        </div>
+        <div class="dots" id="dots-3">
+          <div class="dot active" onclick="setPosition(2, 0)"></div>
+          <div class="dot" onclick="setPosition(2, 1)"></div>
+          <div class="dot" onclick="setPosition(2, 2)"></div>
+          <div class="dot" onclick="setPosition(2, 3)"></div>
+          <div class="dot" onclick="setPosition(2, 4)"></div>
+          <div class="dot" onclick="setPosition(2, 5)"></div>
+        </div>
+      </div>
+      <button class="next-btn" onclick="moveCarousel(2, 1)">❯</button>
+    </div>
+
+    <div class="botao">
+      <button class="botaoAcess">
+        <a
+          href="https://api.whatsapp.com/send?phone=5514999034536&text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20sess%C3%A3o%20de%20fotografia.%20%F0%9F%93%B8%0A%0A*Tipo%20de%20ensaio%3A*%20%0A*Data%20e%20hor%C3%A1rio%20desejados%3A*%20%0A*Local%3A*%20%0A*Dura%C3%A7%C3%A3o%20aproximada%3A*%20%0A%0APor%20favor%2C%20me%20avise%20sobre%20a%20disponibilidade%20e%20valores.%20Aguardo%20seu%20retorno!%20%F0%9F%98%8A"
+          >Agende sua Seção!</a
+        >
+      </button>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer-container"></div>
+
+    <script src="../../components/footer/footer.js"></script>
+    <script src="../../components/navbar/navbar.js"></script>
+
+    <script src="../../components/animations/animation.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Ajuste para 3 carrosseis independentes
+        const carousels = [
+          {
+            element: document.getElementById("carousel-1"),
+            dots: document.querySelectorAll("#dots-1 .dot"),
+            currentIndex: 0,
+          },
+          {
+            element: document.getElementById("carousel-2"),
+            dots: document.querySelectorAll("#dots-2 .dot"),
+            currentIndex: 0,
+          },
+          {
+            element: document.getElementById("carousel-3"),
+            dots: document.querySelectorAll("#dots-3 .dot"),
+            currentIndex: 0,
+          },
+        ];
+
+        function getCardsToShow() {
+          return window.innerWidth < 768 ? 1 : 3;
+        }
+
+        window.moveCarousel = function (carouselIndex, direction) {
+          const carousel = carousels[carouselIndex];
+          const cards = carousel.element.getElementsByClassName("card");
+          const cardWidth = cards[0].offsetWidth + 20;
+          const cardsToShow = getCardsToShow();
+          const totalCards = cards.length;
+          const maxIndex = Math.max(0, totalCards - cardsToShow);
+
+          // Atualiza índice sem ultrapassar o limite
+          carousel.currentIndex = Math.max(
+            0,
+            Math.min(carousel.currentIndex + direction, maxIndex)
+          );
+          carousel.element.style.transform = `translateX(-${
+            carousel.currentIndex * cardWidth
+          }px)`;
+
+          updateDots(carouselIndex, cardsToShow);
+        };
+
+        window.setPosition = function (carouselIndex, dotIndex) {
+          const carousel = carousels[carouselIndex];
+          const cardsToShow = getCardsToShow();
+          const cards = carousel.element.getElementsByClassName("card");
+          const totalCards = cards.length;
+          const maxIndex = Math.max(0, totalCards - cardsToShow);
+
+          carousel.currentIndex = Math.min(dotIndex * cardsToShow, maxIndex);
+          const cardWidth = cards[0].offsetWidth + 20;
+          carousel.element.style.transform = `translateX(-${
+            carousel.currentIndex * cardWidth
+          }px)`;
+
+          updateDots(carouselIndex, cardsToShow);
+        };
+
+        function updateDots(carouselIndex, cardsToShow) {
+          const carousel = carousels[carouselIndex];
+          const cards = carousel.element.getElementsByClassName("card");
+          const totalCards = cards.length;
+          const totalDots = Math.ceil(totalCards / cardsToShow);
+          const activeDot = Math.floor(carousel.currentIndex / cardsToShow);
+
+          carousel.dots.forEach((dot, idx) => {
+            dot.classList.toggle("active", idx === activeDot);
+            // Esconde dots extras se houver mais dots do que páginas
+            dot.style.display = idx < totalDots ? "inline-block" : "none";
+          });
+        }
+
+        // Atualiza ao redimensionar a tela
+        window.addEventListener("resize", function () {
+          carousels.forEach((carousel, idx) => {
+            const cardsToShow = getCardsToShow();
+            const cards = carousel.element.getElementsByClassName("card");
+            const totalCards = cards.length;
+            const maxIndex = Math.max(0, totalCards - cardsToShow);
+
+            if (carousel.currentIndex > maxIndex) {
+              carousel.currentIndex = maxIndex;
+            }
+            carousel.element.style.transform = `translateX(-${
+              carousel.currentIndex * (cards[0].offsetWidth + 20)
+            }px)`;
+            updateDots(idx, cardsToShow);
+          });
+        });
+
+        // Inicialização
+        carousels.forEach((carousel, idx) => {
+          updateDots(idx, getCardsToShow());
+        });
+      });
+    </script>
+  </body>
+</html>

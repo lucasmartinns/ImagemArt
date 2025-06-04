@@ -1,0 +1,312 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --primary-clr: #a6b826;
+  --secundary-clr: #838d35;
+  --tertiary-clr: #cbd4b6;
+}
+.respansive {
+  display: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #0a0809;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.grupo {
+  display: flex;
+  flex-direction: column;
+  margin: 3% 3%;
+}
+
+.left-right {
+  display: flex;
+  align-items: flex-end;
+}
+
+.left {
+  width: 25vw;
+  margin-left: 2rem;
+  margin-bottom: 2%;
+}
+
+.imagem-principal {
+  position: relative;
+  display: inline-block;
+  margin-top: 5vw;
+  max-width: 240px;
+  max-height: 345px;
+}
+
+.letra-inicial-baixo {
+  position: absolute;
+  top: 16.2rem;
+  left: 0;
+  text-align: center;
+  z-index: 2;
+  color: #e7e7e8;
+  font-family: "Abhaya Libre";
+  font-size: clamp(2rem, 8vw, 7rem);
+  pointer-events: none;
+}
+
+.letra-inicial-cima {
+  position: absolute;
+  bottom: 18rem;
+  left: 0;
+  text-align: center;
+  z-index: 2;
+  color: #e7e7e8;
+  font-family: "Abhaya Libre";
+  font-size: clamp(2rem, 8vw, 7rem);
+  pointer-events: none;
+  transform: translate(0, 25px);
+}
+
+.letra-inicial {
+  display: flex;
+  align-items: first baseline;
+}
+
+.letra-inicial p {
+  color: #e7e7e8;
+  font-family: "Abhaya Libre";
+  font-size: 11vh;
+}
+
+.letra-inicial span {
+  color: #e7e7e8;
+  font-family: "Abhaya Libre";
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: 7.8px;
+}
+
+.imagem-principal img {
+  display: block;
+  max-width: 240px;
+  max-height: 345px;
+}
+
+.grupo .texto {
+  margin-left: 2.5vw;
+  max-width: 27vw;
+  color: #e7e7e8;
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+}
+
+.imagens {
+  display: flex;
+  gap: 6vw;
+  margin-right: 6rem;
+}
+
+.imagens img {
+  max-width: 240px;
+  max-height: 345px;
+}
+
+.imagens #img2,
+.imagens #img4 {
+  margin-top: 15vw;
+}
+
+.linha {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 1.5px;
+  align-self: center;
+
+  & p {
+    width: 50%;
+    background-color: #ffffff;
+    height: 1.5px;
+    margin: 0;
+    padding: 0;
+    opacity: 0.3;
+  }
+}
+
+.alinhar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1%;
+}
+
+button a {
+  display: flex;
+  width: 18vw;
+  height: 6vh;
+  flex-shrink: 0;
+  color: #1b1baf;
+  font-size: 2vh;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.botaoAcess {
+  background-color: #63783d;
+  border-radius: 1.5vh;
+}
+
+.botaoAcess:hover {
+  cursor: pointer;
+  background-color: #739436;
+  transform: translate(0, -2px);
+}
+
+.mobile-carousel {
+  display: none;
+}
+
+@media (max-width: 1440px) {
+  #img4 {
+    display: none;
+  }
+
+  .left-right {
+    margin-left: 5%;
+  }
+
+  .texto {
+    margin-left: 8% !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  #img3 {
+    display: none;
+  }
+
+  .texto {
+    margin-left: 10% !important;
+  }
+
+  #img1 {
+    margin-left: 10%;
+  }
+
+  .botaoAcess a {
+    font-size: 1.8vh;
+  }
+}
+
+@media (max-width: 768px) {
+  #img2 {
+    display: none;
+  }
+
+  #img1 {
+    margin-left: 80%;
+  }
+
+  .letra-inicial p {
+    font-size: 9vh !important;
+
+    span {
+      font-size: 6vh;
+    }
+  }
+
+  .botaoAcess a {
+    font-size: 1.5vh;
+  }
+
+  .texto p {
+    font-size: 1.5vh;
+    width: 40vh !important;
+  }
+}
+
+@media (max-width: 425px) {
+  .mobile-carousel {
+    display: block;
+  }
+
+  .d-block {
+    width: 80% !important;
+    height: 20% !important;
+    margin-left: 10%;
+  }
+
+  .letra-inicial-baixo {
+    display: block;
+    left: 17%;
+    top: 41%;
+  }
+
+  .letra-inicial-cima {
+    left: 14%;
+    bottom: 90%;
+    font-size: 10vh;
+  }
+
+  .mobile-line {
+    margin-top: -10%;
+  }
+
+  #carousel3 {
+    margin-top: 20%;
+  }
+
+  #carousel2 {
+    margin-top: 20%;
+  }
+
+  #carousel1 {
+    margin-top: 20%;
+  }
+
+  .mobile-carousel {
+    padding: 0 16px;
+  }
+
+  .letra-inicial-baixo1 {
+    position: absolute;
+    top: 90%;
+    left: 0;
+    text-align: center;
+    z-index: 2;
+    color: #e7e7e8;
+    font-family: "Abahya Libre";
+    font-size: clamp(2rem, 8vw, 7rem);
+    pointer-events: none;
+  }
+
+  .letra-inicial {
+    margin-top: 80%;
+  }
+
+  .botaoAcess {
+    width: 40%;
+    height: 6vh;
+  }
+
+  .botaoAcess a {
+    font-size: 1.4vh;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

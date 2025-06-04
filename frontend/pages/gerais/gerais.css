@@ -1,0 +1,334 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap");
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(#000000 100%);
+  padding: 1%;
+}
+
+.title {
+  text-align: center;
+  color: #e7e7e7;
+  font-size: 65px;
+  margin-bottom: 20px;
+  font-family: "Abhaya Libre", serif !important;
+  font-weight: 500;
+}
+
+.title #nome-do-evento {
+  font-family: "Abhaya Libre", serif !important;
+}
+
+.title2 {
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  color: #e7e7e7;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.imagelinha {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.outer-container {
+  position: relative;
+  width: 90vw;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px; /* Mais espaço entre os carrosséis */
+}
+
+.carousel-container {
+  width: 90vw;
+  max-width: 1200px;
+  padding: 2vw;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.carousel {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  transition: none;
+}
+
+.card {
+  flex: 0 0 300px;
+  max-width: 280px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background: #282828;
+}
+
+.card.active {
+  transform: scale(1);
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.card-content {
+  padding: 7%;
+}
+
+.card-tag {
+  display: inline-block;
+  background: #63783d;
+  color: #e7e7ee;
+  padding: 2% 8%;
+  font-size: 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-family: "Montserrat";
+}
+
+.card-title {
+  color: #e7e7e7;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-left: 1%;
+  font-family: "Montserrat";
+}
+
+.card-location {
+  display: flex;
+  align-items: center;
+  color: #e7e7e7;
+  font-size: 10px;
+  margin-left: 1%;
+  font-family: "Montserrat";
+}
+
+.card-location::before {
+  content: "";
+  display: inline-block;
+  background: #698f24;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #40492f;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: rgb(87, 87, 87);
+  transform: scale(1.2);
+}
+
+.prev-btn,
+.next-btn {
+  position: relative;
+  background: rgba(201, 197, 197, 0.3);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 10;
+  border: none;
+  flex-shrink: 0;
+  margin-top: 20%;
+}
+
+.prev-btn {
+  margin-right: 10px;
+}
+
+.next-btn {
+  margin-left: 10px;
+}
+.botaoAcess {
+  width: 18vw;
+  height: 5vh;
+  border-radius: 15px;
+  border: none;
+  background-color: #63783d;
+  font-size: 2vh;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: normal;
+  color: inherit;
+  margin-bottom: 3vh;
+}
+.botaoAcess a {
+  text-decoration: none;
+  color: #ebebeb;
+  font-family: "Abhaya Libre";
+}
+
+.botao {
+  text-decoration: none;
+}
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .title {
+    font-size: 60px;
+  }
+  .title2 {
+    font-size: 20px;
+  }
+  .imagelinha img {
+    width: 90%;
+  }
+  .card {
+    flex: 0 0 300px;
+    max-width: 200px;
+  }
+  .botaoAcess {
+    width: 25vw;
+    height: 5vh;
+    font-size: 1.6vw;
+  }
+}
+
+@media (max-width: 768px) and (max-width: 1023px) {
+  .botaoAcess {
+    width: 30vw;
+    height: 5vh;
+    font-size: 1.8vh;
+  }
+  .card {
+    flex: 0 0 220px;
+    max-width: 220px;
+    margin-top: -8%;
+  }
+  .card img {
+    height: 150px;
+  }
+  .title {
+    font-size: 50px;
+  }
+  .title2 {
+    font-size: 15px;
+  }
+
+  .carousel-container {
+    width: 70vw;
+  }
+
+  .prev-btn,
+  .next-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 425px) and (max-width: 763px) {
+  .carousel-container {
+    margin-bottom: -6vh;
+  }
+  .card {
+    flex: 0 0 160px;
+    max-width: 160px;
+    margin-top: -30%;
+  }
+  .title {
+    font-size: 40px;
+  }
+  .title2 {
+    font-size: 10px;
+    width: 100%;
+  }
+  .carousel-container {
+    width: 60vw;
+  }
+  #dots {
+    width: 10%;
+  }
+
+  .prev-btn,
+  .next-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+  .botaoAcess {
+    width: 40vw;
+    height: 4.5vh;
+    font-size: 3.5vw;
+    margin-bottom: 8vh;
+    margin-top: 2vh;
+  }
+}
+@media (max-width: 375px) and (max-width: 424px) {
+  .title {
+    font-size: 35px;
+  }
+  .title2 {
+    font-size: 8px;
+  }
+  .botaoAcess {
+    width: 45vw;
+    height: 5vh;
+    font-size: 1.6vh;
+  }
+}
+@media (max-width: 320px) and (max-width: 376px) {
+  .title {
+    font-size: 3vh;
+  }
+  .imagelinha {
+    margin-top: -5%;
+  }
+  .title2 {
+    font-size: 0.9vh;
+  }
+  .card {
+    margin-top: -9vh;
+    margin-bottom: -5vw;
+  }
+  .outer-container {
+    margin-bottom: 8vh;
+  }
+  .botaoAcess {
+    margin-top: -10vh;
+    font-size: 68%;
+    width: 13vh;
+    font-weight: 100;
+  }
+}
